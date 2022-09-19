@@ -1542,3 +1542,9 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
         return s6;
     }
 }
+
+// on_start - На початок
+//type_number_fire_extinguishers - Визначення типу та необхідної кількості вогнегасників
+//degree_of_risk_from_activities - Оцінка ступеня ризику від провадження господарської діяльності
+//determination_of_categories - Визначення категорій приміщень за пожежною небезпекою
+//feedback_info - Інформація. Зворотній зв'язок
