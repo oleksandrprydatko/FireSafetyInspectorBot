@@ -648,6 +648,14 @@ public class InlineButton {
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
+    // кнопка для переходу на портал електронних послуг
+    public InlineKeyboardMarkup inlineServicePortalKeyboardMarkup(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Посилання").callbackData("Directory").url("https://e-services.dsns.gov.ua").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
 
 
 }

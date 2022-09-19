@@ -52,6 +52,18 @@ public class MessageHandler implements Handler<Message> {
                         //очищення бази
                         dbWorker.update(chatID);
                         return;
+                        // видає посилання на портал електронних послуг
+                    case "/service_portal":
+                        //встановлення команди в БД
+                        dbWorker.setComandOfMenu(chatID,"/service_portal");
+                        sendMessage.setText("🇺🇦 Ви обрали портал електронних послуг ДСНС України. Для переходу скористайтесь посиланням 👇");
+                        sendMessage.setReplyMarkup(inlineButton.inlineServicePortalKeyboardMarkup());
+                        messageSender.sendMessage(sendMessage);
+                        //перевірка чи юзер є в БД/ додавання його в базу
+                        dbWorker.checkUser(chatID);
+                        //очищення бази
+                        dbWorker.update(chatID);
+                        return;
                     // розпочинає роботу вогнегасника + виводить інструкцію
                     case "/type_number_fire_extinguishers":
                         //встановлення команди в БД
