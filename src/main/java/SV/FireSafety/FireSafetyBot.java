@@ -13,12 +13,12 @@ public class FireSafetyBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "Interactive_Inspector_Bot";
+        return "Interactive_Inspector_Test_Bot";
     }
 
     @Override
     public String getBotToken() {
-        return "5485001763:AAFfmj52KDtBio2SsZL9Q_Jx8iVrns4B8HI";
+        return "5726997593:AAFxbabAkVO4DvE6UVL_jVj-Mxi0qV2cfJ0";
     }
 
     @Override

@@ -63,11 +63,19 @@ public class InlineButton {
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
-    //вибір типу гаражної будівлі
+    //розрахувати побутові приміщення
     public InlineKeyboardMarkup inlineFireExtinguisherCalculateKeyboard(){
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Розрахувати").callbackData("Розрахувати").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    //розрахувати технічні приміщення
+    public InlineKeyboardMarkup inlineFireExtinguisherCalculateTechnicalPremisesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Розрахувати").callbackData("Розрахувати(техн.прим)").build()));
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
@@ -203,8 +211,6 @@ public class InlineButton {
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
-
-
     // розпочинає роботу бот по визначенню ступеня ризику
     public InlineKeyboardMarkup inlineStartKeyboard(){
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
@@ -656,6 +662,120 @@ public class InlineButton {
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
+
+    // кнопки визначення класу зон (перший етап)
+    public InlineKeyboardMarkup inlineZoneClassesKeyboardMarkup(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("1.1").callbackData("1.1_Zone_classes").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("1.2").callbackData("1.2_Zone_classes").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("1.3").callbackData("1.3_Zone_classes").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    // кнопки визначення вибухонебезпечної зони (другий етап)
+    public InlineKeyboardMarkup inlineExplosiveEnvironmentKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1_Zone_classes").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2_Zone_classes").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3_Zone_classes").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    // кнопки визначення вибухонебезпечної зони (етап 2.1)
+    public InlineKeyboardMarkup inlineExplosiveEnvironmentTwoKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1.1").callbackData("2.1.1_Zone_classes").build(),
+                InlineKeyboardButton.builder().text("2.1.2").callbackData("2.1.2_Zone_classes").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    // кнопки визначення вибухонебезпечної зони (етап 2.2)
+    public InlineKeyboardMarkup inlineExplosiveEnvironmentThreeKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2.1").callbackData("2.2.1_Zone_classes").build(),
+                InlineKeyboardButton.builder().text("2.2.2").callbackData("2.2.2_Zone_classes").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    // кнопки визначення вибухонебезпечної зони (етап 2.3)
+    public InlineKeyboardMarkup inlineExplosiveEnvironmentFourKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.3.1").callbackData("2.3.1_Zone_classes").build(),
+                InlineKeyboardButton.builder().text("2.3.2").callbackData("2.3.2_Zone_classes").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    // кнопки визначення вибухонебезпечної зони (етап 3)
+    public InlineKeyboardMarkup inlineExplosiveEnvironmentFiveKeyboard() {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("3.1_Zone_classes").build(),
+                InlineKeyboardButton.builder().text("2.2").callbackData("3.2_Zone_classes").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineExplosiveEnvironmentSixKeyboard() {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1.1").callbackData("3.1.1_Zone_classes").build(),
+                InlineKeyboardButton.builder().text("2.1.2").callbackData("3.1.2_Zone_classes").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineExplosiveEnvironmentSevenKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("3.1.1.1").callbackData("3.1.1.1_Zone_classes").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("3.1.1.2").callbackData("3.1.1.2_Zone_classes").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("3.1.1.3").callbackData("3.1.1.3_Zone_classes").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineExplosiveEnvironmentEightKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2.1").callbackData("3.2.1_Zone_classes").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2.2").callbackData("3.2.2_Zone_classes").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2.3").callbackData("3.2.3_Zone_classes").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineExplosiveEnvironmentNineKeyboard() {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("4.1_Zone_classes").build(),
+                InlineKeyboardButton.builder().text("2.2").callbackData("4.2_Zone_classes").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.3").callbackData("4.3_Zone_classes").build(),
+                InlineKeyboardButton.builder().text("2.4").callbackData("4.4_Zone_classes").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineExplosiveEnvironmentTenKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("3.1").callbackData("5.1_Zone_classes").build(),
+                InlineKeyboardButton.builder().text("3.2").callbackData("5.2_Zone_classes").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("3.3").callbackData("5.3_Zone_classes").build(),
+                InlineKeyboardButton.builder().text("3.4").callbackData("5.4_Zone_classes").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+
+
+
+
+
+
 
 
 }

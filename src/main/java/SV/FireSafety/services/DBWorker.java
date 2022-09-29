@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DBWorker {
 
-    private final String HOST = "jdbc:mysql://localhost:3306/interactive_inspector";
+    private final String HOST = "jdbc:mysql://localhost:3306/interactive_inspector?autoReconnect=true";
     private final String USERNAME = "root";
     private final String PASSWORD = "root";
 
@@ -29,7 +29,7 @@ public class DBWorker {
             ResultSet resultSet = statement.executeQuery("select * from users");
             int exists = 0;
             while (resultSet.next()){
-                String idTelegram = String.valueOf(resultSet.getInt("idTelegram"));
+                String idTelegram = resultSet.getString("idTelegram");
                 if (idTelegram.equals(chatID)){
                     exists += 1;
                 }
@@ -51,7 +51,7 @@ public class DBWorker {
                     "classFire=NULL,typeExtinguisher=NULL,typeSpacesBuild=NULL,b1=NULL,b2=NULL,kitchen=NULL," +
                     "characteristicsObject=NULL,typeObjectOfRisk=NULL,typeStateOwnedObject=NULL," +
                     "typeCulturalObject=NULL,typeIndustrialStorageFacility=NULL,levelEmergency=NULL,typeResultDegreeRisk=NULL," +
-                    "usedIndoors=NULL,categoryBuildings=NULL,value=NULL,square=NULL,parking=NULL," +
+                    "usedIndoors='null',categoryBuildings=NULL,value=NULL,square=NULL,parking=NULL," +
                     "workplace=NULL,squareTechnicalPremises=NULL,constantlyAtFacility=NULL," +
                     "periodicallyAtFacility=NULL,heightObject=NULL,fixedViolations=NULL,noFixedViolations=NULL," +
                     "deadPeople = NULL,losses = NULL, taxFreeIncome = NULL, injuredPeople=NULL," +
@@ -968,6 +968,31 @@ public class DBWorker {
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("volumeRoomsГ");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return typePremises;
+    }
+    // встановлення humidityOfSpace
+    public void setHumidityOfSpac(String chatID,String humidityOfSpace){
+        try {
+            Statement statement = getConnection().createStatement();
+            String sql = "UPDATE users set humidityOfSpace='"+humidityOfSpace+"' where idTelegram="+chatID;
+            statement.addBatch(sql);
+            statement.executeBatch();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    // дістаємо humidityOfSpace з БД
+    public String getHumidityOfSpace(String chatID){
+        String typePremises= null;
+        try {
+            Statement statement = getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
+            while (resultSet.next()){
+                typePremises = resultSet.getString("humidityOfSpace");
             }
         } catch (SQLException e) {
             e.printStackTrace();

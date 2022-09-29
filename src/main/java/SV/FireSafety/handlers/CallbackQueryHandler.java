@@ -25,6 +25,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
     Categories categories = new Categories();
     Characteristics characteristics = new Characteristics();
     DBWorker dbWorker = new DBWorker();
+    ZoneClasses zc = new ZoneClasses();
 
     //
     String s2 = null;
@@ -62,8 +63,15 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskTechnicalPremisesKeyboard());
                     messageSender.sendMessage(sendMessage);
                 }else if(dbWorker.getComandOfMenu(chatID).equals("/determination_of_categories")) {
-                    sendMessage.setText("1. Оберіть характеристику, що необхідно визначити");
+                    sendMessage.setText("1. Оберіть характеристику, яку необхідно визначити");
                     sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicKeyboard());
+                    messageSender.sendMessage(sendMessage);
+                }else if(dbWorker.getComandOfMenu(chatID).equals("/zone_classes")) {
+                    sendMessage.setText("1. Оберіть вид речовин, що обертаються у технологічному процесі \uD83C\uDFED\n\n" +
+                            "1.1. Використовуються вибухонебезпечні речовини \uD83D\uDCA5\n" +
+                            "1.2. Використовуються пожежонебезпечні речовини \uD83D\uDD25\n" +
+                            "1.3. Відсутні вибухо- та пожежонебезпечні речовини ♻");
+                    sendMessage.setReplyMarkup(inlineButton.inlineZoneClassesKeyboardMarkup());
                     messageSender.sendMessage(sendMessage);
                 }
                 break;
@@ -339,7 +347,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 //встановлює в БД приміщення використовується для приготування їжі
                 dbWorker.setTypePremises(chatID,"Кухні");
-                dbWorker.setKitchen(chatID,"true");
+                dbWorker.setKitchen(chatID,"1");
                 sendMessage.setText("4. Вкажіть кількість окремих робочих місць де в технологічному процесі приготування їжі застосовуються рослинні або тваринні масла і жири. Пілся - оберіть тип вогнегасника \uD83E\uDDEF: ");
                 sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskObjectAreaKitchenKeyboard());
                 dbWorker.setValue(chatID,"робочі місця");
@@ -349,7 +357,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 s8 = "Обрано: в приміщеннях відсутні технологічні процеси приготування їжі";
                 sendMessage.setText(s8);
                 messageSender.sendMessage(sendMessage);
-                dbWorker.setKitchen(chatID,"false");
+                dbWorker.setKitchen(chatID,"0");
                 sendMessage.setText("3. Чи використовується в досліджуваному приміщенні оргтехніка?");
                 sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherOfficeEquipmentKeyboard());
                 messageSender.sendMessage(sendMessage);
@@ -369,7 +377,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 dbWorker.setB2(chatID,"true");
                 sendMessage.setText("8. Надішліть загальну площу технічних приміщень (м.кв.) після чого натисніть \"Розрахувати\"");
-                sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherCalculateKeyboard());
+                sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherCalculateTechnicalPremisesKeyboard());
                 dbWorker.setTypePremises(chatID,"Технічні приміщення");
                 dbWorker.setValue(chatID,"технічні приміщення");
                 messageSender.sendMessage(sendMessage);
@@ -421,22 +429,15 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "Розрахувати":
-                try{
-                    if (dbWorker.getKitchen(chatID).equals("true") || dbWorker.getKitchen(chatID).equals("false")){
-                        dbWorker.setKitchen(chatID,null);
-                        sendMessage.setText(result(chatID));
-                        messageSender.sendMessage(sendMessage);
-                        sendMessage.setText("7. Чи передбачені в досліджуваних приміщеннях комори, електрощитові, вентиляційні камери або інші технічні приміщення?");
-                        sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherTechnicalАcilitiesKeyboard());
-                        messageSender.sendMessage(sendMessage);
-                    }else{
-                        sendMessage.setText(result(chatID));
-                        messageSender.sendMessage(sendMessage);
-                    }
-                }catch (NullPointerException e){
-                    sendMessage.setText(result(chatID));
-                    messageSender.sendMessage(sendMessage);
-                }
+                sendMessage.setText(result(chatID));
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("7. Чи передбачені в досліджуваних приміщеннях комори, електрощитові, вентиляційні камери або інші технічні приміщення?");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherTechnicalАcilitiesKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Розрахувати(техн.прим)":
+                sendMessage.setText(result(chatID));
+                messageSender.sendMessage(sendMessage);
                 break;
 
 
@@ -1487,6 +1488,305 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 sendMessage.setText(categories.getCategoryД());
                 messageSender.sendMessage(sendMessage);
                 break;
+            case "1.1. Визначення відношення класу зони до вибухонебезпечних чи/(або) пожежонебезпечних зон":
+                sendMessage.setText("Надішліть об'єм приміщень категорії Г та натисніть \" Далі \" ");
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                messageSender.sendMessage(sendMessage);
+                dbWorker.setCategoryBuildings(chatID,"Г");
+                dbWorker.setValue(chatID,"обєм приміщень Г");
+                break;
+
+            case "1.1_Zone_classes":
+                sendMessage.setText("Обрано: Використовуються вибухонебезпечні речовини");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("2. Оберіть період присутності вибухонебезпечного середовища: \n\n" +
+                        "\uD83D\uDC49 2.1. Вибухонебезпечне середовище присутнє постійно, часто або протягом тривалого часу \n" +
+                        "\uD83D\uDC49 2.2. Вибухонебезпечне середовище може утворитись під час нормальної експлуатації\n" +
+                        "\uD83D\uDC49 2.3. Вибухонебезпечне середовище відсутнє або при утворенні триває не довго, та може виникати у випадку аварії");
+
+                sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.1_Zone_classes":
+                sendMessage.setText("Обрано: Вибухонебезпечне середовище присутнє постійно, часто або протягом тривалого часу");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("Зазначте особливості простору вибухонебезпечного середовища: \n\n" +
+                        "\uD83D\uDC49 2.1.1. Простір, у якому вибухонебезпечне середовище знаходиться в межах корпусів технологічного обладнання \n" +
+                        "\uD83D\uDC49 2.1.2. Простір, у якому вибухонебезпечне середовище знаходиться, як в межах, так і  поза межами корпусів технологічного обладнання та утворений пиловими хмарами");
+
+                sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentTwoKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.1.1_Zone_classes":
+                sendMessage.setText(zc.zoneClass0());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.1.2_Zone_classes":
+                sendMessage.setText(zc.zoneClass20());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.2_Zone_classes":
+                sendMessage.setText("Обрано: Вибухонебезпечне середовище може утворитись під час нормальної експлуатації");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("Зазначте особливості простору вибухонебезпечного середовища: \n\n" +
+                        "\uD83D\uDC49 2.2.1. Простір, у якому вибухонебезпечне середовище може утворюватися під час нормальної роботи \n" +
+                        "\uD83D\uDC49 2.2.2. Простір, у якому під час нормальної експлуатації ймовірна поява пилу у вигляді хмари в кількості, достатній для утворення вибухонебезпечні суміші");
+                sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentThreeKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.2.1_Zone_classes":
+                sendMessage.setText(zc.zoneClass1());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.2.2_Zone_classes":
+                sendMessage.setText(zc.zoneClass21());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.3_Zone_classes":
+                sendMessage.setText("Обрано: Вибухонебезпечне середовище відсутнє або при утворенні триває не довго, та може виникати у випадку аварії");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("Зазначте особливості простору вибухонебезпечного середовища: \n\n" +
+                        "\uD83D\uDC49 2.3.1. Простір, у якому вибухонебезпечне середовище за нормальних умов експлуатації відсутнє, а якщо виникає то рідко і триває недовго, викликаючи аварії катастрофічних розмірів  \n" +
+                        "\uD83D\uDC49 2.3.2. Простір, у якому пил у завислому стані може з’являтися не часто й існувати недовго або в якому шари вибухонебезпечного пилу можуть існувати й утворювати вибухонебезпечні суміші в разі аварії");
+                sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentFourKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.3.1_Zone_classes":
+                sendMessage.setText(zc.zoneClass2());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.3.2_Zone_classes":
+                sendMessage.setText(zc.zoneClass22());
+                messageSender.sendMessage(sendMessage);
+                break;
+
+            case "1.2_Zone_classes":
+                sendMessage.setText("Обрано: Використовуються пожежонебезпечні речовини");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("2. Оберіть місце присутності пожежонебезпечного середовища: \n\n" +
+                        "\uD83D\uDC49 2.1. Пожежонебезпечне середовище присутнє \n" +
+                        "\uD83D\uDC49 2.2. В приміщенні присутні речовини");
+                sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentFiveKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.1_Zone_classes":
+                sendMessage.setText("Обрано: Пожежонебезпечне середовище присутнє");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("Зазначте особливості пожежонебезпечного середовища: \n\n" +
+                        "\uD83D\uDC49 2.1.1. В середині приміщень \n" +
+                        "\uD83D\uDC49 2.1.2. Поза приміщеннями");
+                sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentSixKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.1.1_Zone_classes":
+                sendMessage.setText("Обрано: Пожежонебезпечне середовище в середині приміщень");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("Зазначте характеристику простору у приміщенні: \n\n" +
+                        "\uD83D\uDC493.1.1.1. Простір приміщення, у якому знаходиться горюча рідина, яка має температуру спалаху більше + 61 С\n" +
+                        "\uD83D\uDC492.1.1.2. Простір приміщення, у якому можуть накопичуватись і виділятися горючий пил або волокна\n" +
+                        "\uD83D\uDC492.1.1.3. Простір приміщення, у якому знаходяться тверді горючі речовини та матеріали");
+                sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentSevenKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.1.1.1_Zone_classes":
+                sendMessage.setText(zc.zoneClassP_I());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.1.1.2_Zone_classes":
+                sendMessage.setText(zc.zoneClassP_II());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.1.1.3_Zone_classes":
+                sendMessage.setText(zc.zoneClassP_IIa());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.1.2_Zone_classes":
+                sendMessage.setText("Обрано: Пожежонебезпечне середовище поза приміщеннями");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(zc.zoneClassP_III());
+                messageSender.sendMessage(sendMessage);
+                break;
+
+            case "3.2_Zone_classes":
+                sendMessage.setText("Обрано: В приміщенні присутні речовини");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("Зазначте характеристику горючих речовин: \n\n" +
+                        "\uD83D\uDC49 2.2.1. Горючі рідини з температурою спалаху більше + 61 С у закритому тиглі \n" +
+                        "\uD83D\uDC49 2.2.2. Горючі пили або волокна, при надлишковому розрахунковому тиску вибуху ≤ 5 кПа \n" +
+                        "\uD83D\uDC49 2.2.3. Тверді горючі речовини та матеріали");
+                sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentEightKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.2.1_Zone_classes":
+                sendMessage.setText(zc.zoneClassP_I());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.2.2_Zone_classes":
+                sendMessage.setText(zc.zoneClassP_II());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.2.3_Zone_classes":
+                sendMessage.setText(zc.zoneClassP_IIa());
+                messageSender.sendMessage(sendMessage);
+                break;
+
+
+                case "1.3_Zone_classes":
+                sendMessage.setText("Обрано: Відсутні вибухо- та пожежонебезпечні речовини");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("2. Оберіть вид приміщення: \n\n" +
+                        "\uD83D\uDC49 2.1. Приміщення сухе, відносна вологість до 60 % \n" +
+                        "\uD83D\uDC49 2.2. Приміщення вологе, відносна вологість від 60 % до 75 % \n" +
+                       "\uD83D\uDC49 2.3. Приміщення сире, відносна вологість більше 75 % \n" +
+                        "\uD83D\uDC49 2.4. Приміщення особливо сире, відносна вологість близька до 100 % ");
+                sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentNineKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+
+            case "4.1_Zone_classes":
+                sendMessage.setText("Обрано: Приміщення сухе, відносна вологість до 60 %");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("3. Зазначте особливості приміщення де відбувається технологічний процес: \n\n" +
+                        "\uD83D\uDC49 3.1. Приміщення гаряче, температура більше + 35 С \n" +
+                        "\uD83D\uDC49 3.2. Приміщення запилене \n" +
+                        "\uD83D\uDC49 3.3. Приміщення з агресивними парами, рідинами, газами \n" +
+                        "\uD83D\uDC49 3.4. Відсутні особливості технологічного процесу ");
+                dbWorker.setHumidityOfSpac(chatID,"сухе");
+                sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentTenKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "4.2_Zone_classes":
+                sendMessage.setText("Обрано: Приміщення вологе, відносна вологість від 60 % до 75%");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("3. Зазначте особливості приміщення де відбувається технологічний процес: \n\n" +
+                        "\uD83D\uDC49 3.1. Приміщення гаряче, температура більше + 35 С \n" +
+                        "\uD83D\uDC49 3.2. Приміщення запилене \n" +
+                        "\uD83D\uDC49 3.3. Приміщення з агресивними парами, рідинами, газами \n" +
+                        "\uD83D\uDC49 3.4. Відсутні особливості технологічного процесу ");
+                dbWorker.setHumidityOfSpac(chatID,"вологе");
+                sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentTenKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "4.3_Zone_classes":
+                sendMessage.setText("Обрано: Приміщення сире, відносна вологість більше 75%");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("3. Зазначте особливості приміщення де відбувається технологічний процес: \n\n" +
+                        "\uD83D\uDC49 3.1. Приміщення гаряче, температура більше + 35 С \n" +
+                        "\uD83D\uDC49 3.2. Приміщення запилене \n" +
+                        "\uD83D\uDC49 3.3. Приміщення з агресивними парами, рідинами, газами \n" +
+                        "\uD83D\uDC49 3.4. Відсутні особливості технологічного процесу ");
+                dbWorker.setHumidityOfSpac(chatID,"сире");
+                sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentTenKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "4.4_Zone_classes":
+                sendMessage.setText("Обрано: Приміщення особливо сире, відносна вологість близько до 100%");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("3. Зазначте особливості приміщення де відбувається технологічний процес: \n\n" +
+                        "\uD83D\uDC49 3.1. Приміщення гаряче, температура більше + 35 С \n" +
+                        "\uD83D\uDC49 3.2. Приміщення запилене \n" +
+                        "\uD83D\uDC49 3.3. Приміщення з агресивними парами, рідинами, газами \n" +
+                        "\uD83D\uDC49 3.4. Відсутні особливості технологічного процесу ");
+                dbWorker.setHumidityOfSpac(chatID,"особливо сире");
+                sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentTenKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "5.1_Zone_classes":
+                sendMessage.setText("Обрано: гаряче приміщення");
+                messageSender.sendMessage(sendMessage);
+                if (dbWorker.getHumidityOfSpace(chatID).equals("сухе")){
+                    sendMessage.setText(zc.zoneClassSukhi());
+                    messageSender.sendMessage(sendMessage);
+                    sendMessage.setText(zc.zoneClassGariachi());
+                    messageSender.sendMessage(sendMessage);
+                }else if (dbWorker.getHumidityOfSpace(chatID).equals("вологе")){
+                    sendMessage.setText(zc.zoneClassVologi());
+                    messageSender.sendMessage(sendMessage);
+                    sendMessage.setText(zc.zoneClassGariachi());
+                    messageSender.sendMessage(sendMessage);
+                }else if(dbWorker.getHumidityOfSpace(chatID).equals("сире")){
+                    sendMessage.setText(zc.zoneClassSyri());
+                    messageSender.sendMessage(sendMessage);
+                    sendMessage.setText(zc.zoneClassGariachi());
+                    messageSender.sendMessage(sendMessage);
+                }else if(dbWorker.getHumidityOfSpace(chatID).equals("особливо сире")){
+                    sendMessage.setText(zc.zoneClassOsoblyvoSyri());
+                    messageSender.sendMessage(sendMessage);
+                    sendMessage.setText(zc.zoneClassGariachi());
+                    messageSender.sendMessage(sendMessage);
+
+                }
+                break;
+            case "5.2_Zone_classes":
+                sendMessage.setText("Обрано: запилене приміщення");
+                messageSender.sendMessage(sendMessage);
+                if (dbWorker.getHumidityOfSpace(chatID).equals("сухе")){
+                    sendMessage.setText(zc.zoneClassSukhi());
+                    messageSender.sendMessage(sendMessage);
+                    sendMessage.setText(zc.zoneClassZapyleni());
+                    messageSender.sendMessage(sendMessage);
+                }else if (dbWorker.getHumidityOfSpace(chatID).equals("вологе")){
+                    sendMessage.setText(zc.zoneClassVologi());
+                    messageSender.sendMessage(sendMessage);
+                    sendMessage.setText(zc.zoneClassZapyleni());
+                    messageSender.sendMessage(sendMessage);
+                }else if(dbWorker.getHumidityOfSpace(chatID).equals("сире")){
+                    sendMessage.setText(zc.zoneClassSyri());
+                    messageSender.sendMessage(sendMessage);
+                    sendMessage.setText(zc.zoneClassZapyleni());
+                    messageSender.sendMessage(sendMessage);
+                }else if(dbWorker.getHumidityOfSpace(chatID).equals("особливо сире")){
+                    sendMessage.setText(zc.zoneClassOsoblyvoSyri());
+                    messageSender.sendMessage(sendMessage);
+                    sendMessage.setText(zc.zoneClassZapyleni());
+                    messageSender.sendMessage(sendMessage);
+
+                }
+                break;
+            case "5.3_Zone_classes":
+                sendMessage.setText("Обрано: Приміщення з агресивними парами, рідинами, газами");
+                messageSender.sendMessage(sendMessage);
+                if (dbWorker.getHumidityOfSpace(chatID).equals("сухе")){
+                    sendMessage.setText(zc.zoneClassSukhi());
+                    messageSender.sendMessage(sendMessage);
+                    sendMessage.setText(zc.zoneClassKhimichni());
+                    messageSender.sendMessage(sendMessage);
+                }else if (dbWorker.getHumidityOfSpace(chatID).equals("вологе")){
+                    sendMessage.setText(zc.zoneClassVologi());
+                    messageSender.sendMessage(sendMessage);
+                    sendMessage.setText(zc.zoneClassKhimichni());
+                    messageSender.sendMessage(sendMessage);
+                }else if(dbWorker.getHumidityOfSpace(chatID).equals("сире")){
+                    sendMessage.setText(zc.zoneClassSyri());
+                    messageSender.sendMessage(sendMessage);
+                    sendMessage.setText(zc.zoneClassKhimichni());
+                    messageSender.sendMessage(sendMessage);
+                }else if(dbWorker.getHumidityOfSpace(chatID).equals("особливо сире")){
+                    sendMessage.setText(zc.zoneClassOsoblyvoSyri());
+                    messageSender.sendMessage(sendMessage);
+                    sendMessage.setText(zc.zoneClassKhimichni());
+                    messageSender.sendMessage(sendMessage);
+
+                }
+                break;
+            case "5.4_Zone_classes":
+                sendMessage.setText("Відсутні особливості технологічного процесу");
+                messageSender.sendMessage(sendMessage);
+                if (dbWorker.getHumidityOfSpace(chatID).equals("сухе")){
+                    sendMessage.setText(zc.zoneClassSukhi());
+                    messageSender.sendMessage(sendMessage);
+                }else if (dbWorker.getHumidityOfSpace(chatID).equals("вологе")){
+                    sendMessage.setText(zc.zoneClassVologi());
+                    messageSender.sendMessage(sendMessage);
+                }else if(dbWorker.getHumidityOfSpace(chatID).equals("сире")){
+                    sendMessage.setText(zc.zoneClassSyri());
+                    messageSender.sendMessage(sendMessage);
+                }else if(dbWorker.getHumidityOfSpace(chatID).equals("особливо сире")){
+                    sendMessage.setText(zc.zoneClassOsoblyvoSyri());
+                    messageSender.sendMessage(sendMessage);
+
+                }
+                break;
         }
 
 
@@ -1543,9 +1843,4 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
     }
 }
 
-//on_start - На початок
-//type_number_fire_extinguishers - Визначення типу та необхідної кількості вогнегасників
-//degree_of_risk_from_activities - Оцінка ступеня ризику від провадження господарської діяльності
-//determination_of_categories - Визначення категорій приміщень за пожежною небезпекою
-//feedback_info - Інформація. Зворотній зв'язок
-//service_portal - Портал електронних послуг ДСНС України
+

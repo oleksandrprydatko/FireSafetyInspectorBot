@@ -52,18 +52,6 @@ public class MessageHandler implements Handler<Message> {
                         //очищення бази
                         dbWorker.update(chatID);
                         return;
-                        // видає посилання на портал електронних послуг
-                    case "/service_portal":
-                        //встановлення команди в БД
-                        dbWorker.setComandOfMenu(chatID,"/service_portal");
-                        sendMessage.setText("🇺🇦 Ви обрали портал електронних послуг ДСНС України. Для переходу скористайтесь посиланням 👇");
-                        sendMessage.setReplyMarkup(inlineButton.inlineServicePortalKeyboardMarkup());
-                        messageSender.sendMessage(sendMessage);
-                        //перевірка чи юзер є в БД/ додавання його в базу
-                        dbWorker.checkUser(chatID);
-                        //очищення бази
-                        dbWorker.update(chatID);
-                        return;
                     // розпочинає роботу вогнегасника + виводить інструкцію
                     case "/type_number_fire_extinguishers":
                         //встановлення команди в БД
@@ -93,6 +81,30 @@ public class MessageHandler implements Handler<Message> {
                         dbWorker.setComandOfMenu(chatID,"/determination_of_categories");
                         sendMessage.setText("Я підсистема Determination of categories of premisses according to fire hazard \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу з визначенням категорій приміщень,будинків та зовнішніх установок за вибухопожежною та пожежною небезпекою \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
                         sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
+                        messageSender.sendMessage(sendMessage);
+                        //перевірка чи юзер є в БД/ додавання його в базу
+                        dbWorker.checkUser(chatID);
+                        //очищення бази
+                        dbWorker.update(chatID);
+                        return;
+                    //визначення класу зон
+                    case "/zone_classes":
+                        //встановлення команди в БД
+                        dbWorker.setComandOfMenu(chatID,"/zone_classes");
+                        sendMessage.setText("Я підсистема Determination of zone classes \uD83C\uDDFA\uD83C\uDDE6 \nДопоможу визначити клас зони приміщення залежно від параметрів функціонування \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
+                        messageSender.sendMessage(sendMessage);
+                        //перевірка чи юзер є в БД/ додавання його в базу
+                        dbWorker.checkUser(chatID);
+                        //очищення бази
+                        dbWorker.update(chatID);
+                        return;
+                        // видає посилання на портал електронних послуг
+                    case "/service_portal":
+                        //встановлення команди в БД
+                        dbWorker.setComandOfMenu(chatID,"/service_portal");
+                        sendMessage.setText("🇺🇦 Ви обрали портал електронних послуг ДСНС України. Для переходу скористайтесь посиланням 👇");
+                        sendMessage.setReplyMarkup(inlineButton.inlineServicePortalKeyboardMarkup());
                         messageSender.sendMessage(sendMessage);
                         //перевірка чи юзер є в БД/ додавання його в базу
                         dbWorker.checkUser(chatID);
@@ -166,3 +178,11 @@ public class MessageHandler implements Handler<Message> {
 
     }
 }
+
+//on_start - На початок
+//type_number_fire_extinguishers - Визначення типу та необхідної кількості вогнегасників
+//degree_of_risk_from_activities - Оцінка ступеня ризику від провадження господарської діяльності
+//determination_of_categories - Визначення категорій приміщень за пожежною небезпекою
+//zone_classes - Визначення класу зони
+//service_portal - Портал електронних послуг ДСНС України
+//feedback_info - Інформація. Зворотній зв'язок
