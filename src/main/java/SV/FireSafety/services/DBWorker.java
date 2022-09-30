@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DBWorker {
 
-    private final String HOST = "jdbc:mysql://localhost:3306/interactive_inspector?autoReconnect=true";
+    private final String HOST = "jdbc:mysql://localhost:3306/interactive-inspector?autoReconnect=true";
     private final String USERNAME = "root";
     private final String PASSWORD = "root";
 
