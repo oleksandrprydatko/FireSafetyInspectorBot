@@ -1526,54 +1526,62 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                         sendMessage.setText("Оберіть найнебезпечнішу категорію виробництва ⚠️");
                         sendMessage.setReplyMarkup(inlineButton.inlineDeterminationMostDangerousCategoryKeyboard());
                     }else {
-                        if (dbWorker.getVolumeRoomsA(chatID) != null && dbWorker.getVolumeRoomsБ(chatID)==null){
-                            if (categoryBuilding.getBuildingCategoryA()){
-                                sendMessage.setText(categories.getCategoryAб());
-                            }else{
-                                dbWorker.setValue(chatID,"обєм приміщень Б");
-                                sendMessage.setText("Надішліть об'єм приміщень категорії Б та натисніть \" Далі \" \uD83D\uDC47");
-                                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
-                            }
-                        }else if ((dbWorker.getVolumeRoomsA(chatID) != null && dbWorker.getVolumeRoomsБ(chatID) != null && dbWorker.getVolumeRoomsB(chatID)==null)||dbWorker.getVolumeRoomsA(chatID)==null && dbWorker.getVolumeRoomsБ(chatID)!=null && dbWorker.getVolumeRoomsB(chatID)==null){
-                            if (categoryBuilding.getBuildingCategoryБ()){
-                                sendMessage.setText(categories.getCategoryБб());
-                            }else{
-                                dbWorker.setValue(chatID,"обєм приміщень В");
-                                sendMessage.setText("Надішліть об'єм приміщень категорії B та натисніть \" Далі \" \uD83D\uDC47");
-                                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
-                            }
-                        }else if ((dbWorker.getVolumeRoomsA(chatID) != null && dbWorker.getVolumeRoomsБ(chatID) != null && dbWorker.getVolumeRoomsB(chatID) != null && dbWorker.getVolumeRoomsГ(chatID)==null)||((dbWorker.getVolumeRoomsA(chatID) == null && dbWorker.getVolumeRoomsБ(chatID) != null && dbWorker.getVolumeRoomsB(chatID) != null && dbWorker.getVolumeRoomsГ(chatID)==null) || (dbWorker.getVolumeRoomsA(chatID) == null && dbWorker.getVolumeRoomsБ(chatID) == null && dbWorker.getVolumeRoomsB(chatID) != null && dbWorker.getVolumeRoomsГ(chatID)==null))){
-                            if (categoryBuilding.getBuildingCategoryВ()){
-                                sendMessage.setText(categories.getCategoryВб());
-                            }else {
-                                dbWorker.setValue(chatID,"обєм приміщень Г");
-                                sendMessage.setText("Надішліть об'єм приміщень категорії Г та натисніть \" Далі \" \uD83D\uDC47");
-                                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
-                            }
-                        }else if ((dbWorker.getVolumeRoomsA(chatID) != null && dbWorker.getVolumeRoomsБ(chatID) != null && dbWorker.getVolumeRoomsB(chatID) != null && dbWorker.getVolumeRoomsГ(chatID)!=null)||((dbWorker.getVolumeRoomsA(chatID) == null && dbWorker.getVolumeRoomsБ(chatID) != null && dbWorker.getVolumeRoomsB(chatID) != null && dbWorker.getVolumeRoomsГ(chatID)!=null) || (dbWorker.getVolumeRoomsA(chatID) == null && dbWorker.getVolumeRoomsБ(chatID) == null && dbWorker.getVolumeRoomsB(chatID) != null && dbWorker.getVolumeRoomsГ(chatID)!=null) || ((dbWorker.getVolumeRoomsA(chatID) == null && dbWorker.getVolumeRoomsБ(chatID) != null && dbWorker.getVolumeRoomsB(chatID) != null && dbWorker.getVolumeRoomsГ(chatID)!=null) || (dbWorker.getVolumeRoomsA(chatID) == null && dbWorker.getVolumeRoomsБ(chatID) == null && dbWorker.getVolumeRoomsB(chatID) == null && dbWorker.getVolumeRoomsГ(chatID)!=null)))){
-                            if (categoryBuilding.getBuildingCategoryГ()){
-                                sendMessage.setText(categories.getCategoryГб());
-                            }else{
-                                sendMessage.setText(categories.getCategoryДб());
-                            }
-                        }else {
-                            if (dbWorker.getValue(chatID).equals("обєм приміщень А") && dbWorker.getVolumeRoomsA(chatID)==null){
+                        if (dbWorker.getValue(chatID).equals("обєм приміщень А")) {
+                            if (dbWorker.getVolumeRoomsA(chatID) == null) {
                                 sendMessage.setText("Ви не ввели рекомендовані системою параметри \n\n " +
                                         "Надішліть об'єм приміщень категорії А та натисніть \" Далі \" \uD83D\uDC47");
-                            }else if (dbWorker.getValue(chatID).equals("обєм приміщень Б") && dbWorker.getVolumeRoomsБ(chatID)==null){
-                                sendMessage.setText("Ви не ввели рекомендовані системою параметри \n\n " +
-                                        "Надішліть об'єм приміщень категорії Б та натисніть \" Далі \" \uD83D\uDC47");
-                            }else if (dbWorker.getValue(chatID).equals("обєм приміщень В") && dbWorker.getVolumeRoomsБ(chatID)==null){
-                                sendMessage.setText("Ви не ввели рекомендовані системою параметри \n\n " +
-                                        "Надішліть об'єм приміщень категорії В та натисніть \" Далі \" \uD83D\uDC47");
-                            }else if (dbWorker.getValue(chatID).equals("обєм приміщень Г") && dbWorker.getVolumeRoomsБ(chatID)==null){
-                                sendMessage.setText("Ви не ввели рекомендовані системою параметри \n\n " +
-                                        "Надішліть об'єм приміщень категорії Г та натисніть \" Далі \" \uD83D\uDC47");
+                                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                            } else {
+                                if (categoryBuilding.getBuildingCategoryA()) {
+                                    sendMessage.setText(categories.getCategoryAб());
+                                } else {
+                                    dbWorker.setValue(chatID, "обєм приміщень Б");
+                                    sendMessage.setText("Надішліть об'єм приміщень категорії Б та натисніть \" Далі \" \uD83D\uDC47");
+                                    sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                                }
                             }
-                            sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                        }else if (dbWorker.getValue(chatID).equals("обєм приміщень Б")) {
+                            if (dbWorker.getVolumeRoomsБ(chatID)==null){
+                                sendMessage.setText("Ви не ввели рекомендовані системою параметри \n\n " +
+                                            "Надішліть об'єм приміщень категорії Б та натисніть \" Далі \" \uD83D\uDC47");
+                                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                            }else {
+                                if (categoryBuilding.getBuildingCategoryБ()){
+                                sendMessage.setText(categories.getCategoryБб());
+                                }else {
+                                    dbWorker.setValue(chatID,"обєм приміщень В");
+                                    sendMessage.setText("Надішліть об'єм приміщень категорії B та натисніть \" Далі \" \uD83D\uDC47");
+                                    sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                                }
+                            }
+                        }else if (dbWorker.getValue(chatID).equals("обєм приміщень В")){
+                            if (dbWorker.getVolumeRoomsB(chatID)==null){
+                                sendMessage.setText("Ви не ввели рекомендовані системою параметри \n\n " +
+                                            "Надішліть об'єм приміщень категорії В та натисніть \" Далі \" \uD83D\uDC47");
+                                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                            }else {
+                                if (categoryBuilding.getBuildingCategoryВ()){
+                                    sendMessage.setText(categories.getCategoryВб());
+                                }else {
+                                    dbWorker.setValue(chatID,"обєм приміщень Г");
+                                    sendMessage.setText("Надішліть об'єм приміщень категорії Г та натисніть \" Далі \" \uD83D\uDC47");
+                                    sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                                }
+                            }
+                        }else if (dbWorker.getValue(chatID).equals("обєм приміщень Г")){
+                            if (dbWorker.getVolumeRoomsГ(chatID)==null){
+                                sendMessage.setText("Ви не ввели рекомендовані системою параметри \n\n " +
+                                            "Надішліть об'єм приміщень категорії Г та натисніть \" Далі \" \uD83D\uDC47");
+                                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                            }else {
+                                if (categoryBuilding.getBuildingCategoryГ()){
+                                    sendMessage.setText(categories.getCategoryГб());
+                                }else {
+                                    sendMessage.setText(categories.getCategoryДб());
+                                }
+                            }
                         }
                     }
-
                 }
                 messageSender.sendMessage(sendMessage);
                 break;
