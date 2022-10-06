@@ -429,7 +429,17 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "Розрахувати":
-                if (dbWorker.getSquare(chatID)!= null){
+                if(dbWorker.getValue(chatID).equals("паркування")){
+                    if (dbWorker.getParking(chatID)!=null){
+                        sendMessage.setText(result(chatID));
+                        messageSender.sendMessage(sendMessage);
+                    }else{
+                        sendMessage.setText("Ви не ввели рекомендовані системою параметри. \n\n" +
+                                "2. Надішліть кількість місць стоянки автомобілів у боксі (гаражі, стоянці) після чого натисніть \"Розрахувати\" \uD83C\uDD7F️");
+                        sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherCalculateKeyboard());
+                        messageSender.sendMessage(sendMessage);
+                    }
+                }else if (dbWorker.getSquare(chatID)!= null){
                     sendMessage.setText(result(chatID));
                     messageSender.sendMessage(sendMessage);
                     sendMessage.setText("7. Чи передбачені в досліджуваних приміщеннях комори, електрощитові, вентиляційні камери або інші технічні приміщення? ⚡️");
