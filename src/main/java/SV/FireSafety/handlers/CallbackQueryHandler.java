@@ -27,6 +27,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
     DBWorker dbWorker = new DBWorker();
     ZoneClasses zc = new ZoneClasses();
 
+
     //
     String s2 = null;
     String s3 = null;
@@ -51,6 +52,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
         String chatID = String.valueOf(message.getChatId());
         //екземпляр класу з параметром
         CategoryBuilding categoryBuilding = new CategoryBuilding(chatID);
+        FireAlarm fireAlarm = new FireAlarm(chatID);
         //тип та необхідність вогнегасників
         switch (callbackQuery.getData()) {
             case "Розпочати":
@@ -72,6 +74,10 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                             "1.2. Використовуються пожежонебезпечні речовини \uD83D\uDD25\n" +
                             "1.3. Відсутні вибухо- та пожежонебезпечні речовини ♻");
                     sendMessage.setReplyMarkup(inlineButton.inlineZoneClassesKeyboardMarkup());
+                    messageSender.sendMessage(sendMessage);
+                }else if (dbWorker.getComandOfMenu(chatID).equals("/fire_alarm_installation")){
+                    sendMessage.setText("1. Виберіть тип об'єкту \uD83C\uDFEB :");
+                    sendMessage.setReplyMarkup(inlineButton.inlineObjectTypeFireAlarmKeyboard());
                     messageSender.sendMessage(sendMessage);
                 }
                 break;
@@ -1920,6 +1926,154 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     messageSender.sendMessage(sendMessage);
 
                 }
+                break;
+
+            //проектування та монтаж пожежної сигналізації
+            case "об’єкт громадського призначення":
+                sendMessage.setText("2. Виберіть призначення громадського об’єкту:\n\n" +
+                        "\uD83D\uDC49 2.1 Об’єкт житлового фонду \n" +
+                        "\uD83D\uDC49 2.2 Адміністративно-офісна будівля \n" +
+                        "\uD83D\uDC49 2.3 Банківська установа\n" +
+                        "\uD83D\uDC49 2.4 Торгівельний та/або заклад\n" +
+                        "\uD83D\uDC49 2.5 Будівля громадського харчування\n" +
+                        "\uD83D\uDC49 2.6 Виставкова або виставково-торгівельна будівля\n" +
+                        "\uD83D\uDC49 2.7 Культурно-освітній або видовищний заклад\n" +
+                        "\uD83D\uDC49 2.8 Музей\n" +
+                        "\uD83D\uDC49 2.9 Бібліотека\n" +
+                        "\uD83D\uDC49 2.10 Архів\n" +
+                        "\uD83D\uDC49 2.11 Будівлі дослідних інститутів, проектних і конструкторських організацій, інформаційні центри, установи органів управління, громадські організації, навчальні заклади\n" +
+                        "\uD83D\uDC49 2.12 Заклади охорони здоров’я\n" +
+                        "\uD83D\uDC49 2.13 Будівлі спортивного та фізкультурно-оздоровчого призначення\n" +
+                        "\uD83D\uDC49 2.14 Культові та релігійні будівлі");
+                sendMessage.setReplyMarkup(inlineButton.inlinePurposePublicObjectFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "об’єкт промислового призначення":
+                sendMessage.setText("2. Виберіть призначення промислового об'єкту: \n\n" +
+                        "\uD83D\uDC49 2.1 Будівля транспорту\n" +
+                        "\uD83D\uDC49 2.2 Будівля зберігання та обслуговування автомобільного транспорту \n" +
+                        "\uD83D\uDC49 2.3 Виробнича будівля \n" +
+                        "\uD83D\uDC49 2.4 Складська будівля\n" +
+                        "\uD83D\uDC49 2.5 Споруди резервуарів для зберігання спирту, наземних резервуарів для зберігання нафти та нафтопродуктів \n" +
+                        "\uD83D\uDC49 2.6 Будівля  сільськогосподарського призначення\n" +
+                        "\uD83D\uDC49 2.7 Транспортний тунель\n" +
+                        "\uD83D\uDC49 2.8 Допоміжна будівля трубопроводів\n" +
+                        "\uD83D\uDC49 2.9 Склади нафтохімічних і нафтопереробних підприємств\n" +
+                        "\uD83D\uDC49 2.10 Склад полімерних (високомолекулярннних) сполук \n");
+                sendMessage.setReplyMarkup(inlineButton.inlinePurposeIndustrialObjectFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.1 громадський об'єкт":
+                sendMessage.setText("3. Оберіть тип будівлі:\n\n " +
+                        "\uD83D\uDC49 3.1 Житлова будівля \n" +
+                        "\uD83D\uDC49 3.2 Багатоквартирний будинок для осіб похилого віку \n" +
+                        "\uD83D\uDC49 3.3 Гуртожиток\n" +
+                        "\uD83D\uDC49 3.4 Готель \n");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypeResidentialBuildingFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.2 громадський об'єкт":
+                sendMessage.setText("3. Оберіть тип будівлі:\n\n " +
+                        "\uD83D\uDC49 3.1 Адміністративні та офісні будівлі  \n" +
+                        "\uD83D\uDC49 3.2 Будівлі Державних органів влади, виконавчих комітетів рад народних депутатів областей, міст, районів та відділів управління  \n");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypeOfficeBuildingFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.3 громадський об'єкт":
+                sendMessage.setText("ВИСНОВОК");
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.4 громадський об'єкт":
+                sendMessage.setText("3. Оберіть тип будівлі:\n\n" +
+                        "\uD83D\uDC49 3.1 Торгівельні центри, криті ринки, магазини, ярмарки\n" +
+                        "\uD83D\uDC49 3.2 Торгівельні центри з продажу сільськогосподарських продуктів, промислових товарів\n");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypeShoppingBuildingFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.5 громадський об'єкт":
+                sendMessage.setText("3. Оберіть тип будівлі: \n\n" +
+                        "\uD83D\uDC49 3.1 Вбудовані в будівлі іншого призначення \n" +
+                        "\uD83D\uDC49 3.2 Окремо стоячі будівлі громадського харчування \n");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypeCateringBuildingFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.6 громадський об'єкт":
+                sendMessage.setText("3. Оберіть тип будівлі: \n\n" +
+                        "\uD83D\uDC49 3.1 Підземне розміщення \n" +
+                        "\uD83D\uDC49 3.2 Надземне розміщення \n");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypeExhibitionBuildingFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.7 громадський об'єкт":
+                sendMessage.setText("3. Оберіть тип будівлі: \n\n" +
+                        "3.1 \uD83D\uDC49 Театр, кіноконцертна і концертна зала, цирк, кінотеатр, дозвіллєвий заклад \n" +
+                        "3.2 \uD83D\uDC49 Цирк \n" +
+                        "3.3 \uD83D\uDC49 Кінотеатр, заклади дозвілля \n" +
+                        "3.4 \uD83D\uDC49 Казино, ігровий заклад");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypeScienceBuildingFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.8 громадський об'єкт":
+                sendMessage.setText("ВИСНОВОК");
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.9 громадський об'єкт":
+                sendMessage.setText("3. Вкажіть місце розташування об'єкту: " +
+                        "3.1 в будівлях органів влади, місцевого самоврядування та/або будівлях з умовною висотою більше 26,5 м \n" +
+                        "3.2 в інших будівлях \n");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypeLibraryFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.10 громадський об'єкт":
+                sendMessage.setText("ВИСНВООК");
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.11 громадський об'єкт":
+                sendMessage.setText("3 Оберіть тип будівлі: " +
+                        "3.1 будівлі дослідних інститутів, проектних і конструкторських організацій, інформаційні центри, установи органів управління, громадські організації \n" +
+                        "3.2 дошкільні навчальні заклади\n" +
+                        "3.3 загальноосвітні навчальні заклади, навчально-виробничі комбінати, позашкільні заклади\n" +
+                        "3.4 спеціальні та санаторні школи, школи-інтернати");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypeEducationBuildingFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.12 громадський об'єкт":
+                sendMessage.setText("ВИСНОВОК");
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.13 громадський об'єкт":
+                sendMessage.setText("ВИСНОВОК");
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.14 громадський об'єкт":
+                sendMessage.setText("ВИСНОВОК");
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.1 житловий фонд":
+                dbWorker.setTypeOfObjectFireAlarm(chatID,"житлова будівля");
+                sendMessage.setText("4. Введіть умовну висоту будівлі(м.) та натисніть \"Далі\" \uD83D\uDC47 ");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                dbWorker.setValue(chatID,"висота обєкта");
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.2 житловий фонд":
+                sendMessage.setText(fireAlarm.getNursingHome());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.3 житловий фонд":
+                dbWorker.setTypeOfObjectFireAlarm(chatID,"гуртожиток");
+                sendMessage.setText("4. Введіть умовну висоту будівлі(м.) та натисніть \"Далі\" \uD83D\uDC47 ");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                dbWorker.setValue(chatID,"висота обєкта");
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Далі сигналізація":
+                if (dbWorker.getTypeOfObjectFireAlarm(chatID).equals("житлова будівля")){
+                    sendMessage.setText(fireAlarm.getHousing());
+                }else if (dbWorker.getTypeOfObjectFireAlarm(chatID).equals("гуртожиток")){
+                    sendMessage.setText(fireAlarm.getDormitory());
+                }
+                messageSender.sendMessage(sendMessage);
                 break;
         }
 

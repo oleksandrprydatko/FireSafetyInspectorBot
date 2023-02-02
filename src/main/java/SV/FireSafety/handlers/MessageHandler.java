@@ -99,7 +99,19 @@ public class MessageHandler implements Handler<Message> {
                         //очищення бази
                         dbWorker.update(chatID);
                         return;
-                        // видає посилання на портал електронних послуг
+                    //проектування пожежної сигналізації
+                    case "/fire_alarm_installation":
+                        //встановлення команди в БД
+                        dbWorker.setComandOfMenu(chatID,"/fire_alarm_installation");
+                        sendMessage.setText("Я підсистема Fire alarm installation \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити необхіднІсть проектування та монтажу автоматичних систем пожежної сигналізації \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
+                        messageSender.sendMessage(sendMessage);
+                        //перевірка чи юзер є в БД/ додавання його в базу
+                        dbWorker.checkUser(chatID);
+                        //очищення бази
+                        dbWorker.update(chatID);
+                        return;
+                    // видає посилання на портал електронних послуг
                     case "/service_portal":
                         //встановлення команди в БД
                         dbWorker.setComandOfMenu(chatID,"/service_portal");
@@ -115,9 +127,6 @@ public class MessageHandler implements Handler<Message> {
                         sendMessage.setText(instructionExtinguisher.feedback());
                         messageSender.sendMessage(sendMessage);
                         return;
-                    default:
-                        sendMessage.setText("Зазначено не коректні дані: " + message.getText() + " Спробуйте ще раз!");
-                        messageSender.sendMessage(sendMessage);
                 }
                 }
         }
@@ -178,11 +187,11 @@ public class MessageHandler implements Handler<Message> {
 
     }
 }
-
-//on_start - На початок
-//type_number_fire_extinguishers - Визначення типу та необхідної кількості вогнегасників
-//degree_of_risk_from_activities - Оцінка ступеня ризику від провадження господарської діяльності
-//determination_of_categories - Визначення категорій приміщень за пожежною небезпекою
-//zone_classes - Визначення класу зони
-//service_portal - Портал електронних послуг ДСНС України
-//feedback_info - Інформація. Зворотній зв'язок
+//        on_start - На початок
+//        type_number_fire_extinguishers - Визначення типу та необхідної кількості вогнегасників
+//        degree_of_risk_from_activities - Оцінка ступеня ризику від провадження господарської діяльності
+//        determination_of_categories - Визначення категорій приміщень за пожежною небезпекою
+//        zone_classes - Визначення класу зони
+//        fire_alarm_installation - Визначення необхідності проектування та монтажу автоматичних систем пожежної сигналізації
+//        service_portal - Портал електронних послуг ДСНС України
+//        feedback_info - Інформація. Зворотній зв'язок

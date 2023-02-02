@@ -1000,6 +1000,32 @@ public class DBWorker {
         return typePremises;
     }
 
+    // встановлення typeOfObjectFireAlarm
+    public void setTypeOfObjectFireAlarm(String chatID,String purposeOfObject){
+        try {
+            Statement statement = getConnection().createStatement();
+            String sql = "UPDATE users set typeOfObjectFireAlarm='"+purposeOfObject+"' where idTelegram="+chatID;
+            statement.addBatch(sql);
+            statement.executeBatch();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    // дістаємо typeOfObjectFireAlarm з БД
+    public String getTypeOfObjectFireAlarm(String chatID){
+        String typePremises= null;
+        try {
+            Statement statement = getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
+            while (resultSet.next()){
+                typePremises = resultSet.getString("typeOfObjectFireAlarm");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return typePremises;
+    }
+
 
 }
 
