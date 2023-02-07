@@ -1,17 +1,19 @@
 package SV.FireSafety.services;
 
+import SV.FireSafety.repository.DatabaseRepository;
+
 public class Garages {
-    String chatID;
-    public Garages(String chatID) {
-        this.chatID = chatID;
+    Long userId;
+    DatabaseRepository databaseRepository;
+
+    public Garages(Long userId, DatabaseRepository databaseRepository) {
+        this.userId = userId;
+        this.databaseRepository = databaseRepository;
     }
-
-    DBWorker dbWorker = new DBWorker();
-
     double array[] = { 1, 1, 2, 2 };
 
     double numberСarSeats() {
-        double seats = Double.parseDouble(dbWorker.getParking(chatID));
+        double seats = Double.parseDouble(databaseRepository.getParking(userId));
         return seats;
     }
 

@@ -898,4 +898,15 @@ public class InlineButton {
         return inlineKeyboardMarkup;
     }
 
+    public InlineKeyboardMarkup inlineTypeMallFireAlarmKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("4.1").callbackData("4.1 підземне приміщення").build(),
+                InlineKeyboardButton.builder().text("4.2").callbackData("4.2 наземне приміщення").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+
+
 }
