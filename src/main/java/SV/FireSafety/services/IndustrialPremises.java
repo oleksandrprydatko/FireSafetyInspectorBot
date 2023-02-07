@@ -1,20 +1,21 @@
 package SV.FireSafety.services;
 
+import SV.FireSafety.repository.DatabaseRepository;
+
 public class IndustrialPremises{
-    String chatID;
+    Long userId;
+    DatabaseRepository databaseRepository;
 
-    public IndustrialPremises(String chatID) {
-        this.chatID = chatID;
+    public IndustrialPremises(Long userId, DatabaseRepository databaseRepository) {
+        this.userId = userId;
+        this.databaseRepository = databaseRepository;
     }
-
-    DBWorker dbWorker = new DBWorker();
 
     int array[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     //	int arrayDemo [] = {ВП_5, ВП_6, ВП_8, ВП_9, ВП_12, ВП_20, ВП_50, ВП_100, ВП_150};
     double square() {
-        double square = Double.parseDouble(dbWorker.getSquare(chatID));
-        return square;
+        return databaseRepository.getSquare(userId);
     }
 
     String transformation(int vp) {
@@ -30,11 +31,11 @@ public class IndustrialPremises{
         String s = null;
         double n = square() / 1000;
         double nLeft = square() % 1000;
-        if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
-                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ"))
-                && (dbWorker.getClassFire(chatID).equals("Клас пожежі A") || dbWorker.getClassFire(chatID).equals("Клас пожежі B") || dbWorker.getClassFire(chatID).equals("Клас пожежі C")
-                || dbWorker.getClassFire(chatID).equals("Клас пожежі E"))
-                && dbWorker.getTypeExtinguisher(chatID).equals("порошковий")) {
+        if ((databaseRepository.getCategory_premises(userId).equals("Категорія А") || databaseRepository.getCategory_premises(userId).equals("Категорія Б")
+                || databaseRepository.getCategory_premises(userId).equals("Категорія В з ГГ"))
+                && (databaseRepository.getClass_fire(userId).equals("Клас пожежі A") || databaseRepository.getClass_fire(userId).equals("Клас пожежі B") || databaseRepository.getClass_fire(userId).equals("Клас пожежі C")
+                || databaseRepository.getClass_fire(userId).equals("Клас пожежі E"))
+                && databaseRepository.getType_extinguisher(userId).equals("порошковий")) {
             if (square()<= 25) {
                 array[0] = 2;
                 array[1] = 2;
@@ -92,7 +93,7 @@ public class IndustrialPremises{
                     array[5] = 4 * (int) n;
                     array[6] = 3 * (int) n;
                     array[7] = 2 * (int) n;
-                    array[8] = 1 * (int) n;
+                    array[8] =(int) n;
                 } else if (nLeft <= 50) {
                     array[0] = 16 * (int) n + 3;
                     array[1] = 16 * (int) n + 3;
@@ -102,7 +103,7 @@ public class IndustrialPremises{
                     array[5] = 4 * (int) n;
                     array[6] = 3 * (int) n;
                     array[7] = 2 * (int) n;
-                    array[8] = 1 * (int) n;
+                    array[8] =(int) n;
 
                 } else if (nLeft > 50 && nLeft <= 150) {
                     array[0] = 16 * (int) n + 4;
@@ -113,7 +114,7 @@ public class IndustrialPremises{
                     array[5] = 4 * (int) n + 1;
                     array[6] = 3 * (int) n;
                     array[7] = 2 * (int) n;
-                    array[8] = 1 * (int) n;
+                    array[8] =(int) n;
 
                 } else if (nLeft > 150 && nLeft <= 250) {
                     array[0] = 16 * (int) n + 6;
@@ -124,7 +125,7 @@ public class IndustrialPremises{
                     array[5] = 4 * (int) n + 2;
                     array[6] = 3 * (int) n + 1;
                     array[7] = 2 * (int) n;
-                    array[8] = 1 * (int) n;
+                    array[8] =(int) n;
 
                 } else if (nLeft > 250 && nLeft <= 500) {
                     array[0] = 16 * (int) n + 8;
@@ -135,7 +136,7 @@ public class IndustrialPremises{
                     array[5] = 4 * (int) n + 3;
                     array[6] = 3 * (int) n + 2;
                     array[7] = 2 * (int) n + 1;
-                    array[8] = 1 * (int) n;
+                    array[8] =(int) n;
 
                 } else if (nLeft > 500 && nLeft <= 1000) {
                     array[0] = 16 * (int) n + 16;
@@ -146,7 +147,7 @@ public class IndustrialPremises{
                     array[5] = 4 * (int) n + 4;
                     array[6] = 3 * (int) n + 3;
                     array[7] = 2 * (int) n + 2;
-                    array[8] = 1 * (int) n + 1;
+                    array[8] =(int) n + 1;
                 }
             }
 
@@ -187,8 +188,8 @@ public class IndustrialPremises{
                 }
             }
 
-        } else if (dbWorker.getCategoryPremises(chatID).equals("Категорія В без ГГ")
-                && (dbWorker.getClassFire(chatID).equals("Клас пожежі A") || dbWorker.getClassFire(chatID) .equals("Клас пожежі E")) && dbWorker.getTypeExtinguisher(chatID).equals("порошковий")) {
+        } else if (databaseRepository.getCategory_premises(userId).equals("Категорія В без ГГ")
+                && (databaseRepository.getClass_fire(userId).equals("Клас пожежі A") || databaseRepository.getClass_fire(userId) .equals("Клас пожежі E")) && databaseRepository.getType_extinguisher(userId).equals("порошковий")) {
             if (square ()<= 50) {
                 array[0] = 2;
                 array[1] = 2;
@@ -235,7 +236,7 @@ public class IndustrialPremises{
                     array[4] = 5 * (int) n;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft <= 50) {
                     array[0] = 9 * (int) n + 2;
@@ -245,7 +246,7 @@ public class IndustrialPremises{
                     array[4] = 5 * (int) n + 1;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 50 && nLeft <= 100) {
                     array[0] = 9 * (int) n + 3;
@@ -255,7 +256,7 @@ public class IndustrialPremises{
                     array[4] = 5 * (int) n + 2;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 100 && nLeft <= 300) {
                     array[0] = 9 * (int) n + 4;
@@ -265,7 +266,7 @@ public class IndustrialPremises{
                     array[4] = 5 * (int) n + 2;
                     array[5] = 3 * (int) n + 1;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 300 && nLeft <= 500) {
                     array[0] = 9 * (int) n + 6;
@@ -275,7 +276,7 @@ public class IndustrialPremises{
                     array[4] = 5 * (int) n + 3;
                     array[5] = 3 * (int) n + 2;
                     array[6] = 2 * (int) n + 1;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 500 && nLeft <= 1000) {
                     array[0] = 9 * (int) n + 9;
@@ -285,7 +286,7 @@ public class IndustrialPremises{
                     array[4] = 5 * (int) n + 5;
                     array[5] = 3 * (int) n + 3;
                     array[6] = 2 * (int) n + 2;
-                    array[7] = 1 * (int) n + 1;
+                    array[7] =(int) n + 1;
                 }
             }
 
@@ -332,8 +333,8 @@ public class IndustrialPremises{
                             + "\n" + "3. ВП-100 - " + transformation(array[7]) + "\n";
                 }
             }
-        } else if (dbWorker.getCategoryPremises(chatID).equals("Категорія Г") && (dbWorker.getClassFire(chatID).equals("Клас пожежі B") || dbWorker.getClassFire(chatID).equals("Клас пожежі C"))
-                && dbWorker.getTypeExtinguisher(chatID).equals("порошковий")) {
+        } else if (databaseRepository.getCategory_premises(userId).equals("Категорія Г") && (databaseRepository.getClass_fire(userId).equals("Клас пожежі B") || databaseRepository.getClass_fire(userId).equals("Клас пожежі C"))
+                && databaseRepository.getType_extinguisher(userId).equals("порошковий")) {
             if (square() <= 50) {
                 array[0] = 2;
                 array[1] = 2;
@@ -373,64 +374,64 @@ public class IndustrialPremises{
             } else if (square ()> 1000) {
 
                 if (nLeft == 0) {
-                    array[0] = 11 * (int) n;
-                    array[1] = 11 * (int) n;
+                    array[0] = (int) n;
+                    array[1] = (int) n;
                     array[2] = 7 * (int) n;
                     array[3] = 7 * (int) n;
                     array[4] = 5 * (int) n;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft <= 50) {
-                    array[0] = 11 * (int) n + 2;
-                    array[1] = 11 * (int) n + 2;
+                    array[0] = (int) n + 2;
+                    array[1] = (int) n + 2;
                     array[2] = 7 * (int) n + 1;
                     array[3] = 7 * (int) n + 1;
                     array[4] = 5 * (int) n + 1;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 50 && nLeft <= 100) {
-                    array[0] = 11 * (int) n + 3;
-                    array[1] = 11 * (int) n + 3;
+                    array[0] = (int) n + 3;
+                    array[1] = (int) n + 3;
                     array[2] = 7 * (int) n + 2;
                     array[3] = 7 * (int) n + 2;
                     array[4] = 5 * (int) n + 2;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 100 && nLeft <= 300) {
-                    array[0] = 11 * (int) n + 5;
-                    array[1] = 11 * (int) n + 5;
+                    array[0] = (int) n + 5;
+                    array[1] = (int) n + 5;
                     array[2] = 7 * (int) n + 3;
                     array[3] = 7 * (int) n + 3;
                     array[4] = 5 * (int) n + 2;
                     array[5] = 3 * (int) n + 1;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 300 && nLeft <= 500) {
-                    array[0] = 11 * (int) n + 7;
-                    array[1] = 11 * (int) n + 7;
+                    array[0] = (int) n + 7;
+                    array[1] = (int) n + 7;
                     array[2] = 7 * (int) n + 4;
                     array[3] = 7 * (int) n + 4;
                     array[4] = 5 * (int) n + 3;
                     array[5] = 3 * (int) n + 2;
                     array[6] = 2 * (int) n + 1;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 500 && nLeft <= 1000) {
-                    array[0] = 11 * (int) n + 11;
-                    array[1] = 11 * (int) n + 11;
+                    array[0] = (int) n + 11;
+                    array[1] = (int) n + 11;
                     array[2] = 7 * (int) n + 7;
                     array[3] = 7 * (int) n + 7;
                     array[4] = 5 * (int) n + 5;
                     array[5] = 3 * (int) n + 3;
                     array[6] = 2 * (int) n + 2;
-                    array[7] = 1 * (int) n + 1;
+                    array[7] =(int) n + 1;
                 }
             }
 
@@ -469,8 +470,8 @@ public class IndustrialPremises{
                             + "ВП-5 - 7 од. або ВП-6 - 7 од. або ВП-8 - 4 од. або ВП-9 - 4 од. або ВП-12 - 3 од.";
                 }
             }
-        } else if ((dbWorker.getCategoryPremises(chatID).equals("Категорія Г") || dbWorker.getCategoryPremises(chatID).equals("Категорія Д"))
-                && (dbWorker.getClassFire(chatID).equals("Клас пожежі A") || dbWorker.getClassFire(chatID).equals("Клас пожежі E")) && dbWorker.getTypeExtinguisher(chatID).equals("порошковий")) {
+        } else if ((databaseRepository.getCategory_premises(userId).equals("Категорія Г") || databaseRepository.getCategory_premises(userId).equals("Категорія Д"))
+                && (databaseRepository.getClass_fire(userId).equals("Клас пожежі A") || databaseRepository.getClass_fire(userId).equals("Клас пожежі E")) && databaseRepository.getType_extinguisher(userId).equals("порошковий")) {
             if (square ()<= 50) {
                 array[0] = 2;
                 array[1] = 2;
@@ -507,7 +508,7 @@ public class IndustrialPremises{
                     array[3] = 4 * (int) n;
                     array[4] = 3 * (int) n;
                     array[5] = 2 * (int) n;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft <= 50) {
                     array[0] = 6 * (int) n + 2;
@@ -516,7 +517,7 @@ public class IndustrialPremises{
                     array[3] = 4 * (int) n + 1;
                     array[4] = 3 * (int) n + 1;
                     array[5] = 2 * (int) n;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft > 50 && nLeft <= 150) {
                     array[0] = 6 * (int) n + 3;
@@ -525,7 +526,7 @@ public class IndustrialPremises{
                     array[3] = 4 * (int) n + 2;
                     array[4] = 3 * (int) n + 2;
                     array[5] = 2 * (int) n;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft > 150 && nLeft <= 500) {
                     array[0] = 6 * (int) n + 4;
@@ -534,7 +535,7 @@ public class IndustrialPremises{
                     array[3] = 4 * (int) n + 3;
                     array[4] = 3 * (int) n + 2;
                     array[5] = 2 * (int) n + 1;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft > 500 && nLeft <= 1000) {
                     array[0] = 6 * (int) n + 6;
@@ -543,7 +544,7 @@ public class IndustrialPremises{
                     array[3] = 4 * (int) n + 4;
                     array[4] = 3 * (int) n + 3;
                     array[5] = 2 * (int) n + 2;
-                    array[6] = 1 * (int) n + 1;
+                    array[6] =(int) n + 1;
 
                 }
             }
@@ -580,10 +581,10 @@ public class IndustrialPremises{
                             + "ВП-5 - 4 од. або ВП-6 - 4 од. або ВП-8 - 3 од. або ВП-9 - 3 од. або ВП-12 - 2 од.";
                 }
             }
-        } else if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
-                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ") || dbWorker.getCategoryPremises(chatID).equals("Категорія В без ГГ")
-                || dbWorker.getCategoryPremises(chatID).equals("Категорія Г") || dbWorker.getCategoryPremises(chatID).equals("Категорія Д"))
-                && dbWorker.getClassFire(chatID).equals("Клас пожежі D") && dbWorker.getTypeExtinguisher(chatID).equals("порошковий")) {
+        } else if ((databaseRepository.getCategory_premises(userId).equals("Категорія А") || databaseRepository.getCategory_premises(userId).equals("Категорія Б")
+                || databaseRepository.getCategory_premises(userId).equals("Категорія В з ГГ") || databaseRepository.getCategory_premises(userId).equals("Категорія В без ГГ")
+                || databaseRepository.getCategory_premises(userId).equals("Категорія Г") || databaseRepository.getCategory_premises(userId).equals("Категорія Д"))
+                && databaseRepository.getClass_fire(userId).equals("Клас пожежі D") && databaseRepository.getType_extinguisher(userId).equals("порошковий")) {
             s = "🧯 Оснащення порошковими вогнегасниками для гасіння пожеж класу D слід проводити з дотриманням галузевих норм, погоджених у встановленому порядку";
         }
         return s;
@@ -593,9 +594,9 @@ public class IndustrialPremises{
         String s = null;
         double n = square() / 1000;
         double nLeft = square() % 1000;
-        if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
-                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ")) && dbWorker.getClassFire(chatID).equals("Клас пожежі A")
-                && dbWorker.getTypeExtinguisher(chatID).equals("водопінний")) {
+        if ((databaseRepository.getCategory_premises(userId).equals("Категорія А") || databaseRepository.getCategory_premises(userId).equals("Категорія Б")
+                || databaseRepository.getCategory_premises(userId).equals("Категорія В з ГГ")) && databaseRepository.getClass_fire(userId).equals("Клас пожежі A")
+                && databaseRepository.getType_extinguisher(userId).equals("водопінний")) {
             if (square() <= 25) {
                 array[0] = 4;
                 array[1] = 4;
@@ -710,9 +711,9 @@ public class IndustrialPremises{
                             + "ВВП-9 - 8 од. або ВВП-12 - 6 од.";
                 }
             }
-        } else if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
-                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ")) && dbWorker.getClassFire(chatID).equals("Клас пожежі B")
-                && dbWorker.getTypeExtinguisher(chatID).equals("водопінний")) {
+        } else if ((databaseRepository.getCategory_premises(userId).equals("Категорія А") || databaseRepository.getCategory_premises(userId).equals("Категорія Б")
+                || databaseRepository.getCategory_premises(userId).equals("Категорія В з ГГ")) && databaseRepository.getClass_fire(userId).equals("Клас пожежі B")
+                && databaseRepository.getType_extinguisher(userId).equals("водопінний")) {
             if (square ()<= 25) {
                 array[0] = 3;
                 array[1] = 3;
@@ -827,8 +828,8 @@ public class IndustrialPremises{
                             + "ВВП-9 - 7 од. або ВВП-12 - 4 од.";
                 }
             }
-        } else if (dbWorker.getCategoryPremises(chatID).equals("Категорія В без ГГ") && dbWorker.getClassFire(chatID).equals("Клас пожежі A")
-                && dbWorker.getTypeExtinguisher(chatID).equals("водопінний")) {
+        } else if (databaseRepository.getCategory_premises(userId).equals("Категорія В без ГГ") && databaseRepository.getClass_fire(userId).equals("Клас пожежі A")
+                && databaseRepository.getType_extinguisher(userId).equals("водопінний")) {
             if (square ()> 0 && square ()<= 50) {
                 array[0] = 4;
                 array[1] = 4;
@@ -872,7 +873,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft <= 50) {
                     array[2] = 14 * (int) n + 2;
@@ -880,7 +881,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 50 && nLeft <= 100) {
                     array[2] = 14 * (int) n + 4;
@@ -888,7 +889,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 1;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 100 && nLeft <= 300) {
                     array[2] = 14 * (int) n + 6;
@@ -896,7 +897,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 2;
                     array[5] = 3 * (int) n + 1;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 300 && nLeft <= 500) {
                     array[2] = 14 * (int) n + 8;
@@ -904,7 +905,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 3;
                     array[5] = 3 * (int) n + 2;
                     array[6] = 2 * (int) n + 1;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 500 && nLeft <= 1000) {
                     array[2] = 14 * (int) n + 14;
@@ -912,7 +913,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 4;
                     array[5] = 3 * (int) n + 3;
                     array[6] = 2 * (int) n + 2;
-                    array[7] = 1 * (int) n + 1;
+                    array[7] =(int) n + 1;
                 }
             }
             if (square ()== 0) {
@@ -951,8 +952,8 @@ public class IndustrialPremises{
                             + "ВВП-9 - 8 од. або ВВП-12 - 6 од.";
                 }
             }
-        } else if (dbWorker.getCategoryPremises(chatID).equals("Категорія Г") && dbWorker.getClassFire(chatID).equals("Клас пожежі B")
-                && dbWorker.getTypeExtinguisher(chatID).equals("водопінний")) {
+        } else if (databaseRepository.getCategory_premises(userId).equals("Категорія Г") && databaseRepository.getClass_fire(userId).equals("Клас пожежі B")
+                && databaseRepository.getType_extinguisher(userId).equals("водопінний")) {
             if (square ()> 0 && square() <= 50) {
                 array[0] = 3;
                 array[1] = 3;
@@ -998,7 +999,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft <= 50) {
                     array[2] = 12 * (int) n + 2;
@@ -1006,7 +1007,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 50 && nLeft <= 100) {
                     array[2] = 12 * (int) n + 3;
@@ -1014,7 +1015,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 1;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 100 && nLeft <= 300) {
                     array[2] = 12 * (int) n + 5;
@@ -1022,7 +1023,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 2;
                     array[5] = 3 * (int) n + 1;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 300 && nLeft <= 500) {
                     array[2] = 12 * (int) n + 7;
@@ -1030,7 +1031,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 3;
                     array[5] = 3 * (int) n + 2;
                     array[6] = 2 * (int) n + 1;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 500 && nLeft <= 1000) {
                     array[2] = 12 * (int) n + 12;
@@ -1038,7 +1039,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 4;
                     array[5] = 3 * (int) n + 3;
                     array[6] = 2 * (int) n + 2;
-                    array[7] = 1 * (int) n + 1;
+                    array[7] =(int) n + 1;
                 }
             }
             if (square ()== 0) {
@@ -1077,8 +1078,8 @@ public class IndustrialPremises{
                             + "ВВП-5 - 11 од. або ВВП-6 - 11 од. абоВВП-9 - 7 од. або ВВП-12 - 4 од.";
                 }
             }
-        } else if ((dbWorker.getCategoryPremises(chatID) == "Категорія Г" || dbWorker.getCategoryPremises(chatID) == "Категорія Д")
-                && dbWorker.getClassFire(chatID) == "Клас пожежі A" && dbWorker.getTypeExtinguisher(chatID) == "водопінний") {
+        } else if ((databaseRepository.getCategory_premises(userId) == "Категорія Г" || databaseRepository.getCategory_premises(userId) == "Категорія Д")
+                && databaseRepository.getClass_fire(userId) == "Клас пожежі A" && databaseRepository.getType_extinguisher(userId) == "водопінний") {
             if (square ()> 0 && square ()<= 50) {
                 array[0] = 4;
                 array[1] = 4;
@@ -1117,7 +1118,7 @@ public class IndustrialPremises{
                     array[3] = 6 * (int) n;
                     array[4] = 3 * (int) n;
                     array[5] = 2 * (int) n;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft <= 50) {
                     array[0] = 16 * (int) n + 4;
@@ -1126,7 +1127,7 @@ public class IndustrialPremises{
                     array[3] = 6 * (int) n + 2;
                     array[4] = 3 * (int) n;
                     array[5] = 2 * (int) n;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft > 50 && nLeft <= 150) {
                     array[0] = 16 * (int) n + 8;
@@ -1135,7 +1136,7 @@ public class IndustrialPremises{
                     array[3] = 6 * (int) n + 3;
                     array[4] = 3 * (int) n + 1;
                     array[5] = 2 * (int) n;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft > 150 && nLeft <= 500) {
                     array[0] = 16 * (int) n + 12;
@@ -1144,7 +1145,7 @@ public class IndustrialPremises{
                     array[3] = 6 * (int) n + 4;
                     array[4] = 3 * (int) n + 2;
                     array[5] = 2 * (int) n + 1;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft > 500 && nLeft <= 1000) {
                     array[0] = 16 * (int) n + 16;
@@ -1153,7 +1154,7 @@ public class IndustrialPremises{
                     array[3] = 6 * (int) n + 6;
                     array[4] = 3 * (int) n + 3;
                     array[5] = 2 * (int) n + 2;
-                    array[6] = 1 * (int) n + 1;
+                    array[6] =(int) n + 1;
 
                 }
             }
@@ -1196,9 +1197,9 @@ public class IndustrialPremises{
         String s = null;
         double n = square() / 1000;
         double nLeft = square() % 1000;
-        if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
-                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ")) && dbWorker.getClassFire(chatID).equals("Клас пожежі A")
-                && dbWorker.getTypeExtinguisher(chatID).equals("водяний")) {
+        if ((databaseRepository.getCategory_premises(userId).equals("Категорія А") || databaseRepository.getCategory_premises(userId).equals("Категорія Б")
+                || databaseRepository.getCategory_premises(userId).equals("Категорія В з ГГ")) && databaseRepository.getClass_fire(userId).equals("Клас пожежі A")
+                && databaseRepository.getType_extinguisher(userId).equals("водяний")) {
             if (square() <= 25) {
                 array[0] = 4;
                 array[1] = 4;
@@ -1314,9 +1315,9 @@ public class IndustrialPremises{
                             + "ВВ-9 - 8 од. або ВВ-12 - 6 од.";
                 }
             }
-        } else if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
-                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ")) && dbWorker.getClassFire(chatID).equals("Клас пожежі B")
-                && dbWorker.getTypeExtinguisher(chatID).equals("водяний")) {
+        } else if ((databaseRepository.getCategory_premises(userId).equals("Категорія А") || databaseRepository.getCategory_premises(userId).equals("Категорія Б")
+                || databaseRepository.getCategory_premises(userId).equals("Категорія В з ГГ")) && databaseRepository.getClass_fire(userId).equals("Клас пожежі B")
+                && databaseRepository.getType_extinguisher(userId).equals("водяний")) {
             if (square() <= 25) {
                 array[0] = 3;
                 array[1] = 3;
@@ -1434,8 +1435,8 @@ public class IndustrialPremises{
                             + "ВВ-9 - 7 од. або ВВ-12 - 4 од." + "\n";
                 }
             }
-        } else if (dbWorker.getCategoryPremises(chatID).equals("Категорія В без ГГ") && dbWorker.getClassFire(chatID).equals("Клас пожежі A")
-                && dbWorker.getTypeExtinguisher(chatID).equals("водяний")) {
+        } else if (databaseRepository.getCategory_premises(userId).equals("Категорія В без ГГ") && databaseRepository.getClass_fire(userId).equals("Клас пожежі A")
+                && databaseRepository.getType_extinguisher(userId).equals("водяний")) {
             if (square() > 0 && square() <= 50) {
                 array[0] = 4;
                 array[1] = 4;
@@ -1479,7 +1480,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft <= 50) {
                     array[2] = 14 * (int) n + 2;
@@ -1487,7 +1488,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 50 && nLeft <= 100) {
                     array[2] = 14 * (int) n + 4;
@@ -1495,7 +1496,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 1;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 100 && nLeft <= 300) {
                     array[2] = 14 * (int) n + 6;
@@ -1503,7 +1504,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 2;
                     array[5] = 3 * (int) n + 1;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 300 && nLeft <= 500) {
                     array[2] = 14 * (int) n + 8;
@@ -1511,7 +1512,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 3;
                     array[5] = 3 * (int) n + 2;
                     array[6] = 2 * (int) n + 1;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 500 && nLeft <= 1000) {
                     array[2] = 14 * (int) n + 14;
@@ -1519,7 +1520,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 4;
                     array[5] = 3 * (int) n + 3;
                     array[6] = 2 * (int) n + 2;
-                    array[7] = 1 * (int) n + 1;
+                    array[7] =(int) n + 1;
                 }
             }
             if (square() == 0) {
@@ -1558,7 +1559,7 @@ public class IndustrialPremises{
                             + "ВВ-9 - 8 од. або ВВ-12 - 6 од.";
                 }
             }
-        } else if (dbWorker.getCategoryPremises(chatID).equals("Категорія Г") && dbWorker.getClassFire(chatID).equals("Клас пожежі B") && dbWorker.getTypeExtinguisher(chatID).equals("водяний")) {
+        } else if (databaseRepository.getCategory_premises(userId).equals("Категорія Г") && databaseRepository.getClass_fire(userId).equals("Клас пожежі B") && databaseRepository.getType_extinguisher(userId).equals("водяний")) {
             if (square() > 0 && square() <= 50) {
                 array[0] = 3;
                 array[1] = 3;
@@ -1604,7 +1605,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft <= 50) {
                     array[2] = 12 * (int) n + 2;
@@ -1612,7 +1613,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 50 && nLeft <= 100) {
                     array[2] = 12 * (int) n + 3;
@@ -1620,7 +1621,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 1;
                     array[5] = 3 * (int) n;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 100 && nLeft <= 300) {
                     array[2] = 12 * (int) n + 5;
@@ -1628,7 +1629,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 2;
                     array[5] = 3 * (int) n + 1;
                     array[6] = 2 * (int) n;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 300 && nLeft <= 500) {
                     array[2] = 12 * (int) n + 7;
@@ -1636,7 +1637,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 3;
                     array[5] = 3 * (int) n + 2;
                     array[6] = 2 * (int) n + 1;
-                    array[7] = 1 * (int) n;
+                    array[7] =(int) n;
 
                 } else if (nLeft > 500 && nLeft <= 1000) {
                     array[2] = 12 * (int) n + 12;
@@ -1644,7 +1645,7 @@ public class IndustrialPremises{
                     array[4] = 4 * (int) n + 4;
                     array[5] = 3 * (int) n + 3;
                     array[6] = 2 * (int) n + 2;
-                    array[7] = 1 * (int) n + 1;
+                    array[7] =(int) n + 1;
                 }
             }
             if (square ()== 0) {
@@ -1685,8 +1686,8 @@ public class IndustrialPremises{
                             + "ВВ-5 - 11 од. або ВВ-6 - 11 од. або ВВ-9 - 7 од. або ВВ-12 - 4 од.";
                 }
             }
-        } else if ((dbWorker.getCategoryPremises(chatID).equals("Категорія Г") || dbWorker.getCategoryPremises(chatID).equals("Категорія Д"))
-                && dbWorker.getClassFire(chatID).equals("Клас пожежі A") && dbWorker.getTypeExtinguisher(chatID).equals("водяний")) {
+        } else if ((databaseRepository.getCategory_premises(userId).equals("Категорія Г") || databaseRepository.getCategory_premises(userId).equals("Категорія Д"))
+                && databaseRepository.getClass_fire(userId).equals("Клас пожежі A") && databaseRepository.getType_extinguisher(userId).equals("водяний")) {
             if (square() > 0 && square() <= 50) {
                 array[0] = 4;
                 array[1] = 4;
@@ -1725,7 +1726,7 @@ public class IndustrialPremises{
                     array[3] = 6 * (int) n;
                     array[4] = 3 * (int) n;
                     array[5] = 2 * (int) n;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft <= 50) {
                     array[0] = 16 * (int) n + 4;
@@ -1734,7 +1735,7 @@ public class IndustrialPremises{
                     array[3] = 6 * (int) n + 2;
                     array[4] = 3 * (int) n;
                     array[5] = 2 * (int) n;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft > 50 && nLeft <= 150) {
                     array[0] = 16 * (int) n + 8;
@@ -1743,7 +1744,7 @@ public class IndustrialPremises{
                     array[3] = 6 * (int) n + 3;
                     array[4] = 3 * (int) n + 1;
                     array[5] = 2 * (int) n;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft > 150 && nLeft <= 500) {
                     array[0] = 16 * (int) n + 12;
@@ -1752,7 +1753,7 @@ public class IndustrialPremises{
                     array[3] = 6 * (int) n + 4;
                     array[4] = 3 * (int) n + 2;
                     array[5] = 2 * (int) n + 1;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft > 500 && nLeft <= 1000) {
                     array[0] = 16 * (int) n + 16;
@@ -1761,7 +1762,7 @@ public class IndustrialPremises{
                     array[3] = 6 * (int) n + 6;
                     array[4] = 3 * (int) n + 3;
                     array[5] = 2 * (int) n + 2;
-                    array[6] = 1 * (int) n + 1;
+                    array[6] =(int) n + 1;
 
                 }
             }
@@ -1796,10 +1797,10 @@ public class IndustrialPremises{
                             + "ВВ-5 - 12 од. або ВВ-6 - 12 од. або ВВ-9 - 6 од. або ВВ-12 - 4 од.";
                 }
             }
-        } else if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
-                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ") || dbWorker.getCategoryPremises(chatID).equals("Категорія В без ГГ")
-                || dbWorker.getCategoryPremises(chatID).equals("Категорія Г") || dbWorker.getCategoryPremises(chatID).equals("Категорія Д"))
-                && dbWorker.getClassFire(chatID).equals("Клас пожежі F") && dbWorker.getTypeExtinguisher(chatID).equals("водяний")) {
+        } else if ((databaseRepository.getCategory_premises(userId).equals("Категорія А") || databaseRepository.getCategory_premises(userId).equals("Категорія Б")
+                || databaseRepository.getCategory_premises(userId).equals("Категорія В з ГГ") || databaseRepository.getCategory_premises(userId).equals("Категорія В без ГГ")
+                || databaseRepository.getCategory_premises(userId).equals("Категорія Г") || databaseRepository.getCategory_premises(userId).equals("Категорія Д"))
+                && databaseRepository.getClass_fire(userId).equals("Клас пожежі F") && databaseRepository.getType_extinguisher(userId).equals("водяний")) {
             s = "🧯 Оснащення водяними вогнегасниками, що містять воду з сольовими добавками для гасіння пожеж класу F, слід проводити з дотриманням галузевих норм, погоджених у встановленому порядку";
         }
 
@@ -1811,9 +1812,9 @@ public class IndustrialPremises{
         String s = null;
         double n = square() / 1000;
         double nLeft = square() % 1000;
-        if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
-                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ"))
-                && (dbWorker.getClassFire(chatID).equals("Клас пожежі B") || dbWorker.getClassFire(chatID).equals("Клас пожежі E")) && dbWorker.getTypeExtinguisher(chatID).equals("газовий")) {
+        if ((databaseRepository.getCategory_premises(userId).equals("Категорія А") || databaseRepository.getCategory_premises(userId).equals("Категорія Б")
+                || databaseRepository.getCategory_premises(userId).equals("Категорія В з ГГ"))
+                && (databaseRepository.getClass_fire(userId).equals("Клас пожежі B") || databaseRepository.getClass_fire(userId).equals("Клас пожежі E")) && databaseRepository.getType_extinguisher(userId).equals("газовий")) {
             if (square() <= 25) {
                 array[0] = 4;
                 array[1] = 4;
@@ -1908,8 +1909,8 @@ public class IndustrialPremises{
                             + "ВВК-7 - 4 од. або ВВК-14 - 3 од.";
                 }
             }
-        } else if (dbWorker.getCategoryPremises(chatID).equals("Категорія Г") && (dbWorker.getClassFire(chatID).equals("Клас пожежі B") || dbWorker.getClassFire(chatID).equals("Клас пожежі E"))
-                && dbWorker.getTypeExtinguisher(chatID).equals("газовий")) {
+        } else if (databaseRepository.getCategory_premises(userId).equals("Категорія Г") && (databaseRepository.getClass_fire(userId).equals("Клас пожежі B") || databaseRepository.getClass_fire(userId).equals("Клас пожежі E"))
+                && databaseRepository.getType_extinguisher(userId).equals("газовий")) {
             if (square() > 0 && square() <= 50) {
                 array[0] = 4;
                 array[1] = 4;
@@ -1945,37 +1946,37 @@ public class IndustrialPremises{
                     array[3] = 4 * (int) n;
                     array[4] = 3 * (int) n;
                     array[5] = 2 * (int) n;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft <= 50) {
                     array[3] = 4 * (int) n;
                     array[4] = 3 * (int) n;
                     array[5] = 2 * (int) n;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft > 50 && nLeft <= 100) {
                     array[3] = 4 * (int) n + 1;
                     array[4] = 3 * (int) n;
                     array[5] = 2 * (int) n;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft > 100 && nLeft <= 300) {
                     array[3] = 4 * (int) n + 2;
                     array[4] = 3 * (int) n + 1;
                     array[5] = 2 * (int) n;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft > 300 && nLeft <= 500) {
                     array[3] = 4 * (int) n + 3;
                     array[4] = 3 * (int) n + 2;
                     array[5] = 2 * (int) n + 1;
-                    array[6] = 1 * (int) n;
+                    array[6] =(int) n;
 
                 } else if (nLeft > 500 && nLeft <= 1000) {
                     array[3] = 4 * (int) n + 4;
                     array[4] = 3 * (int) n + 3;
                     array[5] = 2 * (int) n + 2;
-                    array[6] = 1 * (int) n + 1;
+                    array[6] =(int) n + 1;
                 }
             }
 
