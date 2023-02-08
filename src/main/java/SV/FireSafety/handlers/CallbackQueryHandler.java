@@ -1307,7 +1307,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "Ні, необхідність відсутня":
-                sendMessage.setText("🇺🇦 Для початку роботи повторно скористайтеся командами бота Fire Safety Bot 👇");
+                sendMessage.setText(instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "Використовується на вулиці":
@@ -1937,6 +1937,8 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
 
             //проектування та монтаж пожежної сигналізації
             case "об’єкт громадського призначення":
+                sendMessage.setText("Обрано: об’єкт громадського призначення");
+                messageSender.sendMessage(sendMessage);
                 sendMessage.setText("2. Виберіть призначення громадського об’єкту:\n\n" +
                         "\uD83D\uDC49 2.1 Об’єкт житлового фонду \n" +
                         "\uD83D\uDC49 2.2 Адміністративно-офісна будівля \n" +
@@ -1956,6 +1958,8 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "об’єкт промислового призначення":
+                sendMessage.setText("Обрано: об’єкт промислового призначення");
+                messageSender.sendMessage(sendMessage);
                 sendMessage.setText("2. Виберіть призначення промислового об'єкту: \n\n" +
                         "\uD83D\uDC49 2.1 Будівля транспорту\n" +
                         "\uD83D\uDC49 2.2 Будівля зберігання та обслуговування автомобільного транспорту \n" +
@@ -1971,6 +1975,8 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.1 громадський об'єкт":
+                sendMessage.setText("Обрано: об’єкт житлового фонду");
+                messageSender.sendMessage(sendMessage);
                 sendMessage.setText("3. Оберіть тип будівлі:\n\n " +
                         "\uD83D\uDC49 3.1 Житлова будівля \n" +
                         "\uD83D\uDC49 3.2 Багатоквартирний будинок для осіб похилого віку \n" +
@@ -1980,6 +1986,8 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.2 громадський об'єкт":
+                sendMessage.setText("Обрано: адміністративно-офісна будівля");
+                messageSender.sendMessage(sendMessage);
                 sendMessage.setText("3. Оберіть тип будівлі:\n\n " +
                         "\uD83D\uDC49 3.1 Адміністративні та офісні будівлі  \n" +
                         "\uD83D\uDC49 3.2 Будівлі Державних органів влади, виконавчих комітетів рад народних депутатів областей, міст, районів та відділів управління  \n");
@@ -1987,10 +1995,14 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.3 громадський об'єкт":
+                sendMessage.setText("Обрано: банківська установа ");
+                messageSender.sendMessage(sendMessage);
                 sendMessage.setText(fireAlarm.getBank());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.4 громадський об'єкт":
+                sendMessage.setText("Обрано: торгівельний та/або заклад");
+                messageSender.sendMessage(sendMessage);
                 sendMessage.setText("3. Оберіть тип будівлі:\n\n" +
                         "\uD83D\uDC49 3.1 Торгівельні центри, криті ринки, магазини, ярмарки\n" +
                         "\uD83D\uDC49 3.2 Торгівельні центри з продажу сільськогосподарських продуктів, промислових товарів\n");
@@ -1998,6 +2010,8 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.5 громадський об'єкт":
+                sendMessage.setText("Обрано: будівля громадського харчування");
+                messageSender.sendMessage(sendMessage);
                 sendMessage.setText("3. Оберіть тип будівлі: \n\n" +
                         "\uD83D\uDC49 3.1 Вбудовані в будівлі іншого призначення \n" +
                         "\uD83D\uDC49 3.2 Окремо стоячі будівлі громадського харчування \n");
@@ -2005,6 +2019,8 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.6 громадський об'єкт":
+                sendMessage.setText("Обрано: виставкова або виставково-торгівельна будівля");
+                messageSender.sendMessage(sendMessage);
                 sendMessage.setText("3. Оберіть тип будівлі: \n\n" +
                         "\uD83D\uDC49 3.1 Підземне розміщення \n" +
                         "\uD83D\uDC49 3.2 Надземне розміщення \n");
@@ -2012,6 +2028,8 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.7 громадський об'єкт":
+                sendMessage.setText("Обрано: культурно-освітній або видовищний заклад");
+                messageSender.sendMessage(sendMessage);
                 sendMessage.setText("3. Оберіть тип будівлі: \n\n" +
                         "3.1 \uD83D\uDC49 Театр, кіноконцертна і концертна зала, цирк, кінотеатр, дозвіллєвий заклад \n" +
                         "3.2 \uD83D\uDC49 Цирк \n" +
@@ -2021,42 +2039,71 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.8 громадський об'єкт":
-                sendMessage.setText("ВИСНОВОК");
+                sendMessage.setText("Обрано: музей");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(fireAlarm.getMuseum());
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.9 громадський об'єкт":
-                sendMessage.setText("3. Вкажіть місце розташування об'єкту: " +
-                        "3.1 в будівлях органів влади, місцевого самоврядування та/або будівлях з умовною висотою більше 26,5 м \n" +
-                        "3.2 в інших будівлях \n");
+                sendMessage.setText("Обрано: бібліотека");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("3. Вкажіть місце розташування об'єкту: \n\n" +
+                        "3.1 \uD83D\uDC49 В будівлях органів влади, місцевого самоврядування та/або будівлях з умовною висотою більше 26,5 м \n" +
+                        "3.2 \uD83D\uDC49 В інших будівлях \n");
                 sendMessage.setReplyMarkup(inlineButton.inlineTypeLibraryFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.10 громадський об'єкт":
-                sendMessage.setText("ВИСНВООК");
+                sendMessage.setText("Обрано: архів");
                 messageSender.sendMessage(sendMessage);
+                databaseRepository.setType_of_object_fire_alarm("архів",userId);
+                sendMessage.setText("4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setValue("площа",userId);
                 break;
             case "2.11 громадський об'єкт":
-                sendMessage.setText("3 Оберіть тип будівлі: " +
-                        "3.1 будівлі дослідних інститутів, проектних і конструкторських організацій, інформаційні центри, установи органів управління, громадські організації \n" +
-                        "3.2 дошкільні навчальні заклади\n" +
-                        "3.3 загальноосвітні навчальні заклади, навчально-виробничі комбінати, позашкільні заклади\n" +
-                        "3.4 спеціальні та санаторні школи, школи-інтернати");
+                sendMessage.setText("Обрано: будівлі дослідних інститутів, проектних і конструкторських організацій, інформаційні центри, установи органів управління, громадські організації, навчальні заклади");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("3. Оберіть тип будівлі: \n\n" +
+                        "3.1 \uD83D\uDC49 Будівлі дослідних інститутів, проектних і конструкторських організацій, інформаційні центри, установи органів управління, громадські організації \n" +
+                        "3.2 \uD83D\uDC49 Дошкільні навчальні заклади\n" +
+                        "3.3 \uD83D\uDC49 Загальноосвітні навчальні заклади, навчально-виробничі комбінати, позашкільні заклади\n" +
+                        "3.4 \uD83D\uDC49 Спеціальні та санаторні школи, школи-інтернати");
                 sendMessage.setReplyMarkup(inlineButton.inlineTypeEducationBuildingFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.12 громадський об'єкт":
-                sendMessage.setText("ВИСНОВОК");
+                sendMessage.setText("Обрано: заклади охорони здоров’я");
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setType_of_object_fire_alarm("охорона здоров'я",userId);
+                sendMessage.setText("4. Введіть умовну висоту будівлі(м.) та натисніть \"Далі\" \uD83D\uDC47 ");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                databaseRepository.setValue("висота обєкта",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.13 громадський об'єкт":
-                sendMessage.setText("ВИСНОВОК");
+                sendMessage.setText("Обрано: будівлі спортивного та фізкультурно-оздоровчого призначення ");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(fireAlarm.getSport());
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.14 громадський об'єкт":
-                sendMessage.setText("ВИСНОВОК");
+                sendMessage.setText("Обрано: культові та релігійні будівлі");
                 messageSender.sendMessage(sendMessage);
+                databaseRepository.setType_of_object_fire_alarm("релігійні будівлі",userId);
+                sendMessage.setText("4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setValue("площа",userId);
                 break;
             case "3.1 житловий фонд":
+                sendMessage.setText("Обрано: житлова будівля");
+                messageSender.sendMessage(sendMessage);
                 databaseRepository.setType_of_object_fire_alarm("житлова будівля",userId);
                 sendMessage.setText("4. Введіть умовну висоту будівлі(м.) та натисніть \"Далі\" \uD83D\uDC47 ");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
@@ -2064,10 +2111,16 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "3.2 житловий фонд":
+                sendMessage.setText("Обрано: багатоквартирний будинок для осіб похилого віку");
+                messageSender.sendMessage(sendMessage);
                 sendMessage.setText(fireAlarm.getNursingHome());
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "3.3 житловий фонд":
+                sendMessage.setText("Обрано: гуртожиток");
+                messageSender.sendMessage(sendMessage);
                 databaseRepository.setType_of_object_fire_alarm("гуртожиток",userId);
                 sendMessage.setText("4. Введіть умовну висоту будівлі(м.) та натисніть \"Далі\" \uD83D\uDC47 ");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
@@ -2075,6 +2128,8 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "3.4 житловий фонд":
+                sendMessage.setText("Обрано: готель");
+                messageSender.sendMessage(sendMessage);
                 databaseRepository.setType_of_object_fire_alarm("готель",userId);
                 sendMessage.setText("4. Введіть кількість номерів для проживання та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
@@ -2082,6 +2137,8 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "3.1 офісна будівля":
+                sendMessage.setText("Обрано: адміністративні та офісні будівлі ");
+                messageSender.sendMessage(sendMessage);
                 databaseRepository.setType_of_object_fire_alarm("офісна будівля",userId);
                 sendMessage.setText("4. Введіть умовну висоту будівлі(м.) та натисніть \"Далі\" \uD83D\uDC47 ");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
@@ -2089,32 +2146,195 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "3.2 офісна будівля":
+                sendMessage.setText("Обрано: будівлі Державних органів влади, виконавчих комітетів рад народних депутатів областей, міст, районів та відділів управління ");
+                messageSender.sendMessage(sendMessage);
                 sendMessage.setText(fireAlarm.getStateAuthorities());
                 messageSender.sendMessage(sendMessage);
-                sendMessage.setText("🇺🇦 Для початку роботи повторно скористайтеся командами бота Fire Safety Bot 👇");
+                sendMessage.setText(instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "3.1 торгівельна будівля":
-                sendMessage.setText("4. Оберіть тип торгівельного закладу: \n\n" +
-                        "4.1 \uD83D\uDC49 Торгівельні центри, криті ринки, магазини, ярмарки\n" +
-                        "4.1 \uD83D\uDC49 Торгівельні центри з продажу сільськогосподарських продуктів, промислових товарів");
+                sendMessage.setText("Обрано: торгівельні центри, криті ринки, магазини, ярмарки");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText("4. Оберіть місцерозташування будівлі: \n\n" +
+                        "4.1 \uD83D\uDC49 Підземне та підвальне розміщеня\n" +
+                        "4.2 \uD83D\uDC49 Надземне розміщення ");
                 sendMessage.setReplyMarkup(inlineButton.inlineTypeMallFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "4.1 підземне приміщення":
+            case "4.1 торгівельний підземний":
+                sendMessage.setText("Обрано: підземне та підвальне розміщення ");
+                messageSender.sendMessage(sendMessage);
                 databaseRepository.setType_of_object_fire_alarm("торгівельний підземний",userId);
-                sendMessage.setText("5. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setText("4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 databaseRepository.setValue("площа",userId);
                 break;
+            case "4.2 торгівельний надземний":
+                sendMessage.setText("Обрано: надземне розміщення ");
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setType_of_object_fire_alarm("торгівельний надземний",userId);
+                sendMessage.setText("4. Введіть кількість поверхів та натисніть \"Далі\" \uD83D\uDC47 ");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setValue("поверхи",userId);
+                break;
+            case "3.2 торгівельна будівля":
+                sendMessage.setText("Обрано: торгівельні центри з продажу сільськогосподарських продуктів, промислових товарів  ");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(fireAlarm.getAgriculturalMall());
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(instructionExtinguisher.getStart());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.1 будівля харчування":
+                sendMessage.setText("Обрано: вбудовані в будівлі іншого призначення ");
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setType_of_object_fire_alarm("вбудована харчування",userId);
+                sendMessage.setText("4. Введіть умовну висоту будівлі(м.) та натисніть \"Далі\" \uD83D\uDC47 ");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                databaseRepository.setValue("висота обєкта",userId);
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.2 будівля харчування":
+                sendMessage.setText("Обрано: окремо стоячі будівлі громадського харчування");
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setType_of_object_fire_alarm("окрема харчування",userId);
+                sendMessage.setText("4. Введіть кількість поверхів та натисніть \"Далі\" \uD83D\uDC47 ");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setValue("поверхи",userId);
+                break;
+            case "3.1 виставкова будівля":
+                sendMessage.setText("Обрано: підземне розміщення ");
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setType_of_object_fire_alarm("виставкова підземна",userId);
+                sendMessage.setText("4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setValue("площа",userId);
+                break;
+            case "3.2 виставкова будівля":
+                sendMessage.setText("Обрано: надземне розміщення ");
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setType_of_object_fire_alarm("виставкова надземна",userId);
+                sendMessage.setText("4. Введіть кількість поверхів (1 / 2) та натисніть \"Далі\" \uD83D\uDC47 ");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setValue("поверхи",userId);
+                break;
+            case "3.1 освітня будівля":
+                sendMessage.setText("Обрано: театр, кіноконцертна і концертна зала, цирк, кінотеатр, дозвіллєвий заклад");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(fireAlarm.getTheatre());
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(instructionExtinguisher.getStart());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.2 освітня будівля":
+                sendMessage.setText("Обрано: цирк");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(fireAlarm.getCircus());
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(instructionExtinguisher.getStart());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.3 освітня будівля":
+                sendMessage.setText("Обрано: кінотеатр, заклади дозвілля");
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setType_of_object_fire_alarm("кінотеатр",userId);
+                sendMessage.setText("4. Введіть місткість зали для глядачів та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setValue("глядацькі місця",userId);
+                break;
+            case "3.4 освітня будівля":
+                sendMessage.setText("Обрано: казино, ігровий заклад");
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setType_of_object_fire_alarm("казино",userId);
+                sendMessage.setText("4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setValue("площа",userId);
+                break;
+            case "3.1 бібліотека":
+                sendMessage.setText("Обрано: в будівлях органів влади, місцевого самоврядування та/або будівлях з умовною висотою більше 26,5 м");
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setType_of_object_fire_alarm("бібліотека органи влади",userId);
+                sendMessage.setText("4. Введіть фонд зберігання умовних одиниць літератури(тис.умовних одиниць) та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setValue("фонд книг",userId);
+                break;
+            case "3.2 бібліотека":
+                sendMessage.setText("Обрано: в інших будівлях ");
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setType_of_object_fire_alarm("бібліотека інші будівлі",userId);
+                sendMessage.setText("4. Введіть фонд зберігання умовних одиниць літератури(тис.умовних одиниць) та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setValue("фонд книг",userId);
+                break;
+            case "3.1 навчальні заклади":
+                sendMessage.setText("Обрано: будівлі дослідних інститутів, проектних і конструкторських організацій, інформаційні центри, установи органів управління, громадські організації ");
+                messageSender.sendMessage(sendMessage);
+                databaseRepository.setType_of_object_fire_alarm("інститути",userId);
+                sendMessage.setText("4. Введіть умовну висоту будівлі(м.) та натисніть \"Далі\" \uD83D\uDC47 ");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                databaseRepository.setValue("висота обєкта",userId);
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "так інститути":
+                databaseRepository.setArchives(true,userId);
+                sendMessage.setText("Обрано: наявність приміщень для зберігання цінних документів та архівів");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "ні інститути":
+                databaseRepository.setArchives(false,userId);
+                sendMessage.setText("Обрано: відсутні приміщення для зберігання цінних документів та архівів");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.2 навчальні заклади":
+                sendMessage.setText("Обрано: дошкільні навчальні заклади");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(fireAlarm.getPreschool());
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(instructionExtinguisher.getStart());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.3 навчальні заклади":
+                sendMessage.setText("Обрано: загальноосвітні навчальні заклади, навчально-виробничі комбінати, позашкільні заклади");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(fireAlarm.getSchool());
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(instructionExtinguisher.getStart());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "3.4 навчальні заклади":
+                sendMessage.setText("Обрано: спеціальні та санаторні школи, школи-інтернати");
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(fireAlarm.getSpecialSchool());
+                messageSender.sendMessage(sendMessage);
+                sendMessage.setText(instructionExtinguisher.getStart());
+                messageSender.sendMessage(sendMessage);
+                break;
+            // TODO: 08.02.2023 ПРОТЕСТИТИ і залити на гіт
             case "Далі сигналізація":
                 switch (databaseRepository.getType_of_object_fire_alarm(userId)){
                     case "житлова будівля":
                         sendMessage.setText(fireAlarm.getHousing());
+                        messageSender.sendMessage(sendMessage);
+                        sendMessage.setText(instructionExtinguisher.getStart());
+                        messageSender.sendMessage(sendMessage);
                         break;
                     case "гуртожиток":
                         sendMessage.setText(fireAlarm.getDormitory());
+                        messageSender.sendMessage(sendMessage);
+                        sendMessage.setText(instructionExtinguisher.getStart());
+                        messageSender.sendMessage(sendMessage);
                         break;
                     case "готель":
                         if (databaseRepository.getValue(userId).equals("кількість номерів") && (databaseRepository.getHotel_rooms(userId) == null)){
@@ -2132,7 +2352,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                         }else if (databaseRepository.getValue(userId).equals("висота обєкта") && (databaseRepository.getHeight_object(userId) != null)){
                             sendMessage.setText(fireAlarm.getHotelHeigth());
                             messageSender.sendMessage(sendMessage);
-                            sendMessage.setText("🇺🇦 Для початку роботи повторно скористайтеся командами бота Fire Safety Bot 👇");
+                            sendMessage.setText(instructionExtinguisher.getStart());
                         }
                         messageSender.sendMessage(sendMessage);
                         break;
@@ -2143,7 +2363,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                         }else {
                             sendMessage.setText(fireAlarm.getOffice());
                             messageSender.sendMessage(sendMessage);
-                            sendMessage.setText("🇺🇦 Для початку роботи повторно скористайтеся командами бота Fire Safety Bot 👇");
+                            sendMessage.setText(instructionExtinguisher.getStart());
                         }
                         messageSender.sendMessage(sendMessage);
                         break;
@@ -2154,7 +2374,207 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                         }else {
                             sendMessage.setText(fireAlarm.getUndergroundMall());
                             messageSender.sendMessage(sendMessage);
-                            sendMessage.setText("🇺🇦 Для початку роботи повторно скористайтеся командами бота Fire Safety Bot 👇");
+                            sendMessage.setText(instructionExtinguisher.getStart());
+                        }
+                        messageSender.sendMessage(sendMessage);
+                        break;
+                    case "торгівельний надземний":
+                        if (databaseRepository.getFloors(userId) == null){
+                            sendMessage.setText(fireAlarm.getFloorsEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else if (databaseRepository.getFloors(userId)!=null && databaseRepository.getSquare(userId) == null && databaseRepository.getValue(userId).equals("поверхи")){
+                            sendMessage.setText("5. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                            databaseRepository.setValue("площа",userId);
+                        }else if (databaseRepository.getSquare(userId)==null && databaseRepository.getValue(userId).equals("площа")){
+                            sendMessage.setText(fireAlarm.getSquareEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else if (databaseRepository.getFloors(userId)!=null && databaseRepository.getSquare(userId)!=null){
+                            sendMessage.setText(fireAlarm.getGroundMall());
+                            messageSender.sendMessage(sendMessage);
+                            sendMessage.setText(instructionExtinguisher.getStart());
+                        }
+                        messageSender.sendMessage(sendMessage);
+                        break;
+                    case "вбудована харчування":
+                        if (databaseRepository.getHeight_object(userId)==null){
+                            sendMessage.setText(fireAlarm.getHeightEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else {
+                            sendMessage.setText(fireAlarm.getBuiltInCatering());
+                            messageSender.sendMessage(sendMessage);
+                            sendMessage.setText(instructionExtinguisher.getStart());
+                        }
+                        messageSender.sendMessage(sendMessage);
+                        break;
+                    case "окрема харчування":
+                        if (databaseRepository.getFloors(userId)==null){
+                            sendMessage.setText(fireAlarm.getFloorsEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else if (databaseRepository.getFloors(userId)!=null && databaseRepository.getSquare(userId)==null && databaseRepository.getValue(userId).equals("поверхи")){
+                            sendMessage.setText("5. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                            databaseRepository.setValue("площа",userId);
+                        }else if (databaseRepository.getSquare(userId)==null && databaseRepository.getValue(userId).equals("площа")){
+                            sendMessage.setText(fireAlarm.getSquareEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else if (databaseRepository.getFloors(userId)!=null && databaseRepository.getSquare(userId)!=null){
+                            sendMessage.setText(fireAlarm.getSeparateCatering());
+                            messageSender.sendMessage(sendMessage);
+                            sendMessage.setText(instructionExtinguisher.getStart());
+                        }
+                        messageSender.sendMessage(sendMessage);
+                        break;
+                    case "виставкова підземна":
+                        if (databaseRepository.getSquare(userId)==null){
+                            sendMessage.setText(fireAlarm.getSquareEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else{
+                            sendMessage.setText(fireAlarm.getExhibitionUnderground());
+                            messageSender.sendMessage(sendMessage);
+                            sendMessage.setText(instructionExtinguisher.getStart());
+                        }
+                        messageSender.sendMessage(sendMessage);
+                        break;
+                    case "виставкова надземна":
+                        if (databaseRepository.getFloors(userId)==null){
+                            sendMessage.setText(fireAlarm.getFloorsEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else if (databaseRepository.getFloors(userId)!=null && databaseRepository.getValue(userId).equals("поверхи")){
+                            if (databaseRepository.getFloors(userId)>2){
+                                sendMessage.setText("Данні введено не корректно. Виставкова або виставково-торгівельна будівля надземного розміщення може містити не більше ніж 2 поверхи.\n\n" +
+                                        "Введіть кількість поверхів (1 / 2) та натисніть \"Далі\" \uD83D\uDC47");
+                                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                            }else {
+                                if (databaseRepository.getFloors(userId)==1){
+                                    sendMessage.setText("5. Введіть ступінь вогнестійкості будівлі (1,2,3,3a,3б,4,4a,5) та натисніть \"Далі\" \uD83D\uDC47");
+                                }else {
+                                    sendMessage.setText("5. Введіть ступінь вогнестійкості будівлі (1,2,3) та натисніть \"Далі\" \uD83D\uDC47");
+                                }
+                                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                                databaseRepository.setValue("вогнеснійкість будівлі",userId);
+                            }
+                        }else if (databaseRepository.getFloors(userId)!=null && databaseRepository.getFire_resistance(userId)==null && databaseRepository.getValue(userId).equals("вогнеснійкість будівлі")){
+                            sendMessage.setText(fireAlarm.getFireResistanceEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else if (databaseRepository.getFloors(userId)!= null && databaseRepository.getFire_resistance(userId)!=null && databaseRepository.getSquare(userId)==null){
+                                sendMessage.setText("6. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                                databaseRepository.setValue("площа",userId);
+                        }else if (databaseRepository.getSquare(userId)==null && databaseRepository.getValue(userId).equals("площа")){
+                            sendMessage.setText(fireAlarm.getSquareEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else if (databaseRepository.getFloors(userId)!=null && databaseRepository.getFire_resistance(userId)!=null && databaseRepository.getSquare(userId)!=null){
+                            sendMessage.setText(fireAlarm.getExhibitionGround());
+                            messageSender.sendMessage(sendMessage);
+                            sendMessage.setText(instructionExtinguisher.getStart());
+                        }
+                        messageSender.sendMessage(sendMessage);
+                        break;
+                    case "кінотеатр":
+                        if (databaseRepository.getSeats(userId)==null){
+                            sendMessage.setText(fireAlarm.getSeatsEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else {
+                            sendMessage.setText(fireAlarm.getCinema());
+                            messageSender.sendMessage(sendMessage);
+                            sendMessage.setText(instructionExtinguisher.getStart());
+                        }
+                        messageSender.sendMessage(sendMessage);
+                        break;
+                    case "казино":
+                        if (databaseRepository.getSquare(userId)==null){
+                            sendMessage.setText(fireAlarm.getSquareEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else {
+                            sendMessage.setText(fireAlarm.getCasino());
+                            messageSender.sendMessage(sendMessage);
+                            sendMessage.setText(instructionExtinguisher.getStart());
+                        }
+                        messageSender.sendMessage(sendMessage);
+                        break;
+                    case "бібліотека органи влади":
+                        if (databaseRepository.getBooks_storage(userId)==null){
+                            sendMessage.setText(fireAlarm.getBooksStorageEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else {
+                            sendMessage.setText(fireAlarm.getLibrary());
+                            messageSender.sendMessage(sendMessage);
+                            sendMessage.setText(instructionExtinguisher.getStart());
+                        }
+                        messageSender.sendMessage(sendMessage);
+                        break;
+                    case "бібліотека інші будівлі":
+                        if (databaseRepository.getBooks_storage(userId)==null){
+                            sendMessage.setText(fireAlarm.getBooksStorageEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else {
+                            sendMessage.setText(fireAlarm.getLibraryOtherBuildings());
+                            messageSender.sendMessage(sendMessage);
+                            sendMessage.setText(instructionExtinguisher.getStart());
+                        }
+                        messageSender.sendMessage(sendMessage);
+                        break;
+                    case "архів":
+                        if (databaseRepository.getSquare(userId)==null){
+                            sendMessage.setText(fireAlarm.getSquareEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else {
+                            sendMessage.setText(fireAlarm.getArchive());
+                            messageSender.sendMessage(sendMessage);
+                            sendMessage.setText(instructionExtinguisher.getStart());
+                        }
+                        messageSender.sendMessage(sendMessage);
+                        break;
+                    case "інститути":
+                        if (databaseRepository.getHeight_object(userId)==null){
+                            sendMessage.setText(fireAlarm.getHeightEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else if (databaseRepository.getHeight_object(userId)!=null && databaseRepository.getValue(userId).equals("висота обєкта")){
+                            sendMessage.setText("5. Введіть кількість поверхів та натисніть \"Далі\" \uD83D\uDC47 ");
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                            databaseRepository.setValue("поверхи",userId);
+                        }else if (databaseRepository.getHeight_object(userId)!=null && databaseRepository.getValue(userId).equals("поверхи")&& databaseRepository.getFloors(userId)==null){
+                            sendMessage.setText(fireAlarm.getFloorsEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else if (databaseRepository.getHeight_object(userId)!=null && databaseRepository.getFloors(userId)!=null && databaseRepository.getValue(userId).equals("поверхи")){
+                            sendMessage.setText("6. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                            databaseRepository.setValue("площа",userId);
+                        }else if (databaseRepository.getHeight_object(userId)!=null && databaseRepository.getFloors(userId)!=null && databaseRepository.getValue(userId).equals("площа")&&databaseRepository.getSquare(userId)==null){
+                                sendMessage.setText(fireAlarm.getSquareEmpty());
+                                sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else if (databaseRepository.getHeight_object(userId)!=null && databaseRepository.getFloors(userId)!=null && databaseRepository.getSquare(userId)!=null){
+                            if (databaseRepository.getSquare(userId)<=300 && databaseRepository.getArchives(userId)==null){
+                                sendMessage.setText("7. Наявні приміщення для зберігання цінних документів та архівів?");
+                                sendMessage.setReplyMarkup(inlineButton.inlineInstitutesFireAlarmKeyboard());
+                            }else {
+                                sendMessage.setText(fireAlarm.getInstitutes());
+                                messageSender.sendMessage(sendMessage);
+                                sendMessage.setText(instructionExtinguisher.getStart());
+                            }
+                        }
+                        messageSender.sendMessage(sendMessage);
+                        break;
+                    case "охорона здоров'я":
+                        if (databaseRepository.getHeight_object(userId)==null){
+                            sendMessage.setText(fireAlarm.getHeightEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else {
+                            sendMessage.setText(fireAlarm.getHealthCare());
+                            messageSender.sendMessage(sendMessage);
+                            sendMessage.setText(instructionExtinguisher.getStart());
+                        }
+                        messageSender.sendMessage(sendMessage);
+                        break;
+                    case "релігійні будівлі":
+                        if (databaseRepository.getSquare(userId)==null){
+                            sendMessage.setText(fireAlarm.getSquareEmpty());
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                        }else {
+                            sendMessage.setText(fireAlarm.getReligious());
+                            messageSender.sendMessage(sendMessage);
+                            sendMessage.setText(instructionExtinguisher.getStart());
                         }
                         messageSender.sendMessage(sendMessage);
                         break;

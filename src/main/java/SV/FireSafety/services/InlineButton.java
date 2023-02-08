@@ -846,6 +846,15 @@ public class InlineButton {
         return inlineKeyboardMarkup;
     }
 
+    public InlineKeyboardMarkup inlineTypeMallFireAlarmKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("4.1").callbackData("4.1 торгівельний підземний").build(),
+                InlineKeyboardButton.builder().text("4.2").callbackData("4.2 торгівельний надземний").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
     public InlineKeyboardMarkup inlineTypeCateringBuildingFireAlarmKeyboard(){
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
@@ -868,6 +877,8 @@ public class InlineButton {
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("3.1").callbackData("3.1 освітня будівля").build(),
                 InlineKeyboardButton.builder().text("3.2").callbackData("3.2 освітня будівля").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("3.3").callbackData("3.3 освітня будівля").build(),
+                InlineKeyboardButton.builder().text("3.4").callbackData("3.4 освітня будівля").build()));
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
@@ -898,14 +909,15 @@ public class InlineButton {
         return inlineKeyboardMarkup;
     }
 
-    public InlineKeyboardMarkup inlineTypeMallFireAlarmKeyboard(){
+    public InlineKeyboardMarkup inlineInstitutesFireAlarmKeyboard(){
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
-        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("4.1").callbackData("4.1 підземне приміщення").build(),
-                InlineKeyboardButton.builder().text("4.2").callbackData("4.2 наземне приміщення").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("так").callbackData("так інститути").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("ні").callbackData("ні інститути").build()));
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
+
 
 
 

@@ -133,61 +133,101 @@ public class MessageHandler implements Handler<Message> {
         }
         if (message.hasText()){ //якщо введено текст, перевірка чи це значення
             String messageText = message.getText();
-
-            Scanner sc = new Scanner(message.getText());
-            if (sc.hasNextDouble()) {
-                sendMessage.setText("Надіслані дані збережено: " + messageText);
-                messageSender.sendMessage(sendMessage);
+            try{
                 if (databaseRepository.getValue(userId).equals("площа")){
-                    //встановлення в БД площі об'єкта
-                    databaseRepository.setSquare(messageText,userId);
+                    databaseRepository.setSquare(Float.valueOf(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("паркування")){
-                    //встановлення в БД кількість місць для паркування
-                    databaseRepository.setParking(messageText,userId);
+                    databaseRepository.setParking(Integer.valueOf(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("технічні приміщення")){
-                    databaseRepository.setSquare_technical_premises(messageText,userId);
+                    databaseRepository.setSquare_technical_premises(Float.valueOf(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("робочі місця")){
-                    databaseRepository.setWorkplace(messageText,userId);
+                    databaseRepository.setWorkplace(Integer.valueOf(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("постійно перебувають на обєкті")){
-                    databaseRepository.setConstantly_at_facility(Float.parseFloat(messageText),userId);
+                    databaseRepository.setConstantly_at_facility(Integer.valueOf(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("періодично перебувають на обєкті")){
-                    databaseRepository.setPeriodically_at_facility(Float.parseFloat(messageText),userId);
+                    databaseRepository.setPeriodically_at_facility(Integer.valueOf(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("висота обєкта")){
                     databaseRepository.setHeight_object(Float.parseFloat(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("усунено порушень")){
-                    databaseRepository.setFixed_violations(Float.parseFloat(messageText),userId);
+                    databaseRepository.setFixed_violations(Integer.parseInt(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("не усунено порушень")){
-                    databaseRepository.setNo_fixed_violations(Float.parseFloat(messageText),userId);
+                    databaseRepository.setNo_fixed_violations(Integer.parseInt(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("загиблі")){
-                    databaseRepository.setDead_people(Float.parseFloat(messageText),userId);
+                    databaseRepository.setDead_people(Integer.parseInt(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("збитки")){
                     databaseRepository.setLosses(Float.parseFloat(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("дохід")){
                     databaseRepository.setTax_free_income(Float.parseFloat(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("травмовані")){
-                    databaseRepository.setInjured_people(Float.parseFloat(messageText),userId);
+                    databaseRepository.setInjured_people(Integer.parseInt(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("обєм будівлі")){
                     databaseRepository.setVolume_premises(Float.parseFloat(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("обєм приміщень А")){
                     databaseRepository.setVolume_rooms_a(Float.parseFloat(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("обєм приміщень Б")){
                     databaseRepository.setVolume_rooms_б(Float.parseFloat(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("обєм приміщень В")){
                     databaseRepository.setVolume_rooms_в(Float.parseFloat(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("обєм приміщень Г")){
                     databaseRepository.setVolume_rooms_г(Float.parseFloat(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("кількість номерів")){
                     databaseRepository.setHotel_rooms(Integer.parseInt(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
+                }else if (databaseRepository.getValue(userId).equals("поверхи")){
+                    databaseRepository.setFloors(Integer.parseInt(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
+                }else if (databaseRepository.getValue(userId).equals("вогнеснійкість будівлі")){
+                    if (databaseRepository.getFloors(userId)==1 &&(messageText.equals("1")||messageText.equals("2")||messageText.equals("3")||messageText.equals("3а")||messageText.equals("3б")||messageText.equals("4")||messageText.equals("4а")||messageText.equals("5"))){
+                        databaseRepository.setFire_resistance(messageText,userId);
+                        sendMessage.setText("Надіслані дані збережено: " + messageText);
+                    }else if (databaseRepository.getFloors(userId)==2 &&(messageText.equals("1")||messageText.equals("2")||messageText.equals("3"))){
+                        databaseRepository.setFire_resistance(messageText,userId);
+                        sendMessage.setText("Надіслані дані збережено: " + messageText);
+                    } else {
+                        sendMessage.setText("Ступінь вогнестійкості будівлі введено не коректно.\n" +
+                                "Спробуйте ввести (1 / 2 / 3 / 3a / 3б / 4 / 4a / 5) [ I поверх] або " +
+                                "(1 / 2 / 3) [II поверхи] ступені вогнестійкості та натисніть \"Далі\" \uD83D\uDC47");
+                        sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
+                    }
+                }else if (databaseRepository.getValue(userId).equals("глядацькі місця")){
+                    databaseRepository.setSeats(Integer.parseInt(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
+                }else if (databaseRepository.getValue(userId).equals("фонд книг")){
+                    databaseRepository.setBooks_storage(Integer.parseInt(messageText),userId);
+                    sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }
-            }else{
+                else{
+                    sendMessage.setText("Зазначено не коректні дані: " + messageText + " Спробуйте ще раз!");
+                    messageSender.sendMessage(sendMessage);
+                }
+                messageSender.sendMessage(sendMessage);
+            }catch (NumberFormatException exception) {
                 sendMessage.setText("Зазначено не коректні дані: " + messageText + " Спробуйте ще раз!");
                 messageSender.sendMessage(sendMessage);
+
             }
         }else {
             sendMessage.setText("Помилка");
             messageSender.sendMessage(sendMessage);
         }
-
     }
 }
 //        on_start - На початок
