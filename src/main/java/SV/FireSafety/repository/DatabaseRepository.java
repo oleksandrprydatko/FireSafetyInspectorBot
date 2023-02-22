@@ -7,12 +7,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 public interface DatabaseRepository extends JpaRepository<Database, Long> {
 
     @Query(value = "select u from Database u where u.id_telegram = :telegram_id")
-    Optional<Database> findByTelegramId(long telegram_id);
+    Database getByTelegramId (long telegram_id);
     @Transactional
     @Modifying
     @Query(value = "update inspector.users set type_premises = NULL,category_premises=NULL," +
@@ -24,13 +23,15 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
             "periodically_at_facility=NULL,height_object=NULL,fixed_violations=NULL,no_fixed_violations=NULL," +
             "dead_people = NULL,losses = NULL, tax_free_income = NULL, injured_people=NULL," +
             "volume_premises=NULL, volume_rooms_a=NULL, volume_rooms_б=NULL, volume_rooms_в=NULL," +
-            "volume_rooms_г=NULL,hotel_rooms=NULL,floors=NULL," +
-            "fire_resistance=NULL,seats=NULL,books_storage=NULL,archives=NULL where inspector.users.id_telegram = :telegram_id",nativeQuery = true)
-    int clearDB(long telegram_id);
+            "volume_rooms_г=NULL,humidity_of_space=NULL,hotel_rooms=NULL,floors=NULL," +
+            "fire_resistance=NULL,seats=NULL,books_storage=NULL,archives=NULL," +
+            "amount_of_transport=NULL,weight=NULL where inspector.users.id_telegram = :telegram_id",nativeQuery = true)
+    void clearDB(long telegram_id);
     @Transactional
     @Modifying
     @Query(value = "insert  into inspector.users (id_telegram) values (:id)", nativeQuery = true)
     void setId_telegram(Long id);
+
     @Transactional
     @Modifying
     @Query(value = "update inspector.users set comand_of_menu = :command where id_telegram = :userId", nativeQuery = true)
@@ -196,7 +197,7 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
     void setWorkplace(int command,long userId);
 
     @Query(value = "select workplace from inspector.users where id_telegram = :userId ", nativeQuery = true)
-    String getWorkplace(long userId);
+    Integer getWorkplace(long userId);
 
     @Transactional
     @Modifying
@@ -228,7 +229,7 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
     void setConstantly_at_facility(int command,long userId);
 
     @Query(value = "select constantly_at_facility from inspector.users where id_telegram = :userId ", nativeQuery = true)
-    Float getConstantly_at_facility(long userId);
+    Integer getConstantly_at_facility(long userId);
 
     @Transactional
     @Modifying
@@ -236,7 +237,7 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
     void setPeriodically_at_facility(int command,long userId);
 
     @Query(value = "select periodically_at_facility from inspector.users where id_telegram = :userId ", nativeQuery = true)
-    Float getPeriodically_at_facility(long userId);
+    Integer getPeriodically_at_facility(long userId);
 
     @Transactional
     @Modifying
@@ -252,7 +253,7 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
     void setFixed_violations(int command,long userId);
 
     @Query(value = "select fixed_violations from inspector.users where id_telegram = :userId ", nativeQuery = true)
-    Float getFixed_violations(long userId);
+    Integer getFixed_violations(long userId);
 
     @Transactional
     @Modifying
@@ -260,7 +261,7 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
     void setNo_fixed_violations(int command,long userId);
 
     @Query(value = "select no_fixed_violations from inspector.users where id_telegram = :userId ", nativeQuery = true)
-    Float getNo_fixed_violations(long userId);
+    Integer getNo_fixed_violations(long userId);
 
     @Transactional
     @Modifying
@@ -292,7 +293,7 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
     void setInjured_people(int command,long userId);
 
     @Query(value = "select injured_people from inspector.users where id_telegram = :userId ", nativeQuery = true)
-    Float getInjured_people(long userId);
+    Integer getInjured_people(long userId);
 
     @Transactional
     @Modifying
@@ -390,8 +391,37 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
     @Query(value = "select archives from inspector.users where id_telegram = :userId ", nativeQuery = true)
     Boolean getArchives(long userId);
 
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set amount_of_transport = :command where id_telegram = :userId", nativeQuery = true)
+    void setAmount_of_transport(int command,long userId);
 
+    @Query(value = "select amount_of_transport from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    Integer getAmount_of_transport(long userId);
 
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set weight = :command where id_telegram = :userId", nativeQuery = true)
+    void setWeight(float command,long userId);
+
+    @Query(value = "select weight from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    Float getWeight(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set length = :command where id_telegram = :userId", nativeQuery = true)
+    void setLength(float command,long userId);
+
+    @Query(value = "select length from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    Float getLength(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set productivity = :command where id_telegram = :userId", nativeQuery = true)
+    void setProductivity(float command,long userId);
+
+    @Query(value = "select productivity from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    Float getProductivity(long userId);
 
 
 }

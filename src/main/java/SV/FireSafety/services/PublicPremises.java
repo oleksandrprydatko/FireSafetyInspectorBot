@@ -6,7 +6,6 @@ public class PublicPremises {
 
     Long userId;
     DatabaseRepository databaseRepository;
-
     public PublicPremises(Long userId, DatabaseRepository databaseRepository) {
         this.userId = userId;
         this.databaseRepository = databaseRepository;
@@ -14,18 +13,20 @@ public class PublicPremises {
 
     double array[] = { 0, 0, 0, 0, 0, 0, 0 };
 
-    double square() {
-        double square = databaseRepository.getSquare(userId);
-        return square;
+    float square() {
+        return databaseRepository.getSquare(userId);
     }
+    float squareTechnicalPremisses(){return databaseRepository.getSquare_technical_premises(userId);}
+    String b1(){return databaseRepository.getB1(userId);}
+    String typeSpacesBuild(){return databaseRepository.getType_spaces_build(userId);}
+    int workplace(){return databaseRepository.getWorkplace(userId);}
 
     public String quantityExtinguisherTekhPrym() {
-        double squareTekhPrym = 0;
-        String s = null;
-            if (databaseRepository.getSquare_technical_premises(userId) == null){
+        double squareTekhPrym = squareTechnicalPremisses();
+        String s;
+            if (squareTekhPrym == 0){
                 s = "🚨 Не задано площу технічного приміщення. Зазначте площу та повторіть спробу!";
             }else {
-                squareTekhPrym = Double.parseDouble(String.valueOf(databaseRepository.getSquare_technical_premises(userId)));
                 array[5] = Math.ceil(squareTekhPrym / 20);
                 array[6] = Math.ceil(squareTekhPrym / 20);
                 s = "8. Рекомендована додаткова кількість вогнегасників для обладнання технічних приміщень (обираємо один з варіантів на загальну площу технічних приміщень):\n";
@@ -66,7 +67,7 @@ public class PublicPremises {
             array[6] = Math.ceil(square() / 20);
 
         }
-        if (databaseRepository.getB1(userId).equals("false")) {
+        if (b1().equals("false")) {
             if (square() == 0) {
                 s = "🚨 Не задано площу приміщення/об'єкту. Зазначне площу та повторіть спробу!";
             } else {
@@ -75,7 +76,7 @@ public class PublicPremises {
                 s = s + "1. ВП-5 - " + ((int) array[0]) + " од. \n" + "2. ВП-6 - " + ((int) array[1]) + " од. \n"
                         + "3. ВП-8 - " + ((int) array[2]) + " од. \n" + "4. ВП-9 - " + ((int) array[3]) + " од. \n"
                         + "5. ВП-12 - " + ((int) array[4]) + " од. \n";
-                if (databaseRepository.getType_spaces_build(userId).equals("архіви")) {
+                if (typeSpacesBuild().equals("архіви")) {
                     array[5] = Math.ceil(square() / 50);
                     array[6] = Math.ceil(square() / 50);
                     s = s + "🧯"
@@ -88,7 +89,7 @@ public class PublicPremises {
                 s = s + "🧯 Примітка: дозволяється комбінувати порошкові вогнегасники з різною масою вогнегасної суміші "
                         + "із розрахунку 1 кг вогнегасної речовини на 10 м.кв. площі";
             }
-        } else if (databaseRepository.getB1(userId).equals("true")) {
+        } else if (b1().equals("true")) {
             if (square() == 0) {
                 s = "🚨 Не задано площу приміщення/об'єкту. Зазначне площу та повторіть спробу!";
             } else {
@@ -137,7 +138,7 @@ public class PublicPremises {
             array[5] = Math.ceil(square() / 20);
 
         }
-        if (databaseRepository.getB1(userId).equals("false")) {
+        if (b1().equals("false")) {
             if (square() == 0) {
                 s = "🚨 Не задано площу приміщення/об'єкту. Зазначне площу та повторіть спробу!";
             } else {
@@ -145,7 +146,7 @@ public class PublicPremises {
                 s = s + "🧯" + " Переносні вогнегасники:\n";
                 s = s + "1. ВВП-5 - " + ((int) array[0]) + " од. \n" + "2. ВВП-6 - " + ((int) array[1]) + " од. \n"
                         + "3. ВВП-9 - " + ((int) array[2]) + " од. \n" + "4. ВВП-12 - " + ((int) array[3]) + " од. \n";
-                if (databaseRepository.getType_spaces_build(userId).equals("архіви")) {
+                if (typeSpacesBuild().equals("архіви")) {
                     array[4] = Math.ceil(square() / 50);
                     array[5] = Math.ceil(square() / 50);
                     s = s + "🧯"
@@ -158,7 +159,7 @@ public class PublicPremises {
                 s = s + "🧯 Примітка: дозволяється комбінувати водопінні вогнегасники з різною масою вогнегасної суміші "
                         + "із розрахунку 1 кг вогнегасної речовини на 10 м.кв. площі";
             }
-        } else if (databaseRepository.getB1(userId).equals("true")) {
+        } else if (b1().equals("true")) {
             if (square() == 0) {
                 s = "🚨 Не задано площу приміщення/об'єкту. Зазначне площу та повторіть спробу!";
             } else {
@@ -205,7 +206,7 @@ public class PublicPremises {
             array[5] = Math.ceil(square() / 20);
 
         }
-        if (databaseRepository.getB1(userId).equals("false")) {
+        if (b1().equals("false")) {
             if (square() == 0) {
                 s = "🚨 Не задано площу приміщення/об'єкту. Зазначне площу та повторіть спробу!";
             } else {
@@ -213,7 +214,7 @@ public class PublicPremises {
                 s = s + "🧯" + " Переносні вогнегасники:\n";
                 s = s + "1. ВВ-5 - " + ((int) array[0]) + " од. \n" + "2. ВВ-6 - " + ((int) array[1]) + " од. \n"
                         + "3. ВВ-9 - " + ((int) array[2]) + " од. \n" + "4. ВВ-12 - " + ((int) array[3]) + " од. \n";
-                if (databaseRepository.getType_spaces_build(userId).equals("архіви")) {
+                if (typeSpacesBuild().equals("архіви")) {
                     array[4] = Math.ceil(square() / 50);
                     array[5] = Math.ceil(square() / 50);
                     s = s + "🧯"
@@ -226,7 +227,7 @@ public class PublicPremises {
                 s = s + "🧯 Примітка: дозволяється комбінувати водяні вогнегасники з різною масою вогнегасної суміші "
                         + "із розрахунку 1 кг вогнегасної речовини на 10 м.кв. площі";
             }
-        } else if (databaseRepository.getB1(userId).equals("true")) {
+        } else if (b1().equals("true")) {
             if (square() == 0) {
                 s = "🚨 Не задано площу приміщення/об'єкту. Зазначне площу та повторіть спробу!";
             } else {
@@ -255,11 +256,11 @@ public class PublicPremises {
         return s;
     }
     public String quantityExtinguisherVodianiKitchen() {
-        String s = null;
-            array[0] = Math.ceil(Double.parseDouble(databaseRepository.getWorkplace(userId)));
-            array[1] = Math.ceil(Double.parseDouble(databaseRepository.getWorkplace(userId)));
-            array[2] = Math.ceil(Double.parseDouble(databaseRepository.getWorkplace(userId)));
-            array[3] = Math.ceil(Double.parseDouble(databaseRepository.getWorkplace(userId)));
+        String s;
+            array[0] = Math.ceil(workplace());
+            array[1] = Math.ceil(workplace());
+            array[2] = Math.ceil(workplace());
+            array[3] = Math.ceil(workplace());
             if (square() == 0) {
                 s = "🚨 Не задано площу приміщення. Зазначте площу та повторіть спробу!";
             } else {

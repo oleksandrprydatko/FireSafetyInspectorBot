@@ -11,6 +11,44 @@ public class FireAlarm {
         this.databaseRepository = databaseRepository;
     }
 
+    float square() {
+        return databaseRepository.getSquare(userId);
+    }
+
+    float heightObject(){
+        return databaseRepository.getHeight_object(userId);
+    }
+    float weight(){
+        return  databaseRepository.getWeight(userId);
+    }
+    float volumePremisses(){
+        return databaseRepository.getVolume_premises(userId);
+    }
+    float length(){return databaseRepository.getLength(userId);}
+    float productivity(){return databaseRepository.getProductivity(userId);}
+    int floors(){
+        return databaseRepository.getFloors(userId);
+    }
+    int hotelRooms(){
+        return databaseRepository.getHotel_rooms(userId);
+    }
+    int amountOfTransport(){
+        return databaseRepository.getAmount_of_transport(userId);
+    }
+    int booksStorage(){
+        return databaseRepository.getBooks_storage(userId);
+    }
+    int seats(){
+        return databaseRepository.getSeats(userId);
+    }
+    String typeOfObjectFireAlarm(){
+        return databaseRepository.getType_of_object_fire_alarm(userId);
+    }
+    String fireResistance(){
+        return databaseRepository.getFire_resistance(userId);
+    }
+    String categoryBuildings(){return databaseRepository.getCategory_buildings(userId);}
+    String categoryPremisses(){return databaseRepository.getCategory_premises(userId);}
     String text = "Висновок: ";
 
     private String roomsEmpty(){
@@ -69,16 +107,56 @@ public class FireAlarm {
         return booksStorageEmpty();
     }
 
+    private String amountOfTransportEmpty(){
+        return  "Ви не ввели рекомендовані системою параметри.\n\n" +
+                "Надішліть  кількість одиниць автотранспорту та натисніть \"Далі\" \uD83D\uDC47";
+    }
+    public String getAmountOfTransportEmpty(){
+        return amountOfTransportEmpty();
+    }
+
+    private String weightEmpty(){
+        return  "Ви не ввели рекомендовані системою параметри.\n\n" +
+                "Надішліть загальну вагу (кг.) та натисніть \"Далі\" \uD83D\uDC47";
+    }
+    public String getWeightEmpty(){
+        return weightEmpty();
+    }
+
+    private String volumeEmpty(){
+        return  "Ви не ввели рекомендовані системою параметри.\n\n" +
+                "Надішліть загальний об'єм (м.куб) та натисніть \"Далі\" \uD83D\uDC47";
+    }
+    public String getVolumeEmpty(){
+        return volumeEmpty();
+    }
+
+    private String lengthEmpty(){
+        return  "Ви не ввели рекомендовані системою параметри.\n\n" +
+                "Надішліть загальну довжину (м.) та натисніть \"Далі\" \uD83D\uDC47";
+    }
+    public String getLengthEmpty(){
+        return lengthEmpty();
+    }
+
+    private String productivityEmpty(){
+        return  "Ви не ввели рекомендовані системою параметри.\n\n" +
+                "Надішліть продуктивність (м.куб/год) та натисніть \"Далі\" \uD83D\uDC47";
+    }
+    public String getProductivityEmpty(){
+        return productivityEmpty();
+    }
+
 
     //житлові будинки
     private String housing(){
-        if ((databaseRepository.getHeight_object(userId))<=26.5){
+        if ((heightObject())<=26.5){
             text += "не підлягають обладнанню системою пожежної сигналізації, підлягають обладнанню усі вбудовані приміщення різного призначення незалежно від площі \uD83C\uDFE0";
-        }else if ((databaseRepository.getHeight_object(userId))>26.5 && (databaseRepository.getHeight_object(userId)) <= 47){
+        }else if ((heightObject())>26.5 && (heightObject()) <= 47){
             text += "підлягають обладнанню передпокої житлових квартир та усі вбудовані приміщення різного призначення незалежно від площі \uD83C\uDFE0";
-        }else if ((databaseRepository.getHeight_object(userId)) > 47 && (databaseRepository.getHeight_object(userId)) <= 73.5){
+        }else if ((heightObject()) > 47 && (heightObject()) <= 73.5){
             text += "підлягають обладнанню системою пожежної сигналізації, передпокої житлових квартир, поза квартирні коридори, ліфтові холи та усі вбудовані приміщення різного призначення незалежно від площі \uD83C\uDFE0";
-        }else if ((databaseRepository.getHeight_object(userId)) > 73.5 && (databaseRepository.getHeight_object(userId)) <= 100){
+        }else if ((heightObject()) > 73.5 && (heightObject()) <= 100){
             text += "підлягають обладнанню системою пожежної сигналізації, передпокої житлових квартир, позаквартирні коридори, ліфтові холи та усі вбудовані приміщення різного призначення незалежно від площі та підлягають обладнанню системою автоматичного пожежогасіння усі вбудовані і прибудовані громадські та інші нежитлові приміщення, автостоянки, допоміжні та технічні приміщення, сміттєзабірні, стовбур сміттєпроводу \uD83C\uDFE0";
         }else{
             text += "обладнання системами пожежної сигналізації та автоматичного пожежогасіння визначається індивідуальними технічними вимогами на кожен об’єкт окремо \uD83C\uDFE0";
@@ -102,7 +180,7 @@ public class FireAlarm {
 
     //гуртожиток
     private String dormitory(){
-        if ((databaseRepository.getHeight_object(userId))<= 26.5){
+        if ((heightObject())<= 26.5){
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
         }else{
             text += "підлягають обладнанню адресною системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
@@ -114,9 +192,9 @@ public class FireAlarm {
     }
 
     private String hotel(){
-        if (databaseRepository.getHotel_rooms(userId)<7){
+        if (hotelRooms()<7){
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення при загальній площі більше 300 м2 \uD83C\uDFE8";
-        }else if (databaseRepository.getHotel_rooms(userId)>=7 && databaseRepository.getHotel_rooms(userId)<50){
+        }else if (hotelRooms()>=7 && hotelRooms()<50){
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFE8";
         }else{
             text += "підлягають обладнанню адресною системою пожежної сигналізації усі приміщення \uD83C\uDFE8  \n\n";
@@ -128,9 +206,9 @@ public class FireAlarm {
     }
 
     private String hotelHeight(){
-        if (databaseRepository.getHeight_object(userId)<26.5){
+        if (heightObject()<26.5){
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення із врахуванням кількості номерів \uD83C\uDFE8";
-        }else if (databaseRepository.getHeight_object(userId)>=26.5 && databaseRepository.getHeight_object(userId)<100){
+        }else if (heightObject()>=26.5 && heightObject()<100){
             text += "підлягають обладнанню адресною системою пожежної сигналізації усі приміщення та обладнанню системою автоматичного пожежогасіння усі приміщення \uD83C\uDFE8";
         }else {
             text += "обладнання системами пожежної сигналізації та автоматичного пожежогасіння визначається індивідуальними технічними вимогами \uD83C\uDFE8";
@@ -143,13 +221,13 @@ public class FireAlarm {
     }
 
     private String office(){
-        if (databaseRepository.getHeight_object(userId)<3){
+        if (heightObject()<3){
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення при загальній площі більше 300 м2 \uD83C\uDFE2";
-        }else if (databaseRepository.getHeight_object(userId)>=3 && databaseRepository.getHeight_object(userId)<26.5){
+        }else if (heightObject()>=3 && heightObject()<26.5){
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFE2";
-        }else if (databaseRepository.getHeight_object(userId)>=26.5 && databaseRepository.getHeight_object(userId)<47){
+        }else if (heightObject()>=26.5 && heightObject()<47){
             text += "підлягають обладнанню адресною системою пожежної сигналізації усі приміщення \uD83C\uDFE2";
-        }else if (databaseRepository.getHeight_object(userId)>=47 && databaseRepository.getHeight_object(userId)<100){
+        }else if (heightObject()>=47 && heightObject()<100){
             text += "підлягають обладнанню адресною системою пожежної сигналізації та автоматичного пожежогасіння усі приміщення \uD83C\uDFE2";
         }else{
             text += "обладнання системами пожежної сигналізації та автоматичного пожежогасіння визначається індивідуальними технічними вимогами \uD83C\uDFE2";
@@ -180,9 +258,9 @@ public class FireAlarm {
     }
 
     private String undergroundMall(){
-        if (databaseRepository.getSquare(userId)<400){
+        if (square()<400){
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення та системою автоматичного пожежогасіння торгівельні зали площею більше 150 м2 \uD83C\uDFEC";
-        }else if (databaseRepository.getSquare(userId)>=400 && databaseRepository.getSquare(userId)<1000){
+        }else if (square()>=400 && square()<1000){
             text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
         }else{
             text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
@@ -194,20 +272,20 @@ public class FireAlarm {
     }
 
     private String groundMall(){
-        if (databaseRepository.getFloors(userId)==1){
-            if (databaseRepository.getSquare(userId)<3500){
+        if (floors()==1){
+            if (square()<3500){
                 text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння при загальній площі більше допустимої площі протипожежного відсіку усі приміщення \uD83C\uDFEC";
             }else{
                 text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння при загальній площі більше допустимої площі протипожежного відсіку усі приміщення  \uD83C\uDFEC";
             }
-        }else if (databaseRepository.getFloors(userId) == 2){
-            if (databaseRepository.getSquare(userId)<3500){
+        }else if (floors() == 2){
+            if (square()<3500){
                 text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
             }else {
                 text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння при загальній площі торгових залів більше 3500 м2 усі приміщення \uD83C\uDFEC";
             }
         }else{
-            if (databaseRepository.getSquare(userId)<1000){
+            if (square()<1000){
                 text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
             }else {
                 text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
@@ -229,7 +307,7 @@ public class FireAlarm {
     }
 
     private String builtInCatering(){
-        if (databaseRepository.getHeight_object(userId)<47){
+        if (heightObject()<47){
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFE0";
         }else {
             text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFE0";
@@ -241,16 +319,16 @@ public class FireAlarm {
     }
 
     private String separateCatering(){
-        if (databaseRepository.getFloors(userId)==1){
-            if (databaseRepository.getSquare(userId)<50){
+        if (floors()==1){
+            if (square()<50){
                 text += "не підлягають обладнанню системою пожежної сигналізації \uD83C\uDFEC";
-            }else if (databaseRepository.getSquare(userId)>=50 && databaseRepository.getSquare(userId)<3500){
+            }else if (square()>=50 && square()<3500){
                 text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
             }else{
                 text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
             }
-        }else if (databaseRepository.getFloors(userId)==2){
-            if (databaseRepository.getSquare(userId)<2500){
+        }else if (floors()==2){
+            if (square()<2500){
                 text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
             }else{
                 text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
@@ -266,7 +344,7 @@ public class FireAlarm {
     }
 
     private String exhibitionUnderground(){
-        if (databaseRepository.getSquare(userId)<400){
+        if (square()<400){
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення та системою автоматичного пожежогасіння виставкові зали площею більше 150 м2 \uD83C\uDFDB";
         }else {
             text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFDB";
@@ -279,27 +357,27 @@ public class FireAlarm {
     }
 
     private String exhibitionGround(){
-        if (databaseRepository.getFloors(userId)==1){
-            if (databaseRepository.getFire_resistance(userId).equals("1") || databaseRepository.getFire_resistance(userId).equals("2")){
-                if (databaseRepository.getSquare(userId)<3500){
+        if (floors()==1){
+            if (fireResistance().equals("1") || fireResistance().equals("2")){
+                if (square()<3500){
                     text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFDB";
                 }else{
                     text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFDB";
                 }
-            }else if (databaseRepository.getFire_resistance(userId).equals("3")){
-                if (databaseRepository.getSquare(userId)<2000){
+            }else if (fireResistance().equals("3")){
+                if (square()<2000){
                     text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFDB";
                 }else {
                     text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFDB";
                 }
-            }else if (databaseRepository.getFire_resistance(userId).equals("3а")||databaseRepository.getFire_resistance(userId).equals("3б")){
-                if (databaseRepository.getSquare(userId)<1000){
+            }else if (fireResistance().equals("3а")||fireResistance().equals("3б")){
+                if (square()<1000){
                     text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFDB";
                 }else {
                     text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFDB";
                 }
-            }else if (databaseRepository.getFire_resistance(userId).equals("4") || databaseRepository.getFire_resistance(userId).equals("4а") || databaseRepository.getFire_resistance(userId).equals("5")){
-                if (databaseRepository.getSquare(userId)<500){
+            }else if (fireResistance().equals("4") || fireResistance().equals("4а") || fireResistance().equals("5")){
+                if (square()<500){
                     text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFDB";
                 }else {
                     text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFDB";
@@ -308,14 +386,14 @@ public class FireAlarm {
                 text = "Ступінь вогнестійкості будівлі введено не коректно. Спробуйте ввести (1,2,3,3a,3б,4,4a,5) ступені вогнестійкості.";
             }
         }else{
-            if (databaseRepository.getFire_resistance(userId).equals("1") || databaseRepository.getFire_resistance(userId).equals("2")){
-                if (databaseRepository.getSquare(userId)<3000){
+            if (fireResistance().equals("1") || fireResistance().equals("2")){
+                if (square()<3000){
                     text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFDB";
                 }else {
                     text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFDB";
                 }
-            }else if (databaseRepository.getFire_resistance(userId).equals("3")){
-                if (databaseRepository.getSquare(userId)<1000){
+            }else if (fireResistance().equals("3")){
+                if (square()<1000){
                     text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFDB";
                 }else{
                     text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFDB";
@@ -347,7 +425,7 @@ public class FireAlarm {
     }
 
     private String cinema(){
-        if (databaseRepository.getSeats(userId)<700){
+        if (seats()<700){
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFA5";
         }else{
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення та системою автоматичного пожежогасіння приміщення під колосниками сцени і ар’єрсцени, яруси робочих галерей і усі перехідні містки крім нижніх, сейф згорнутих декорацій, всі прорізи сцени, порталу сцени, частини трюму із вбудованим обладнанням, покриття сцени та ар’єрсцени, кармани сцени, складські приміщення і комори, майстерні, приміщення монтажу декорацій, камери пиловидалення \uD83C\uDFA5";
@@ -359,9 +437,9 @@ public class FireAlarm {
     }
 
     private String casino(){
-        if (databaseRepository.getSquare(userId)<500){
+        if (square()<500){
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення";
-        }else if (databaseRepository.getSquare(userId)>=500 &&  databaseRepository.getSquare(userId)<1000){
+        }else if (square()>=500 &&  square()<1000){
             text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
         }else {
             text+= "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
@@ -381,7 +459,7 @@ public class FireAlarm {
     }
 
     private String library(){
-        if (databaseRepository.getBooks_storage(userId)<500){
+        if (booksStorage()<500){
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення та системою автоматичного пожежогасіння приміщення сховищ, архівів, комор, ремонтних майстерень, палітурно-брошурувальних, збирання і обробки макулатури \uD83D\uDCDA";
         }else {
             text += "підлягають обладнанню адресною системою пожежної сигналізації усі приміщення та системою автоматичного пожежогасіння приміщення сховищ, архівів, комор, ремонтних майстерень, палітурно-брошурувальних, збирання і обробки макулатури \uD83D\uDCDA";
@@ -394,7 +472,7 @@ public class FireAlarm {
     }
 
     private String libraryOtherBuildings(){
-        if (databaseRepository.getBooks_storage(userId)<500){
+        if (booksStorage()<500){
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83D\uDCDA";
         }else {
             text += "підлягають обладнанню адресною системою пожежної сигналізації усі приміщення \uD83D\uDCDA";
@@ -407,10 +485,10 @@ public class FireAlarm {
     }
 
     private String archive(){
-        if (databaseRepository.getSquare(userId)<400){
+        if (square()<400){
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83D\uDCD6";
         }else {
-            text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83D\uDCD6";
+            text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83D\uDCD6";
         }
         return text;
     }
@@ -420,11 +498,11 @@ public class FireAlarm {
     }
 
     private String institutes(){
-        if (databaseRepository.getHeight_object(userId)<26.5){
-            if (databaseRepository.getFloors(userId)==1){
-                if (databaseRepository.getSquare(userId)<=300 && !databaseRepository.getArchives(userId)){
+        if (heightObject()<26.5){
+            if (floors()==1){
+                if (square()<=300 && !databaseRepository.getArchives(userId)){
                     text += "не підлягають обладнанню системою пожежної сигналізації \uD83D\uDCDA";
-                }else if (databaseRepository.getSquare(userId)<=300 && databaseRepository.getArchives(userId)){
+                }else if (square()<=300 && databaseRepository.getArchives(userId)){
                     text += "підлягають системою автоматичного пожежогасіння зазначені приміщення \uD83D\uDCDA";
                 }else {
                     text += "підлягають обладнанню системою пожежної сигналізації усі приміщення та системою автоматичного пожежогасіння приміщення зберігання цінних документів та архівів \uD83D\uDCDA";
@@ -468,7 +546,7 @@ public class FireAlarm {
     }
 
     private String healthCare(){
-        if (databaseRepository.getHeight_object(userId)<26.5){
+        if (heightObject()<26.5){
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення та системою автоматичного пожежогасіння склади та приміщення оперативного зберігання горючих і легкозаймистих рідин та хімікатів, приміщення з унікальним обладнанням \uD83C\uDFE5";
         }else {
             text += "підлягають обладнанню адресною системою пожежної сигналізації усі приміщення та системою автоматичного пожежогасіння склади та приміщення оперативного зберігання горючих і легкозаймистих рідин та хімікатів, приміщення з унікальним обладнанням \uD83C\uDFE5";
@@ -488,7 +566,7 @@ public class FireAlarm {
         return sport();
     }
     private String religious(){
-        if (databaseRepository.getSquare(userId)<300){
+        if (square()<300){
             text += "не підлягає обладнанню системою пожежної сигналізації ⛪️";
         }else {
             text += "підлягають обладнанню системою пожежної сигналізації усі приміщення ⛪️";
@@ -498,4 +576,1208 @@ public class FireAlarm {
     public String getReligious(){
         return religious();
     }
+
+    private String station(){
+        if (square()<3500){
+            text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83D\uDE9B";
+        }else{
+            text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83D\uDE9B";
+        }
+        return text;
+    }
+    public String getStation(){
+        return station();
+    }
+    private String hangar(){
+        text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83D\uDE9B";
+        return text;
+    }
+    public String getHangar(){
+        return hangar();
+    }
+
+    private String airTransport(){
+        text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83D\uDE9B";
+        return text;
+    }
+    public String getAirTransport(){
+        return airTransport();
+    }
+
+    private String depot(){
+        if (square()<7000){
+            text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83D\uDE83";
+        }else {
+            text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83D\uDE83";
+        }
+        return text;
+    }
+    public String getDepot(){
+        return depot();
+    }
+    private String undergroundGarages(){
+        if (amountOfTransport()<25){
+            text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83D\uDE8D";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83D\uDE8D";
+        }
+        return text;
+    }
+    public String getUndergroundGarages(){
+        return undergroundGarages();
+    }
+
+    private String garages(){
+        if (floors()==1){
+            if (fireResistance().equals("1")|| fireResistance().equals("2")){
+                if (square()<7000){
+                    text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83D\uDE8D";
+                }else {
+                    text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83D\uDE8D";
+                }
+            }else if (fireResistance().equals("3а")){
+                if (square() < 3600){
+                    text += "підлягають обладнанню системою пожежної сигналізації усі приміщення";
+                }else{
+                    text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83D\uDE8D";
+                }
+            }else {
+                if (square()<2000){
+                    text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83D\uDE8D";
+                }else {
+                    text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83D\uDE8D";
+                }
+            }
+        }
+        return text;
+    }
+    public String getGarages(){
+        return garages();
+    }
+    private String mechanizedGarages(){
+        text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83D\uDE8D";
+        return text;
+    }
+    public String getMechanizedGarages(){
+        return mechanizedGarages();
+    }
+    private String gasStation(){
+        text += "підлягають обладнанню системою пожежної сигналізації усі приміщення та системою автоматичного пожежогасіння приміщення категорії «В», складські приміщення з наявністю легкозаймистих та горючих рідин, пости технічного обслуговування від 100 м2, БП АЗС та АГЗП об’ємом від 500 м3 ⛽️";
+        return text;
+    }
+    public String getGasStation(){
+        return gasStation();
+    }
+    private String carDealership(){
+        if (square()<500){
+            text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83D\uDE99";
+        }else {
+            text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83D\uDE99";
+        }
+        return text;
+    }
+    public String getCarDealership(){
+        return carDealership();
+    }
+
+    private String productionBuilding(){
+        if (categoryBuildings().equals("В")){
+            if (floors()==1){
+                if (square()<1000){
+                    text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFED";
+                }else {
+                    text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFED";
+                }
+            }else {
+                if (square()<500){
+                    text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFED";
+                }else {
+                    text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFED";
+                }
+            }
+        }else {
+            if (floors()==1){
+                if (square()<300){
+                    text += "– підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFED";
+                }else {
+                    text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFED";
+                }
+            }else {
+                text += "підлягають обладнанню адресною системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFED";
+            }
+        }
+        return text;
+    }
+    public String getProductionBuilding(){
+        return productionBuilding();
+    }
+
+    private String storageA(){
+        if (square()<500){
+            text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getStorageA(){
+        return storageA();
+    }
+
+    private String storageB(){
+        if (square()<1000){
+            text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getStorageB(){
+        return storageB();
+    }
+
+    private String storageRack(){
+        text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
+        return text;
+    }
+    public String getStorageRack(){
+        return storageRack();
+    }
+
+    private String storageRubber(){
+        if (floors()==1){
+            if (square()<750){
+                text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
+            }else {
+                text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
+            }
+        }else{
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
+        }
+        return text;
+    }
+
+    public String getStorageRubber(){
+        return storageRubber();
+    }
+
+    private String storageNonCombustibleSubstances(){
+        if (square()<1500){
+            text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getStorageNonCombustibleSubstances(){
+        return storageNonCombustibleSubstances();
+    }
+
+    private String storageSaltpeter(){
+        if (square()<700){
+            text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getStorageSaltpeter(){
+        return storageSaltpeter();
+    }
+
+    private String storageFilm(){
+        if (weight()<200){
+            text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
+        }else {
+            text +="підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getStorageFilm(){
+        return storageFilm();
+    }
+
+    private String storageEngine(){
+        if (square()<500){
+            text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getStorageEngine(){
+        return storageEngine();
+    }
+
+    private String alcoholTanks(){
+        if (volumePremisses()<1000){
+            text += "підлягають обладнанню системою пожежної сигналізації \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getAlcoholTanks(){
+        return alcoholTanks();
+    }
+    private String oilTanks(){
+        if (volumePremisses()<5000){
+            text += "не підлягають обладнанню системами протипожежного захисту \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою автоматичного пожежогасіння \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getOilTanks(){
+        return oilTanks();
+    }
+
+    private String oilPremissesBellow120(){
+        if (square()<500){
+            text += "підлягають обладнанню системою пожежної сигналізації \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getOilPremissesBellow120(){
+        return oilPremissesBellow120();
+    }
+
+    private String oilPremissesHigher120(){
+        if (square()<750){
+            text += "підлягають обладнанню системою пожежної сигналізації \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getOilPremissesHigher120(){
+        return oilPremissesHigher120();
+    }
+    private String closedStorage(){
+        if (square()<500){
+            text += "підлягають обладнанню системою пожежної сигналізації \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getClosedStorage(){
+        return closedStorage();
+    }
+
+    private String breadProductsStorage(){
+        if (typeOfObjectFireAlarm().equals("наявні приміщення")){
+            text += "не підлягають обладнанню системою пожежної сигналізації \uD83C\uDFEC";
+        }else{
+            text += "не підлягають обладнанню системою пожежної сигналізації лише ті приміщення \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getBreadProductsStorage(){
+        return breadProductsStorage();
+    }
+
+    private String flourStorage(){
+        if (square()<100){
+            text += "не підлягають обладнанню системою пожежної сигналізації \uD83C\uDFEC";
+        }else if (square()>=100 && square()<1000){
+            text += "підлягають обладнанню системою пожежної сигналізації зазначені приміщення \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння зазначені приміщення \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getFlourStorage(){
+        return flourStorage();
+    }
+
+    private String vitaminsStorage(){
+        if (square()<200){
+            text += "не підлягають обладнанню системою пожежної сигналізації \uD83C\uDFEC";
+        }else if (square()>200 && square()<1000){
+            text += "підлягають обладнанню системою пожежної сигналізації зазначені приміщення \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння зазначені приміщення \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getVitaminsStorage(){
+        return vitaminsStorage();
+    }
+
+    private String materialStorage(){
+        if (square()<1000){
+            text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getMaterialStorage(){
+        return materialStorage();
+    }
+
+    private String poultryFarm(){
+        text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
+        return text;
+    }
+    public String getPoultryFarm(){
+        return poultryFarm();
+    }
+
+    private String barn(){
+        if (square()<1500){
+            text += "не підлягає обладнанню системою пожежної сигналізації \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getBarn(){
+        return barn();
+    }
+
+    private String pesticidesStorage(){
+        if (square()<100){
+            text += "не підлягає обладнанню системою пожежної сигналізації \uD83C\uDFEC";
+        } else if (square()>=100 && square()<500) {
+            text += "підлягає обладнанню системою пожежної сигналізації \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getPesticidesStorage(){
+        return pesticidesStorage();
+    }
+
+    private String railwayTunnel(){
+        text += "підлягають обладнанню системою пожежної сигналізації допоміжні приміщення тунелю та системою автоматичного пожежогасіння при протяжності більше 2000 м \uD83C\uDFEC";
+        return text;
+    }
+    public String getRailwayTunnel(){
+        return railwayTunnel();
+    }
+    private String carTunnel(){
+        if (length()<500){
+            text += "не підлягає обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння за індивідуальними технічними умовами";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації усі приміщення та системою автоматичного пожежогасіння за індивідуальними технічними умовами";
+        }
+        return text;
+    }
+    public String getCarTunnel(){
+        return carTunnel();
+    }
+
+    private String pumpingStation(){
+        text += "підлягають обладнанню системою пожежної сигналізації приміщення персоналу, газоперекачувальних агрегатів цехового і блочного виконання, машинні зали газомотокомпресорів та системами автоматичного пожежогасіння нагнітачі і приводи газоперекачувальних апаратів цехового і блочного виконання при ємності маслоблоків більше 60 кг \uD83C\uDFEC";
+        return text;
+    }
+    public String getPumpingStation(){
+        return pumpingStation();
+    }
+
+    private String filtrationStation(){
+        text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
+        return text;
+    }
+    public String getFiltrationStation(){
+        return filtrationStation();
+    }
+
+    private String oilRefiningEnterprisesStorage(){
+        text += "підлягають обладнанню системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
+        return text;
+    }
+    public String getOilRefiningEnterprisesStorage(){
+        return oilRefiningEnterprisesStorage();
+    }
+
+    private String polymersStorage(){
+        if (typeOfObjectFireAlarm().equals("Г1 або Г2")){
+            if (square()<1000){
+                text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
+            }else {
+                text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
+            }
+        }else {
+            if (square()<100){
+                text += "підлягають обладнанню системою пожежної сигналізації усі приміщення \uD83C\uDFEC";
+            }else {
+                text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння усі приміщення \uD83C\uDFEC";
+            }
+        }
+        return text;
+    }
+    public String getPolymersStorage(){
+        return polymersStorage();
+    }
+
+    private String basements(){
+        text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння незалежно від площі \uD83C\uDFEC";
+        return text;
+    }
+    public String getBasements(){
+        return basements();
+    }
+
+    private String treatmentPlant(){
+        text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі \uD83C\uDFEC";
+        return text;
+    }
+    public String getTreatmentPlant(){
+        return treatmentPlant();
+    }
+
+    private String internalCableStructure(){
+        if (volumePremisses()<20){
+            text += "не підлягають обладнанню системою пожежної сигналізації незалежно від площі \uD83C\uDFEC";
+        } else if (volumePremisses()>=20 && volumePremisses()<100) {
+            text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння незалежно від площі \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getInternalCableStructure(){
+        return internalCableStructure();
+    }
+
+    private String cableThermalPowerStation(){
+        text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі та системою автоматичного пожежогасіння \uD83C\uDFEC";
+        return text;
+    }
+    public String getCableThermalPowerStation(){
+        return cableThermalPowerStation();
+    }
+    private String oilFilledEquipments(){
+        if (typeOfObjectFireAlarm().equals("відсутнє")){
+            text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі \uD83C\uDFEC";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння незалежно від площі \uD83C\uDFEC";
+        }
+        return text;
+    }
+    public String getOilFilledEquipments(){
+        return oilFilledEquipments();
+    }
+    private String engineRooms(){
+        text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння незалежно від площі \uD83C\uDFEC";
+        return text;
+    }
+    public String getEngineRooms(){
+        return engineRooms();
+    }
+    private String boilerRooms(){
+        text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння незалежно від площі \uD83C\uDFEC";
+        return text;
+    }
+    public String getBoilerRooms(){
+        return boilerRooms();
+    }
+    private String boilerGasRooms(){
+        text += "підлягають обладнанню системою пожежної сигналізації у вибухозахищеному виконанні незалежно від площі";
+        return text;
+    }
+    public String getBoilerGasRooms(){
+        return boilerGasRooms();
+    }
+
+    private String powerGenerator(){
+        text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння вибухозахищеного виконання незалежно від площі";
+        return text;
+    }
+    public String getPowerGenerator(){
+        return powerGenerator();
+    }
+
+    private String fireLoad(){
+        if (typeOfObjectFireAlarm().equals("менше 180 МДж/м2")){
+            text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння незалежно від площі";
+        }
+        return text;
+    }
+    public String getFireLoad(){
+        return fireLoad();
+    }
+
+    private String transformer(){
+        text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі окрім самих трансформаторів та системами автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String getTransformer(){
+        return transformer();
+    }
+    private String transformerClosedSubstation(){
+        text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String getTransformerClosedSubstation(){
+        return transformerClosedSubstation();
+    }
+
+    private String flammableLiquidsStorage(){
+        if (square()<500){
+            text += "підлягають обладнанню системою пожежної сигналізації ";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getFlammableLiquidsStorage(){
+        return flammableLiquidsStorage();
+    }
+
+    private String pumpRooms(){
+        text += "підлягають обладнанню системою пожежної сигналізації  та системою автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String getPumpRooms(){
+        return pumpRooms();
+    }
+
+    private String transformerWorkshops(){
+        text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі";
+        return text;
+    }
+    public String getTransformerWorkshops(){
+        return transformerWorkshops();
+    }
+    private String solidFuelWarehouses(){
+        text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String  getSolidFuelWarehouses(){
+        return solidFuelWarehouses();
+    }
+
+    private String stationPremisses(){
+        text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String getStationPremisses(){
+        return stationPremisses();
+    }
+    private String cloakroom(){
+        if (square()<1000){
+            text += "підлягають обладнанню системою пожежної сигналізації  ";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння  ";
+        }
+        return text;
+    }
+    public String getCloakroom(){
+        return cloakroom();
+    }
+
+    private String cloakroomUnderground(){
+        if (square()<700){
+            text += "підлягають обладнанню системою пожежної сигналізації ";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getCloakroomUnderground(){
+        return cloakroomUnderground();
+    }
+
+    private String autoCloakroom(){
+        if (typeOfObjectFireAlarm().equals("надземний поверх автоматична камера")){
+            if (square()<1500){
+                text += "підлягають обладнанню системою пожежної сигналізації ";
+            }else {
+                text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння";
+            }
+        }else {
+            if (square()<1000){
+                text += "підлягають обладнанню системою пожежної сигналізації ";
+            }else {
+                text += "підлягають обладнанню системою пожежної сигналізації та системою автоматичного пожежогасіння";
+            }
+        }
+        return text;
+    }
+    public String getAutoCloakroom(){
+        return autoCloakroom();
+    }
+
+    private String grainCleaning(){
+        if (square()<100){
+            text += "не підлягають обладнанню системою пожежної сигналізації ";
+        }else if (square()>=100 && square()<1000){
+            text += "підлягають обладнанню системою пожежної сигналізації ";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getGrainCleaning(){
+        return grainCleaning();
+    }
+
+    private String cornCleaning(){
+        text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі";
+        return text;
+    }
+    public String getCornCleaning(){
+        return cornCleaning();
+    }
+
+    private String premisesOfCompoundFeedShops(){
+        if (square()<200){
+            text += "не підлягають обладнанню системою пожежної сигналізації ";
+        }else if (square()>=200 && square()<1500){
+            text += "підлягають обладнанню системою пожежної сигналізації ";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getPremissesOfCompoundFeedShops(){
+        return premisesOfCompoundFeedShops();
+    }
+
+    private String mills(){
+        text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі";
+        return text;
+    }
+    public String getMills(){
+        return mills();
+    }
+    private String transportGalleries(){
+        if (square()<200){
+            text += "не підлягають обладнанню системою пожежної сигналізації ";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації ";
+        }
+        return text;
+    }
+    public String getTransportGalleries(){
+        return transportGalleries();
+    }
+
+    private String powerTransportGalleries(){
+        if (typeOfObjectFireAlarm().equals("до 12 кВт")){
+            text += "підлягають обладнанню системою пожежної сигналізації ";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getPowerTransportGalleries(){
+        return powerTransportGalleries();
+    }
+
+    private String premisesOfRegenerationUnits(){
+        text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String getPremisesOfRegenerationUnits(){
+        return premisesOfRegenerationUnits();
+    }
+
+    private String mobileCommunication(){
+        if (typeOfObjectFireAlarm().equals("у діючих будинках зв’язку")){
+            text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі";
+        }else if (typeOfObjectFireAlarm().equals("у будинках іншого призначення")){
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння незалежно від площі";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та модульними системами автоматичного пожежогасіння незалежно від площі";
+        }
+        return text;
+    }
+    public String getMobileCommunication(){
+        return mobileCommunication();
+    }
+
+    private String airTransportPremisses(){
+        text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String getAitTransportPremisses(){
+        return airTransportPremisses();
+    }
+
+    private String ukrainianPost(){
+        if (square()<500){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getUkrainianPost(){
+        return ukrainianPost();
+    }
+
+    private String productionPremisses(){
+        if (typeOfObjectFireAlarm().equals("виробничі А та Б")){
+            if (square()<300){
+                text += "підлягають обладнанню системою пожежної сигналізації";
+            }else {
+                text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+            }
+        }else if (typeOfObjectFireAlarm().equals("підземне розташування")){
+            if (square()<500){
+                text += "підлягають обладнанню системою пожежної сигналізації ";
+            }else {
+                text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+            }
+        }else {
+            if (square()<1000){
+                text += "підлягають обладнанню системою пожежної сигналізації ";
+            }else {
+                text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+            }
+        }
+        return text;
+    }
+    public String getProductionPremisses(){
+        return productionPremisses();
+    }
+
+    private String adjustment(){
+        if (square()<500){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getAdjustment(){
+        return adjustment();
+    }
+
+    private String aggregate(){
+        text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String getAggregate(){
+        return aggregate();
+    }
+    private String woodGrinding(){
+        if (categoryPremisses().equals("АБ")){
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння незалежно від площі";
+        }else {
+            if (square()<500){
+                text += "підлягають обладнанню системою пожежної сигналізації";
+            }else {
+                text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+            }
+        }
+        return text;
+    }
+    public String getWoodGrinding(){
+        return woodGrinding();
+    }
+    private String oilPremisses(){
+        if (square()<50){
+            text += "підлягають обладнанню системою пожежної сигналізації ";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getOilPremisses(){
+        return oilPremisses();
+    }
+
+    private String rubberEngineeringWorkshops(){
+        if (square()<500){
+            text += "підлягають обладнанню системою пожежної сигналізації ";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getRubberEngineeringWorkshops(){
+        return rubberEngineeringWorkshops();
+    }
+    private String testPremisses(){
+        text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String getTestPremisses(){
+        return testPremisses();
+    }
+
+    private String analysisLaboratories(){
+        text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі";
+        return text;
+    }
+    public String getAnalysisLaboratories(){
+        return analysisLaboratories();
+    }
+
+    private String testEquipment(){
+        if (square()<300){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getTestEquipment(){
+        return testEquipment();
+    }
+    private String testAggregate(){
+        if (square()<500){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getTestAggregate(){
+        return testAggregate();
+    }
+    private String metalProcessing(){
+        if (square()<750){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getMetalProcessing(){
+        return metalProcessing();
+    }
+    private String cyclones(){
+        if (volumePremisses()<50){
+            text += "не підлягають обладнанню системами протипожежного захисту";
+        }else {
+            text += "підлягають обладнанню системою автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getCyclones(){
+        return cyclones();
+    }
+    private String pneumaticTransport(){
+        text += "підлягають обладнанню системами протипожежного захисту згідно окремих технічних умов";
+        return text;
+    }
+    public String getPneumaticTransport(){
+        return pneumaticTransport();
+    }
+    private String pumpsPremisses(){
+        if (productivity()<1200){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системами пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getPumpsPremisses(){
+        return pumpsPremisses();
+    }
+    private String switchPremisses(){
+        if (weight()<60){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getSwitchPremisses(){
+        return switchPremisses();
+    }
+    private String installationOfEngines(){
+        if (square()<1000){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getInstallationOfEngines(){
+        return installationOfEngines();
+    }
+    private String placesOfDisassembly(){
+        text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String getPlacesDisassembly(){
+        return placesOfDisassembly();
+    }
+    private String lubricantStorage(){
+        if (square()<500){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getLubricantStorage(){
+        return lubricantStorage();
+    }
+    private String celluloidStorage(){
+        text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String getCelluloidStorage(){
+        return celluloidStorage();
+    }
+    private String flammablePesticidesStorage(){
+        if (square()<200){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getFlammablePesticidesStorage(){
+        return flammablePesticidesStorage();
+    }
+    private String archivesUpTo150(){
+        if (square()<400){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getArchivesUpTo150(){
+        return archivesUpTo150();
+    }
+
+    private String rubberStorage(){
+        if (square()<500){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getRubberStorage(){
+        return rubberStorage();
+    }
+    private String flammableInBasement(){
+        if (square()<700){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getFlammableInBasement(){
+        return flammableInBasement();
+    }
+    private String petroleumProducts(){
+        if (square()<750){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getPetroleumProducts(){
+        return petroleumProducts();
+    }
+    private String combustibleMaterials(){
+        if (square()<1000){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getCombustibleMaterials(){
+        return combustibleMaterials();
+    }
+    private String boatRamps(){
+        if (square()<1500){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getBoatRamps(){
+        return boatRamps();
+    }
+    private String siloPremisses(){
+        text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі";
+        return text;
+    }
+    public String getSiloPremisses(){
+        return siloPremisses();
+    }
+    private String crushingDepartment(){
+        if (square()<100){
+            text += "не підлягають обладнанню системою пожежної сигналізації";
+        }else if (square()>=100 && square()<1000){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getCrushingDepartment(){
+        return crushingDepartment();
+    }
+    private String compressorDepartment(){
+        if (square()<100){
+            text += "не підлягають обладнанню системою пожежної сигналізації";
+        }else if (square()>=100 && square()<1500){
+            text += "підлягають обладнанню системою пожежної сигналізації";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getCompressorDepartment(){
+        return compressorDepartment();
+    }
+    private String car(){
+        if (square()<7000){
+            text += "підлягають обладнанню системою пожежної сигналізації ";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getCar(){
+        return car();
+    }
+    private String bus(){
+        if (square()<3600){
+            text += "підлягають обладнанню системою пожежної сигналізації ";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getBus(){
+        return bus();
+    }
+    private String autoInPremisses3fireResistance(){
+        if (square()<2000){
+            text += "підлягають обладнанню системою пожежної сигналізації ";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getAutoInPremisses3fireResistance(){
+        return autoInPremisses3fireResistance();
+    }
+    private String autoInPremisses3aFireResistance(){
+        if (square()<3600){
+            text += "підлягають обладнанню системою пожежної сигналізації ";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння";
+        }
+        return text;
+    }
+    public String getAutoInPremisses3aFireResistance(){
+        return autoInPremisses3aFireResistance();
+    }
+    private String autoMoreTwoFloors(){
+        text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String getAutoMoreTwoFloors(){
+        return autoMoreTwoFloors();
+    }
+    private String repairAutoInBasement(){
+        text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String getRepairAutoInBasement(){
+        return repairAutoInBasement();
+    }
+    private String staffPremisses(){
+        text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі";
+        return text;
+    }
+    public String getStaffPremisses(){
+        return staffPremisses();
+    }
+    private String electricCabinetZones(){
+        text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі";
+        return text;
+    }
+    public String getElectricCabinetZones(){
+        return electricCabinetZones();
+    }
+    private String subway(){
+        text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі";
+        return text;
+    }
+    public String getSubway(){
+        return subway();
+    }
+    private String stationsElectricalDepot(){
+        text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String getStationsElectricalDepot(){
+        return stationsElectricalDepot();
+    }
+    private String cableChannels(){
+        if (productivity()<180){
+            text += "підлягають обладнанню системою пожежної сигналізації незалежно від площі";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння незалежно від площі";
+        }
+        return text;
+    }
+    public String getCableChannels(){
+        return cableChannels();
+    }
+    private String sumpHousings(){
+        if (square()<7000){
+            text += "підлягають обладнанню системою пожежної сигналізації ";
+        }else {
+            text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння ";
+        }
+        return text;
+    }
+    public String getSumpHousing(){
+        return sumpHousings();
+    }
+    private String serverPremisses(){
+        text += "підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String getServerPremisses(){
+        return serverPremisses();
+    }
+    private String suspendedCeiling(){
+        text += "згідно до вимог ДСТУ-Н CEN/TS 54-14 – підлягають обладнанню системою пожежної сигналізації\n\n" +
+                "за наявності пожежного навантаження більше 25МДж/м – підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння ";
+        return text;
+    }
+    public String getSuspendedCeiling(){
+        return suspendedCeiling();
+    }
+
+    private String serverInHotel(){
+        text += "всі приміщення – підлягають обладнанню системою пожежної сигналізації незалежно від площі\n\n" +
+                "приміщення зберігання авто- та мототранспорту, склади горючих та легкозаймистих рідин і хімікатів, камери оперативного запасу горючих та легкозаймистих рідин і хімікатів від 300 м2, приміщення з унікальним обладнанням, зберігання та видачі унікальних видань, звітів, рукописів та іншої документації, серверні – підлягають обладнанню системою пожежної сигналізації та автоматичного пожежогасіння незалежно від площі";
+        return text;
+    }
+    public String getServerInHotel(){
+        return serverInHotel();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
