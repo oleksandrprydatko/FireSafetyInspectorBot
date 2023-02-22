@@ -37,7 +37,7 @@ public class MessageHandler implements Handler<Message> {
     public void choose(Message message) {
 
         long userId = message.getFrom().getId();
-        Optional<Database> optionalDatabase = Optional.ofNullable(databaseRepository.getByTelegramId(userId));
+        Optional<Database> optionalDatabase = databaseRepository.findByTelegramId(userId);
 
         //перевірка чи юзер є в базі, додавання в базу
         if (!optionalDatabase.isPresent()){
@@ -131,7 +131,7 @@ public class MessageHandler implements Handler<Message> {
                         messageSender.sendMessage(sendMessage);
                         return;
                 }
-                }
+            }
         }
         if (message.hasText()){ //якщо введено текст, перевірка чи це значення
             String messageText = message.getText();

@@ -1060,20 +1060,20 @@ public class InlineButton {
     public InlineKeyboardMarkup inlineEnergySupplyFireAlarmKeyboard(){
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
-        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("1.1").callbackData("1.1 енергозабезпечення").build(),
-                InlineKeyboardButton.builder().text("1.2").callbackData("1.2 енергозабезпечення").build()));
-        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("1.3").callbackData("1.3 енергозабезпечення").build(),
-                InlineKeyboardButton.builder().text("1.4").callbackData("1.4 енергозабезпечення").build()));
-        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("1.5").callbackData("1.5 енергозабезпечення").build(),
-                InlineKeyboardButton.builder().text("1.6").callbackData("1.6 енергозабезпечення").build()));
-        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("1.7").callbackData("1.7 енергозабезпечення").build(),
-                InlineKeyboardButton.builder().text("1.8").callbackData("1.8 енергозабезпечення").build()));
-        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("1.9").callbackData("1.9 енергозабезпечення").build(),
-                InlineKeyboardButton.builder().text("1.10").callbackData("1.10 енергозабезпечення").build()));
-        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("1.11").callbackData("1.11 енергозабезпечення").build(),
-                InlineKeyboardButton.builder().text("1.12").callbackData("1.12 енергозабезпечення").build()));
-        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("1.13").callbackData("1.13 енергозабезпечення").build(),
-                InlineKeyboardButton.builder().text("1.14").callbackData("1.14 енергозабезпечення").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 енергозабезпечення").build(),
+                InlineKeyboardButton.builder().text("2.2").callbackData("2.2 енергозабезпечення").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 енергозабезпечення").build(),
+                InlineKeyboardButton.builder().text("2.4").callbackData("2.4 енергозабезпечення").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.5").callbackData("2.5 енергозабезпечення").build(),
+                InlineKeyboardButton.builder().text("2.6").callbackData("2.6 енергозабезпечення").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.7").callbackData("2.7 енергозабезпечення").build(),
+                InlineKeyboardButton.builder().text("2.8").callbackData("2.8 енергозабезпечення").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.9").callbackData("2.9 енергозабезпечення").build(),
+                InlineKeyboardButton.builder().text("2.10").callbackData("2.10 енергозабезпечення").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.11").callbackData("2.11 енергозабезпечення").build(),
+                InlineKeyboardButton.builder().text("2.12").callbackData("2.12 енергозабезпечення").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.13").callbackData("2.13 енергозабезпечення").build(),
+                InlineKeyboardButton.builder().text("2.14").callbackData("2.14 енергозабезпечення").build()));
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
@@ -1122,8 +1122,8 @@ public class InlineButton {
     public InlineKeyboardMarkup inlineAutoLuggageStationFireAlarmKeyboard(){
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
-        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Надземний поверх").callbackData("надземний поверх автоматична камера").build()));
-        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Підземний поверх").callbackData("підземний поверх автоматична камера").build()));inlineKeyboardMarkup.setKeyboard(keyboard);
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Надземний поверх").callbackData("надземний поверх автоматична").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Підземний поверх").callbackData("підземний поверх автоматична").build()));inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
 

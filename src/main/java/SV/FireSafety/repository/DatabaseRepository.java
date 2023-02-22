@@ -7,18 +7,20 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 
 public interface DatabaseRepository extends JpaRepository<Database, Long> {
 
-    @Query(value = "select u from Database u where u.id_telegram = :telegram_id")
-    Database getByTelegramId (long telegram_id);
+    @Query(value = "select u from Database u where u.id_telegram = :id_telegram")
+    Optional<Database> findByTelegramId(long id_telegram);
     @Transactional
     @Modifying
     @Query(value = "update inspector.users set type_premises = NULL,category_premises=NULL," +
             "class_fire=NULL,type_extinguisher=NULL,type_spaces_build=NULL,b1=NULL,b2=NULL,kitchen=NULL," +
             "characteristics_object=NULL,type_object_of_risk=NULL,type_state_owned_object=NULL," +
             "type_cultural_object=NULL,type_industrial_storage_facility=NULL,level_emergency=NULL,type_result_degree_risk=NULL," +
-            "used_indoors='null',category_buildings=NULL,value=NULL,square=NULL,parking=NULL," +
+            "used_indoors=false,category_buildings=NULL,value=NULL,square=NULL,parking=NULL," +
             "workplace=NULL,square_technical_premises=NULL,constantly_at_facility=NULL," +
             "periodically_at_facility=NULL,height_object=NULL,fixed_violations=NULL,no_fixed_violations=NULL," +
             "dead_people = NULL,losses = NULL, tax_free_income = NULL, injured_people=NULL," +
@@ -170,10 +172,10 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
     @Transactional
     @Modifying
     @Query(value = "update inspector.users set used_indoors = :command where id_telegram = :userId", nativeQuery = true)
-    void setUsed_indoors(String command,long userId);
+    void setUsed_indoors(Boolean command,long userId);
 
     @Query(value = "select used_indoors from inspector.users where id_telegram = :userId ", nativeQuery = true)
-    String getUsed_indoors(long userId);
+    Boolean getUsed_indoors(long userId);
 
     @Transactional
     @Modifying

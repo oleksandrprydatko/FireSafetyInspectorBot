@@ -17,7 +17,7 @@ public class Database {
     private String comand_of_menu,type_premises,category_premises,class_fire,
             type_extinguisher,type_spaces_build,b1,b2,characteristics_object,type_object_of_risk,
             type_state_owned_object,type_cultural_object,type_industrial_storage_facility,level_emergency,
-            type_result_degree_risk,used_indoors,category_buildings,value,
+            type_result_degree_risk,category_buildings,value,
             humidity_of_space,type_of_object_fire_alarm,fire_resistance;
 
     private Integer kitchen,dead_people,hotel_rooms,floors,parking,workplace,constantly_at_facility,periodically_at_facility,
@@ -26,7 +26,7 @@ public class Database {
     private Float height_object,losses,tax_free_income,volume_premises,volume_rooms_a,volume_rooms_б,volume_rooms_в,
             volume_rooms_г,square,square_technical_premises,weight,length,productivity;
 
-    private Boolean archives;
+    private Boolean used_indoors,archives;
     public Database() {
 
     }
