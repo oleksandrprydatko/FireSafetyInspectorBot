@@ -19,7 +19,7 @@ public class Garages {
 
     public String quantityExtinguisherGarages() {
         double n = numberСarSeats();
-        String s = null;
+        String s;
         if (n == 0) {
             s = "🚨 Не вказана кількість місць автостоянки/боксу. Зазначте кількість та повторіть спробу!";
         } else {

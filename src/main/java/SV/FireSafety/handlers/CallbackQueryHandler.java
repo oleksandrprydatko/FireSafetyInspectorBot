@@ -86,8 +86,8 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                         break;
                     case "/fire_alarm_installation":
                         sendMessage.setText("Оберіть характеристику, що необхідно визначити:\n\n" +
-                                "\uD83D\uDC49 1. Обладнання будівель автоматичними системами протипожежного захисту\n" +
-                                "\uD83D\uDC49 2. Обладнання приміщень автоматичними системами протипожежного захисту");
+                                "\uD83D\uDC49 Обладнання будівель автоматичними системами протипожежного захисту\n" +
+                                "\uD83D\uDC49 Обладнання приміщень автоматичними системами протипожежного захисту");
                         sendMessage.setReplyMarkup(inlineButton.inlineTypeOfProtectionFireAlarmKeyboard());
                         break;
                 }
@@ -1692,7 +1692,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             // TODO: 08.02.2023 Протестити
                 
             //проектування та монтаж пожежної сигналізації
-            case "1 протипожежний захист":
+            case "будівлі протипожежний захист":
                 sendMessage.setText("Обрано: Обладнання будівель автоматичними системами протипожежного захисту\n\n" +
                         "1. Виберіть тип об'єкту \uD83C\uDFEB :");
                 sendMessage.setReplyMarkup(inlineButton.inlineObjectTypeFireAlarmKeyboard());
@@ -1737,7 +1737,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.3 громадський об'єкт":
-                sendMessage.setText("Обрано: банківська установа\n\n" + fireAlarm.getBank());
+                sendMessage.setText("Обрано: банківська установа\n\n" + fireAlarm.getBank() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.4 громадський об'єкт":
@@ -1789,7 +1789,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "2.10 громадський об'єкт":
                 databaseRepository.setType_of_object_fire_alarm("архів",userId);
                 sendMessage.setText("Обрано: архів\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
@@ -1807,7 +1807,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "2.12 громадський об'єкт":
                 databaseRepository.setType_of_object_fire_alarm("охорона здоров'я",userId);
                 sendMessage.setText("Обрано: заклади охорони здоров’я\n\n" +
-                        "4. Введіть умовну висоту будівлі(м.) та натисніть \"Далі\" \uD83D\uDC47 ");
+                        "3. Введіть умовну висоту будівлі(м.) та натисніть \"Далі\" \uD83D\uDC47 ");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("висота обєкта",userId);
                 messageSender.sendMessage(sendMessage);
@@ -1819,7 +1819,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "2.14 громадський об'єкт":
                 databaseRepository.setType_of_object_fire_alarm("релігійні будівлі",userId);
                 sendMessage.setText("Обрано: культові та релігійні будівлі\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
@@ -1875,7 +1875,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "4.1 торгівельний підземний":
                 databaseRepository.setType_of_object_fire_alarm("торгівельний підземний",userId);
                 sendMessage.setText("Обрано: підземне та підвальне розміщення\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "5. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
@@ -1883,7 +1883,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "4.2 торгівельний надземний":
                 databaseRepository.setType_of_object_fire_alarm("торгівельний надземний",userId);
                 sendMessage.setText("Обрано: надземне розміщення\n\n" +
-                        "4. Введіть кількість поверхів та натисніть \"Далі\" \uD83D\uDC47 ");
+                        "5. Введіть кількість поверхів та натисніть \"Далі\" \uD83D\uDC47 ");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("поверхи",userId);
                 messageSender.sendMessage(sendMessage);
@@ -2183,7 +2183,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "3.7 склад":
                 databaseRepository.setType_of_object_fire_alarm("склади плівки",userId);
                 sendMessage.setText("Обрано: склади для зберігання фото-, кіно- та аудіоплівки\n\n" +
-                        "3. Ведіть загальну вагу плівки (кг.) та натисніть \"Далі\" \uD83D\uDC47");
+                        "4. Ведіть загальну вагу плівки (кг.) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("вага",userId);
                 messageSender.sendMessage(sendMessage);
@@ -2191,7 +2191,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "3.8 склад":
                 databaseRepository.setType_of_object_fire_alarm("склади двигунів",userId);
                 sendMessage.setText("Обрано: склади для зберігання запасу двигунів та агрегатів із паливом та мастилом\n\n" +
-                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
@@ -2383,7 +2383,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "2 протипожежний захист":
+            case "приміщення протипожежний захист":
                 sendMessage.setText("Обрано: Обладнання приміщень автоматичними системами протипожежного захисту\n\n" +
                         "1. Виберіть призначення споруд, приміщень або технологічного обладнання об’єкту:\n\n" +
                         "\uD83D\uDC49 1.1 Споруди, приміщення та технологічне обладнання об’єктів енергозабезпечення\n" +
@@ -2442,7 +2442,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "3.2 кабельні":
                 databaseRepository.setType_of_object_fire_alarm("кабельні внутрішньоцехові",userId);
                 sendMessage.setText("Обрано: кабельні споруди внутрішньоцехових комбінованих тунелів\n\n" +
-                        "3. Введіть об'єм приміщень (м.куб) та натисніть \"Далі\" \uD83D\uDC47");
+                        "4. Введіть об'єм приміщень (м.куб) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("обєм будівлі",userId);
                 messageSender.sendMessage(sendMessage);
@@ -2542,14 +2542,14 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 break;
             case "2.2 вокзал":
                 sendMessage.setText("Обрано: камери схову багажу \n\n" +
-                        "2. Вкажіть розташування камер схову багажу:");
+                        "3. Вкажіть розташування камер схову багажу:");
                 sendMessage.setReplyMarkup(inlineButton.inlineLuggageStationFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "надземний поверх камера схову":
                 databaseRepository.setType_of_object_fire_alarm("надземний поверх камера схову",userId);
                 sendMessage.setText("Обрано: надземний поверх \n\n" +
-                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
@@ -2557,21 +2557,21 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "підземний поверх камера схову":
                 databaseRepository.setType_of_object_fire_alarm("підземний поверх камера схову",userId);
                 sendMessage.setText("Обрано: підземний поверх \n\n" +
-                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.3 вокзал":
                 sendMessage.setText("Обрано: автоматичні камери схов багажу\n\n" +
-                        "2. Вкажіть місце розташування автоматичних камер схову:");
+                        "3. Вкажіть місце розташування автоматичних камер схову:");
                 sendMessage.setReplyMarkup(inlineButton.inlineAutoLuggageStationFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "надземний поверх автоматична":
                 databaseRepository.setType_of_object_fire_alarm("надземний поверх автоматична",userId);
                 sendMessage.setText("Обрано: надземний поверх\n\n" +
-                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
@@ -2579,7 +2579,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "підземний поверх автоматична":
                 databaseRepository.setType_of_object_fire_alarm("підземний поверх автоматична",userId);
                 sendMessage.setText("Обрано: підземний поверх\n\n" +
-                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
@@ -2676,35 +2676,35 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "1.6 АСПЗ приміщення":
                 databaseRepository.setType_of_object_fire_alarm("укрпошта",userId);
                 sendMessage.setText("Обрано: приміщення обробки, сортування, зберігання, доставки посилок, кореспонденції, видань та страхової пошти у будинках Укрпошти\n\n" +
-                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "2. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
             case "1.7 АСПЗ приміщення":
                 sendMessage.setText("Обрано: виробничі приміщення\n\n" +
-                        "3. Виберіть тип приміщення:\n\n" +
-                        "\uD83D\uDC49 3.1 Приміщення за категорією вибухопожежної небезпеки\n" +
-                        "\uD83D\uDC49 3.2 Регулювальні, контрольно-вимірювальні ділянки, лабораторії, майстерні, електроремонтні майстерні двигунів, ділянки консервування виробів в установках періодичної дії з використанням горючих рідин,промивання виробів, приміщення деревообробки та столярні майстерні\n" +
-                        "\uD83D\uDC49 3.3 Приміщення агрегатних у цокольних, підвальних та напівпідвальних поверхах з наявністю видаткових баків мастила більше 500 л \n" +
-                        "\uD83D\uDC49 3.4 Ділянки полірування та шліфування виробів з деревини\n" +
-                        "\uD83D\uDC49 3.5 Приміщення витратних комор лакофарбових матеріалів, горючих миючих засобів, мастил, горючих рідин\n" +
-                        "\uD83D\uDC49 3.6 Приміщення виробництва деталей із горючих матеріалів, гумотехнічні майстерні\n" +
-                        "\uD83D\uDC49 3.7 Приміщення випробувань із використанням легкозаймистих і горючих рідин, екрановані кімнати, приміщення із застосуванням лужних та лужноземельних металів, небезпечних металів, їх зварювання, приміщення приготування клею, наповнення балонів горючими газами, насосні компресорні станції, фарбування занурюванням, струменевим поливанням, фарбоприготувальні приміщення, камери сушіння пофарбованих виробів, масляних охолоджувачів\n" +
-                        "\uD83D\uDC49 3.8 Цехові експрес-лабораторії аналізів, приміщення ремонту і перевірки кисневого обладнання, перевірки, ремонту та випробувань паливних приладів, промивки хлорованими вуглеводами, приміщення мазутних, дизельних насосів, циклони забору горючих відходів\n" +
-                        "\uD83D\uDC49 3.9 Приміщення випробувальної апаратури, гідровипробувань гасом, дефектоскопії легкозаймистими рідинами, приміщення насосів і вузлів засувок продуктових насосних станцій, складів нафти і нафтопродуктів, каналізаційних насосних станцій\n" +
-                        "\uD83D\uDC49 3.10 Камери випробування бустерних і гідравлічних агрегатів, відділення виготовлення і розплавлення модельних форм, ділянки приготування і фарбування різними методами окрім занурення, струменевого покриття і безкамерного фарбування, електромоторні цехи, приміщення масло підживлювальних пристроїв, зберігання, технічного обслуговування і ремонту рухомого складу\n" +
-                        "\uD83D\uDC49 3.11 Приміщення обробки металів із використанням устаткування, що містить горючих рідин у силовій гідросистемі та системі охолодження у кількості 60 кг і більше\n" +
-                        "\uD83D\uDC49 3.12 Циклони для збору горючих відходів\n" +
-                        "\uD83D\uDC49 3.13 Пневмотранспорт горючих матеріалів\n" +
-                        "\uD83D\uDC49 3.14 Приміщення для насосів і вузлів засувок, у будівлях насосних станцій резервуарних парків магістральних нафтопроводів незалежно від площі\n" +
-                        "\uD83D\uDC49 3.15 Приміщення масляних вимикачів, трансформаторних камер, розподільчих пристроїв розташованих в будівлях іншого призначення\n");
+                        "2. Виберіть тип приміщення:\n\n" +
+                        "\uD83D\uDC49 2.1 Приміщення за категорією вибухопожежної небезпеки\n" +
+                        "\uD83D\uDC49 2.2 Регулювальні, контрольно-вимірювальні ділянки, лабораторії, майстерні, електроремонтні майстерні двигунів, ділянки консервування виробів в установках періодичної дії з використанням горючих рідин,промивання виробів, приміщення деревообробки та столярні майстерні\n" +
+                        "\uD83D\uDC49 2.3 Приміщення агрегатних у цокольних, підвальних та напівпідвальних поверхах з наявністю видаткових баків мастила більше 500 л \n" +
+                        "\uD83D\uDC49 2.4 Ділянки полірування та шліфування виробів з деревини\n" +
+                        "\uD83D\uDC49 2.5 Приміщення витратних комор лакофарбових матеріалів, горючих миючих засобів, мастил, горючих рідин\n" +
+                        "\uD83D\uDC49 2.6 Приміщення виробництва деталей із горючих матеріалів, гумотехнічні майстерні\n" +
+                        "\uD83D\uDC49 2.7 Приміщення випробувань із використанням легкозаймистих і горючих рідин, екрановані кімнати, приміщення із застосуванням лужних та лужноземельних металів, небезпечних металів, їх зварювання, приміщення приготування клею, наповнення балонів горючими газами, насосні компресорні станції, фарбування занурюванням, струменевим поливанням, фарбоприготувальні приміщення, камери сушіння пофарбованих виробів, масляних охолоджувачів\n" +
+                        "\uD83D\uDC49 2.8 Цехові експрес-лабораторії аналізів, приміщення ремонту і перевірки кисневого обладнання, перевірки, ремонту та випробувань паливних приладів, промивки хлорованими вуглеводами, приміщення мазутних, дизельних насосів, циклони забору горючих відходів\n" +
+                        "\uD83D\uDC49 2.9 Приміщення випробувальної апаратури, гідровипробувань гасом, дефектоскопії легкозаймистими рідинами, приміщення насосів і вузлів засувок продуктових насосних станцій, складів нафти і нафтопродуктів, каналізаційних насосних станцій\n" +
+                        "\uD83D\uDC49 2.10 Камери випробування бустерних і гідравлічних агрегатів, відділення виготовлення і розплавлення модельних форм, ділянки приготування і фарбування різними методами окрім занурення, струменевого покриття і безкамерного фарбування, електромоторні цехи, приміщення масло підживлювальних пристроїв, зберігання, технічного обслуговування і ремонту рухомого складу\n" +
+                        "\uD83D\uDC49 2.11 Приміщення обробки металів із використанням устаткування, що містить горючих рідин у силовій гідросистемі та системі охолодження у кількості 60 кг і більше\n" +
+                        "\uD83D\uDC49 2.12 Циклони для збору горючих відходів\n" +
+                        "\uD83D\uDC49 2.13 Пневмотранспорт горючих матеріалів\n" +
+                        "\uD83D\uDC49 2.14 Приміщення для насосів і вузлів засувок, у будівлях насосних станцій резервуарних парків магістральних нафтопроводів незалежно від площі\n" +
+                        "\uD83D\uDC49 2.15 Приміщення масляних вимикачів, трансформаторних камер, розподільчих пристроїв розташованих в будівлях іншого призначення\n");
                 sendMessage.setReplyMarkup(inlineButton.inlineProductionFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.1 виробничі":
+            case "2.1 виробничі":
                 sendMessage.setText("Обрано: приміщення за категорією вибухопожежної небезпеки\n\n" +
-                        "4. Вкажіть категорію за вибухопожежною небезпекою:");
+                        "3. Вкажіть категорію за вибухопожежною небезпекою:");
                 sendMessage.setReplyMarkup(inlineButton.inlineCategoryProductionPremissesFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
@@ -2729,20 +2729,20 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.2 виробничі":
+            case "2.2 виробничі":
                 databaseRepository.setType_of_object_fire_alarm("регулювальні",userId);
                 sendMessage.setText("Обрано: регулювальні, контрольно-вимірювальні ділянки, лабораторії, майстерні, електроремонтні майстерні двигунів, ділянки консервування виробів в установках періодичної дії з використанням горючих рідин,промивання виробів, приміщення деревообробки та столярні майстерні\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.3 виробничі":
+            case "2.3 виробничі":
                 sendMessage.setText("Обрано: приміщення агрегатних у цокольних, підвальних та напівпідвальних поверхах з наявністю видаткових баків мастила більше 500 л \n\n" + fireAlarm.getAggregate() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.4 виробничі":
+            case "2.4 виробничі":
                 sendMessage.setText("Обрано: ділянки полірування та шліфування виробів з деревини \n\n " +
-                        "4. Вкажіть категорію за вибухопожежною небезпекою: ");
+                        "3. Вкажіть категорію за вибухопожежною небезпекою: ");
                 sendMessage.setReplyMarkup(inlineButton.inlineCategoryAggregatePremissesFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
@@ -2760,181 +2760,181 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.5 виробничі":
+            case "2.5 виробничі":
                 databaseRepository.setType_of_object_fire_alarm("приміщення мастил",userId);
                 sendMessage.setText("Обрано: приміщення витратних комор лакофарбових матеріалів, горючих миючих засобів, мастил, горючих рідин\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.6 виробничі":
+            case "2.6 виробничі":
                 databaseRepository.setType_of_object_fire_alarm("гумотехнічні майстерні",userId);
                 sendMessage.setText("Обрано: приміщення виробництва деталей із горючих матеріалів, гумотехнічні майстерні\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.7 виробничі":
+            case "2.7 виробничі":
                 sendMessage.setText("Обрано: приміщення випробувань із використанням легкозаймистих і горючих рідин, екрановані кімнати, приміщення із застосуванням лужних та лужноземельних металів, небезпечних металів, їх зварювання, приміщення приготування клею, наповнення балонів горючими газами, насосні компресорні станції, фарбування занурюванням, струменевим поливанням, фарбоприготувальні приміщення, камери сушіння пофарбованих виробів, масляних охолоджувачів\n\n" + fireAlarm.getTestPremisses() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.8 виробничі":
+            case "2.8 виробничі":
                 sendMessage.setText("Обрано: цехові експрес-лабораторії аналізів, приміщення ремонту і перевірки кисневого обладнання, перевірки, ремонту та випробувань паливних приладів, промивки хлорованими вуглеводами, приміщення мазутних, дизельних насосів, циклони забору горючих відходів\n\n" + fireAlarm.getAnalysisLaboratories() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.9 виробничі":
+            case "2.9 виробничі":
                 databaseRepository.setType_of_object_fire_alarm("випробувальна апаратура",userId);
                 sendMessage.setText("Обрано: приміщення випробувальної апаратури, гідровипробувань гасом, дефектоскопії легкозаймистими рідинами, приміщення насосів і вузлів засувок продуктових насосних станцій, складів нафти і нафтопродуктів, каналізаційних насосних станцій\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.10 виробничі":
+            case "2.10 виробничі":
                 databaseRepository.setType_of_object_fire_alarm("випробування агрегатів",userId);
                 sendMessage.setText("Обрано: камери випробування бустерних і гідравлічних агрегатів, відділення виготовлення і розплавлення модельних форм, ділянки приготування і фарбування різними методами окрім занурення, струменевого покриття і безкамерного фарбування, електромоторні цехи, приміщення масло підживлювальних пристроїв, зберігання, технічного обслуговування і ремонту рухомого складу\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.11 виробничі":
+            case "2.11 виробничі":
                 databaseRepository.setType_of_object_fire_alarm("обробка металів",userId);
                 sendMessage.setText("Обрано: приміщення обробки металів із використанням устаткування, що містить горючих рідин у силовій гідросистемі та системі охолодження у кількості 60 кг і більше\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.12 виробничі":
+            case "2.12 виробничі":
                 databaseRepository.setType_of_object_fire_alarm("циклони",userId);
                 sendMessage.setText("Обрано: циклони для збору горючих відходів\n\n" +
-                        "4. Вкажіть об'єм бункеру (м.куб) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Вкажіть об'єм бункеру (м.куб) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("обєм будівлі",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.13 виробничі":
+            case "2.13 виробничі":
                 sendMessage.setText("Обрано: пневмотранспорт горючих матеріалів\n\n" + fireAlarm.getPneumaticTransport() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.14 виробничі":
+            case "2.14 виробничі":
                 databaseRepository.setType_of_object_fire_alarm("приміщення насосів",userId);
                 sendMessage.setText("Обрано: приміщення для насосів і вузлів засувок, у будівлях насосних станцій резервуарних парків магістральних нафтопроводів незалежно від площі\n\n" +
-                        "4. Вкажіть продуктивність насосних станцій (м3/год) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Вкажіть продуктивність насосних станцій (м3/год) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("продуктивність",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.15 виробничі":
+            case "2.15 виробничі":
                 databaseRepository.setType_of_object_fire_alarm("приміщення вимикачів",userId);
                 sendMessage.setText("Обрано: приміщення масляних вимикачів, трансформаторних камер, розподільчих пристроїв розташованих в будівлях іншого призначення\n\n" +
-                        "4. Вкажіть масу мастила та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Вкажіть масу мастила та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("вага",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
             case "1.8 АСПЗ приміщення":
                 sendMessage.setText("Обрано: приміщення у виробничих спорудах і будівлях авіаційного транспорту\n\n" +
-                        "3. Оберіть тип приміщення: \n\n" +
-                        "\uD83D\uDC49 3.1 Приміщення демонтажу і монтажу двигунів, повітряних гвинтів, шасі, коліс, фарбування, промивки, випробування, ремонту і перевірки паливних приладів, приміщення консервації і розконсервації двигунів, підшипників, агрегатів, ремонтні і слюсарні приміщення виробів із скла, пластмаси, крісел, приміщення сушіння і укладання гальмівних парашутів, приміщення обслуговування планерів та систем літаків, випробування агрегатів та систем літаків, приміщення термічних робіт, дефектування знімних деталей та вузлів літаків, приміщення випробування, ремонту та обслуговування силових установок \n" +
-                        "\uD83D\uDC49 3.2 Приміщення ділянок розбирання, розконсервування авіадвигунів, випробування паливних агрегатів, промивання легкозаймистими і горючими рідинами, дільниці промивання деталей гарячим маслом чи гасом під тиском, приміщення фарбування деталей\n" +
-                        "\uD83D\uDC49 3.3 Складські приміщення для зберігання мастильних матеріалів на об’єктах авіаційного транспорту");
+                        "2. Оберіть тип приміщення: \n\n" +
+                        "\uD83D\uDC49 2.1 Приміщення демонтажу і монтажу двигунів, повітряних гвинтів, шасі, коліс, фарбування, промивки, випробування, ремонту і перевірки паливних приладів, приміщення консервації і розконсервації двигунів, підшипників, агрегатів, ремонтні і слюсарні приміщення виробів із скла, пластмаси, крісел, приміщення сушіння і укладання гальмівних парашутів, приміщення обслуговування планерів та систем літаків, випробування агрегатів та систем літаків, приміщення термічних робіт, дефектування знімних деталей та вузлів літаків, приміщення випробування, ремонту та обслуговування силових установок \n" +
+                        "\uD83D\uDC49 2.2 Приміщення ділянок розбирання, розконсервування авіадвигунів, випробування паливних агрегатів, промивання легкозаймистими і горючими рідинами, дільниці промивання деталей гарячим маслом чи гасом під тиском, приміщення фарбування деталей\n" +
+                        "\uD83D\uDC49 2.3 Складські приміщення для зберігання мастильних матеріалів на об’єктах авіаційного транспорту");
                 sendMessage.setReplyMarkup(inlineButton.inlinePremissesAirTransportFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.1 авіаційний":
+            case "2.1 авіаційний":
                 databaseRepository.setType_of_object_fire_alarm("монтаж двигунів",userId);
                 sendMessage.setText("Обрано: приміщення демонтажу і монтажу двигунів, повітряних гвинтів, шасі, коліс, фарбування, промивки, випробування, ремонту і перевірки паливних приладів, приміщення консервації і розконсервації двигунів, підшипників, агрегатів, ремонтні і слюсарні приміщення виробів із скла, пластмаси, крісел, приміщення сушіння і укладання гальмівних парашутів, приміщення обслуговування планерів та систем літаків, випробування агрегатів та систем літаків, приміщення термічних робіт, дефектування знімних деталей та вузлів літаків, приміщення випробування, ремонту та обслуговування силових установок \n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.2 авіаційний":
+            case "2.2 авіаційний":
                 sendMessage.setText("Обрано: приміщення ділянок розбирання, розконсервування авіадвигунів, випробування паливних агрегатів, промивання легкозаймистими і горючими рідинами, дільниці промивання деталей гарячим маслом чи гасом під тиском, приміщення фарбування деталей\n\n" + fireAlarm.getPlacesDisassembly() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.3 авіаційний":
+            case "2.3 авіаційний":
                 databaseRepository.setType_of_object_fire_alarm("складські мастильні",userId);
                 sendMessage.setText("Обрано: складські приміщення для зберігання мастильних матеріалів на об’єктах авіаційного транспорту\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
             case "1.9 АСПЗ приміщення":
                 sendMessage.setText("Обрано: складські приміщення\n\n" +
-                        "3. Оберіть тип приміщення: \n\n" +
-                        "\uD83D\uDC49 3.1 Склади зберігання горючих і негорючих вантажів у горючій упаковці з висотою зберігання вантажів від 5,5 м, склади целулоїду і виробів із нього, склади, приміщення і камери легкозаймистих рідин та їх оперативного запасу, склади лужних і лужноземельних металів та порошків, склади витратного запасу двигунів та агрегатів з наявністю в них мастил\n" +
-                        "\uD83D\uDC49 3.2 Склади і приміщення для зберігання аміачної селітри і горючих пестицидів\n" +
-                        "\uD83D\uDC49 3.3 Приміщення архівів місткістю до 150 тисяч умовних одиниць\n" +
-                        "\uD83D\uDC49 3.4 Складські приміщення гуми, каучуку і виробів із них, приміщення зберігання нафтопродуктів із температурою спалаху менше 120 0С в тарі, склади горючих хімікатів, склади деревини \n" +
-                        "\uD83D\uDC49 3.5 Склади горючих матеріалів або негорючих матеріалів у горючій упаковці розміщених у підвалах\n" +
-                        "\uD83D\uDC49 3.6 Приміщення зберігання нафтопродуктів із температурою спалаху більше 120 0С в тарі \n" +
-                        "\uD83D\uDC49 3.7 Склади горючих матеріалів (крім деревини, лужних металів, гуми і виробів, нафтопродуктів, селітри та пестицидів)\n" +
-                        "\uD83D\uDC49 3.8 Склади негорючих матеріалів у горючій упаковці, елінги");
+                        "2. Оберіть тип приміщення: \n\n" +
+                        "\uD83D\uDC49 2.1 Склади зберігання горючих і негорючих вантажів у горючій упаковці з висотою зберігання вантажів від 5,5 м, склади целулоїду і виробів із нього, склади, приміщення і камери легкозаймистих рідин та їх оперативного запасу, склади лужних і лужноземельних металів та порошків, склади витратного запасу двигунів та агрегатів з наявністю в них мастил\n" +
+                        "\uD83D\uDC49 2.2 Склади і приміщення для зберігання аміачної селітри і горючих пестицидів\n" +
+                        "\uD83D\uDC49 2.3 Приміщення архівів місткістю до 150 тисяч умовних одиниць\n" +
+                        "\uD83D\uDC49 2.4 Складські приміщення гуми, каучуку і виробів із них, приміщення зберігання нафтопродуктів із температурою спалаху менше 120 0С в тарі, склади горючих хімікатів, склади деревини \n" +
+                        "\uD83D\uDC49 2.5 Склади горючих матеріалів або негорючих матеріалів у горючій упаковці розміщених у підвалах\n" +
+                        "\uD83D\uDC49 2.6 Приміщення зберігання нафтопродуктів із температурою спалаху більше 120 0С в тарі \n" +
+                        "\uD83D\uDC49 2.7 Склади горючих матеріалів (крім деревини, лужних металів, гуми і виробів, нафтопродуктів, селітри та пестицидів)\n" +
+                        "\uD83D\uDC49 2.8 Склади негорючих матеріалів у горючій упаковці, елінги");
                 sendMessage.setReplyMarkup(inlineButton.inlineStoragePremissesFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.1 складські":
+            case "2.1 складські":
                 sendMessage.setText("Обрано: склади зберігання горючих і негорючих вантажів у горючій упаковці з висотою зберігання вантажів від 5,5 м, склади целулоїду і виробів із нього, склади, приміщення і камери легкозаймистих рідин та їх оперативного запасу, склади лужних і лужноземельних металів та порошків, склади витратного запасу двигунів та агрегатів з наявністю в них мастил\n\n" + fireAlarm.getCelluloidStorage() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.2 складські":
+            case "2.2 складські":
                 databaseRepository.setType_of_object_fire_alarm("склади горючих пестицидів",userId);
                 sendMessage.setText("Обрано: склади і приміщення для зберігання аміачної селітри і горючих пестицидів\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.3 складські":
+            case "2.3 складські":
                 databaseRepository.setType_of_object_fire_alarm("архіви до 150тис.",userId);
                 sendMessage.setText("Обрано: приміщення архівів місткістю до 150 тисяч умовних одиниць\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.4 складські":
+            case "2.4 складські":
                 databaseRepository.setType_of_object_fire_alarm("склади каучуку",userId);
                 sendMessage.setText("Обрано: складські приміщення гуми, каучуку і виробів із них, приміщення зберігання нафтопродуктів із температурою спалаху менше 120 0С в тарі, склади горючих хімікатів, склади деревини \n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.5 складські":
+            case "2.5 складські":
                 databaseRepository.setType_of_object_fire_alarm("горючі в підвалах",userId);
                 sendMessage.setText("Обрано: склади горючих матеріалів або негорючих матеріалів у горючій упаковці розміщених у підвалах\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.6 складські":
+            case "2.6 складські":
                 databaseRepository.setType_of_object_fire_alarm("нафтопродукти",userId);
                 sendMessage.setText("Обрано: приміщення зберігання нафтопродуктів із температурою спалаху більше 120 0С в тарі \n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.7 складські":
+            case "2.7 складські":
                 databaseRepository.setType_of_object_fire_alarm("склади горючих матеріалів",userId);
                 sendMessage.setText("Обрано: склади горючих матеріалів (крім деревини, лужних металів, гуми і виробів, нафтопродуктів, селітри та пестицидів)\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.8 складські":
+            case "2.8 складські":
                 databaseRepository.setType_of_object_fire_alarm("елінги",userId);
                 sendMessage.setText("Обрано: склади негорючих матеріалів у горючій упаковці, елінги \n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
@@ -2942,132 +2942,132 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "1.10 АСПЗ приміщення":
                 sendMessage.setText("Обрано: приміщення на об’єктах із виробництва солоду, пива та безалкогольних напоїв\n\n" +
                         "3. Оберіть тип приміщення: \n\n" +
-                        "\uD83D\uDC49 3.1 Надсилосні і підсилосні приміщення\n" +
-                        "\uD83D\uDC49 3.2 Приміщення дробильних відділень, бункери дробильного солоду, відділення обробки та очищення зерна, зберігання недробленого продукту, склади хмелю та сировини, дробильно-полірувальні відділення сухого дроблення, відділення сушіння солоду, підробітку солодовні, підлогові склади ячменю та солоду, закриті складські приміщення пальної сировини, горючої продукції та тари із горючих матеріалів\n" +
-                        "\uD83D\uDC49 3.3 Холодильно-компресорне відділення, склади аміаку, масла, пального, допоміжного матеріалі і матеріальні");
+                        "\uD83D\uDC49 2.1 Надсилосні і підсилосні приміщення\n" +
+                        "\uD83D\uDC49 2.2 Приміщення дробильних відділень, бункери дробильного солоду, відділення обробки та очищення зерна, зберігання недробленого продукту, склади хмелю та сировини, дробильно-полірувальні відділення сухого дроблення, відділення сушіння солоду, підробітку солодовні, підлогові склади ячменю та солоду, закриті складські приміщення пальної сировини, горючої продукції та тари із горючих матеріалів\n" +
+                        "\uD83D\uDC49 2.3 Холодильно-компресорне відділення, склади аміаку, масла, пального, допоміжного матеріалі і матеріальні");
                 sendMessage.setReplyMarkup(inlineButton.inlineBeerProductionFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.1 пиво":
+            case "2.1 пиво":
                 sendMessage.setText("Обрано: надсилосні і підсилосні приміщення\n\n" + fireAlarm.getSiloPremisses() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.2 пиво":
+            case "2.2 пиво":
                 databaseRepository.setType_of_object_fire_alarm("дробильне відділення",userId);
                 sendMessage.setText("Обрано: приміщення дробильних відділень, бункери дробильного солоду, відділення обробки та очищення зерна, зберігання недробленого продукту, склади хмелю та сировини, дробильно-полірувальні відділення сухого дроблення, відділення сушіння солоду, підробітку солодовні, підлогові склади ячменю та солоду, закриті складські приміщення пальної сировини, горючої продукції та тари із горючих матеріалів\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.3 пиво":
+            case "2.3 пиво":
                 databaseRepository.setType_of_object_fire_alarm("холодильно-компресорне відділення",userId);
                 sendMessage.setText("Обрано: холодильно-компресорне відділення, склади аміаку, масла, пального, допоміжного матеріалі і матеріальні\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
             case "1.11 АСПЗ приміщення":
                 sendMessage.setText("Обрано: приміщення для автомобільного транспорту\n\n" +
-                        "3. Виберіть тип приміщення: \n\n" +
-                        "\uD83D\uDC49 3.1 В одноповерхових будинках І та ІІ ступеня вогнестійкості\n" +
-                        "\uD83D\uDC49 3.2 В будинках ІІІ та IV ступеня вогнестійкості\n" +
-                        "\uD83D\uDC49 3.3 В будинках ІІІа ступеня вогнестійкості \n" +
-                        "\uD83D\uDC49 3.4 У будинках з двома поверхами і більше, у підвальних, цокольних, підземних поверхах, приміщення гаражів і стоянок з механізованими пристроями паркування, приміщення у будівлях різного призначення які пристосовані під автосалони, приміщення зберігання автомототранспорту у підвальних, цокольних, підземних поверхах\n" +
-                        "\uD83D\uDC49 3.5 Приміщення для зберігання, технічного обслуговування і ремонту автомобілів");
+                        "2. Виберіть тип приміщення: \n\n" +
+                        "\uD83D\uDC49 2.1 В одноповерхових будинках І та ІІ ступеня вогнестійкості\n" +
+                        "\uD83D\uDC49 2.2 В будинках ІІІ та IV ступеня вогнестійкості\n" +
+                        "\uD83D\uDC49 2.3 В будинках ІІІа ступеня вогнестійкості \n" +
+                        "\uD83D\uDC49 2.4 У будинках з двома поверхами і більше, у підвальних, цокольних, підземних поверхах, приміщення гаражів і стоянок з механізованими пристроями паркування, приміщення у будівлях різного призначення які пристосовані під автосалони, приміщення зберігання автомототранспорту у підвальних, цокольних, підземних поверхах\n" +
+                        "\uD83D\uDC49 2.5 Приміщення для зберігання, технічного обслуговування і ремонту автомобілів");
                 sendMessage.setReplyMarkup(inlineButton.inlineAutoTransportFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.1 автотранспорт":
+            case "2.1 автотранспорт":
                 sendMessage.setText("Обрано: в одноповерхових будинках І та ІІ ступеня вогнестійкості\n\n" +
-                        "4. Вкажіть тип транспорту: \n\n" +
-                        "\uD83D\uDC49 4.1 легковий та вантажний автомобільний транспорт, автобуси І категорії, суміщене зберігання з іншими видами транспорту менше 50 % автобусів від загальної кількості транспорту \n" +
-                        "\uD83D\uDC49 4.2 автобуси ІІ та ІІІ категорій, суміщене зберігання з іншими видами транспорту більше 50 % автобусів від загальної кількості транспорту \n");
+                        "3. Вкажіть тип транспорту: \n\n" +
+                        "\uD83D\uDC49 3.1 легковий та вантажний автомобільний транспорт, автобуси І категорії, суміщене зберігання з іншими видами транспорту менше 50 % автобусів від загальної кількості транспорту \n" +
+                        "\uD83D\uDC49 3.2 автобуси ІІ та ІІІ категорій, суміщене зберігання з іншими видами транспорту більше 50 % автобусів від загальної кількості транспорту \n");
                 sendMessage.setReplyMarkup(inlineButton.inlineTypeAutoTransportFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "4.1 вид транспорту":
+            case "3.1 вид транспорту":
                 databaseRepository.setType_of_object_fire_alarm("легковий транспорт",userId);
                 sendMessage.setText("Обрано: легковий та вантажний автомобільний транспорт, автобуси І категорії, суміщене зберігання з іншими видами транспорту менше 50 % автобусів від загальної кількості транспорту \n\n" +
-                        "5. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "4.2 вид транспорту":
+            case "3.2 вид транспорту":
                 databaseRepository.setType_of_object_fire_alarm("автобуси",userId);
                 sendMessage.setText("Обрано: автобуси ІІ та ІІІ категорій, суміщене зберігання з іншими видами транспорту більше 50 % автобусів від загальної кількості транспорту\n\n" +
-                        "5. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.2 автотранспорт":
+            case "2.2 автотранспорт":
                 databaseRepository.setType_of_object_fire_alarm("авто в будинках ІІІст",userId);
                 sendMessage.setText("Обрано: в будинках ІІІ та IV ступеня вогнестійкості\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.3 автотранспорт":
+            case "2.3 автотранспорт":
                 databaseRepository.setType_of_object_fire_alarm("авто в будинках ІІІа ст.",userId);
                 sendMessage.setText("Обрано: в будинках ІІІа ступеня вогнестійкості\n\n" +
-                        "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                        "3. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                 databaseRepository.setValue("площа",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.4 автотранспорт":
+            case "2.4 автотранспорт":
                 sendMessage.setText("Обрано: у будинках з двома поверхами і більше, у підвальних, цокольних, підземних поверхах, приміщення гаражів і стоянок з механізованими пристроями паркування, приміщення у будівлях різного призначення які пристосовані під автосалони, приміщення зберігання автомототранспорту у підвальних, цокольних, підземних поверхах\n\n" + fireAlarm.getAutoMoreTwoFloors() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.5 автотранспорт":
+            case "2.5 автотранспорт":
                 sendMessage.setText("Обрано: приміщення для зберігання, технічного обслуговування і ремонту автомобілів\n\n" +
-                        "4. Виберіть тип приміщення: \n\n" +
-                        "\uD83D\uDC49 4.1 У підвальних, цокольних, підземних поверхах незалежно від поверховості, підземних і цокольних поверхах будівель іншого призначення\n" +
-                        "\uD83D\uDC49 4.2 Службові приміщення персоналу гаражів\n" +
-                        "\uD83D\uDC49 4.3 Зони електрошаф, венткамер, бойлерних, теплопунктів і насосних станцій ");
+                        "3. Виберіть тип приміщення: \n\n" +
+                        "\uD83D\uDC49 3.1 У підвальних, цокольних, підземних поверхах незалежно від поверховості, підземних і цокольних поверхах будівель іншого призначення\n" +
+                        "\uD83D\uDC49 3.2 Службові приміщення персоналу гаражів\n" +
+                        "\uD83D\uDC49 3.3 Зони електрошаф, венткамер, бойлерних, теплопунктів і насосних станцій ");
                 sendMessage.setReplyMarkup(inlineButton.inlineRepairAutoTransportFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "4.1 ремонт авто":
+            case "3.1 ремонт авто":
                 sendMessage.setText("Обрано: у підвальних, цокольних, підземних поверхах незалежно від поверховості, підземних і цокольних поверхах будівель іншого призначення \n\n" + fireAlarm.getRepairAutoInBasement() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "4.2 ремонт авто":
+            case "3.2 ремонт авто":
                 sendMessage.setText("Обрано: службові приміщення персоналу гаражів\n\n" + fireAlarm.getStaffPremisses() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "4.3 ремонт авто":
+            case "3.3 ремонт авто":
                 sendMessage.setText("Обрано: зони електрошаф, венткамер, бойлерних, теплопунктів і насосних станцій зони електрошаф, венткамер, бойлерних, теплопунктів і насосних станцій\n\n" + fireAlarm.getElectricCabinetZones() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "1.12 АСПЗ приміщення":
                 sendMessage.setText("Обрано: приміщення в спорудах і будівлях метрополітену\n\n" +
-                        "3. Виберіть тип приміщення:\n\n" +
-                        "\uD83D\uDC49 3.1 Підземні приміщення і споруди метрополітенів за винятком пасажирських приміщень, акумуляторних, насосних, теплових вузлів, санвузлів, калориферних, камер тунельної вентиляції і приміщень категорії «Д» \n" +
-                        "\uD83D\uDC49 3.2 Дільниці на лініях, в електродепо та приміщеннях метрополітену\n" +
-                        "\uD83D\uDC49 3.3 Об’єкти торгівельного та соціально-побутового призначення розміщених на площах і в під вуличних переходах метрополітену, шафи вводів електроживлення і шафи управління ескалаторами у машинних відділеннях, підбалюстрадний простір ескалаторів у похилому тонелі та натяжній, підземні та наземні комори мастильних матеріалів\n" +
-                        "\uD83D\uDC49 3.4 Кабельні канали, кабельні підвали, кабельні тунелі вздовж станцій, кабельні поверхи, кабельні колектори наземних об’єктів та електродепо \n" +
-                        "\uD83D\uDC49 3.5 Відстійно-ремонтні корпуси і будинках електродепо");
+                        "2. Виберіть тип приміщення:\n\n" +
+                        "\uD83D\uDC49 2.1 Підземні приміщення і споруди метрополітенів за винятком пасажирських приміщень, акумуляторних, насосних, теплових вузлів, санвузлів, калориферних, камер тунельної вентиляції і приміщень категорії «Д» \n" +
+                        "\uD83D\uDC49 2.2 Дільниці на лініях, в електродепо та приміщеннях метрополітену\n" +
+                        "\uD83D\uDC49 2.3 Об’єкти торгівельного та соціально-побутового призначення розміщених на площах і в під вуличних переходах метрополітену, шафи вводів електроживлення і шафи управління ескалаторами у машинних відділеннях, підбалюстрадний простір ескалаторів у похилому тонелі та натяжній, підземні та наземні комори мастильних матеріалів\n" +
+                        "\uD83D\uDC49 2.4 Кабельні канали, кабельні підвали, кабельні тунелі вздовж станцій, кабельні поверхи, кабельні колектори наземних об’єктів та електродепо \n" +
+                        "\uD83D\uDC49 2.5 Відстійно-ремонтні корпуси і будинках електродепо");
                 sendMessage.setReplyMarkup(inlineButton.inlineSubwayFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.1 метрополітен":
+            case "2.1 метрополітен":
                 sendMessage.setText("підземні приміщення і споруди метрополітенів за винятком пасажирських приміщень, акумуляторних, насосних, теплових вузлів, санвузлів, калориферних, камер тунельної вентиляції і приміщень категорії «Д» \n\n" + fireAlarm.getSubway() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.2 метрополітен":
+            case "2.2 метрополітен":
                 sendMessage.setText("Обрано: дільниці на лініях, в електродепо та приміщеннях метрополітену\n\n" + fireAlarm.getStationsElectricalDepot() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.3 метрополітен":
+            case "2.3 метрополітен":
                 sendMessage.setText("Обрано: об’єкти торгівельного та соціально-побутового призначення розміщених на площах і в під вуличних переходах метрополітену, шафи вводів електроживлення і шафи управління ескалаторами у машинних відділеннях, підбалюстрадний простір ескалаторів у похилому тонелі та натяжній, підземні та наземні комори мастильних матеріалів \n\n" + fireAlarm.getStationsElectricalDepot() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.4 метрополітен":
+            case "2.4 метрополітен":
                 databaseRepository.setType_of_object_fire_alarm("кабельні канали",userId);
                 sendMessage.setText("Обрано: кабельні канали, кабельні підвали, кабельні тунелі вздовж станцій, кабельні поверхи, кабельні колектори наземних об’єктів та електродепо \n\n" +
                         "4. Вкажіть пожежне навантаження (МДж/м2) та натисніть \"Далі\" \uD83D\uDC47");
@@ -3075,7 +3075,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 databaseRepository.setValue("продуктивність",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.5 метрополітен":
+            case "2.5 метрополітен":
                 databaseRepository.setType_of_object_fire_alarm("відстійно-ремонтні корпуси",userId);
                 sendMessage.setText("Обрано: відстійно-ремонтні корпуси і будинках електродепо\n\n" +
                         "4. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
@@ -3085,22 +3085,22 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 break;
             case "1.13 АСПЗ приміщення":
                 sendMessage.setText("Обрано: приміщення в будинках виробничого та громадського призначення\n\n" +
-                        "3. Виберіть тип приміщення: \n\n" +
-                        "\uD83D\uDC49 3.1 приміщення електрообчислювальних машин обробки даних, серверні, централізованого контролю і управління технологічним процесом \n" +
-                        "\uD83D\uDC49 3.2 простори за підвісними стелями та під фальшпідлогою\n" +
-                        "\uD83D\uDC49 3.3 приміщення електронних АТС та серверних у 4- та 5-зіркових готелях");
+                        "2. Виберіть тип приміщення: \n\n" +
+                        "\uD83D\uDC49 2.1 приміщення електрообчислювальних машин обробки даних, серверні, централізованого контролю і управління технологічним процесом \n" +
+                        "\uD83D\uDC49 2.2 простори за підвісними стелями та під фальшпідлогою\n" +
+                        "\uD83D\uDC49 2.3 приміщення електронних АТС та серверних у 4- та 5-зіркових готелях");
                 sendMessage.setReplyMarkup(inlineButton.inlinePremissesProductionPurposeFireAlarmKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.1 виробничого призначення":
+            case "2.1 виробничого призначення":
                 sendMessage.setText("Обрано: приміщення електрообчислювальних машин обробки даних, серверні, централізованого контролю і управління технологічним процесом\n\n" + fireAlarm.getServerPremisses() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.2 виробничого призначення":
+            case "2.2 виробничого призначення":
                 sendMessage.setText("Обрано: простори за підвісними стелями та під фальшпідлогою\n\n" + fireAlarm.getSuspendedCeiling() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
-            case "3.3 виробничого призначення":
+            case "2.3 виробничого призначення":
                 sendMessage.setText("Обрано: приміщення електронних АТС та серверних у 4- та 5-зіркових готелях\n\n" + fireAlarm.getServerInHotel() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
@@ -3164,7 +3164,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                             sendMessage.setText(fireAlarm.getFloorsEmpty());
                             sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                         }else if (databaseRepository.getFloors(userId)!=null && square == null && databaseRepository.getValue(userId).equals("поверхи")){
-                            sendMessage.setText("5. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
+                            sendMessage.setText("6. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                             sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                             databaseRepository.setValue("площа",userId);
                         }else if (square==null && databaseRepository.getValue(userId).equals("площа")){
