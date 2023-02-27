@@ -18,7 +18,7 @@ public class Database {
             type_extinguisher,type_spaces_build,b1,b2,characteristics_object,type_object_of_risk,
             type_state_owned_object,type_cultural_object,type_industrial_storage_facility,level_emergency,
             type_result_degree_risk,category_buildings,value,
-            humidity_of_space,type_of_object_fire_alarm,fire_resistance;
+            humidity_of_space,type_of_object,fire_resistance;
 
     private Integer kitchen,dead_people,hotel_rooms,floors,parking,workplace,constantly_at_facility,periodically_at_facility,
             fixed_violations,no_fixed_violations,injured_people,seats,books_storage,amount_of_transport;

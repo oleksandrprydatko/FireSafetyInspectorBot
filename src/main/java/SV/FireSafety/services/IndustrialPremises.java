@@ -17,7 +17,7 @@ public class IndustrialPremises{
     String typeExtinguisher(){return databaseRepository.getType_extinguisher(userId);}
 
     //	int arrayDemo [] = {ВП_5, ВП_6, ВП_8, ВП_9, ВП_12, ВП_20, ВП_50, ВП_100, ВП_150};
-    int array[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    int[] array = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 
     String transformation(int vp) {

@@ -191,7 +191,7 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
     void setParking(int command,long userId);
 
     @Query(value = "select parking from inspector.users where id_telegram = :userId ", nativeQuery = true)
-    String getParking(long userId);
+    Integer getParking(long userId);
 
     @Transactional
     @Modifying
@@ -219,11 +219,11 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "update inspector.users set type_of_object_fire_alarm = :command where id_telegram = :userId", nativeQuery = true)
-    void setType_of_object_fire_alarm(String command,long userId);
+    @Query(value = "update inspector.users set type_of_object = :command where id_telegram = :userId", nativeQuery = true)
+    void setType_of_object(String command,long userId);
 
-    @Query(value = "select type_of_object_fire_alarm from inspector.users where id_telegram = :userId ", nativeQuery = true)
-    String getType_of_object_fire_alarm(long userId);
+    @Query(value = "select type_of_object from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    String getType_of_object(long userId);
 
     @Transactional
     @Modifying
@@ -341,9 +341,6 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
     @Modifying
     @Query(value = "update inspector.users set kitchen = :command where id_telegram = :userId", nativeQuery = true)
     void setKitchen(int command,long userId);
-
-    @Query(value = "select kitchen from inspector.users where id_telegram = :userId ", nativeQuery = true)
-    Integer getKitchen(long userId);
 
     @Transactional
     @Modifying

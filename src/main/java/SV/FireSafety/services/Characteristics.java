@@ -83,7 +83,7 @@ public class Characteristics {
         return characteristicCombustibleFibersRooms();
     }
     //характеристика тверді горючі речовини, категорія - приміщення
-    private String characteristicSolidСombustibleSubstancesRooms(){
+    private String characteristicSolidCombustibleSubstancesRooms(){
         //Категорія В
         text = "\uD83D\uDC49 2.1 Тверді горючі речовини, пожежна навантага на окремих ділянках площею не менше 10м² кожна перевищує 180 МДж/м² \n";
         //Категорія Г
@@ -92,8 +92,8 @@ public class Characteristics {
         text += "\uD83D\uDC49 2.3 Тверді горючі речовини, пожежна навантага на окремих ділянках площею не менше 10м² кожна не перевищує 180 МДж/м² \n";
         return text;
     }
-    public String getCharacteristicSolidСombustibleSubstancesRooms(){
-        return characteristicSolidСombustibleSubstancesRooms();
+    public String getCharacteristicSolidCombustibleSubstancesRooms(){
+        return characteristicSolidCombustibleSubstancesRooms();
     }
     //характеристика тверді важкогорючі речовини, категорія - приміщення
     private String characteristicSolidHighlyFlammableSubstancesRooms(){
@@ -202,15 +202,15 @@ public class Characteristics {
         return characteristicCombustibleFibersExternal();
     }
     // характеристика тверді горючі речовини, категорія зовнішньої установки
-    private String characteristicSolidСombustibleSubstancesExternal(){
+    private String characteristicSolidCombustibleSubstancesExternal(){
         //Категорія Вз
         text = "\uD83D\uDC49 2.1 Тверді горючі речовини, які здатні вибухати і/або горіти під час взаємодії з іншими речовинами з розрахунковим надлишковим тиском вибуху менше/дорівнює 5 кПа, інтенсивність теплоовго випромінювання від вогнища перевищує 4 кВт/м² на відстані 30 м від зовнішньої установки\n ";
         //Категорія Гз
         text += "\uD83D\uDC49 2.2 Тверді горючі речовини, що спалюються або утилізовуюються як паливо\n";
         return text;
     }
-    public String getCharacteristicSolidСombustibleSubstancesExternal(){
-        return characteristicSolidСombustibleSubstancesExternal();
+    public String getCharacteristicSolidCombustibleSubstancesExternal(){
+        return characteristicSolidCombustibleSubstancesExternal();
     }
     // характеристика тверді важкогорючі речовини, категорія зовнішньої установки
     private String characteristicSolidHighlyFlammableSubstancesExternal(){

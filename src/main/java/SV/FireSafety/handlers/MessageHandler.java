@@ -6,7 +6,6 @@ import SV.FireSafety.repository.DatabaseRepository;
 import SV.FireSafety.services.InlineButton;
 import SV.FireSafety.services.InstructionExtinguisher;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -25,7 +24,7 @@ public class MessageHandler implements Handler<Message> {
         this.databaseRepository = databaseRepository;
     }
     //екземпляри класів
-    @Autowired
+
     DatabaseRepository databaseRepository;
     InstructionExtinguisher instructionExtinguisher = new InstructionExtinguisher();
     InlineButton inlineButton = new InlineButton();
@@ -116,6 +115,15 @@ public class MessageHandler implements Handler<Message> {
                         //очищення бази
                         databaseRepository.clearDB(userId);
                         return;
+                    //система оповіщення
+                    case "/notification_system":
+                        databaseRepository.setComand_of_menu("/notification_system",userId);
+                        sendMessage.setText("Я підсистема Notification System \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити тип системи оповіщення, характеристики системи оповіщення та управління евакуюванням людей при пожежі \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
+                        messageSender.sendMessage(sendMessage);
+                        //очищення бази
+                        databaseRepository.clearDB(userId);
+                        return;
                     // видає посилання на портал електронних послуг
                     case "/service_portal":
                         //встановлення команди в БД
@@ -194,8 +202,8 @@ public class MessageHandler implements Handler<Message> {
                     databaseRepository.setHotel_rooms(Integer.parseInt(messageText),userId);
                     sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("поверхи")){
-                    if (databaseRepository.getType_of_object_fire_alarm(userId)!= null){
-                        if (databaseRepository.getType_of_object_fire_alarm(userId).equals("склади гуми")){
+                    if (databaseRepository.getType_of_object(userId)!= null){
+                        if (databaseRepository.getType_of_object(userId).equals("склади гуми")){
                             if (Integer.parseInt(messageText)>2){
                                 sendMessage.setText("Ви ввели не корректні данні. Склади гуми, каучуку та виробів із них не можуть бути вище 2 поверху\n\n" +
                                         "Введіть кількість поверхів та натисніть \"Далі\" \uD83D\uDC47");
@@ -213,7 +221,7 @@ public class MessageHandler implements Handler<Message> {
                         sendMessage.setText("Надіслані дані збережено: " + messageText);
                     }
                 }else if (databaseRepository.getValue(userId).equals("вогнеснійкість будівлі")){
-                    if (databaseRepository.getType_of_object_fire_alarm(userId).equals("виставкова надземна")){
+                    if (databaseRepository.getType_of_object(userId).equals("виставкова надземна")){
                         if (databaseRepository.getFloors(userId)==1 &&(messageText.equals("1")||messageText.equals("2")||messageText.equals("3")||messageText.equals("3а")||messageText.equals("3б")||messageText.equals("4")||messageText.equals("4а")||messageText.equals("5"))){
                             databaseRepository.setFire_resistance(messageText,userId);
                             sendMessage.setText("Надіслані дані збережено: " + messageText);
@@ -226,7 +234,7 @@ public class MessageHandler implements Handler<Message> {
                                     "(1 / 2 / 3) [II поверхи] ступені вогнестійкості та натисніть \"Далі\" \uD83D\uDC47");
                             sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                         }
-                    }else if (databaseRepository.getType_of_object_fire_alarm(userId).equals("наземні гаражі")){
+                    }else if (databaseRepository.getType_of_object(userId).equals("наземні гаражі")){
                         if (messageText.equals("1")||messageText.equals("2")||messageText.equals("3")||messageText.equals("3а")||messageText.equals("4")){
                             databaseRepository.setFire_resistance(messageText,userId);
                             sendMessage.setText("Надіслані дані збережено: " + messageText);
@@ -236,7 +244,7 @@ public class MessageHandler implements Handler<Message> {
                             sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                         }
                     }
-                }else if (databaseRepository.getValue(userId).equals("глядацькі місця")){
+                }else if (databaseRepository.getValue(userId).equals("місця")){
                     databaseRepository.setSeats(Integer.parseInt(messageText),userId);
                     sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("фонд книг")){
@@ -277,5 +285,6 @@ public class MessageHandler implements Handler<Message> {
 //        determination_of_categories - Визначення категорій приміщень за пожежною небезпекою
 //        zone_classes - Визначення класу зони
 //        fire_alarm_installation - Визначення необхідності проектування та монтажу автоматичних систем пожежної сигналізації
+//        notification_system - Визначення типу системи оповіщення, та управління евакуюванням людей
 //        service_portal - Портал електронних послуг ДСНС України
 //        feedback_info - Інформація. Зворотній зв'язок
