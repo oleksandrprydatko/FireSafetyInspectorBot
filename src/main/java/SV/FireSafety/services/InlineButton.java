@@ -1413,6 +1413,59 @@ public class InlineButton {
         return inlineKeyboardMarkup;
     }
 
+    public InlineKeyboardMarkup inlineEntertainmentNotificationSystemKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Протягом року").callbackData("Протягом року опов.").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Сезонної дії").callbackData("Сезонні опов.").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineSeasonalEntertainmentNotificationSystemKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("4.1 сезонні опов.").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("4.2 сезонні опов.").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineLibraryNotificationSystemKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Так").callbackData("Так бібліотека опов.").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Ні").callbackData("Ні бібліотека опов.").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineHealthyNotificationSystemKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.1").callbackData("3.1 здоров'я опов.").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.2").callbackData("3.2 здоров'я опов.").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.3").callbackData("3.3 здоров'я опов.").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineSanatoriumNotificationSystemKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Так").callbackData("Так санаторій опов.").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Ні").callbackData("Ні санаторій опов.").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineCampNotificationSystemKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.1").callbackData("3.1 табори опов.").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.2").callbackData("3.2 табори опов.").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+
 
 
 
