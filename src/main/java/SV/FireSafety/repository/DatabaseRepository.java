@@ -191,7 +191,7 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
     void setParking(int command,long userId);
 
     @Query(value = "select parking from inspector.users where id_telegram = :userId ", nativeQuery = true)
-    String getParking(long userId);
+    Integer getParking(long userId);
 
     @Transactional
     @Modifying
@@ -341,9 +341,6 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
     @Modifying
     @Query(value = "update inspector.users set kitchen = :command where id_telegram = :userId", nativeQuery = true)
     void setKitchen(int command,long userId);
-
-    @Query(value = "select kitchen from inspector.users where id_telegram = :userId ", nativeQuery = true)
-    Integer getKitchen(long userId);
 
     @Transactional
     @Modifying

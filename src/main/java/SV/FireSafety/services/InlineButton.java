@@ -141,15 +141,6 @@ public class InlineButton {
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
-    //вибір типу вогнегасника для класу E
-    public InlineKeyboardMarkup inlineFireExtinguisherTypeExtinguisherForClassEKeyboard(){
-        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
-        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Порошковий").callbackData("Порошковий").build()));
-        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Газовий").callbackData("Газовий").build()));
-        inlineKeyboardMarkup.setKeyboard(keyboard);
-        return inlineKeyboardMarkup;
-    }
     //вибір типу вогнегасника для класу E, категорія B2,Д
     public InlineKeyboardMarkup inlineFireExtinguisherTypeExtinguisherForClassE_category_В2_ДKeyboard(){
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
@@ -203,7 +194,7 @@ public class InlineButton {
         return inlineKeyboardMarkup;
     }
     // встановлення чи є технічні приміщення
-    public InlineKeyboardMarkup inlineFireExtinguisherTechnicalАcilitiesKeyboard(){
+    public InlineKeyboardMarkup inlineFireExtinguisherTechnicalFacilitiesKeyboard(){
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Так, передбачені").callbackData("Так, передбачені").build()));
@@ -487,7 +478,7 @@ public class InlineButton {
         return inlineKeyboardMarkup;
     }
     //характеристика тверді горючі речовини, категорія приміщення
-    public InlineKeyboardMarkup inlineDeterminationCharacteristicSolidСombustibleSubstancesKeyboard(){
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicSolidCombustibleSubstancesKeyboard(){
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Тверді горючі речовини").build()));
@@ -599,7 +590,7 @@ public class InlineButton {
         return inlineKeyboardMarkup;
     }
     //характеристика тверді горючі речовини, категорія зовнішньої установки
-    public InlineKeyboardMarkup inlineDeterminationCharacteristicSolidСombustibleSubstancesExternalKeyboard(){
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicSolidCombustibleSubstancesExternalKeyboard(){
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Тверді горючі речовини З").build()));
@@ -1464,7 +1455,24 @@ public class InlineButton {
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
-
+    public InlineKeyboardMarkup inlinePurposeIndustrialNotificationSystemKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 промис. опов.").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 промис. опов.").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineCategoryIndustrialNotificationSystemKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія А").callbackData("категорія А").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія Б").callbackData("категорія Б").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія В").callbackData("категорія В").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія Г").callbackData("категорія Г").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
 
 
 

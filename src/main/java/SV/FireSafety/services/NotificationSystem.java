@@ -350,4 +350,39 @@ public class NotificationSystem {
     public String getExhibitions(){
         return exhibitions();
     }
+    private String production(){
+        if (floors()==1){
+            text += s1;
+        }else {
+            text += s2;
+        }
+        return text;
+    }
+    public String getProduction(){
+        return production();
+    }
+    private String productionCategoryГ(){
+        if (floors()==1){
+            text += s0;
+        }else {
+            text += s1;
+        }
+        return text;
+    }
+    public String getProductionCategoryГ(){
+        return productionCategoryГ();
+    }
+    private String administrative(){
+        if (seats()<50){
+            text += s1;
+        } else if (seats() >=50 && seats()<100) {
+            text += s2;
+        }else {
+            text += s3;
+        }
+        return text;
+    }
+    public String getAdministrative(){
+        return administrative();
+    }
 }

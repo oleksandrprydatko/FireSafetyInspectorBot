@@ -3,7 +3,6 @@ package SV.FireSafety.handlers;
 import SV.FireSafety.messagesender.MessageSender;
 import SV.FireSafety.repository.DatabaseRepository;
 import SV.FireSafety.services.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -41,8 +40,6 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
     String s10 = null;
 
     Long userId;
-
-    @Autowired
     DatabaseRepository databaseRepository;
 
     @Override
@@ -214,7 +211,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 //встановлення в БД класу пожежі
                 databaseRepository.setClass_fire("Клас пожежі E",userId);
                 sendMessage.setText(s4 + "\n\n" + "4. Оберіть бажаний/наявний тип вогнегасника \uD83E\uDDEF");
-                sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherTypeExtinguisherForClassEKeyboard());
+                sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherTypeExtinguisherForClassE_category_В2_ДKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "Порошковий":
@@ -398,7 +395,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     }
                 }else if (square!= null){
                     sendMessage.setText(result() + "\n\n" + "7. Чи передбачені в досліджуваних приміщеннях комори, електрощитові, вентиляційні камери або інші технічні приміщення? ⚡️");
-                    sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherTechnicalАcilitiesKeyboard());
+                    sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherTechnicalFacilitiesKeyboard());
                 }else {
                     sendMessage.setText("Ви не ввели рекомендовані системою параметри. \n\n" +
                             "Надішліть площу приміщення/поверху(м.кв) та натисніть \" Розрахувати \" \uD83D\uDC47");
@@ -1182,8 +1179,8 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "Тверді горючі речовини":
-                sendMessage.setText(characteristics.getCharacteristicSolidСombustibleSubstancesRooms());
-                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicSolidСombustibleSubstancesKeyboard());
+                sendMessage.setText(characteristics.getCharacteristicSolidCombustibleSubstancesRooms());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicSolidCombustibleSubstancesKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "Тверді важкогорючі речовини":
@@ -1285,7 +1282,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "Вибухові речовини З":
-                sendMessage.setText(characteristics.getCharacteristicExplosiveSubstancesRooms());
+                sendMessage.setText(characteristics.getCharacteristicExplosiveSubstancesExternal());
                 sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicExplosiveSubstancesExternalKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
@@ -1305,8 +1302,8 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "Тверді горючі речовини З":
-                sendMessage.setText(characteristics.getCharacteristicSolidСombustibleSubstancesExternal());
-                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicSolidСombustibleSubstancesExternalKeyboard());
+                sendMessage.setText(characteristics.getCharacteristicSolidCombustibleSubstancesExternal());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicSolidCombustibleSubstancesExternalKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "Тверді важкогорючі речовини З":
@@ -3697,7 +3694,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 break;
             case "2.5 громадські опов.":
                 sendMessage.setText("Обрано: підприємства торгівлі\n\n" +
-                        "3. Введіть чи наявне природне освітлення: ");
+                        "3. Чи наявне природне освітлення?");
                 sendMessage.setReplyMarkup(inlineButton.inlineTradeNotificationSystemKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
@@ -3812,7 +3809,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 break;
             case "2.8 громадські опов.":
                 sendMessage.setText("Обрано: бібліотеки (архіви книгосховища, сховища)\n\n" +
-                        "3. Чи наявні читальні зали з кількістю місць понад 50?");
+                        "3. Чи наявні читальні зали з кількістю місць понад 50? \uD83D\uDCDA");
                 sendMessage.setReplyMarkup(inlineButton.inlineLibraryNotificationSystemKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
@@ -3858,7 +3855,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "3.2 здоров'я опов.":
-                sendMessage.setText("Обрано: психіатричні лікарні" + notificationSystem.getText() + notificationSystem.getS3() + "\n\n" + instructionExtinguisher.getStart());
+                sendMessage.setText("Обрано: психіатричні лікарні\n\n" + notificationSystem.getText() + notificationSystem.getS3() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "3.3 здоров'я опов.":
@@ -3936,7 +3933,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.18 громадські опов.":
-                sendMessage.setText("Обрано: висотні будинки громадського призначення з умовною висотою від 73,5 м" + notificationSystem.getText() + notificationSystem.getOr() + notificationSystem.getS4() + notificationSystem.getS5() + "\n\n" + instructionExtinguisher.getStart());
+                sendMessage.setText("Обрано: висотні будинки громадського призначення з умовною висотою від 73,5 м\n\n" + notificationSystem.getText() + notificationSystem.getOr() + notificationSystem.getS4() + notificationSystem.getS5() + "\n\n" + instructionExtinguisher.getStart());
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.19 громадські опов.":
@@ -3956,9 +3953,44 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "2.21 громадські опов.":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
                 sendMessage.setText("Обрано: виставкові центри\n\n" +
                         "3. Введіть загальну площу поверху та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextNotificationSystemKeyboard());
+                databaseRepository.setValue("площа",userId);
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "1.2 оповіщення":
+                sendMessage.setText("Обрано: об’єкт промислового призначення\n\n" +
+                        "2. Виберіть призначення будинку, приміщення:\n\n" +
+                        "\uD83D\uDC49 2.1 Виробничі та складські\n" +
+                        "\uD83D\uDC49 2.2 Адміністративні та побутові будинки промислових підприємств");
+                sendMessage.setReplyMarkup(inlineButton.inlinePurposeIndustrialNotificationSystemKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.1 промис. опов.":
+                sendMessage.setText("Обрано: виробничі та складські\n\n" +
+                        "3. Виберіть категорію будинку: ");
+                sendMessage.setReplyMarkup(inlineButton.inlineCategoryIndustrialNotificationSystemKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "категорія А":
+            case "категорія Б":
+            case "категорія В":
+            case "категорія Г":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                        "4. Введіть кількість поверхів та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextNotificationSystemKeyboard());
+                databaseRepository.setValue("поверхи",userId);
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.2 промис. опов.":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: адміністративні та побутові будинки промислових підприємств\n\n" +
+                        "3. Введіть кількість місць та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextNotificationSystemKeyboard());
+                databaseRepository.setValue("місця",userId);
                 messageSender.sendMessage(sendMessage);
                 break;
             case "Далі оповіщення":
@@ -3988,6 +4020,16 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                                 break;
                             case "2.15 громадські опов.":
                                 sendMessage.setText(notificationSystem.getStation() + "\n\n" + instructionExtinguisher.getStart());
+                                messageSender.sendMessage(sendMessage);
+                                break;
+                            case "категорія А":
+                            case "категорія Б":
+                            case "категорія В":
+                                sendMessage.setText(notificationSystem.getProduction() + "\n\n" + instructionExtinguisher.getStart());
+                                messageSender.sendMessage(sendMessage);
+                                break;
+                            case "категорія Г":
+                                sendMessage.setText(notificationSystem.getProductionCategoryГ() + "\n\n" + instructionExtinguisher.getStart());
                                 messageSender.sendMessage(sendMessage);
                                 break;
                         }
@@ -4079,6 +4121,10 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                                 break;
                             case "2.20 громадські опов.":
                                 sendMessage.setText(notificationSystem.getCult() + "\n\n" + instructionExtinguisher.getStart());
+                                messageSender.sendMessage(sendMessage);
+                                break;
+                            case "2.2 промис. опов.":
+                                sendMessage.setText(notificationSystem.getAdministrative() + "\n\n" + instructionExtinguisher.getStart());
                                 messageSender.sendMessage(sendMessage);
                                 break;
                         }

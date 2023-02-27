@@ -6,7 +6,6 @@ import SV.FireSafety.repository.DatabaseRepository;
 import SV.FireSafety.services.InlineButton;
 import SV.FireSafety.services.InstructionExtinguisher;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -25,7 +24,7 @@ public class MessageHandler implements Handler<Message> {
         this.databaseRepository = databaseRepository;
     }
     //екземпляри класів
-    @Autowired
+
     DatabaseRepository databaseRepository;
     InstructionExtinguisher instructionExtinguisher = new InstructionExtinguisher();
     InlineButton inlineButton = new InlineButton();

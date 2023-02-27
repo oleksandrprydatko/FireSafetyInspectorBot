@@ -10,11 +10,10 @@ public class Garages {
         this.userId = userId;
         this.databaseRepository = databaseRepository;
     }
-    double array[] = { 1, 1, 2, 2 };
+    double[] array = { 1, 1, 2, 2 };
 
-    double numberСarSeats() {
-        double seats = Double.parseDouble(databaseRepository.getParking(userId));
-        return seats;
+    int numberСarSeats() {
+        return databaseRepository.getParking(userId);
     }
 
     public String quantityExtinguisherGarages() {
