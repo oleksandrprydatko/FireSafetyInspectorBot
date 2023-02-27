@@ -1,13 +1,19 @@
 package SV.FireSafety.handlers;
 
 import SV.FireSafety.messagesender.MessageSender;
+import SV.FireSafety.model.BotMenu;
+import SV.FireSafety.repository.BotMenuRepository;
 import SV.FireSafety.repository.DatabaseRepository;
 import SV.FireSafety.services.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
+
+import java.util.List;
+import java.util.Optional;
 
 
 @Component
@@ -42,6 +48,11 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
     Long userId;
     DatabaseRepository databaseRepository;
 
+    @Autowired
+    BotMenuRepository botMenuRepository;
+
+    @Autowired
+    InlineButtonFromDB inlineButtonFromDB;
     @Override
     public void choose(CallbackQuery callbackQuery) {
         //надіслати нове повідомлення в конкретний чат
@@ -58,6 +69,14 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
         NotificationSystem notificationSystem = new NotificationSystem(userId,databaseRepository);
         Float square = databaseRepository.getSquare(userId);
 
+        Optional<BotMenu> val = botMenuRepository.findVal(callbackQuery.getData());
+        if(val.isPresent()){
+            BotMenu botMenu = val.get();
+            List<BotMenu> subMenus = botMenuRepository.findSubMenus(botMenu.getId());
+            sendMessage.setText(botMenu.getMenuVal());
+            sendMessage.setReplyMarkup(inlineButtonFromDB.inlineStartKeyboard(subMenus));
+            messageSender.sendMessage(sendMessage);
+        }
 
         //тип та необхідність вогнегасників
         switch (callbackQuery.getData()) {

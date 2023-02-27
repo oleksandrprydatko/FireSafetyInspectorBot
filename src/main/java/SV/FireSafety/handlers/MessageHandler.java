@@ -1,16 +1,21 @@
 package SV.FireSafety.handlers;
 
 import SV.FireSafety.messagesender.MessageSender;
+import SV.FireSafety.model.BotMenu;
 import SV.FireSafety.model.Database;
+import SV.FireSafety.repository.BotMenuRepository;
 import SV.FireSafety.repository.DatabaseRepository;
 import SV.FireSafety.services.InlineButton;
+import SV.FireSafety.services.InlineButtonFromDB;
 import SV.FireSafety.services.InstructionExtinguisher;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -30,6 +35,11 @@ public class MessageHandler implements Handler<Message> {
     InlineButton inlineButton = new InlineButton();
 
 
+    @Autowired
+    BotMenuRepository botMenuRepository;
+
+    @Autowired
+    InlineButtonFromDB inlineButtonFromDB;
 
 
     @Override
@@ -62,6 +72,8 @@ public class MessageHandler implements Handler<Message> {
                         return;
                     case "/on_start":
                         sendMessage.setText("🇺🇦 Для початку роботи повторно скористайтеся командами бота Fire Safety Bot 👇");
+                        List<BotMenu> rootMenus = botMenuRepository.findRootMenus();
+                        sendMessage.setReplyMarkup(inlineButtonFromDB.inlineStartKeyboard(rootMenus));
                         messageSender.sendMessage(sendMessage);
                         //очищення бази
                         databaseRepository.clearDB(userId);
