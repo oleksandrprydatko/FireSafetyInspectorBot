@@ -124,6 +124,15 @@ public class MessageHandler implements Handler<Message> {
                         //очищення бази
                         databaseRepository.clearDB(userId);
                         return;
+                    //протипожежне водопостачання
+                    case "/fire_water_supply":
+                        databaseRepository.setComand_of_menu("/fire_water_supply",userId);
+                        sendMessage.setText("Я підсистема Fire Water Supply \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити необхідність влаштування та параметри зовнішнього та внутрішнього протипожежного водопостачання \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
+                        messageSender.sendMessage(sendMessage);
+                        //очищення бази
+                        databaseRepository.clearDB(userId);
+                        break;
                     // видає посилання на портал електронних послуг
                     case "/service_portal":
                         //встановлення команди в БД
@@ -244,7 +253,7 @@ public class MessageHandler implements Handler<Message> {
                             sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                         }
                     }
-                }else if (databaseRepository.getValue(userId).equals("місця")){
+                }else if (databaseRepository.getValue(userId).equals("місця") || databaseRepository.getValue(userId).equals("жителі")){
                     databaseRepository.setSeats(Integer.parseInt(messageText),userId);
                     sendMessage.setText("Надіслані дані збережено: " + messageText);
                 }else if (databaseRepository.getValue(userId).equals("фонд книг")){
@@ -286,5 +295,6 @@ public class MessageHandler implements Handler<Message> {
 //        zone_classes - Визначення класу зони
 //        fire_alarm_installation - Визначення необхідності проектування та монтажу автоматичних систем пожежної сигналізації
 //        notification_system - Визначення типу системи оповіщення, та управління евакуюванням людей
+//        fire_water_supply - Визначення необхідності влаштування та параметрів протипожежного водопостачання
 //        service_portal - Портал електронних послуг ДСНС України
 //        feedback_info - Інформація. Зворотній зв'язок

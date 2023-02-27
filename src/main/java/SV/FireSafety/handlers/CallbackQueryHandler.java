@@ -56,7 +56,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
         CategoryBuilding categoryBuilding = new CategoryBuilding(userId,databaseRepository);
         FireAlarm fireAlarm = new FireAlarm(userId,databaseRepository);
         NotificationSystem notificationSystem = new NotificationSystem(userId,databaseRepository);
-        Float square = databaseRepository.getSquare(userId);
+        FireWaterSupply fireWaterSupply = new FireWaterSupply(userId,databaseRepository);
 
 
         //тип та необхідність вогнегасників
@@ -94,6 +94,13 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                                 "\uD83D\uDC49 1.1 Об’єкт громадського призначення\n" +
                                 "\uD83D\uDC49 1.2 Об’єкт промислового призначення");
                         sendMessage.setReplyMarkup(inlineButton.inlineStartNotificationSystemKeyboard());
+                        break;
+                    case "/fire_water_supply":
+                        sendMessage.setText("1. Оберіть характеристику, що необхідно визначити:\n\n" +
+                                "\uD83D\uDC49 1.1 Необхідність влаштування та параметри зовнішнього протипожежного водопостачання населених пунктів\n" +
+                                "\uD83D\uDC49 1.2 Необхідність влаштування та параметри зовнішнього протипожежного водопостачання об’єктів\n" +
+                                "\uD83D\uDC49 1.3 Необхідність влаштування та параметри внутрішнього протипожежного водопостачання об’єктів");
+                        sendMessage.setReplyMarkup(inlineButton.inlineFireWaterSupplyKeyboard());
                         break;
                 }
                 messageSender.sendMessage(sendMessage);
@@ -393,7 +400,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                                 "2. Надішліть кількість місць стоянки автомобілів у боксі (гаражі, стоянці) після чого натисніть \"Розрахувати\" \uD83C\uDD7F️");
                         sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherCalculateKeyboard());
                     }
-                }else if (square!= null){
+                }else if (databaseRepository.getSquare(userId)!= null){
                     sendMessage.setText(result() + "\n\n" + "7. Чи передбачені в досліджуваних приміщеннях комори, електрощитові, вентиляційні камери або інші технічні приміщення? ⚡️");
                     sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherTechnicalFacilitiesKeyboard());
                 }else {
@@ -587,7 +594,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "Далі":
                 if (databaseRepository.getCharacteristics_object(userId).equals("експлуатується")){
                     if (databaseRepository.getValue(userId).equals("площа")){
-                        if (square!=null){
+                        if (databaseRepository.getSquare(userId)!=null){
                             databaseRepository.setValue("постійно перебувають на обєкті",userId);
                             sendMessage.setText("Введіть максимальну розрахункову (проектну) кількість людей, які ПОСТІЙНО перебувають на об’єкті (осіб) та натисніть \"Далі\" \uD83D\uDC47 \n");
                             sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskObjectAreaKeyboard());
@@ -840,7 +847,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherForKitchenKeyboard());
                 }else{
                     sendMessage.setText("Ви не ввели рекомендовані системою параметри \n\n" +
-                            "Вкажіть кількість окремих робочих місць де в технологічному процесі приготування їжі застосовуються рослинні або тваринні масла і жири. Після - оберіть тип вогнегасника \uD83E\uDDEF:");
+                            "Вкажіть кількість окремих робочих місць де в технологічному процесі приготування їжі застосовуються рослинні або тваринні масла і жири.");
                     sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskObjectAreaKitchenKeyboard());
                 }
                 messageSender.sendMessage(sendMessage);
@@ -3111,264 +3118,202 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 break;
             case "Далі сигналізація":
                 if (databaseRepository.getValue(userId).equals("площа")){
-                    if (square==null){
+                    if (databaseRepository.getSquare(userId)==null){
                         sendMessage.setText(databaseEmpty.getSquareEmpty());
                         sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
-                        messageSender.sendMessage(sendMessage);
                     }else {
                         switch (databaseRepository.getType_of_object(userId)){
                             case "торгівельний підземний":
                                 sendMessage.setText(fireAlarm.getUndergroundMall()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "виставкова підземна":
                                 sendMessage.setText(fireAlarm.getExhibitionUnderground()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "казино":
                                 sendMessage.setText(fireAlarm.getCasino()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "архів":
                                 sendMessage.setText(fireAlarm.getArchive()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "релігійні будівлі":
                                 sendMessage.setText(fireAlarm.getReligious()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "вокзали":
                                 sendMessage.setText(fireAlarm.getStation()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "депо":
                                 sendMessage.setText(fireAlarm.getDepot()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "автосалони":
                                 sendMessage.setText(fireAlarm.getCarDealership() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "склад категорії А та Б":
                                 sendMessage.setText(fireAlarm.getStorageA() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "склад категорії В":
                                 sendMessage.setText(fireAlarm.getStorageB() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "склади негорючих матеріалів":
                                 sendMessage.setText(fireAlarm.getStorageNonCombustibleSubstances()+"\n\n"+instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "склади селітри":
                                 sendMessage.setText(fireAlarm.getStorageSaltpeter() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "склади двигунів":
                                 sendMessage.setText(fireAlarm.getStorageEngine() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "приміщення нафти нижче 120":
                                 sendMessage.setText(fireAlarm.getOilPremissesBellow120() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "приміщення нафти вижче 120":
                                 sendMessage.setText(fireAlarm.getOilPremissesHigher120() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "закриті склади":
                                 sendMessage.setText(fireAlarm.getClosedStorage() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "склади борошна":
                                 sendMessage.setText(fireAlarm.getFlourStorage() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "склади вітамінів":
                                 sendMessage.setText(fireAlarm.getVitaminsStorage() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "матеріальні склади":
                                 sendMessage.setText(fireAlarm.getMaterialStorage() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "корівники":
                                 sendMessage.setText(fireAlarm.getBarn() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "склади пестицидів":
                                 sendMessage.setText(fireAlarm.getPesticidesStorage() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "Г1 або Г2":
                             case "Г3 або Г4":
                                 sendMessage.setText(fireAlarm.getPolymersStorage() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "склади легкозаймистих рідин":
                                 sendMessage.setText(fireAlarm.getFlammableLiquidsStorage() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "надземний поверх камера схову":
                                 sendMessage.setText(fireAlarm.getCloakroom() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "підземний поверх камера схову":
                                 sendMessage.setText(fireAlarm.getCloakroomUnderground() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "надземний поверх автоматична":
                             case "підземний поверх автоматична":
                                 sendMessage.setText(fireAlarm.getAutoCloakroom() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "очищення зерна":
                                 sendMessage.setText(fireAlarm.getGrainCleaning() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "приміщення кормоцехів":
                                 sendMessage.setText(fireAlarm.getPremissesOfCompoundFeedShops() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "транспортні галереї":
                                 sendMessage.setText(fireAlarm.getTransportGalleries() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "укрпошта":
                                 sendMessage.setText(fireAlarm.getUkrainianPost() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "виробничі А та Б":
                             case "підземне розташування":
                             case "надземне розташування":
                                 sendMessage.setText(fireAlarm.getProductionPremisses() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "регулювальні":
                                 sendMessage.setText(fireAlarm.getAdjustment() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "Категорія В агрегатні":
                                 sendMessage.setText(fireAlarm.getWoodGrinding() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "приміщення мастил":
                                 sendMessage.setText(fireAlarm.getOilPremisses() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "гумотехнічні майстерні":
                                 sendMessage.setText(fireAlarm.getRubberEngineeringWorkshops() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "випробувальна апаратура":
                                 sendMessage.setText(fireAlarm.getTestEquipment() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "випробування агрегатів":
                                 sendMessage.setText(fireAlarm.getTestAggregate() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "обробка металів":
                                 sendMessage.setText(fireAlarm.getMetalProcessing() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "монтаж двигунів":
                                 sendMessage.setText(fireAlarm.getInstallationOfEngines() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "складські мастильні":
                                 sendMessage.setText(fireAlarm.getLubricantStorage() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "склади горючих пестицидів":
                                 sendMessage.setText(fireAlarm.getFlammablePesticidesStorage() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "архіви до 150тис.":
                                 sendMessage.setText(fireAlarm.getArchivesUpTo150() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "склади каучуку":
                                 sendMessage.setText(fireAlarm.getRubberStorage() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "горючі в підвалах":
                                 sendMessage.setText(fireAlarm.getFlammableInBasement() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "нафтопродукти":
                                 sendMessage.setText(fireAlarm.getPetroleumProducts() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "склади горючих матеріалів":
                                 sendMessage.setText(fireAlarm.getCombustibleMaterials() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "елінги":
                                 sendMessage.setText(fireAlarm.getBoatRamps() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "дробильне відділення":
                                 sendMessage.setText(fireAlarm.getCrushingDepartment() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "холодильно-компресорне відділення":
                                 sendMessage.setText(fireAlarm.getCompressorDepartment() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "легковий транспорт":
                                 sendMessage.setText(fireAlarm.getCar() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "автобуси":
                                 sendMessage.setText(fireAlarm.getBus() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "авто в будинках ІІІст":
                                 sendMessage.setText(fireAlarm.getAutoInPremisses3fireResistance() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "авто в будинках ІІІа ст.":
                                 sendMessage.setText(fireAlarm.getAutoInPremisses3aFireResistance() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "відстійно-ремонтні корпуси":
                                 sendMessage.setText(fireAlarm.getSumpHousing() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "торгівельний надземний":
                                 sendMessage.setText(fireAlarm.getGroundMall()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "окрема харчування":
                                 sendMessage.setText(fireAlarm.getSeparateCatering()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "виставкова надземна":
                                 sendMessage.setText(fireAlarm.getExhibitionGround()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "інститути":
-                                if (square<=300 && databaseRepository.getArchives(userId)==null){
+                                if (databaseRepository.getSquare(userId)<=300 && databaseRepository.getArchives(userId)==null){
                                     sendMessage.setText("7. Наявні приміщення для зберігання цінних документів та архівів?");
                                     sendMessage.setReplyMarkup(inlineButton.inlineInstitutesFireAlarmKeyboard());
                                 }else {
                                     sendMessage.setText(fireAlarm.getInstitutes()+ "\n\n" +instructionExtinguisher.getStart());
                                 }
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "наземні гаражі":
                                 sendMessage.setText(fireAlarm.getGarages()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "виробнича будівля":
                                 sendMessage.setText(fireAlarm.getProductionBuilding() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "склади гуми":
                                 sendMessage.setText(fireAlarm.getStorageRubber() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                         }
                     }
@@ -3376,38 +3321,30 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     if (databaseRepository.getHeight_object(userId)==null){
                         sendMessage.setText(databaseEmpty.getHeightEmpty());
                         sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
-                        messageSender.sendMessage(sendMessage);
                     }else {
                         switch (databaseRepository.getType_of_object(userId)){
                             case "житлова будівля":
                                 sendMessage.setText(fireAlarm.getHousing()+"\n\n"+instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "гуртожиток":
                                 sendMessage.setText(fireAlarm.getDormitory()+"\n\n"+instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "офісна будівля":
                                 sendMessage.setText(fireAlarm.getOffice()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "вбудована харчування":
                                 sendMessage.setText(fireAlarm.getBuiltInCatering()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "охорона здоров'я":
                                 sendMessage.setText(fireAlarm.getHealthCare()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "готель":
                                 sendMessage.setText(fireAlarm.getHotelHeigth() + "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "інститути":
                                 sendMessage.setText("5. Введіть кількість поверхів та натисніть \"Далі\" \uD83D\uDC47 ");
                                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                                 databaseRepository.setValue("поверхи",userId);
-                                messageSender.sendMessage(sendMessage);
                                 break;
                         }
                     }
@@ -3415,16 +3352,13 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     if (databaseRepository.getProductivity(userId)==null){
                         sendMessage.setText(databaseEmpty.getProductivityEmpty());
                         sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
-                        messageSender.sendMessage(sendMessage);
                     }else {
                         switch (databaseRepository.getType_of_object(userId)){
                             case "приміщення насосів":
                                 sendMessage.setText(fireAlarm.getPumpsPremisses() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "кабельні канали":
                                 sendMessage.setText(fireAlarm.getCableChannels() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                         }
                     }
@@ -3432,57 +3366,46 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     if (databaseRepository.getSeats(userId)==null){
                         sendMessage.setText(databaseEmpty.getSeatsEmpty());
                         sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
-                        messageSender.sendMessage(sendMessage);
                     }else {
                         if ("кінотеатр".equals(databaseRepository.getType_of_object(userId))) {
                             sendMessage.setText(fireAlarm.getCinema() + "\n\n" + instructionExtinguisher.getStart());
-                            messageSender.sendMessage(sendMessage);
                         }
                     }
                 } else if (databaseRepository.getValue(userId).equals("кількість транспорту")) {
                     if (databaseRepository.getAmount_of_transport(userId)==null){
                         sendMessage.setText(databaseEmpty.getAmountOfTransportEmpty());
                         sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
-                        messageSender.sendMessage(sendMessage);
                     }else {
                         if ("підземні гаражі".equals(databaseRepository.getType_of_object(userId))) {
                             sendMessage.setText(fireAlarm.getUndergroundGarages() + "\n\n" + instructionExtinguisher.getStart());
-                            messageSender.sendMessage(sendMessage);
                         }
                     }
                 } else if (databaseRepository.getValue(userId).equals("довжина")) {
                     if (databaseRepository.getLength(userId)==null){
                         sendMessage.setText(databaseEmpty.getLengthEmpty());
                         sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
-                        messageSender.sendMessage(sendMessage);
                     }else {
                         if ("автомобільні тунелі".equals(databaseRepository.getType_of_object(userId))) {
                             sendMessage.setText(fireAlarm.getCarTunnel() + "\n\n" + instructionExtinguisher.getStart());
-                            messageSender.sendMessage(sendMessage);
                         }
                     }
                 } else if (databaseRepository.getValue(userId).equals("обєм будівлі")) {
                     if (databaseRepository.getVolume_premises(userId)==null){
                         sendMessage.setText(databaseEmpty.getVolumeEmpty());
                         sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
-                        messageSender.sendMessage(sendMessage);
                     }else {
                         switch (databaseRepository.getType_of_object(userId)){
                             case "резервуари спирту":
                                 sendMessage.setText(fireAlarm.getAlcoholTanks() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "резервуари нафти":
                                 sendMessage.setText(fireAlarm.getOilTanks() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "кабельні внутрішньоцехові":
                                 sendMessage.setText(fireAlarm.getInternalCableStructure() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "циклони":
                                 sendMessage.setText(fireAlarm.getCyclones() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                         }
                     }
@@ -3490,16 +3413,13 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     if (databaseRepository.getWeight(userId)==null){
                         sendMessage.setText(databaseEmpty.getWeightEmpty());
                         sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
-                        messageSender.sendMessage(sendMessage);
                     }else {
                         switch (databaseRepository.getType_of_object(userId)){
                             case "склади плівки":
                                 sendMessage.setText(fireAlarm.getStorageFilm() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "приміщення вимикачів":
                                 sendMessage.setText(fireAlarm.getSwitchPremisses() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                         }
                     }
@@ -3507,16 +3427,13 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     if (databaseRepository.getBooks_storage(userId)==null){
                         sendMessage.setText(databaseEmpty.getBooksStorageEmpty());
                         sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
-                        messageSender.sendMessage(sendMessage);
                     }else {
                         switch (databaseRepository.getType_of_object(userId)){
                             case "бібліотека органи влади":
                                 sendMessage.setText(fireAlarm.getLibrary()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "бібліотека інші будівлі":
                                 sendMessage.setText(fireAlarm.getLibraryOtherBuildings()+ "\n\n" +instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                         }
                     }
@@ -3524,21 +3441,18 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     if (databaseRepository.getHotel_rooms(userId)==null){
                         sendMessage.setText(databaseEmpty.getRoomsEmpty());
                         sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
-                        messageSender.sendMessage(sendMessage);
                     }else {
                         if ("готель".equals(databaseRepository.getType_of_object(userId))) {
                             sendMessage.setText(fireAlarm.getHotel());
                             sendMessage.setText("5. Введіть умовну висоту будівлі(м.) та натисніть \"Далі\" \uD83D\uDC47 ");
                             sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                             databaseRepository.setValue("висота обєкта",userId);
-                            messageSender.sendMessage(sendMessage);
                         }
                     }
                 } else if (databaseRepository.getValue(userId).equals("поверхи")) {
                     if (databaseRepository.getFloors(userId)==null){
                         sendMessage.setText(databaseEmpty.getFloorsEmpty());
                         sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
-                        messageSender.sendMessage(sendMessage);
                     }else {
                         switch (databaseRepository.getType_of_object(userId)){
                             case "торгівельний надземний":
@@ -3546,7 +3460,6 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                                 sendMessage.setText("6. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                                 databaseRepository.setValue("площа",userId);
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "окрема харчування":
                             case "виробнича будівля":
@@ -3554,7 +3467,6 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                                 sendMessage.setText("5. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                                 databaseRepository.setValue("площа",userId);
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "виставкова надземна":
                                 if (databaseRepository.getFloors(userId)>2){
@@ -3570,13 +3482,11 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                                     sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                                     databaseRepository.setValue("вогнеснійкість будівлі",userId);
                                 }
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "наземні гаражі":
                                 sendMessage.setText("5. Введіть ступінь вогнестійкості(1 / 2 / 3 / 3а / 4) та натисніть \"Далі\" \uD83D\uDC47 ");
                                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                                 databaseRepository.setValue("вогнеснійкість будівлі",userId);
-                                messageSender.sendMessage(sendMessage);
                                 break;
                         }
                     }
@@ -3584,24 +3494,22 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     if (databaseRepository.getFire_resistance(userId)==null){
                         sendMessage.setText(databaseEmpty.getFireResistanceEmpty());
                         sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
-                        messageSender.sendMessage(sendMessage);
                     }else {
                         switch (databaseRepository.getType_of_object(userId)){
                             case "виставкова надземна":
                                 sendMessage.setText("6. Введіть загальну площу приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47");
                                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                                 databaseRepository.setValue("площа",userId);
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "наземні гаражі":
                                 sendMessage.setText("6. Введіть загальну площу будівлі та натисніть \"Далі\" \uD83D\uDC47");
                                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireAlarmKeyboard());
                                 databaseRepository.setValue("площа",userId);
-                                messageSender.sendMessage(sendMessage);
                                 break;
                         }
                     }
                 }
+                messageSender.sendMessage(sendMessage);
                 break;
 
             //Система оповіщення та управління евакуюванням людей
@@ -3998,39 +3906,31 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     if (databaseRepository.getFloors(userId)==null){
                         sendMessage.setText(databaseEmpty.getFloorsEmpty());
                         sendMessage.setReplyMarkup(inlineButton.inlineNextNotificationSystemKeyboard());
-                        messageSender.sendMessage(sendMessage);
                     }else {
                         switch (databaseRepository.getType_of_object(userId)){
                             case "3.1 банк опов.":
                             case "3.1 побутові опов.":
                                 sendMessage.setText(notificationSystem.getSeparatedBankHousehold() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "4.3 навчальні опов.":
                                 sendMessage.setText(notificationSystem.getHigherSchool() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "Ні санаторій опов.":
                                 sendMessage.setText(notificationSystem.getSanatorium() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "2.14 громадські опов.":
                                 sendMessage.setText(notificationSystem.getText() + notificationSystem.getResearchInstitutions() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "2.15 громадські опов.":
                                 sendMessage.setText(notificationSystem.getStation() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "категорія А":
                             case "категорія Б":
                             case "категорія В":
                                 sendMessage.setText(notificationSystem.getProduction() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "категорія Г":
                                 sendMessage.setText(notificationSystem.getProductionCategoryГ() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                         }
                     }
@@ -4038,21 +3938,17 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     if (databaseRepository.getSquare(userId)==null){
                         sendMessage.setText(databaseEmpty.getSquareEmpty());
                         sendMessage.setReplyMarkup(inlineButton.inlineNextNotificationSystemKeyboard());
-                        messageSender.sendMessage(sendMessage);
                     }else {
                         switch (databaseRepository.getType_of_object(userId)){
                             case "3.2 банк опов.":
                             case "3.2 побутові опов.":
                                 sendMessage.setText(notificationSystem.getBankHousehold() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "Так торгівля опов.":
                                 sendMessage.setText(notificationSystem.getTrade() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "2.21 громадські опов.":
                                 sendMessage.setText(notificationSystem.getExhibitions() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                         }
                     }
@@ -4060,72 +3956,55 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     if (databaseRepository.getSeats(userId)==null){
                         sendMessage.setText(databaseEmpty.getSeatsEmpty());
                         sendMessage.setReplyMarkup(inlineButton.inlineNextNotificationSystemKeyboard());
-                        messageSender.sendMessage(sendMessage);
                     }else {
                         switch (databaseRepository.getType_of_object(userId)){
                             case "2.3 громадські опов.":
                                 sendMessage.setText(notificationSystem.getBaths() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "Ні харчування опов.":
                                 sendMessage.setText(notificationSystem.getCatering() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "Ні дошкільні опов.":
                                 sendMessage.setText(notificationSystem.getPreschool() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "4.1 навчальні опов.":
                                 sendMessage.setText(notificationSystem.getSecondarySchools() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "4.2 навчальні опов.":
                                 sendMessage.setText(notificationSystem.getSpecializedSchools() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "Протягом року опов.":
                                 sendMessage.setText(notificationSystem.getEntertainmentWholeYear() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "4.1 сезонні опов.":
                                 sendMessage.setText(notificationSystem.getEntertainmentClosed() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "4.2 сезонні опов.":
                                 sendMessage.setText(notificationSystem.getEntertainmentOpen() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "2.9 громадські опов.":
                                 sendMessage.setText(notificationSystem.getMuseum() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "2.10 громадські опов.":
                                 sendMessage.setText(notificationSystem.getSport() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "3.1 здоров'я опов.":
                                 sendMessage.setText(notificationSystem.getMedical() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "3.3 здоров'я опов.":
                                 sendMessage.setText(notificationSystem.getAmbulatory() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "2.16 громадські опов.":
                                 sendMessage.setText(notificationSystem.getSeatsHotels() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "2.19 громадські опов.":
                                 sendMessage.setText(notificationSystem.getOffice() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "2.20 громадські опов.":
                                 sendMessage.setText(notificationSystem.getCult() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "2.2 промис. опов.":
                                 sendMessage.setText(notificationSystem.getAdministrative() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                         }
                     }
@@ -4143,15 +4022,47 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                                 }else {
                                     sendMessage.setText(notificationSystem.getHotels() + "\n\n" + instructionExtinguisher.getStart());
                                 }
-                                messageSender.sendMessage(sendMessage);
                                 break;
                             case "2.17 громадські опов.":
                                 sendMessage.setText(notificationSystem.getResidentialBuildings() + "\n\n" + instructionExtinguisher.getStart());
-                                messageSender.sendMessage(sendMessage);
                                 break;
                         }
                     }
                 }
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "1.1 ПВ":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: необхідність влаштування та параметри зовнішнього протипожежного водопостачання населених пунктів\n\n" +
+                        "2. Введіть чисельність жителів населеного пункту та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                databaseRepository.setValue("жителі",userId);
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Далі ПВ":
+                if (databaseRepository.getValue(userId).equals("жителі")){
+                    if (databaseRepository.getSeats(userId)==null){
+                        sendMessage.setText(databaseEmpty.getResidentsEmpty());
+                        sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                    }else {
+                        if ("1.1 ПВ".equals(databaseRepository.getType_of_object(userId))) {
+                            sendMessage.setText("3. Введіть поверховість забудови населеного пункту та натисніть \"Далі\" \uD83D\uDC47");
+                            sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                            databaseRepository.setValue("поверхи",userId);
+                        }
+                    }
+                } else if (databaseRepository.getValue(userId).equals("поверхи")) {
+                    if (databaseRepository.getFloors(userId)==null){
+                        sendMessage.setText(databaseEmpty.getFloorsEmpty());
+                        sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                    }else {
+                        if ("1.1 ПВ".equals(databaseRepository.getType_of_object(userId))){
+
+                        }
+                    }
+                }
+                messageSender.sendMessage(sendMessage);
+                break;
         }
     }
     String result() { // виводить результат для вогнегасника

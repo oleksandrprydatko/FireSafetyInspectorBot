@@ -96,5 +96,12 @@ public class DatabaseEmpty {
     public String getProductivityEmpty(){
         return productivityEmpty();
     }
+    private String residentsEmpty(){
+        return  "Ви не ввели рекомендовані системою параметри.\n\n" +
+                "Надішліть чисельність жителів населеного пункту та натисніть \"Далі\" \uD83D\uDC47";
+    }
+    public String getResidentsEmpty(){
+        return residentsEmpty();
+    }
 
 }
