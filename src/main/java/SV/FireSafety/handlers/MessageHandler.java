@@ -82,8 +82,18 @@ public class MessageHandler implements Handler<Message> {
                     case "/type_number_fire_extinguishers":
                         //встановлення команди в БД
                         databaseRepository.setComand_of_menu("/type_number_fire_extinguishers",userId);
-                        sendMessage.setText("Я підсистема Extinguisher Bot \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу вибрати тип та необхідну кількість вогнегасників \uD83E\uDDEF \n\n Для початку роботи натисніть <Розпочати> \n\n \uD83D\uDCDA Для ознайомлення з інструкцією користувача скористайтесь відповідним меню");
-                        sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherStartKeyboard());
+                        Optional<BotMenu> val = botMenuRepository.findVal("/type_number_fire_extinguishers01");
+                        if(val.isPresent()){
+                            BotMenu botMenu = val.get();
+                            sendMessage.setText(botMenu.getMenuVal());
+                            sendMessage.setReplyMarkup(inlineButtonFromDB.inlineStartKeyboard(
+                                    botMenuRepository.findSubMenus(botMenu.getId())
+                            ));
+
+
+                        }
+//                        sendMessage.setText("Я підсистема Extinguisher Bot \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу вибрати тип та необхідну кількість вогнегасників \uD83E\uDDEF \n\n Для початку роботи натисніть <Розпочати> \n\n \uD83D\uDCDA Для ознайомлення з інструкцією користувача скористайтесь відповідним меню");
+//                        sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherStartKeyboard());
                         messageSender.sendMessage(sendMessage);
                         //очищення бази
                         databaseRepository.clearDB(userId);

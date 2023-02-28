@@ -73,7 +73,8 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
         if(val.isPresent()){
             BotMenu botMenu = val.get();
             List<BotMenu> subMenus = botMenuRepository.findSubMenus(botMenu.getId());
-            sendMessage.setText(botMenu.getMenuVal());
+            String menuVal = botMenu.getMenuVal();
+            sendMessage.setText(menuVal);
             sendMessage.setReplyMarkup(inlineButtonFromDB.inlineStartKeyboard(subMenus));
             messageSender.sendMessage(sendMessage);
         }

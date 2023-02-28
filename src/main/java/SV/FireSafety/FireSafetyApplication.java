@@ -28,11 +28,12 @@ public class FireSafetyApplication {
             @Override
             public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
 //                List<BotMenu> rootMenus = botMenuRepository.findAll();
-                List<BotMenu> rootMenus = botMenuRepository.findRootMenus();
-                for(BotMenu botMenu: rootMenus){
-                    List<BotMenu> subMenu = botMenuRepository.findSubMenus(botMenu.getId());
-                    log.debug("{}", subMenu.size());
-                }
+                // TODO: 28.02.23 тест видалити
+//                List<BotMenu> rootMenus = botMenuRepository.findRootMenus();
+//                for(BotMenu botMenu: rootMenus){
+//                    List<BotMenu> subMenu = botMenuRepository.findSubMenus(botMenu.getId());
+//                    log.debug("{}", subMenu.size());
+//                }
             }
         };
     }
