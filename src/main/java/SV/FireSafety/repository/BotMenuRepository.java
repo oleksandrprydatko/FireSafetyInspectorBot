@@ -10,9 +10,9 @@ import java.util.Optional;
 
 public interface BotMenuRepository extends JpaRepository<BotMenu, Integer> {
 
-    @Query(value = "from BotMenu b where b.parentMenuId is null")
+    @Query(value = "from BotMenu b where b.parentMenuId is null order by b.ord")
     List<BotMenu> findRootMenus();
-    @Query(value = "from BotMenu b where b.parentMenuId = :parentMenuId")
+    @Query(value = "from BotMenu b where b.parentMenuId = :parentMenuId order by b.ord")
     List<BotMenu> findSubMenus(Integer parentMenuId);
 
     @Query(value = "from BotMenu b where b.menuId = :menuId")

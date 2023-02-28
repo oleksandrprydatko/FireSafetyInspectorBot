@@ -29,4 +29,7 @@ public class BotMenu {
     private String menuVal;
     @Column(name = "menu_name")
     private String menuName;
+
+    @Column(name = "ord")
+    private Integer ord;
 }
