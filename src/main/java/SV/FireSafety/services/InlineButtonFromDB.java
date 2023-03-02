@@ -24,4 +24,13 @@ public class InlineButtonFromDB {
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
+
+    public  InlineKeyboardMarkup inlineButton(BotMenu botMenu){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder()
+                .text(botMenu.getMenuName()).callbackData(botMenu.getMenuId()).build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
 }

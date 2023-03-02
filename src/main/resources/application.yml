@@ -1,3 +1,4 @@
+
 spring:
   main:
     allow-circular-references: true
@@ -16,3 +17,10 @@ spring:
         dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
     open-in-view: false
     database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
+logging:
+  level:
+    SV.FireSafety: INFO
+#    SV.FireSafety: DEBUG
+bot:
+  BOT_TOKEN: "5758141289:AAEGQYSwqPgIranthi8B_HZmWLIxmo78t_I"
+  BOT_USERNAME: "InteractiveInspectorTestBot"

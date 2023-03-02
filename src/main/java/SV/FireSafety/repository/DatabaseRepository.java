@@ -11,7 +11,7 @@ import java.util.Optional;
 
 
 public interface DatabaseRepository extends JpaRepository<Database, Long> {
-
+    // TODO: 28.02.2023 дописати очищення бази
     @Query(value = "select u from Database u where u.id_telegram = :id_telegram")
     Optional<Database> findByTelegramId(long id_telegram);
     @Transactional

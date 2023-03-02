@@ -53,6 +53,8 @@ public class MessageHandler implements Handler<Message> {
             databaseRepository.setId_telegram(userId);
         }
 
+        log.debug("debug");
+        log.info("info");
         //виведення повідомлення користувача в консоль
         log.info("{}:{}", userId, message.getText());
         SendMessage sendMessage = new SendMessage();

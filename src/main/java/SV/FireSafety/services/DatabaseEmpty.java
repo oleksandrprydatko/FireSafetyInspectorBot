@@ -24,6 +24,13 @@ public class DatabaseEmpty {
     public String getSquareEmpty(){
         return squareEmpty();
     }
+    private String squareTechnicalEmpty(){
+        return  "Ви не ввели рекомендовані системою параметри.\n\n" +
+                "Надішліть загальну площу приміщень технічних приміщень (м.кв) та натисніть \"Далі\" \uD83D\uDC47";
+    }
+    public String getSquareTechnicalEmpty(){
+        return squareTechnicalEmpty();
+    }
 
     private String floorsEmpty(){
         return  "Ви не ввели рекомендовані системою параметри.\n\n" +

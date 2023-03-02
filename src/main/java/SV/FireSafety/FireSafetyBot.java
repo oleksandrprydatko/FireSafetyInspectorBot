@@ -2,6 +2,7 @@ package SV.FireSafety;
 
 import SV.FireSafety.processors.Processor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -10,15 +11,20 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Component
 public class FireSafetyBot extends TelegramLongPollingBot {
     private Processor processor;
+    @Value("${bot.BOT_TOKEN}")
+    private String botToken;
+
+    @Value("${bot.BOT_USERNAME}")
+    private String botUsername;
 
     @Override
     public String getBotUsername() {
-        return "InteractiveInspectorTestBot";
+        return botUsername;
     }
 
     @Override
     public String getBotToken() {
-        return "5758141289:AAEGQYSwqPgIranthi8B_HZmWLIxmo78t_I";
+        return botToken;
     }
 
     @Override
