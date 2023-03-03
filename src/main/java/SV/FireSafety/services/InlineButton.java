@@ -1493,6 +1493,64 @@ public class InlineButton {
         return inlineKeyboardMarkup;
     }
 
+    public InlineKeyboardMarkup inlineExternalFireWaterSupplyKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 зовнішнє ПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 зовнішнє ПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineExternalResidentialFireWaterSupplyKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.1").callbackData("3.1 зовнішнє житлові ПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.2").callbackData("3.2 зовнішнє громадські ПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineExternalStorageFireWaterSupplyKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("3.1").callbackData("3.1 зовнішнє складські ПВ").build(),
+                InlineKeyboardButton.builder().text("3.2").callbackData("3.2 зовнішнє складські ПВ").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("3.3").callbackData("3.3 зовнішнє складські ПВ").build(),
+                InlineKeyboardButton.builder().text("3.4").callbackData("3.4 зовнішнє складські ПВ").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("3.5").callbackData("3.5 зовнішнє складські ПВ").build(),
+                InlineKeyboardButton.builder().text("3.6").callbackData("3.6 зовнішнє складські ПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.7").callbackData("3.7 зовнішнє складські ПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineExternalStorageAllCategoriesFireWaterSupplyKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія А").callbackData("А зовнішнє склади ПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія Б").callbackData("Б зовнішнє склади ПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія В").callbackData("В зовнішнє склади ПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія Г").callbackData("Г зовнішнє склади ПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія Д").callbackData("Д зовнішнє склади ПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineExternalStorageCategoriesВГДFireWaterSupplyKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія В").callbackData("В зовнішнє склади ПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія Г").callbackData("Г зовнішнє склади ПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія Д").callbackData("Д зовнішнє склади ПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineExternalStorageCategoriesВДFireWaterSupplyKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія В").callbackData("В зовнішнє склади ПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія Д").callbackData("Д зовнішнє склади ПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
 
 
 }
