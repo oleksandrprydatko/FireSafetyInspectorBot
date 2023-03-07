@@ -3575,48 +3575,55 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 sendMessage.setReplyMarkup(inlineButton.inlineExternalStorageFireWaterSupplyKeyboard());
                 break;
             case "3.1 зовнішнє складські ПВ":
+                databaseRepository.setB2("зовнішні",userId);
                 sendMessage.setText("Обрано: будівлі І та ІІ ступеня вогнестійкості\n\n" +
                         "4. Вкажіть категорію будівлі за вибухопожежною та пожежною небезпекою ⚠️");
-                sendMessage.setReplyMarkup(inlineButton.inlineExternalStorageAllCategoriesFireWaterSupplyKeyboard());
+                sendMessage.setReplyMarkup(inlineButton.inlineStorageAllCategoriesFireWaterSupplyKeyboard());
                 databaseRepository.setType_premises("1 ступінь",userId);
                 break;
             case "3.2 зовнішнє складські ПВ":
+                databaseRepository.setB2("зовнішні",userId);
                 sendMessage.setText("Обрано: будівлі ІІІ ступеня вогнестійкості\n\n" +
                         "4. Вкажіть категорію будівлі за вибухопожежною та пожежною небезпекою ⚠️");
-                sendMessage.setReplyMarkup(inlineButton.inlineExternalStorageCategoriesВГДFireWaterSupplyKeyboard());
+                sendMessage.setReplyMarkup(inlineButton.inlineStorageCategoriesВГДFireWaterSupplyKeyboard());
                 databaseRepository.setType_premises("3 ступінь",userId);
                 break;
             case "3.3 зовнішнє складські ПВ":
+                databaseRepository.setB2("зовнішні",userId);
                 sendMessage.setText("Обрано: будівлі ІІІа ступеня вогнестійкості\n\n" +
                         "4. Вкажіть категорію будівлі за вибухопожежною та пожежною небезпекою ⚠️");
-                sendMessage.setReplyMarkup(inlineButton.inlineExternalStorageAllCategoriesFireWaterSupplyKeyboard());
+                sendMessage.setReplyMarkup(inlineButton.inlineStorageAllCategoriesFireWaterSupplyKeyboard());
                 databaseRepository.setType_premises("3а ступінь",userId);
                 break;
             case "3.4 зовнішнє складські ПВ":
+                databaseRepository.setB2("зовнішні",userId);
                 sendMessage.setText("Обрано: будівлі ІІІб ступеня вогнестійкості\n\n" +
                         "4. Вкажіть категорію будівлі за вибухопожежною та пожежною небезпекою ⚠️");
-                sendMessage.setReplyMarkup(inlineButton.inlineExternalStorageCategoriesВГДFireWaterSupplyKeyboard());
+                sendMessage.setReplyMarkup(inlineButton.inlineStorageCategoriesВГДFireWaterSupplyKeyboard());
                 databaseRepository.setType_premises("3б ступінь",userId);
                 break;
             case "3.5 зовнішнє складські ПВ":
+                databaseRepository.setB2("зовнішні",userId);
                 sendMessage.setText("Обрано: будівлі ІV ступеня вогнестійкості\n\n" +
                         "4. Вкажіть категорію будівлі за вибухопожежною та пожежною небезпекою ⚠️");
-                sendMessage.setReplyMarkup(inlineButton.inlineExternalStorageCategoriesВГДFireWaterSupplyKeyboard());
+                sendMessage.setReplyMarkup(inlineButton.inlineStorageCategoriesВГДFireWaterSupplyKeyboard());
                 databaseRepository.setType_premises("4 ступінь",userId);
                 break;
             case "3.6 зовнішнє складські ПВ":
+                databaseRepository.setB2("зовнішні",userId);
                 sendMessage.setText("Обрано: будівлі ІVа ступеня вогнестійкості\n\n" +
                         "4. Вкажіть категорію будівлі за вибухопожежною та пожежною небезпекою ⚠️");
-                sendMessage.setReplyMarkup(inlineButton.inlineExternalStorageCategoriesВГДFireWaterSupplyKeyboard());
+                sendMessage.setReplyMarkup(inlineButton.inlineStorageCategoriesВГДFireWaterSupplyKeyboard());
                 databaseRepository.setType_premises("4а ступінь",userId);
                 break;
             case "3.7 зовнішнє складські ПВ":
+                databaseRepository.setB2("зовнішні",userId);
                 sendMessage.setText("Обрано: будівлі V ступеня вогнестійкості\n\n" +
                         "4. Вкажіть категорію будівлі за вибухопожежною та пожежною небезпекою ⚠️");
-                sendMessage.setReplyMarkup(inlineButton.inlineExternalStorageCategoriesВДFireWaterSupplyKeyboard());
+                sendMessage.setReplyMarkup(inlineButton.inlineStorageCategoriesВДFireWaterSupplyKeyboard());
                 databaseRepository.setType_premises("5 ступінь",userId);
                 break;
-            case "А зовнішнє склади ПВ":
+            case "А склади ПВ":
                 databaseRepository.setType_of_object(callbackQuery.getData(),userId);
                 sendMessage.setText("Обрано: категорія за вибухопожежною небезпекою «А»\n\n" +
                         "5. Введіть об'єм будівлі (м.куб) та натисніть \"Далі\" \uD83D\uDC47");
@@ -3624,7 +3631,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 databaseRepository.setCategory_premises("А",userId);
                 databaseRepository.setValue("обєм будівлі",userId);
                 break;
-            case "Б зовнішнє склади ПВ":
+            case "Б склади ПВ":
                 databaseRepository.setType_of_object(callbackQuery.getData(),userId);
                 sendMessage.setText("Обрано: категорія за вибухопожежною небезпекою «Б»\n\n" +
                         "5. Введіть об'єм будівлі (м.куб) та натисніть \"Далі\" \uD83D\uDC47");
@@ -3632,7 +3639,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 databaseRepository.setCategory_premises("Б",userId);
                 databaseRepository.setValue("обєм будівлі",userId);
                 break;
-            case "В зовнішнє склади ПВ":
+            case "В склади ПВ":
                 databaseRepository.setType_of_object(callbackQuery.getData(),userId);
                 sendMessage.setText("Обрано: категорія за вибухопожежною небезпекою «В»\n\n" +
                         "5. Введіть об'єм будівлі (м.куб) та натисніть \"Далі\" \uD83D\uDC47");
@@ -3640,7 +3647,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 databaseRepository.setCategory_premises("В",userId);
                 databaseRepository.setValue("обєм будівлі",userId);
                 break;
-            case "Г зовнішнє склади ПВ":
+            case "Г склади ПВ":
                 databaseRepository.setType_of_object(callbackQuery.getData(),userId);
                 sendMessage.setText("Обрано: категорія за вибухопожежною небезпекою «Г»\n\n" +
                         "5. Введіть об'єм будівлі (м.куб) та натисніть \"Далі\" \uD83D\uDC47");
@@ -3648,13 +3655,174 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 databaseRepository.setCategory_premises("Г",userId);
                 databaseRepository.setValue("обєм будівлі",userId);
                 break;
-            case "Д зовнішнє склади ПВ":
+            case "Д склади ПВ":
                 databaseRepository.setType_of_object(callbackQuery.getData(),userId);
                 sendMessage.setText("Обрано: категорія за вибухопожежною небезпекою «Д»\n\n" +
                         "5. Введіть об'єм будівлі (м.куб) та натисніть \"Далі\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
                 databaseRepository.setCategory_premises("Д",userId);
                 databaseRepository.setValue("обєм будівлі",userId);
+                break;
+            case "1.3 ПВ":
+                sendMessage.setText("Обрано: необхідність влаштування та параметри внутрішнього протипожежного водопостачання об’єктів\n\n" +
+                        "2. Виберіть призначення об'єкту: \n\n" +
+                        "\uD83D\uDC49 2.1 Об’єкти громадського та житлового призначення\n" +
+                        "\uD83D\uDC49 2.2 Об’єкти виробничого та складського призначення");
+                sendMessage.setReplyMarkup(inlineButton.inlineInternalFireWaterSupplyKeyboard());
+                break;
+            case "2.1 внутрішнє ПВ":
+                sendMessage.setText("Обрано: об’єкти громадського та житлового призначення\n\n" +
+                        "3. Виберіть тип об'єкту:\n\n" +
+                        "\uD83D\uDC49 3.1 Житлові будинки\n" +
+                        "\uD83D\uDC49 3.2 Громадські будинки та гуртожитки \n" +
+                        "\uD83D\uDC49 3.3 Культурно-видовищні та дозвіллєві заклади\n" +
+                        "\uD83D\uDC49 3.4 Адміністративно-побутові будівлі виробничих підприємств\n" +
+                        "\uD83D\uDC49 3.5 Багатофункціональні будівлі\n" +
+                        "\uD83D\uDC49 3.6 Культові споруди та споруди різних конфесій (в нормативних актах вимоги відсутні)\n" +
+                        "\uD83D\uDC49 3.7 Підприємства торгівлі\n" +
+                        "\uD83D\uDC49 3.8 Спортивні та фізкультурно-оздоровчі споруди (в нормативних актах вимоги відсутні)\n");
+                sendMessage.setReplyMarkup(inlineButton.inlineInternalPublicAndResidentialFireWaterSupplyKeyboard());
+                break;
+            case "3.1 внутрішнє ПВ":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: житлові будинки\n\n" +
+                        "4. Введіть умовну висоту об'єкту та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                databaseRepository.setValue("висота обєкта",userId);
+                break;
+            case "3.2 внутрішнє ПВ":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: громадські будинки та гуртожитки\n\n" +
+                        "4. Введіть умовну висоту об'єкту та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                databaseRepository.setValue("висота обєкта",userId);
+                break;
+            case "3.3 внутрішнє ПВ":
+                sendMessage.setText("Обрано: культурно-видовищні та дозвіллєві заклади\n\n" +
+                        "4. Виберіть вид закладу:\n\n " +
+                        "\uD83D\uDC49 4.1 Кінотеатри\n" +
+                        "\uD83D\uDC49 4.2 Клубні заклади з естрадами\n" +
+                        "\uD83D\uDC49 4.3 Клубні заклади зі сценами \n" +
+                        "\uD83D\uDC49 4.4 Театри ");
+                sendMessage.setReplyMarkup(inlineButton.inlineInternalCultureFireWaterSupplyKeyboard());
+                break;
+            case "4.1 внутрішнє культурні ПВ":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: кінотеатри\n\n" +
+                        "5. Вкажіть місткість зали для глядачів та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                databaseRepository.setValue("місця",userId);
+                break;
+            case "4.2 внутрішнє культурні ПВ":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: клубні заклади з естрадами\n\n" +
+                        "5. Вкажіть місткість зали для глядачів та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                databaseRepository.setValue("місця",userId);
+                break;
+            case "4.3 внутрішнє культурні ПВ":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: клубні заклади зі сценами\n\n" + fireWaterSupply.getInternalPublicAndResidential() + "\n\n" + instructionExtinguisher.getStart());
+                break;
+            case "4.4 внутрішнє культурні ПВ":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: театри \n\n" + fireWaterSupply.getInternalPublicAndResidential() + "\n\n" + instructionExtinguisher.getStart());
+                break;
+            case "3.4 внутрішнє ПВ":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: адміністративно-побутові будівлі виробничих підприємств\n\n" +
+                        "4. Вкажіть умовну висоту будинку та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                databaseRepository.setValue("висота обєкта",userId);
+                break;
+            case "3.5 внутрішнє ПВ":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: багатофункціональні будівлі\n\n" +
+                        "4. Вкажіть умовну висоту будинку та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                databaseRepository.setValue("висота обєкта",userId);
+                break;
+            case "3.6 внутрішнє ПВ":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: культові споруди та споруди різних конфесій (в нормативних актах вимоги відсутні)\n\n" +
+                        "4. Вкажіть вміст комплексу (к-сть осіб) та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                databaseRepository.setValue("місця",userId);
+                break;
+            case "3.7 внутрішнє ПВ":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: підприємства торгівлі\n\n" +
+                        "4. Вкажіть об'єм будівлі (м.куб) та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                databaseRepository.setValue("обєм будівлі",userId);
+                break;
+            case "3.8 внутрішнє ПВ":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: спортивні та фізкультурно-оздоровчі споруди (в нормативних актах вимоги відсутні)\n\n" +
+                        "4. Вкажіть умовну висоту будинку та натисніть \"Далі\" \uD83D\uDC47");
+                sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                databaseRepository.setValue("висота обєкта",userId);
+                break;
+            case "2.2 внутрішнє ПВ":
+                sendMessage.setText("Обрано: об’єкти виробничого та складського призначення\n\n" +
+                        "3. Виберіть тип будівлі: \n\n" +
+                        "\uD83D\uDC49 3.1 Будівлі І та ІІ ступеня вогнестійкості\n" +
+                        "\uD83D\uDC49 3.2 Будівлі ІІІ ступеня вогнестійкості \n" +
+                        "\uD83D\uDC49 3.3 Будівлі ІІІа ступеня вогнестійкості \n" +
+                        "\uD83D\uDC49 3.4 Будівлі ІІІб ступеня вогнестійкості \n" +
+                        "\uD83D\uDC49 3.5 Будівлі ІV ступеня вогнестійкості \n" +
+                        "\uD83D\uDC49 3.6 Будівлі ІVа ступеня вогнестійкості \n" +
+                        "\uD83D\uDC49 3.7 Будівлі V ступеня вогнестійкості \n");
+                sendMessage.setReplyMarkup(inlineButton.inlineInternalStorageFireWaterSupplyKeyboard());
+                break;
+            case "3.1 внутрішнє складські ПВ":
+                databaseRepository.setB2("внутрішні",userId);
+                sendMessage.setText("Обрано: будівлі І та ІІ ступеня вогнестійкості\n\n" +
+                        "4. Вкажіть категорію будівлі за вибухопожежною та пожежною небезпекою ⚠️");
+                sendMessage.setReplyMarkup(inlineButton.inlineStorageAllCategoriesFireWaterSupplyKeyboard());
+                databaseRepository.setType_premises("1 ступінь",userId);
+                break;
+            case "3.2 внутрішнє складські ПВ":
+                databaseRepository.setB2("внутрішні",userId);
+                sendMessage.setText("Обрано: будівлі ІІІ ступеня вогнестійкості\n\n" +
+                        "4. Вкажіть категорію будівлі за вибухопожежною та пожежною небезпекою ⚠️");
+                sendMessage.setReplyMarkup(inlineButton.inlineStorageCategoriesВГДFireWaterSupplyKeyboard());
+                databaseRepository.setType_premises("3 ступінь",userId);
+                break;
+            case "3.3 внутрішнє складські ПВ":
+                databaseRepository.setB2("внутрішні",userId);
+                sendMessage.setText("Обрано: будівлі ІІІа ступеня вогнестійкості\n\n" +
+                        "4. Вкажіть категорію будівлі за вибухопожежною та пожежною небезпекою ⚠️");
+                sendMessage.setReplyMarkup(inlineButton.inlineStorageAllCategoriesFireWaterSupplyKeyboard());
+                databaseRepository.setType_premises("3а ступінь",userId);
+                break;
+            case "3.4 внутрішнє складські ПВ":
+                databaseRepository.setB2("внутрішні",userId);
+                sendMessage.setText("Обрано: будівлі ІІІб ступеня вогнестійкості\n\n" +
+                        "4. Вкажіть категорію будівлі за вибухопожежною та пожежною небезпекою ⚠️");
+                sendMessage.setReplyMarkup(inlineButton.inlineStorageCategoriesВГДFireWaterSupplyKeyboard());
+                databaseRepository.setType_premises("3б ступінь",userId);
+                break;
+            case "3.5 внутрішнє складські ПВ":
+                databaseRepository.setB2("внутрішні",userId);
+                sendMessage.setText("Обрано: будівлі ІV ступеня вогнестійкості\n\n" +
+                        "4. Вкажіть категорію будівлі за вибухопожежною та пожежною небезпекою ⚠️");
+                sendMessage.setReplyMarkup(inlineButton.inlineStorageCategoriesВГДFireWaterSupplyKeyboard());
+                databaseRepository.setType_premises("4 ступінь",userId);
+                break;
+            case "3.6 внутрішнє складські ПВ":
+                databaseRepository.setB2("внутрішні",userId);
+                sendMessage.setText("Обрано: будівлі ІVа ступеня вогнестійкості\n\n" +
+                        "4. Вкажіть категорію будівлі за вибухопожежною та пожежною небезпекою ⚠️");
+                sendMessage.setReplyMarkup(inlineButton.inlineStorageCategoriesВГДFireWaterSupplyKeyboard());
+                databaseRepository.setType_premises("4а ступінь",userId);
+                break;
+            case "3.7 внутрішнє складські ПВ":
+                databaseRepository.setB2("внутрішні",userId);
+                sendMessage.setText("Обрано: будівлі V ступеня вогнестійкості\n\n" +
+                        "4. Вкажіть категорію будівлі за вибухопожежною та пожежною небезпекою ⚠️");
+                sendMessage.setReplyMarkup(inlineButton.inlineStorageCategoriesВГДFireWaterSupplyKeyboard());
+                databaseRepository.setType_premises("5 ступінь",userId);
                 break;
             case "Далі ПВ":
                 if (databaseRepository.getValue(userId).equals("жителі")){
@@ -3697,16 +3865,65 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                                 sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
                                 databaseRepository.setValue("поверхи",userId);
                                 break;
-                            case "А зовнішнє склади ПВ":
-                            case "Б зовнішнє склади ПВ":
-                            case "В зовнішнє склади ПВ":
-                            case "Г зовнішнє склади ПВ":
-                            case "Д зовнішнє склади ПВ":
-                                sendMessage.setText(fireWaterSupply.getExternalStorage() + "\n\n" + instructionExtinguisher.getStart());
+                            case "А склади ПВ":
+                            case "Б склади ПВ":
+                            case "В склади ПВ":
+                            case "Г склади ПВ":
+                            case "Д склади ПВ":
+                                if (databaseRepository.getB2(userId).equals("зовнішні")){
+                                    sendMessage.setText(fireWaterSupply.getExternalStorage() + "\n\n" + instructionExtinguisher.getStart());
+                                }else {
+                                    sendMessage.setText(fireWaterSupply.getInternalStorage() + "\n\n" + instructionExtinguisher.getStart());
+                                }
+                                break;
+                            case "3.2 внутрішнє ПВ":
+                            case "3.4 внутрішнє ПВ":
+                            case "3.5 внутрішнє ПВ":
+                            case "3.6 внутрішнє ПВ":
+                            case "3.7 внутрішнє ПВ":
+                            case "3.8 внутрішнє ПВ":
+                                sendMessage.setText(fireWaterSupply.getInternalPublicAndResidential() + "\n\n" + instructionExtinguisher.getStart());
                                 break;
                         }
 
 
+                    }
+                } else if (databaseRepository.getValue(userId).equals("висота обєкта")) {
+                    if (databaseRepository.getHeight_object(userId)==null){
+                        sendMessage.setText(databaseEmpty.getHeightEmpty());
+                        sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                    }else {
+                        switch (databaseRepository.getType_of_object(userId)){
+                            case "3.1 внутрішнє ПВ":
+                                sendMessage.setText(fireWaterSupply.getInternalPublicAndResidential() + "\n\n" + instructionExtinguisher.getStart());
+                                break;
+                            case "3.2 внутрішнє ПВ":
+                            case "3.4 внутрішнє ПВ":
+                            case "3.5 внутрішнє ПВ":
+                            case "3.8 внутрішнє ПВ":
+                                sendMessage.setText("5. Введіть об`єм будівлі та натисніть \"Далі\" \uD83D\uDC47");
+                                sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                                databaseRepository.setValue("обєм будівлі",userId);
+                                break;
+
+                        }
+                    }
+                } else if (databaseRepository.getValue(userId).equals("місця")) {
+                    if (databaseRepository.getSeats(userId)==null){
+                        sendMessage.setText(databaseEmpty.getSeatsEmpty());
+                        sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                    }else {
+                        switch (databaseRepository.getType_of_object(userId)){
+                            case "4.1 внутрішнє культурні ПВ":
+                            case "4.2 внутрішнє культурні ПВ":
+                                sendMessage.setText(fireWaterSupply.getInternalPublicAndResidential() + "\n\n" + instructionExtinguisher.getStart());
+                                break;
+                            case "3.6 внутрішнє ПВ":
+                                sendMessage.setText("5. Вкажіть об'єм будівлі (м.куб) та натисніть \"Далі\" \uD83D\uDC47");
+                                sendMessage.setReplyMarkup(inlineButton.inlineNextFireWaterSupplyKeyboard());
+                                databaseRepository.setValue("обєм будівлі",userId);
+                                break;
+                        }
                     }
                 }
                 break;

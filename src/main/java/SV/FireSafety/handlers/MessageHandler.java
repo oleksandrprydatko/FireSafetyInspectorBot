@@ -132,7 +132,7 @@ public class MessageHandler implements Handler<Message> {
                         messageSender.sendMessage(sendMessage);
                         //очищення бази
                         databaseRepository.clearDB(userId);
-                        break;
+                        return;
                     // видає посилання на портал електронних послуг
                     case "/service_portal":
                         //встановлення команди в БД

@@ -25,9 +25,9 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
             "periodically_at_facility=NULL,height_object=NULL,fixed_violations=NULL,no_fixed_violations=NULL," +
             "dead_people = NULL,losses = NULL, tax_free_income = NULL, injured_people=NULL," +
             "volume_premises=NULL, volume_rooms_a=NULL, volume_rooms_б=NULL, volume_rooms_в=NULL," +
-            "volume_rooms_г=NULL,humidity_of_space=NULL,hotel_rooms=NULL,floors=NULL," +
+            "volume_rooms_г=NULL,humidity_of_space=NULL,type_of_object=NULL,hotel_rooms=NULL,floors=NULL," +
             "fire_resistance=NULL,seats=NULL,books_storage=NULL,archives=NULL," +
-            "amount_of_transport=NULL,weight=NULL where inspector.users.id_telegram = :telegram_id",nativeQuery = true)
+            "amount_of_transport=NULL,weight=NULL,productivity=NULL,length=NULL where inspector.users.id_telegram = :telegram_id",nativeQuery = true)
     void clearDB(long telegram_id);
     @Transactional
     @Modifying
@@ -95,7 +95,8 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
     @Query(value = "update inspector.users set b2 = :command where id_telegram = :userId", nativeQuery = true)
     void setB2(String command,long userId);
 
-
+    @Query(value = "select b2 from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    String getB2(long userId);
     @Transactional
     @Modifying
     @Query(value = "update inspector.users set characteristics_object = :command where id_telegram = :userId", nativeQuery = true)

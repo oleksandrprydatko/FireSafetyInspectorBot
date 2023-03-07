@@ -2,6 +2,7 @@ package SV.FireSafety.services;
 
 import SV.FireSafety.repository.DatabaseRepository;
 
+
 public class FireWaterSupply {
     Long userId;
     DatabaseRepository databaseRepository;
@@ -13,22 +14,34 @@ public class FireWaterSupply {
 
     int residents(){return databaseRepository.getSeats(userId);}
     int floors(){return databaseRepository.getFloors(userId);}
+    int seats(){return databaseRepository.getSeats(userId);}
     float volume(){return databaseRepository.getVolume_premises(userId);}
+    float height(){return databaseRepository.getHeight_object(userId);}
     String typePremisses(){return databaseRepository.getType_premises(userId);}
     String category(){return databaseRepository.getCategory_premises(userId);}
+    String typeObject(){return databaseRepository.getType_of_object(userId);}
 
     private String result(int fire, int consumption){
         return  "Висновок: розрахункова кількість одночасних пожеж – " + fire + " \uD83D\uDD25, розрахункові витрати води на зовнішнє пожежогасіння в населеному пункті – " + consumption + "л/с \uD83D\uDCA7";
     }
     private String notStandardized(){return "Висновок: не нормується";}
     private String costs(int costs){return "Висновок: витрати на зовнішнє пожежогасіння складають - " + costs + "\uD83D\uDCA7 л/с";}
-    private String noLessCosts(int costs){return "Висновок: витрати на зовнішнє пожежогасіння складають – не менше " + costs + "\uD83D\uDCA7 л/с";}
+    private String noLessCosts(){return "Висновок: витрати на зовнішнє пожежогасіння складають – не менше 35 \uD83D\uDCA7 л/с";}
     private String incorrectFloors(boolean value, int floors){
         if (value)return "Ви ввели не корректні дані. Можлива максимальна кількість поверхів відповідно до об'єму будівлі - " + floors;
         else return "Ви ввели не корректні дані. Можлива мінімальна кількість поверхів відповідно до об'єму будівлі - " + floors;
     }
     private String incorrectVolume(int volume){
         return "Ви введи не корректні дані. Максимальний можливий об'єм для будівлі обраної вами категорії за вибухопожежною та пожежною небезпекою - " + volume+ " м.куб";
+    }
+    private String costsNotExpected(){
+        return "Висновок: витрати на внутрішнє пожежогасіння не передбачаються";
+    }
+    private String costsNotRequired(){
+        return "Висновок: витрати на внутрішнє пожежогасіння не вимагаються";
+    }
+    private String costsInternal(int jet, double costs){
+        return "Висновок: кількість струменів – " + jet + " , витрати на внутрішнє пожежогасіння складають – " + costs + " \uD83D\uDCA7 л/с";
     }
     private String settlement(){
         if (residents()<=1000){
@@ -157,7 +170,7 @@ public class FireWaterSupply {
             } else if (floors()>12 && floors()<=25) {
                 return costs(25);
             } else {
-                return noLessCosts(35);
+                return noLessCosts();
             }
         } else if (volume()>50000 && volume()<=150000) {
             if (floors()<17){
@@ -165,7 +178,7 @@ public class FireWaterSupply {
             } else if (floors()>=17 && floors()<=25) {
                 return costs(30);
             }else {
-                return noLessCosts(35);
+                return noLessCosts();
             }
         }else {
             return "Висновок: витрати на зовнішнє протипожежне водопостачання приймати за індивідуальними технічними умовами або" +
@@ -209,7 +222,7 @@ public class FireWaterSupply {
             } else if (floors()>6 && floors()<=16) {
                 return costs(30);
             } else{
-                return noLessCosts(35);
+                return noLessCosts();
             }
         } else if (volume()>50000 && volume()<=150000) {
             if (floors()<3){
@@ -219,7 +232,7 @@ public class FireWaterSupply {
             } else if (floors()>6 && floors()<=16) {
                 return costs(35);
             }else {
-                return noLessCosts(35);
+                return noLessCosts();
             }
         } else{
             return "Висновок: витрати на зовнішнє протипожежне водопостачання приймати за індивідуальними технічними" +
@@ -382,6 +395,220 @@ public class FireWaterSupply {
     public String getExternalStorage(){
         return externalStorage();
     }
+    private String internalPublicAndResidential(){
+        if (typeObject().equals("3.1 внутрішнє ПВ")){
+            if (height()<=26.5){
+                return costsNotExpected();
+            } else if (height()>26.5 && height()<=47) {
+                return costsInternal(1,2.5);
+            } else if (height()>47 && height()<=73.5) {
+                return costsInternal(2,2.5) + ", один внутрішньоквартирний пожежний кран-комплект";
+            }else {
+                return "Висновок: кількість струменів на кожен протипожежний відсік – 4 (з кожного стояка протипожежного " +
+                        "водопостачання не більше 2), витрати на внутрішнє пожежогасіння складають – 2,5 \uD83D\uDCA7 л/с, один " +
+                        "внутрішньоквартирний пожежний кран-комплект";
+            }
+        } else if (typeObject().equals("3.2 внутрішнє ПВ")) {
+            if (height()<=26.5){
+                if (volume()<=5000){
+                    return costsNotExpected();
+                } else if (volume()>5000 && volume()<=25000) {
+                    return costsInternal(1,2.5);
+                }else return costsInternal(2,2.5);
+            } else if (height()>26.5 && height()<=47) {
+                if (volume()<25000){
+                    return costsInternal(2,2.5);
+                }else return costsInternal(3,2.5);
+            } else if (height()>47 && height()<=73.5) {
+                if (volume()<=50000) return costsInternal(4,5);
+                else return costsInternal(8,5);
+            }else return "Висновок: кількість струменів на кожен протипожежний відсік – 8 (з кожного стояка протипожежного " +
+                    "водопостачання не більше 2), витрати на внутрішнє пожежогасіння складають – 5 \uD83D\uDCA7 л/с";
+        } else if (typeObject().equals("4.1 внутрішнє культурні ПВ") || typeObject().equals("4.2 внутрішнє культурні ПВ")) {
+            if (seats()<=300){
+                return costsInternal(2,2.5);
+            }else {
+                return costsInternal(2,5);
+            }
+        } else if (typeObject().equals("4.3 внутрішнє культурні ПВ") || typeObject().equals("4.4 внутрішнє культурні ПВ")) {
+            return "кількість струменів – 4, витрати на внутрішнє пожежогасіння двох із них складають – 2,5 \uD83D\uDCA7 л/с, ще двох складають – 5 \uD83D\uDCA7 л/с";
+        } else if (typeObject().equals("3.4 внутрішнє ПВ")) {
+            if (height()<=47){
+                if (volume()<=5000) return costsNotExpected();
+                else if (volume()>5000 && volume()<=25000) {
+                    return costsInternal(1,2.5);
+                } else if (volume()>25000 && volume()<=50000) {
+                    return costsInternal(2,2.5);
+                }else return costsInternal(4,2.5);
+            } else {
+                if (volume()<=50000) return costsInternal(4,2.5);
+                else return costsInternal(8,2.5);
+            }
+        } else if (typeObject().equals("3.5 внутрішнє ПВ")) {
+            if (height()<=26.5){
+                if (volume()<=5000) return costsNotExpected();
+                else if (volume()>5000 && volume()<=25000) {
+                    return costsInternal(2,2.5);
+                }else return costsInternal(3,2.5);
+            }else if (height()>26.5 && height()<=47) {
+                return costsInternal(4,2.5);
+            } else if (height()>47 && height()<=73.5) {
+                if (volume()<=50000) return costsInternal(4,5);
+                else return costsInternal(8,5);
+            } else return "Висновок: кількість струменів на кожен протипожежний відсік – 8 " +
+                    "(з кожного стояка протипожежного водопостачання не більше 2), витрати на внутрішнє пожежогасіння " +
+                    "складають – 5 \uD83D\uDCA7 л/с";
+        } else if (typeObject().equals("3.6 внутрішнє ПВ")) {
+            if (seats()<=300){
+                if (volume()<=5000){
+                    return costsNotExpected();
+                } else if (volume()>5000 && volume()<=25000) {
+                    return costsInternal(2,2.5);
+                } else {
+                    return costsInternal(2,5);
+                }
+            } else {
+                if (volume()<=25000){
+                    return costsInternal(2,5);
+                }else {
+                    return "Висновок: кількість струменів – 4, витрати на внутрішнє пожежогасіння двох із них складають – 2,5 \uD83D\uDCA7 л/с, ще двох складають – 5 \uD83D\uDCA7 л/с";
+                }
+            }
+        } else if (typeObject().equals("3.7 внутрішнє ПВ")) {
+            if (volume()<=5000){
+                return costsNotExpected();
+            } else if (volume()>5000 && volume()<=25000) {
+                return costsInternal(2,2.5);
+            } else if (volume()>25000 && volume()<=50000) {
+                return costsInternal(3,2.5);
+            }else return costsInternal(4,2.5);
+        }else {
+            if (height()<=26.5){
+                if (volume()<=5000){
+                    return costsNotExpected();
+                } else if (volume()>5000 && volume()<=25000) {
+                    return costsInternal(1,2.5);
+                } else {
+                    return costsInternal(2,2.5);
+                }
+            } else if (height()>26.5 && height()<=47) {
+                if (volume()<=25000){
+                    return costsInternal(2,2.5);
+                }else {
+                    return costsInternal(3,2.5);
+                }
+            } else if (height()>47 && height()<=73.5) {
+                if (volume()<=50000){
+                    return costsInternal(4,5);
+                }else {
+                    return costsInternal(8,5);
+                }
+            }else {
+                return "Висновок: кількість струменів на кожен протипожежний відсік – 8 (з кожного стояка протипожежного водопостачання" +
+                        " не більше 2), витрати на внутрішнє пожежогасіння складають – 5 \uD83D\uDCA7 л/с";
+            }
+        }
 
+    }
+    public String getInternalPublicAndResidential(){
+        return internalPublicAndResidential();
+    }
+    private String internalStorage(){
+        if (typePremisses().equals("1 ступінь")) {
+            if (category().equals("А") || category().equals("Б") || category().equals("В")){
+                if (volume() <= 500) {
+                    return costsNotRequired();
+                } else if (volume() > 500 && volume() <= 300000) {
+                    return costsInternal(2, 2.5);
+                } else if (volume() > 300000 && volume() <= 400000) {
+                    return costsInternal(3, 5);
+                } else if (volume() > 400000 && volume() <= 500000) {
+                    return costsInternal(4, 5);
+                } else{
+                    return "Висновок: кількість струменів на кожен протипожежний відсік (об’ємом до 500000 м3) – 4, витрати на" +
+                            " внутрішнє пожежогасіння складають – 5 \uD83D\uDCA7 л/с";
+                }
+            }else {
+                if (volume() <= 5000) {
+                    return costsNotRequired();
+                } else if (volume() > 5000 && volume() <= 300000) {
+                    return costsInternal(2, 2.5);
+                } else if (volume() > 300000 && volume() <= 400000) {
+                    return costsInternal(3, 2.5);
+                } else if (volume() > 400000 && volume() <= 500000) {
+                    return costsInternal(4, 2.5);
+                } else{
+                    return "Висновок: кількість струменів на кожен протипожежний відсік (об’ємом до 500000 м3) – 4, витрати на" +
+                            " внутрішнє пожежогасіння складають – 2.5 \uD83D\uDCA7 л/с";
+                }
+            }
+
+        } else if (typePremisses().equals("3 ступінь")) {
+            if (category().equals("В")){
+                if (volume()<=500){
+                    return costsNotRequired();
+                } else if (volume()>500 && volume()<=5000) {
+                    return costsInternal(2,2.5);
+                } else if (volume()>5000 && volume()<=200000) {
+                    return costsInternal(2,5);
+                }else {
+                    return incorrectVolume(200000);
+                }
+            }else {
+                if (volume()<=5000){
+                    return costsNotRequired();
+                } else if (volume()>5000 && volume()<=200000) {
+                    return costsInternal(2,2.5);
+                }else return incorrectVolume(200000);
+            }
+        } else if (typePremisses().equals("3а ступінь")) {
+            if (category().equals("А")||category().equals("Б") || category().equals("В")){
+                if (volume()<=500){
+                    return costsNotRequired();
+                } else if (volume()>500 && volume()<=5000) {
+                    return costsInternal(2,2.5);
+                } else if (volume()>5000 && volume()<=300000) {
+                    return costsInternal(2,5);
+                } else if (volume()>300000 && volume()<=400000) {
+                    return costsInternal(3,5);
+                } else if (volume()>400000 && volume()<=500000) {
+                    return costsInternal(4,5);
+                }else return "Висновок :кількість струменів на кожен протипожежний відсік (об’ємом до 500000 м3) – 4, витрати " +
+                        "на внутрішнє пожежогасіння складають – 5 \uD83D\uDCA7 л/с";
+            }else {
+                if (volume()<=5000){
+                    return costsNotRequired();
+                } else if (volume()>5000&& volume()<=300000) {
+                    return costsInternal(2,2.5);
+                } else if (volume()>300000 && volume()<=400000) {
+                    return costsInternal(3,2.5);
+                } else if (volume()>400000 && volume()<=500000) {
+                    return costsInternal(4,2.5);
+                }else return "кількість струменів на кожен протипожежний відсік (об’ємом до 500000 м3) – 4, витрати на " +
+                        "внутрішнє пожежогасіння складають – 2,5 \uD83D\uDCA7 л/с";
+            }
+        } else {
+            if (category().equals("В")){
+                if (volume()<=500){
+                    return costsNotRequired();
+                } else if (volume()>500 && volume()<=5000) {
+                    return costsInternal(2,2.5);
+                } else if (volume()>5000 && volume()<=10000) {
+                    return costsInternal(2,5);
+                }else return incorrectVolume(10000);
+            }else {
+                if (volume()<=5000){
+                    return costsNotRequired();
+                } else if (volume()>5000 && volume()<=50000) {
+                    return costsInternal(2,2.5);
+                }else {
+                    return incorrectVolume(50000);
+                }
+            }
+        }
+    }
+    public String getInternalStorage(){
+        return internalStorage();
+    }
 
 }
