@@ -1597,4 +1597,67 @@ public class InlineButton {
         return inlineKeyboardMarkup;
     }
 
+    //визначення протипожежних відстаней
+
+    public InlineKeyboardMarkup inlineFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.1").callbackData("1.1 ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.2").callbackData("1.2 ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.3").callbackData("1.3 ВПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineFireProtectionDistancesBetweenBuildingsKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 ВПВ між будівлями").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 ВПВ між будівлями").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 ВПВ між будівлями").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineFireResistanceFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("І ступінь").callbackData("І ступінь вогнестійкості").build(),
+                InlineKeyboardButton.builder().text("ІІ ступінь").callbackData("ІІ ступінь вогнестійкості").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("ІІІ ступінь").callbackData("ІІІ ступінь вогнестійкості").build(),
+                InlineKeyboardButton.builder().text("ІІІа ступінь").callbackData("ІІІа ступінь вогнестійкості").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("ІІІб ступінь").callbackData("ІІІб ступінь вогнестійкості").build(),
+                InlineKeyboardButton.builder().text("ІV ступінь").callbackData("ІV ступінь вогнестійкості").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("ІVа ступінь").callbackData("ІVа ступінь вогнестійкості").build(),
+                InlineKeyboardButton.builder().text("V ступінь").callbackData("V ступінь вогнестійкості").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineWindowsFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Наявні").callbackData("вікна наявні ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Відсутні").callbackData("вікна відсутні ВПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineCategoriesАБВFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія А").callbackData("Категорія А ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія Б").callbackData("Категорія Б ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія В").callbackData("Категорія В ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія не наявна").callbackData("Категорія не наявна ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Примітка").callbackData("Примітка категорії").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineCategoryВFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Так, наявна").callbackData("Категорія В ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Ні, не наявна").callbackData("Категорія не наявна ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Примітка").callbackData("Примітка категорії").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
 }

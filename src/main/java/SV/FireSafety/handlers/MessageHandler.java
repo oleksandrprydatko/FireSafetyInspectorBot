@@ -4,7 +4,7 @@ import SV.FireSafety.messagesender.MessageSender;
 import SV.FireSafety.model.Database;
 import SV.FireSafety.repository.DatabaseRepository;
 import SV.FireSafety.services.InlineButton;
-import SV.FireSafety.services.InstructionExtinguisher;
+import SV.FireSafety.services.Instructions;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -26,7 +26,7 @@ public class MessageHandler implements Handler<Message> {
     //екземпляри класів
 
     DatabaseRepository databaseRepository;
-    InstructionExtinguisher instructionExtinguisher = new InstructionExtinguisher();
+    Instructions instructions = new Instructions();
     InlineButton inlineButton = new InlineButton();
 
 
@@ -133,6 +133,15 @@ public class MessageHandler implements Handler<Message> {
                         //очищення бази
                         databaseRepository.clearDB(userId);
                         return;
+                    //протипожежні відстані
+                    case "/fire_protection_distances":
+                        databaseRepository.setComand_of_menu("/fire_protection_distances",userId);
+                        sendMessage.setText("Я підсистема Fire Protection Distances \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити протипожежні відстані між будівлями, технологічними установками, інженерними комунікаціями \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
+                        messageSender.sendMessage(sendMessage);
+                        //очищення бази
+                        databaseRepository.clearDB(userId);
+                        return;
                     // видає посилання на портал електронних послуг
                     case "/service_portal":
                         //встановлення команди в БД
@@ -144,7 +153,7 @@ public class MessageHandler implements Handler<Message> {
                         databaseRepository.clearDB(userId);
                         return;
                     case "/feedback_info":
-                        sendMessage.setText(instructionExtinguisher.feedback());
+                        sendMessage.setText(instructions.feedback());
                         messageSender.sendMessage(sendMessage);
                         return;
                 }
@@ -372,5 +381,6 @@ public class MessageHandler implements Handler<Message> {
 //        fire_alarm_installation - Визначення необхідності проектування та монтажу автоматичних систем пожежної сигналізації
 //        notification_system - Визначення типу системи оповіщення, та управління евакуюванням людей
 //        fire_water_supply - Визначення необхідності влаштування та параметрів протипожежного водопостачання
+//        fire_protection_distances - Визначення протипожежних відстаней
 //        service_portal - Портал електронних послуг ДСНС України
 //        feedback_info - Інформація. Зворотній зв'язок
