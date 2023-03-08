@@ -10,6 +10,8 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
+import java.nio.charset.StandardCharsets;
+
 
 @Component
 public class CallbackQueryHandler implements Handler<CallbackQuery> {
@@ -4062,6 +4064,20 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                         "\uD83D\uDC49 2.3 Протипожежні відстані між будівлями виробничих, промислових та сільськогосподарських підприємств\n");
                 sendMessage.setReplyMarkup(inlineButton.inlineFireProtectionDistancesBetweenBuildingsKeyboard());
                 break;
+            case "1.2 ВПВ":
+                sendMessage.setText("Обрано: протипожежні відстані між будівлями та/або технологічними установками\n\n" +
+                        "2. Виберіть призначення об’єкту \uD83C\uDFE2 \n\n" +
+                        "\uD83D\uDC49 2.1 Протипожежні відстані між житловими і громадськими будівлями та складами (установками) нафти і нафтопродуктів\n" +
+                        "\uD83D\uDC49 2.2 Протипожежні відстані між будівлями промислового призначення та складами (установками) нафти і нафтопродуктів\n" +
+                        "\uD83D\uDC49 2.3 Протипожежні відстані між складами (установками) нафти і нафтопродуктів та лісовими насадженнями, ділянками залягання торфу\n" +
+                        "\uD83D\uDC49 2.4 Протипожежні відстані між резервуарами та технологічними установками складів нафти та нафтопродуктів\n" +
+                        "\uD83D\uDC49 2.5 Протипожежні відстані між об’єктами навколишнього середовища до технологічного обладнання традиційної автозаправної станції\n" +
+                        "\uD83D\uDC49 2.6 Протипожежні відстані між об’єктами навколишнього середовища до технологічного обладнання модульної автозаправної станції\n" +
+                        "\uD83D\uDC49 2.7 Протипожежні відстані між об’єктами навколишнього середовища до технологічного обладнання автомобільних газонаповнювальних компресорних станцій або багатопаливних автозаправних станцій\n" +
+                        "\uD83D\uDC49 2.8 Протипожежні відстані між будівлями і спорудами закритими розподільчими пристроями трансформаторних пунктів\n" +
+                        "\uD83D\uDC49 2.9 Протипожежні відстані між об’єктами навколишнього середовища та технологічним обладнанням газових сховищ (газгольдерів)\n");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireProtectionDistancesTechnologicalKeyboard());
+                break;
             case "2.1 ВПВ між будівлями":
                 databaseRepository.setType_of_object(callbackQuery.getData(),userId);
                 sendMessage.setText("Обрано: протипожежні відстані між об’єктами громадського, адміністративного, побутового та житлового призначення\n\n" +
@@ -4071,6 +4087,12 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "2.2 ВПВ між будівлями":
                 databaseRepository.setType_of_object(callbackQuery.getData(),userId);
                 sendMessage.setText("Обрано: протипожежні відстані від будівель громадського, адміністративного, побутового та житлового призначення до будівель і споруд виробничого, складського та сільськогосподарського призначення\n\n" +
+                        "3. Вкажіть ступінь вогнестійкості будівлі <b>від якої розпочинається вимірювання</b> \uD83D\uDD25");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireResistanceFireProtectionDistancesKeyboard());
+                break;
+            case "2.3 ВПВ між будівлями":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні відстані між будівлями виробничих, промислових та сільськогосподарських підприємств\n\n" +
                         "3. Вкажіть ступінь вогнестійкості будівлі <b>від якої розпочинається вимірювання</b> \uD83D\uDD25");
                 sendMessage.setReplyMarkup(inlineButton.inlineFireResistanceFireProtectionDistancesKeyboard());
                 break;
@@ -4095,20 +4117,25 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                             if (databaseRepository.getFire_resistance_to_which(userId).equals("І ступінь вогнестійкості") ||
                                     databaseRepository.getFire_resistance_to_which(userId).equals("ІІ ступінь вогнестійкості") ||
                                     databaseRepository.getFire_resistance_to_which(userId).equals("ІІІ ступінь вогнестійкості")){
-                                sendMessage.setText("5. Вкажіть наявність віконних прорізів: \uD83E\uDE9F");
+                                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n5. Вкажіть наявність віконних прорізів: \uD83E\uDE9F");
                                 sendMessage.setReplyMarkup(inlineButton.inlineWindowsFireProtectionDistancesKeyboard());
                             }else {
-                                sendMessage.setText(resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
                             }
+                        }else {
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
                         }
                     } else if (databaseRepository.getType_of_object(userId).equals("2.2 ВПВ між будівлями")) {
                         if (databaseRepository.getFire_resistance_to_which(userId).equals("І ступінь вогнестійкості") || databaseRepository.getFire_resistance_to_which(userId).equals("ІІ ступінь вогнестійкості")){
-                            sendMessage.setText("5. Вкажіть наявність категорії за вибухопожежною\n небезпекою:\uD83D\uDD25");
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n5. Вкажіть наявність категорії за вибухопожежною\n небезпекою:\uD83D\uDD25");
                             sendMessage.setReplyMarkup(inlineButton.inlineCategoriesАБВFireProtectionDistancesKeyboard());
                         }else{
-                            sendMessage.setText("5. Вкажіть наявність категорії В за вибухопожежною небезпекою:\uD83D\uDD25");
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n5. Вкажіть наявність категорії В за вибухопожежною небезпекою:\uD83D\uDD25");
                             sendMessage.setReplyMarkup(inlineButton.inlineCategoryВFireProtectionDistancesKeyboard());
                         }
+                    } else if (databaseRepository.getType_of_object(userId).equals("2.3 ВПВ між будівлями")) {
+                        sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n5. Вкажіть категорію за вибухопожежною небезпекою \uD83D\uDD25");
+                        sendMessage.setReplyMarkup(inlineButton.inlineCategoriesАБВГДFireProtectionDistancesKeyboard());
                     }
 
                 }
@@ -4118,25 +4145,91 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 sendMessage.setText(resultFireProtectionDistances() + "\n\n" + instructions.getStart());
                 break;
             case "вікна відсутні ВПВ":
+                databaseRepository.setWindows(false,userId);
                 sendMessage.setText(resultFireProtectionDistances() + "\n\n" + instructions.getStart());
                 break;
             case "Категорія А ВПВ":
                 databaseRepository.setCategory_buildings("А",userId);
-                sendMessage.setText("Обрано: категорія А\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                if (databaseRepository.getFire_resistance(userId).equals("ІІ ступінь вогнестійкості")){
+                    if (databaseRepository.getFire_resistance_to_which(userId).equals("ІІ ступінь вогнестійкості")){
+                        sendMessage.setText("Обрано: категорія А \n\n" +
+                                "6. Вкажіть наявність автоматичних систем пожежогасіння \uD83D\uDCA7");
+                        sendMessage.setReplyMarkup(inlineButton.inlineFireAlarmFireProtectionDistancesKeyboard());
+                    }else {
+                        sendMessage.setText("Обрано: категорія А\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                    }
+                }else {
+                    sendMessage.setText("Обрано: категорія А\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                }
                 break;
             case "Категорія Б ВПВ":
                 databaseRepository.setCategory_buildings("Б",userId);
-                sendMessage.setText("Обрано: категорія Б\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                if (databaseRepository.getFire_resistance(userId).equals("ІІ ступінь вогнестійкості")){
+                    if (databaseRepository.getFire_resistance_to_which(userId).equals("ІІ ступінь вогнестійкості")){
+                        sendMessage.setText("Обрано: категорія Б \n\n" +
+                                "6. Вкажіть наявність автоматичних систем пожежогасіння \uD83D\uDCA7");
+                        sendMessage.setReplyMarkup(inlineButton.inlineFireAlarmFireProtectionDistancesKeyboard());
+                    }else {
+                        sendMessage.setText("Обрано: категорія Б\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                    }
+                }else {
+                    sendMessage.setText("Обрано: категорія Б\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                }
                 break;
             case "Категорія В ВПВ":
                 databaseRepository.setCategory_buildings("В",userId);
-                sendMessage.setText("Обрано: категорія В\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                if (databaseRepository.getFire_resistance(userId).equals("ІІ ступінь вогнестійкості")){
+                    if (databaseRepository.getFire_resistance_to_which(userId).equals("ІІ ступінь вогнестійкості")){
+                        sendMessage.setText("Обрано: категорія В \n\n" +
+                                "6. Вкажіть наявність автоматичних систем пожежогасіння \uD83D\uDCA7");
+                        sendMessage.setReplyMarkup(inlineButton.inlineFireAlarmFireProtectionDistancesKeyboard());
+                    }else {
+                        sendMessage.setText("Обрано: категорія В\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                    }
+                }else {
+                    sendMessage.setText("Обрано: категорія В\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                }
+                break;
+            case "Категорія Г ВПВ":
+                databaseRepository.setCategory_buildings("Г",userId);
+                sendMessage.setText("Обрано: категорія Г\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "Категорія Д ВПВ":
+                databaseRepository.setCategory_buildings("Д",userId);
+                sendMessage.setText("Обрано: категорія Д\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
                 break;
             case "Категорія не наявна ВПВ":
                 databaseRepository.setCategory_buildings("не наявна",userId);
                 sendMessage.setText("Обрано: категорія не наявна\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
                 break;
-
+            case "Так сигналізації ВПВ":
+                databaseRepository.setFire_alarm(true,userId);
+                sendMessage.setText("Обрано: наявні автоматичні системи пожежогасіння\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "Ні сигналізації ВПВ":
+                databaseRepository.setFire_alarm(false,userId);
+                if (databaseRepository.getFire_resistance(userId).equals("ІІ ступінь вогнестійкості")){
+                    if (databaseRepository.getFire_resistance_to_which(userId).equals("ІІ ступінь вогнестійкості")){
+                        if (databaseRepository.getCategory_buildings(userId).equals("В")){
+                            sendMessage.setText("Обрано: відсутні автоматичні системи пожежогасіння\n\n" +
+                                    "7. Вкажіть питому навантагу в приміщеннях \uD83D\uDD25");
+                            sendMessage.setReplyMarkup(inlineButton.inlineSpecificLoadFireProtectionDistancesKeyboard());
+                        }else {
+                            sendMessage.setText("Обрано: відсутні автоматичні системи пожежогасіння\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                        }
+                    }
+                }else {
+                    sendMessage.setText("Обрано: відсутні автоматичні системи пожежогасіння\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                }
+                break;
+            case "навантага до 10 ВПВ":
+                databaseRepository.setSpecific_load(false,userId);
+                sendMessage.setText("Обрано: питома навантага до 10 кг на 1м2\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "навантага більше 10 ВПВ":
+                databaseRepository.setSpecific_load(true,userId);
+                sendMessage.setText("Обрано: питома навантага більше 10 кг на 1м2\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
         }
         messageSender.sendMessage(sendMessage);
     }

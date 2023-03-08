@@ -28,7 +28,7 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
             "volume_rooms_г=NULL,humidity_of_space=NULL,type_of_object=NULL,hotel_rooms=NULL,floors=NULL," +
             "fire_resistance=NULL,seats=NULL,books_storage=NULL,archives=NULL," +
             "amount_of_transport=NULL,weight=NULL,productivity=NULL," +
-            "length=NULL,fire_resistance_to_which=NULL,windows = false where inspector.users.id_telegram = :telegram_id",nativeQuery = true)
+            "length=NULL,fire_resistance_to_which=NULL,windows = false,fire_alarm=false,specific_load=false where inspector.users.id_telegram = :telegram_id",nativeQuery = true)
     void clearDB(long telegram_id);
     @Transactional
     @Modifying
@@ -439,5 +439,21 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
 
     @Query(value = "select windows from inspector.users where id_telegram = :userId ", nativeQuery = true)
     Boolean getWindows(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set fire_alarm = :command where id_telegram = :userId", nativeQuery = true)
+    void setFire_alarm(boolean command,long userId);
+
+    @Query(value = "select fire_alarm from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    Boolean getFire_alarm(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set specific_load = :command where id_telegram = :userId", nativeQuery = true)
+    void setSpecific_load(boolean command,long userId);
+
+    @Query(value = "select specific_load from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    Boolean getSpecific_load(long userId);
 
 }
