@@ -109,7 +109,7 @@ public class MessageHandler implements Handler<Message> {
                     case "/fire_alarm_installation":
                         //встановлення команди в БД
                         databaseRepository.setComand_of_menu("/fire_alarm_installation",userId);
-                        sendMessage.setText("Я підсистема Fire alarm installation \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити необхіднІсть проектування та монтажу автоматичних систем пожежної сигналізації \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setText("Я підсистема Fire alarm installation \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити необхіднІсть проектування та монтажу автоматичних систем пожежної сигналізації та пожежогасіння \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
                         sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
                         messageSender.sendMessage(sendMessage);
                         //очищення бази
@@ -378,7 +378,7 @@ public class MessageHandler implements Handler<Message> {
 //        degree_of_risk_from_activities - Оцінка ступеня ризику від провадження господарської діяльності
 //        determination_of_categories - Визначення категорій приміщень за пожежною небезпекою
 //        zone_classes - Визначення класу зони
-//        fire_alarm_installation - Визначення необхідності проектування та монтажу автоматичних систем пожежної сигналізації
+//        fire_alarm_installation - Визначення необхідності проектування та монтажу автоматичних систем пожежної сигналізації та пожежогасіння
 //        notification_system - Визначення типу системи оповіщення, та управління евакуюванням людей
 //        fire_water_supply - Визначення необхідності влаштування та параметрів протипожежного водопостачання
 //        fire_protection_distances - Визначення протипожежних відстаней

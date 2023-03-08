@@ -1646,7 +1646,6 @@ public class InlineButton {
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія Б").callbackData("Категорія Б ВПВ").build()));
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія В").callbackData("Категорія В ВПВ").build()));
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія не наявна").callbackData("Категорія не наявна ВПВ").build()));
-        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Примітка").callbackData("Примітка категорії").build()));
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
@@ -1655,7 +1654,6 @@ public class InlineButton {
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Так, наявна").callbackData("Категорія В ВПВ").build()));
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Ні, не наявна").callbackData("Категорія не наявна ВПВ").build()));
-        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Примітка").callbackData("Примітка категорії").build()));
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
