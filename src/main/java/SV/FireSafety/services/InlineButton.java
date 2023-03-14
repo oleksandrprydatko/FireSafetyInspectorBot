@@ -1597,4 +1597,512 @@ public class InlineButton {
         return inlineKeyboardMarkup;
     }
 
+    //визначення протипожежних відстаней
+
+    public InlineKeyboardMarkup inlineFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.1").callbackData("1.1 ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.2").callbackData("1.2 ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.3").callbackData("1.3 ВПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineFireProtectionDistancesBetweenBuildingsKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 ВПВ між будівлями").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 ВПВ між будівлями").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 ВПВ між будівлями").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineFireResistanceFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("І ступінь").callbackData("І ступінь вогнестійкості").build(),
+                InlineKeyboardButton.builder().text("ІІ ступінь").callbackData("ІІ ступінь вогнестійкості").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("ІІІ ступінь").callbackData("ІІІ ступінь вогнестійкості").build(),
+                InlineKeyboardButton.builder().text("ІІІа ступінь").callbackData("ІІІа ступінь вогнестійкості").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("ІІІб ступінь").callbackData("ІІІб ступінь вогнестійкості").build(),
+                InlineKeyboardButton.builder().text("ІV ступінь").callbackData("ІV ступінь вогнестійкості").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("ІVа ступінь").callbackData("ІVа ступінь вогнестійкості").build(),
+                InlineKeyboardButton.builder().text("V ступінь").callbackData("V ступінь вогнестійкості").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineWindowsFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Наявні").callbackData("вікна наявні ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Відсутні").callbackData("вікна відсутні ВПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineCategoriesАБВFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія А").callbackData("Категорія А ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія Б").callbackData("Категорія Б ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія В").callbackData("Категорія В ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія не наявна").callbackData("Категорія не наявна ВПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineCategoriesАБВГДFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія А").callbackData("Категорія А ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія Б").callbackData("Категорія Б ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія В").callbackData("Категорія В ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія Г").callbackData("Категорія Г ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія Д").callbackData("Категорія Д ВПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineCategoryВFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Так, наявна").callbackData("Категорія В ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Ні, не наявна").callbackData("Категорія не наявна ВПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineFireAlarmFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Так, наявні").callbackData("Так сигналізації ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Ні, не наявні").callbackData("Ні сигналізації ВПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineSpecificLoadFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("до 10 кг на 1 м2 включно").callbackData("навантага до 10 ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("більше 10 кг на 1 м2 включно").callbackData("навантага більше 10 ВПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineFireProtectionDistancesTechnologicalKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 ВПВ технологічні").build(),
+                InlineKeyboardButton.builder().text("2.2").callbackData("2.2 ВПВ технологічні").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 ВПВ технологічні").build(),
+                InlineKeyboardButton.builder().text("2.4").callbackData("2.4 ВПВ технологічні").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.5").callbackData("2.5 ВПВ технологічні").build(),
+                InlineKeyboardButton.builder().text("2.6").callbackData("2.6 ВПВ технологічні").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.7").callbackData("2.7 ВПВ технологічні").build(),
+                InlineKeyboardButton.builder().text("2.8").callbackData("2.8 ВПВ технологічні").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.9").callbackData("2.9 ВПВ технологічні").build()));
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineCategoriesStorageFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія складу - І").callbackData("категорія складу - І").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія складу - ІІ").callbackData("категорія складу - ІІ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Категорія складу - ІІІ").callbackData("категорія складу - ІІІ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSubcategoriesIStorageFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("підкатегорія – Іа").callbackData("підкатегорія – Іа").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("підкатегорія – Іб").callbackData("підкатегорія – Іб").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSubcategoriesIIStorageFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("підкатегорія – ІIа").callbackData("підкатегорія – IІа").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("підкатегорія – ІIб").callbackData("підкатегорія – ІIб").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSubcategoriesIIIStorageFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("підкатегорія – IІIа").callbackData("підкатегорія – IIІа").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("підкатегорія – ІIIб").callbackData("підкатегорія – ІIIб").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("підкатегорія – ІIIв").callbackData("підкатегорія – ІIIв").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineLiquidsFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.1").callbackData("легкозаймисті ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.2").callbackData("горючі ВПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineOilStorageFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.1").callbackData("5.1 2.2 ВПВ технологічні").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.2").callbackData("5.2 2.2 ВПВ технологічні").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.3").callbackData("5.3 2.2 ВПВ технологічні").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.4").callbackData("5.4 2.2 ВПВ технологічні").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.5").callbackData("5.5 2.2 ВПВ технологічні").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineCarsFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("до 20 одиниць").callbackData("до 20 авто ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("більше 20 одиниць").callbackData("більше 20 авто ВПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlinePeatFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("лісові масиви").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("ділянки залягання торфу").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineForestFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.1").callbackData("хвойні породи").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.2").callbackData("змішані породи").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.3").callbackData("листяні породи").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineFireProtectionDistancesTechnologicalReservoirsKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("5.1").callbackData("5.1 ВПВ резервуари").build(),
+                InlineKeyboardButton.builder().text("5.2").callbackData("5.2 ВПВ резервуари").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("5.3").callbackData("5.3 ВПВ резервуари").build(),
+                InlineKeyboardButton.builder().text("5.4").callbackData("5.4 ВПВ резервуари").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("5.5").callbackData("5.5 ВПВ резервуари").build(),
+                InlineKeyboardButton.builder().text("5.6").callbackData("5.6 ВПВ резервуари").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("5.7").callbackData("5.7 ВПВ резервуари").build(),
+                InlineKeyboardButton.builder().text("5.8").callbackData("5.8 ВПВ резервуари").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("5.9").callbackData("5.9 ВПВ резервуари").build(),
+                InlineKeyboardButton.builder().text("5.10").callbackData("5.10 ВПВ резервуари").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineOilFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("6.1").callbackData("легкозаймисті ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("6.2").callbackData("горючі ВПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineGasStationFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.1").callbackData("тип А або Б").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.2").callbackData("тип В").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineTypeGasStationАБFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("мала").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("середня").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.3").callbackData("велика").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineTypeGasStationВFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("мала").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("середня").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineFireProtectionDistancesTechnologicalGasStationKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("5.1").callbackData("1 ВПВ заправки").build(),
+                InlineKeyboardButton.builder().text("5.2").callbackData("2 ВПВ заправки").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("5.3").callbackData("3 ВПВ заправки").build(),
+                InlineKeyboardButton.builder().text("5.4").callbackData("4 ВПВ заправки").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("5.5").callbackData("5 ВПВ заправки").build(),
+                InlineKeyboardButton.builder().text("5.6").callbackData("6 ВПВ заправки").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("5.7").callbackData("7 ВПВ заправки").build(),
+                InlineKeyboardButton.builder().text("5.8").callbackData("8 ВПВ заправки").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.9").callbackData("9 ВПВ заправки").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineFireResistanceGasStationFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("6.1").callbackData("І, ІІ, ІІІ ступінь").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("6.2").callbackData("ІІІа, ІІІб, IV, IVa, V ступінь").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineForestGasStationFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("6.1").callbackData("хвойні породи").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("6.2").callbackData("змішані породи").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("6.3").callbackData("листяні породи").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineModularGasStationFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.1").callbackData("категорія І(малої потужності)").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.2").callbackData("категорія ІІ(середньої потужності)").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineFireProtectionDistancesTechnologicalModularGasStationKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("4.1").callbackData("1 ВПВ заправки").build(),
+                InlineKeyboardButton.builder().text("4.2").callbackData("2 ВПВ заправки").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("4.3").callbackData("3 ВПВ заправки").build(),
+                InlineKeyboardButton.builder().text("4.4").callbackData("4 ВПВ заправки").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("4.5").callbackData("5 ВПВ заправки").build(),
+                InlineKeyboardButton.builder().text("4.6").callbackData("6 ВПВ заправки").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("4.7").callbackData("7 ВПВ заправки").build(),
+                InlineKeyboardButton.builder().text("4.8").callbackData("8 ВПВ заправки").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.9").callbackData("9 ВПВ заправки").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineMultiFuelGasStationsFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.1").callbackData("скраплений вуглеводневий газ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.2").callbackData("стиснений природний газ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineGasHolderFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.1").callbackData("поршневий").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.2").callbackData("постійного об’єму").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineFireProtectionDistancesGasHolderKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("4.1").callbackData("4.1 ВПВ газгольдерів").build(),
+                InlineKeyboardButton.builder().text("4.2").callbackData("4.2 ВПВ газгольдерів").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("4.3").callbackData("4.3 ВПВ газгольдерів").build(),
+                InlineKeyboardButton.builder().text("4.4").callbackData("4.4 ВПВ газгольдерів").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("4.5").callbackData("4.5 ВПВ газгольдерів").build(),
+                InlineKeyboardButton.builder().text("4.6").callbackData("4.6 ВПВ газгольдерів").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("4.7").callbackData("4.7 ВПВ газгольдерів").build(),
+                InlineKeyboardButton.builder().text("4.8").callbackData("4.8 ВПВ газгольдерів").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineHardCoalStorageFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("до 10000 вугілля").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("від 10000 вугілля").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineFlammableLiquidsStorageFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("до 500").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("від 500 до 1000").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.3").callbackData("від 1000 до 2000").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineCombustibleLiquidsStorageFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("до 2500").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("від 2500 до 5000").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.3").callbackData("від 5000 до 10000").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineFireResistancePistonGasHolderFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("І/ІІ ступінь").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("ІІ-V ступінь").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineLumberFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("до 10000 ліс").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("від 10000 ліс").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineFireProtectionDistancesBetweenCommunicationsKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.4").callbackData("2.4 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.5").callbackData("2.5 ВПВ комунікації").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineTypeUtilityNetworkFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.1").callbackData("5.1 2.1 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.2").callbackData("5.2 2.1 ВПВ комунікації").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineLocationPipelineFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.1").callbackData("3.1 2.2 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.2").callbackData("3.2 2.2 ВПВ комунікації").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlinePipelineFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("4.1").callbackData("4.1 трубопроводи ВПВ").build(),
+                InlineKeyboardButton.builder().text("4.2").callbackData("4.2 трубопроводи ВПВ").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("4.3").callbackData("4.3 трубопроводи ВПВ").build(),
+                InlineKeyboardButton.builder().text("4.4").callbackData("4.4 трубопроводи ВПВ").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("4.5").callbackData("4.5 трубопроводи ВПВ").build(),
+                InlineKeyboardButton.builder().text("4.6").callbackData("4.6 трубопроводи ВПВ").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("4.7").callbackData("4.7 трубопроводи ВПВ").build(),
+                InlineKeyboardButton.builder().text("4.8").callbackData("4.8 трубопроводи ВПВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.9").callbackData("4.9 трубопроводи ВПВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlinePressurePipelineFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.1").callbackData("до 2,5 МПа").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.2").callbackData("більше 2,5 МПа").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineVoltageFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.1").callbackData("до 1 кВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.2").callbackData("більше 1 кВ до 35 кВ").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.3").callbackData("більше 35 кВ").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlinePipelineLiquidsFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.1").callbackData("легкозаймисті/горючі рідини").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.2").callbackData("масла, мазути").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineTypeBuildingPipelineLiquidsFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("4.1 2.3 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("4.2 2.3 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.3").callbackData("4.3 2.3 ВПВ комунікації").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineDiameterPipelineFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.1").callbackData("до 300 мм").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.2").callbackData("більше 300 мм").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineGasStationEngineeringNetworksFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.1").callbackData("3.1 2.4 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.2").callbackData("3.2 2.4 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.3").callbackData("3.3 2.4 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.4").callbackData("3.4 2.4 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.5").callbackData("3.5 2.4 ВПВ комунікації").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineTypesGasStationFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("тип АЗС А або Б").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("тип АЗС В").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineTypesCommunicationLinesFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("кабельні").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("повітряні").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineTypesGasStationEngineeringNetworksFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.1").callbackData("мала АЗС").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.2").callbackData("середня АЗС").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineTypesEngineeringNetworksFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.1").callbackData("3.1 2.5 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.2").callbackData("3.2 2.5 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.2").callbackData("3.3 2.5 ВПВ комунікації").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineTypesGasPipelineFireProtectionDistancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("4.1 2.5 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("4.2 2.5 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.3").callbackData("4.3 2.5 ВПВ комунікації").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.4").callbackData("4.4 2.5 ВПВ комунікації").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
 }

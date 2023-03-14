@@ -1,6 +1,8 @@
 package SV.FireSafety.services;
 
-public class InstructionExtinguisher {
+
+
+public class Instructions {
     public String instruction() {
         return "Робота чат боту щодо визначення нормативних показників "
                 + "чисельності та типів первинних засобів пожежогасіння (вогнегасників) регламентована "
@@ -76,4 +78,5 @@ public class InstructionExtinguisher {
     public String getStart(){
         return start();
     }
+
 }

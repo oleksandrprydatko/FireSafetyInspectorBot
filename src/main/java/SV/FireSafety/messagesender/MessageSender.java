@@ -7,4 +7,5 @@ public interface MessageSender {
     void sendMessage(SendMessage sendMessage);
 
     void sendEditMessage(EditMessageText editMessageText);
+
 }

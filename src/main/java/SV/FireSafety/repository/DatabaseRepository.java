@@ -27,7 +27,9 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
             "volume_premises=NULL, volume_rooms_a=NULL, volume_rooms_б=NULL, volume_rooms_в=NULL," +
             "volume_rooms_г=NULL,humidity_of_space=NULL,type_of_object=NULL,hotel_rooms=NULL,floors=NULL," +
             "fire_resistance=NULL,seats=NULL,books_storage=NULL,archives=NULL," +
-            "amount_of_transport=NULL,weight=NULL,productivity=NULL,length=NULL where inspector.users.id_telegram = :telegram_id",nativeQuery = true)
+            "amount_of_transport=NULL,weight=NULL,productivity=NULL," +
+            "length=NULL,fire_resistance_to_which=NULL,fire_alarm=false," +
+            "specific_load=false,type_fire_distance=NULL where inspector.users.id_telegram = :telegram_id",nativeQuery = true)
     void clearDB(long telegram_id);
     @Transactional
     @Modifying
@@ -423,5 +425,83 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
     @Query(value = "select productivity from inspector.users where id_telegram = :userId ", nativeQuery = true)
     Float getProductivity(long userId);
 
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set fire_resistance_to_which = :command where id_telegram = :userId", nativeQuery = true)
+    void setFire_resistance_to_which(String command,long userId);
 
+    @Query(value = "select fire_resistance_to_which from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    String getFire_resistance_to_which(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set fire_alarm = :command where id_telegram = :userId", nativeQuery = true)
+    void setFire_alarm(boolean command,long userId);
+
+    @Query(value = "select fire_alarm from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    Boolean getFire_alarm(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set specific_load = :command where id_telegram = :userId", nativeQuery = true)
+    void setSpecific_load(boolean command,long userId);
+
+    @Query(value = "select specific_load from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    Boolean getSpecific_load(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set type_fire_distance = :command where id_telegram = :userId", nativeQuery = true)
+    void setType_fire_distance(String command,long userId);
+
+    @Query(value = "select type_fire_distance from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    String getType_fire_distance(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set type_gas_station = :command where id_telegram = :userId", nativeQuery = true)
+    void setType_gas_station(String command,long userId);
+
+    @Query(value = "select type_gas_station from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    String getType_gas_station(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set size_gas_station = :command where id_telegram = :userId", nativeQuery = true)
+    void setSize_gas_station(String command,long userId);
+
+    @Query(value = "select size_gas_station from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    String getSize_gas_station(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set type_of_fuel = :command where id_telegram = :userId", nativeQuery = true)
+    void setType_of_fuel(String command,long userId);
+
+    @Query(value = "select type_of_fuel from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    String getType_of_fuel(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set type_gas_holder = :command where id_telegram = :userId", nativeQuery = true)
+    void setType_gas_holder(String command,long userId);
+
+    @Query(value = "select type_gas_holder from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    String getType_gas_holder(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set location_pipeline = :command where id_telegram = :userId", nativeQuery = true)
+    void setLocation_pipeline(String command,long userId);
+
+    @Query(value = "select location_pipeline from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    String getLocation_pipeline(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set type_liquid = :command where id_telegram = :userId", nativeQuery = true)
+    void setType_liquid(String command,long userId);
+
+    @Query(value = "select type_liquid from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    String getType_liquid(long userId);
 }

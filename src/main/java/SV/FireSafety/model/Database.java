@@ -18,7 +18,8 @@ public class Database {
             type_extinguisher,type_spaces_build,b1,b2,characteristics_object,type_object_of_risk,
             type_state_owned_object,type_cultural_object,type_industrial_storage_facility,level_emergency,
             type_result_degree_risk,category_buildings,value,
-            humidity_of_space,type_of_object,fire_resistance;
+            humidity_of_space,type_of_object,fire_resistance,fire_resistance_to_which,type_fire_distance,type_gas_station,
+            size_gas_station,type_of_fuel,type_gas_holder,location_pipeline,type_liquid;
 
     private Integer kitchen,dead_people,hotel_rooms,floors,parking,workplace,constantly_at_facility,periodically_at_facility,
             fixed_violations,no_fixed_violations,injured_people,seats,books_storage,amount_of_transport;
@@ -26,7 +27,7 @@ public class Database {
     private Float height_object,losses,tax_free_income,volume_premises,volume_rooms_a,volume_rooms_б,volume_rooms_в,
             volume_rooms_г,square,square_technical_premises,weight,length,productivity;
 
-    private Boolean used_indoors,archives;
+    private Boolean used_indoors,archives,fire_alarm,specific_load;
     public Database() {
 
     }
