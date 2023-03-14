@@ -10,8 +10,6 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-import java.nio.charset.StandardCharsets;
-
 
 @Component
 public class CallbackQueryHandler implements Handler<CallbackQuery> {
@@ -4057,26 +4055,13 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 sendMessage.setReplyMarkup(inlineButton.inlineFireProtectionDistancesKeyboard());
                 break;
             case "1.1 ВПВ":
+                databaseRepository.setType_fire_distance(callbackQuery.getData(),userId);
                 sendMessage.setText("Обрано: протипожежні відстані між будівлями\n\n" +
                         "2. Виберіть призначення об’єкту: \n\n" +
                         "\uD83D\uDC49 2.1 Протипожежні відстані між об’єктами громадського, адміністративного, побутового та житлового призначення\n" +
                         "\uD83D\uDC49 2.2 Протипожежні відстані від будівель громадського, адміністративного, побутового та житлового призначення до будівель і споруд виробничого, складського та сільськогосподарського призначення \n" +
                         "\uD83D\uDC49 2.3 Протипожежні відстані між будівлями виробничих, промислових та сільськогосподарських підприємств\n");
                 sendMessage.setReplyMarkup(inlineButton.inlineFireProtectionDistancesBetweenBuildingsKeyboard());
-                break;
-            case "1.2 ВПВ":
-                sendMessage.setText("Обрано: протипожежні відстані між будівлями та/або технологічними установками\n\n" +
-                        "2. Виберіть призначення об’єкту \uD83C\uDFE2 \n\n" +
-                        "\uD83D\uDC49 2.1 Протипожежні відстані між житловими і громадськими будівлями та складами (установками) нафти і нафтопродуктів\n" +
-                        "\uD83D\uDC49 2.2 Протипожежні відстані між будівлями промислового призначення та складами (установками) нафти і нафтопродуктів\n" +
-                        "\uD83D\uDC49 2.3 Протипожежні відстані між складами (установками) нафти і нафтопродуктів та лісовими насадженнями, ділянками залягання торфу\n" +
-                        "\uD83D\uDC49 2.4 Протипожежні відстані між резервуарами та технологічними установками складів нафти та нафтопродуктів\n" +
-                        "\uD83D\uDC49 2.5 Протипожежні відстані між об’єктами навколишнього середовища до технологічного обладнання традиційної автозаправної станції\n" +
-                        "\uD83D\uDC49 2.6 Протипожежні відстані між об’єктами навколишнього середовища до технологічного обладнання модульної автозаправної станції\n" +
-                        "\uD83D\uDC49 2.7 Протипожежні відстані між об’єктами навколишнього середовища до технологічного обладнання автомобільних газонаповнювальних компресорних станцій або багатопаливних автозаправних станцій\n" +
-                        "\uD83D\uDC49 2.8 Протипожежні відстані між будівлями і спорудами закритими розподільчими пристроями трансформаторних пунктів\n" +
-                        "\uD83D\uDC49 2.9 Протипожежні відстані між об’єктами навколишнього середовища та технологічним обладнанням газових сховищ (газгольдерів)\n");
-                sendMessage.setReplyMarkup(inlineButton.inlineFireProtectionDistancesTechnologicalKeyboard());
                 break;
             case "2.1 ВПВ між будівлями":
                 databaseRepository.setType_of_object(callbackQuery.getData(),userId);
@@ -4106,14 +4091,17 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "V ступінь вогнестійкості":
                 if (databaseRepository.getFire_resistance(userId)==null){
                     databaseRepository.setFire_resistance(callbackQuery.getData(), userId);
-                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
-                            "4. Вкажіть ступінь вогнестійкості будівлі <b>до якої здійснюється вимірювання</b> \uD83D\uDD25");
-                    sendMessage.setReplyMarkup(inlineButton.inlineFireResistanceFireProtectionDistancesKeyboard());
+                    if (databaseRepository.getType_of_object(userId).equals("2.8 ВПВ технологічні")){
+                        sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                    }else {
+                        sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                "4. Вкажіть ступінь вогнестійкості будівлі <b>до якої здійснюється вимірювання</b> \uD83D\uDD25");
+                        sendMessage.setReplyMarkup(inlineButton.inlineFireResistanceFireProtectionDistancesKeyboard());
+                    }
                 }else {
                     databaseRepository.setFire_resistance_to_which(callbackQuery.getData(),userId);
-                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n");
                     if (databaseRepository.getType_of_object(userId).equals("2.1 ВПВ між будівлями")){
-                        if (databaseRepository.getFire_resistance(userId).equals("І ступінь вогнестійкості")){
+                        if (databaseRepository.getFire_resistance(userId).equals("І ступінь вогнестійкості") || databaseRepository.getFire_resistance(userId).equals("ІІ ступінь вогнестійкості") || databaseRepository.getFire_resistance(userId).equals("ІІІ ступінь вогнестійкості")){
                             if (databaseRepository.getFire_resistance_to_which(userId).equals("І ступінь вогнестійкості") ||
                                     databaseRepository.getFire_resistance_to_which(userId).equals("ІІ ступінь вогнестійкості") ||
                                     databaseRepository.getFire_resistance_to_which(userId).equals("ІІІ ступінь вогнестійкості")){
@@ -4141,11 +4129,11 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 }
                 break;
             case "вікна наявні ВПВ":
-                databaseRepository.setWindows(true,userId);
+                databaseRepository.setType_premises("вікна наявні",userId);
                 sendMessage.setText(resultFireProtectionDistances() + "\n\n" + instructions.getStart());
                 break;
             case "вікна відсутні ВПВ":
-                databaseRepository.setWindows(false,userId);
+                databaseRepository.setType_premises("вікна відсутні",userId);
                 sendMessage.setText(resultFireProtectionDistances() + "\n\n" + instructions.getStart());
                 break;
             case "Категорія А ВПВ":
@@ -4230,7 +4218,740 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 databaseRepository.setSpecific_load(true,userId);
                 sendMessage.setText("Обрано: питома навантага більше 10 кг на 1м2\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
                 break;
+            case "1.2 ВПВ":
+                databaseRepository.setType_fire_distance(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні відстані між будівлями та/або технологічними установками\n\n" +
+                        "2. Виберіть призначення об’єкту \uD83C\uDFE2 \n\n" +
+                        "\uD83D\uDC49 2.1 Протипожежні відстані між житловими і громадськими будівлями та складами (установками) нафти і нафтопродуктів\n" +
+                        "\uD83D\uDC49 2.2 Протипожежні відстані між будівлями промислового призначення та складами (установками) нафти і нафтопродуктів\n" +
+                        "\uD83D\uDC49 2.3 Протипожежні відстані між складами (установками) нафти і нафтопродуктів та лісовими насадженнями, ділянками залягання торфу\n" +
+                        "\uD83D\uDC49 2.4 Протипожежні відстані між резервуарами та технологічними установками складів нафти та нафтопродуктів\n" +
+                        "\uD83D\uDC49 2.5 Протипожежні відстані між об’єктами навколишнього середовища до технологічного обладнання традиційної автозаправної станції\n" +
+                        "\uD83D\uDC49 2.6 Протипожежні відстані між об’єктами навколишнього середовища до технологічного обладнання модульної автозаправної станції\n" +
+                        "\uD83D\uDC49 2.7 Протипожежні відстані між об’єктами навколишнього середовища до технологічного обладнання автомобільних газонаповнювальних компресорних станцій або багатопаливних автозаправних станцій\n" +
+                        "\uD83D\uDC49 2.8 Протипожежні відстані між будівлями і спорудами закритими розподільчими пристроями трансформаторних пунктів\n" +
+                        "\uD83D\uDC49 2.9 Протипожежні відстані між об’єктами навколишнього середовища та технологічним обладнанням газових сховищ (газгольдерів)\n");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireProtectionDistancesTechnologicalKeyboard());
+                break;
+            case "2.1 ВПВ технологічні":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні відстані між житловими і громадськими будівлями та складами (установками) нафти і нафтопродуктів\n\n" +
+                        "3. Вкажіть категорію складу \uD83C\uDFEC");
+                sendMessage.setReplyMarkup(inlineButton.inlineCategoriesStorageFireProtectionDistancesKeyboard());
+                break;
+            case "категорія складу - І":
+                databaseRepository.setCategory_buildings(callbackQuery.getData(),userId);
+                if (databaseRepository.getType_of_object(userId).equals("2.3 ВПВ технологічні")){
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                            "4. Вкажіть тип ділянки:\n\n" +
+                            "\uD83D\uDC49 4.1 Лісові масиви\n" +
+                            "\uD83D\uDC49 4.2 Ділянки залягання торфу");
+                    sendMessage.setReplyMarkup(inlineButton.inlinePeatFireProtectionDistancesKeyboard());
+                }else {
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + "" +
+                            "4. Вкажіть підкатегорію складу \uD83C\uDFEC");
+                    sendMessage.setReplyMarkup(inlineButton.inlineSubcategoriesIStorageFireProtectionDistancesKeyboard());
+                }
+                break;
+            case "категорія складу - ІІ":
+                databaseRepository.setCategory_buildings(callbackQuery.getData(),userId);
+                if (databaseRepository.getType_of_object(userId).equals("2.3 ВПВ технологічні")){
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                            "4. Вкажіть тип ділянки:\n\n" +
+                            "\uD83D\uDC49 4.1 Лісові масиви\n" +
+                            "\uD83D\uDC49 4.2 Ділянки залягання торфу");
+                    sendMessage.setReplyMarkup(inlineButton.inlinePeatFireProtectionDistancesKeyboard());
+                }else {
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + "" +
+                            "4. Вкажіть підкатегорію складу \uD83C\uDFEC");
+                    sendMessage.setReplyMarkup(inlineButton.inlineSubcategoriesIIStorageFireProtectionDistancesKeyboard());
+                }
+                break;
+            case "категорія складу - ІІІ":
+                databaseRepository.setCategory_buildings(callbackQuery.getData(),userId);
+                if (databaseRepository.getType_of_object(userId).equals("2.3 ВПВ технологічні")){
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                            "4. Вкажіть тип ділянки:\n\n" +
+                            "\uD83D\uDC49 4.1 Лісові масиви\n" +
+                            "\uD83D\uDC49 4.2 Ділянки залягання торфу");
+                    sendMessage.setReplyMarkup(inlineButton.inlinePeatFireProtectionDistancesKeyboard());
+                }else {
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + "" +
+                            "4. Вкажіть підкатегорію складу \uD83C\uDFEC");
+                    sendMessage.setReplyMarkup(inlineButton.inlineSubcategoriesIIIStorageFireProtectionDistancesKeyboard());
+                }
+                break;
+            case "підкатегорія – Іа":
+            case "підкатегорія – Іб":
+            case "підкатегорія – IІа":
+            case "підкатегорія – ІIб":
+            case "підкатегорія – IIІа":
+            case "підкатегорія – ІIIб":
+            case "підкатегорія – ІIIв":
+                databaseRepository.setCategory_premises(callbackQuery.getData(),userId);
+                if (databaseRepository.getType_of_object(userId).equals("2.1 ВПВ технологічні")){
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                            "5. Виберіть тип рідин, які зберігаються:\n\n" +
+                            "\uD83D\uDC49 5.1 Зберігання легкозаймистих рідин\n" +
+                            "\uD83D\uDC49 5.2 Зберігання горючих рідин");
+                    sendMessage.setReplyMarkup(inlineButton.inlineLiquidsFireProtectionDistancesKeyboard());
+                } else if (databaseRepository.getType_of_object(userId).equals("2.2 ВПВ технологічні")) {
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                            "5. Виберіть тип будівлі:\n\n" +
+                            "\uD83D\uDC49 5.1 Будинки і споруди сільськогосподарських підприємств\n" +
+                            "\uD83D\uDC49 5.2 Cклади твердих горючих матеріалів\n" +
+                            "\uD83D\uDC49 5.3 Гаражі та відкриті стоянки\n" +
+                            "\uD83D\uDC49 5.4 Технологічні установки категорії виробництва «А» та «Б» нафтопереробних, нафтохімічних підприємств\n" +
+                            "\uD83D\uDC49 5.5 Факельні установки спалювання газу");
+                    sendMessage.setReplyMarkup(inlineButton.inlineOilStorageFireProtectionDistancesKeyboard());
+                    break;
+                } else if (databaseRepository.getType_of_object(userId).equals("2.4 ВПВ технологічні")) {
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                            "5. Вкажіть тип резервуару:\n\n" +
+                            "\uD83D\uDC49 5.1 Зливо-наливні пристрої морських і річкових суден\n" +
+                            "\uD83D\uDC49 5.2 Зливо-наливні пристрої залізничних та автомобільних цистерн більше 3-х стояків\n" +
+                            "\uD83D\uDC49 5.3 Зливо-наливні пристрої автомобільних цистерн до 3-х стояків\n" +
+                            "\uD83D\uDC49 5.4 Насосні станції \n" +
+                            "\uD83D\uDC49 5.5 Складські будівлі для зберігання нафтопродуктів в тарі\n" +
+                            "\uD83D\uDC49 5.6 Насосні станції пожежні і водопровідні, пожежні пости, протипожежні резервуари\n" +
+                            "\uD83D\uDC49 5.7 Очисні споруди\n" +
+                            "\uD83D\uDC49 5.8 Очисні споруди\n" +
+                            "\uD83D\uDC49 5.9 Виробничі будівлі категорії «Д»\n" +
+                            "\uD83D\uDC49 5.10 Технологічні установки категорії «А», «Б»");
+                    sendMessage.setReplyMarkup(inlineButton.inlineFireProtectionDistancesTechnologicalReservoirsKeyboard());
+                    break;
+                } else {
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                            "5. Вкажіть тип інженерної мережі:\n\n" +
+                            "\uD83D\uDC49 5.1 Водопровідні споруди \n" +
+                            "\uD83D\uDC49 5.2 Очисні каналізаційні споруди та мережі");
+                    sendMessage.setReplyMarkup(inlineButton.inlineTypeUtilityNetworkFireProtectionDistancesKeyboard());
+                    break;
+                }
+                break;
+            case "легкозаймисті ВПВ":
+                databaseRepository.setType_premises("легкозаймисті рідини",userId);
+                sendMessage.setText("Обрано: при зберіганні легкозаймистих рідин\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "горючі ВПВ":
+                databaseRepository.setType_premises("горючі рідини",userId);
+                sendMessage.setText("Обрано: при зберіганні горючих рідин\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "2.2 ВПВ технологічні":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні відстані між будівлями промислового призначення та складами (установками) нафти і нафтопродуктів\n\n" +
+                        "3. Вкажіть категорію складу \uD83C\uDFEC");
+                sendMessage.setReplyMarkup(inlineButton.inlineCategoriesStorageFireProtectionDistancesKeyboard());
+                break;
+            case "5.1 2.2 ВПВ технологічні":
+                databaseRepository.setType_premises("сільськогосподарські",userId);
+                sendMessage.setText("Обрано: будинки і споруди сільськогосподарських підприємств\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "5.2 2.2 ВПВ технологічні":
+                databaseRepository.setType_premises("тверді горючі",userId);
+                sendMessage.setText("Обрано: склади твердих горючих матеріалів\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "5.3 2.2 ВПВ технологічні":
+                databaseRepository.setType_premises("гаражі",userId);
+                sendMessage.setText("Обрано: гаражі та відкриті стоянки\n\n" +
+                        "6. Вкажіть кількість автомобілів: \uD83D\uDE97");
+                sendMessage.setReplyMarkup(inlineButton.inlineCarsFireProtectionDistancesKeyboard());
+                break;
+            case "5.4 2.2 ВПВ технологічні":
+                databaseRepository.setType_premises("технологічні",userId);
+                sendMessage.setText("Обрано: технологічні установки категорії виробництва «А» та «Б» нафтопереробних, нафтохімічних підприємств\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "5.5 2.2 ВПВ технологічні":
+                databaseRepository.setType_premises("факельні",userId);
+                sendMessage.setText("Обрано: факельні установки спалювання газу\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "до 20 авто ВПВ":
+                databaseRepository.setParking(1,userId);
+                sendMessage.setText("Обрано: до 20 одиниць\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "більше 20 авто ВПВ":
+                databaseRepository.setParking(21,userId);
+                sendMessage.setText("Обрано: більше 20 авто ВПВ\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "2.3 ВПВ технологічні":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: Протипожежні відстані між складами (установками) нафти і нафтопродуктів та лісовими насадженнями, ділянками залягання торфу\n\n" +
+                        "3. 3. Вкажіть категорію складу \uD83C\uDFEC");
+                sendMessage.setReplyMarkup(inlineButton.inlineCategoriesStorageFireProtectionDistancesKeyboard());
+                break;
+            case "лісові масиви":
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                        "5. Вкажіть породу насаджень \uD83C\uDF33 \n\n" +
+                        "\uD83D\uDC49 5.1 Хвойні породи\n" +
+                        "\uD83D\uDC49 5.2 Змішані породи\n" +
+                        "\uD83D\uDC49 5.3 Листяні породи");
+                sendMessage.setReplyMarkup(inlineButton.inlineForestFireProtectionDistancesKeyboard());
+                break;
+            case "хвойні породи":
+            case "змішані породи":
+            case "листяні породи":
+            case "ділянки залягання торфу":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "2.4 ВПВ технологічні":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні відстані між резервуарами та технологічними установками складів нафти та нафтопродуктів\n\n" +
+                        "3. Вкажіть категорію складу \uD83C\uDFEC");
+                sendMessage.setReplyMarkup(inlineButton.inlineCategoriesStorageFireProtectionDistancesKeyboard());
+                break;
+            case "5.1 ВПВ резервуари":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: зливо-наливні пристрої морських і річкових суден\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "5.2 ВПВ резервуари":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: зливо-наливні пристрої залізничних та автомобільних цистерн більше 3-х стояків\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "5.3 ВПВ резервуари":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: зливо-наливні пристрої автомобільних цистерн до 3-х стояків\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "5.4 ВПВ резервуари":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: насосні станції\n\n"  + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "5.5 ВПВ резервуари":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: складські будівлі для зберігання нафтопродуктів в тарі\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "5.6 ВПВ резервуари":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: насосні станції пожежні і водопровідні, пожежні пости, протипожежні резервуари\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "5.7 ВПВ резервуари":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: очисні споруди \n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "5.8 ВПВ резервуари":
+                sendMessage.setText("Обрано: виробничі будівлі з використанням відкритого вогню\n\n" +
+                        "6. Вкажіть вид нафтопродукту:\n\n" +
+                        "\uD83D\uDC49 6.1 Легкозаймиста рідина\n" +
+                        "\uD83D\uDC49 6.2 Горюча рідина");
+                sendMessage.setReplyMarkup(inlineButton.inlineOilFireProtectionDistancesKeyboard());
+                break;
+            case "5.9 ВПВ резервуари":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: виробничі будівлі категорії «Д»\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "5.10 ВПВ резервуари":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: технологічні установки категорії «А», «Б»\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "2.5 ВПВ технологічні":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні відстані між об’єктами навколишнього середовища до технологічного обладнання традиційної автозаправної станції\n\n" +
+                        "3. Вкажіть тип автозаправної станції ⛽️ \n\n" +
+                        "\uD83D\uDC49 3.1 Тип А або Б\n" +
+                        "\uD83D\uDC49 3.2 Тип В");
+                sendMessage.setReplyMarkup(inlineButton.inlineGasStationFireProtectionDistancesKeyboard());
+                break;
+            case "тип А або Б":
+                databaseRepository.setType_gas_station(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                        "4. Вкажіть вид автозаправної станції: \n\n" +
+                        "\uD83D\uDC49 4.1 Мала\n" +
+                        "\uD83D\uDC49 4.2 Середня\n" +
+                        "\uD83D\uDC49 4.3 Велика");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypeGasStationАБFireProtectionDistancesKeyboard());
+                break;
+            case "тип В":
+                databaseRepository.setType_gas_station(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                        "4. Вкажіть вид автозаправної станції: \n\n" +
+                        "\uD83D\uDC49 4.1 Мала\n" +
+                        "\uD83D\uDC49 4.2 Середня\n");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypeGasStationВFireProtectionDistancesKeyboard());
+                break;
+            case "мала":
+            case "середня":
+            case "велика":
+                databaseRepository.setSize_gas_station(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                        "5. Вкажіть тип об'єкту навколишнього середовища: \n\n" +
+                        "\uD83D\uDC49 5.1 Житлові та громадські будинки\n" +
+                        "\uD83D\uDC49 5.2 Місця з одночасним перебуванням 100 осіб та більше\n" +
+                        "\uD83D\uDC49 5.3 Окремо стоячі торгові місця\n" +
+                        "\uD83D\uDC49 5.4 Індивідуальні гаражі та відкриті автостоянки\n" +
+                        "\uD83D\uDC49 5.5 Очисні та каналізаційні споруди\n" +
+                        "\uD83D\uDC49 5.6 Виробничі, адміністративні, складські будівлі і споруди\n" +
+                        "\uD83D\uDC49 5.7 Виробничі будинки, де обертаються шкідливі речовини\n" +
+                        "\uD83D\uDC49 5.8 Склади твердих горючих речовин \n" +
+                        "\uD83D\uDC49 5.9 Лісові насадження");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireProtectionDistancesTechnologicalGasStationKeyboard());
+                break;
+            case "1 ВПВ заправки":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: житлові та громадські будинки\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "2 ВПВ заправки":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: місця з одночасним перебуванням 100 осіб та більше\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "3 ВПВ заправки":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: окремо стоячі торгові місця\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4 ВПВ заправки":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: індивідуальні гаражі та відкриті автостоянки\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "5 ВПВ заправки":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: очисні та каналізаційні споруди\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "6 ВПВ заправки":
+                if (databaseRepository.getType_of_object(userId).equals("2.5 ВПВ технологічні")){
+                    sendMessage.setText("Обрано: виробничі, адміністративні, складські будівлі і споруди\n\n" +
+                            "6. Вкажіть ступінь вогнестійкості будівлі: \uD83D\uDD25 \n\n" +
+                            "\uD83D\uDC49 6.1 І, ІІ, ІІІ ступінь вогнестійкості\n" +
+                            "\uD83D\uDC49 6.2 ІІІа, ІІІб, IV, IVa, V ступінь вогнестійкості");
+                    sendMessage.setReplyMarkup(inlineButton.inlineFireResistanceGasStationFireProtectionDistancesKeyboard());
+                }else {
+                    databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                    sendMessage.setText("Обрано: виробничі, адміністративні, складські будівлі і споруди\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                }
+                break;
+            case "7 ВПВ заправки":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: виробничі будинки, де обертаються шкідливі речовини\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "8 ВПВ заправки":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: склади твердих горючих речовин\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "9 ВПВ заправки":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: лісові насадження\n\n" +
+                        "6. Вкажіть породу насаджень \uD83C\uDF33 \n\n" +
+                        "\uD83D\uDC49 6.1 Хвойні\n" +
+                        "\uD83D\uDC49 6.2 Змішані\n" +
+                        "\uD83D\uDC49 6.3 Листяні ");
+                sendMessage.setReplyMarkup(inlineButton.inlineForestGasStationFireProtectionDistancesKeyboard());
+                break;
+            case "І, ІІ, ІІІ ступінь":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: І, ІІ, ІІІ ступінь вогнестійкості\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "ІІІа, ІІІб, IV, IVa, V ступінь":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: ІІІа, ІІІб, IV, IVa, V ступінь вогнестійкості\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "2.6 ВПВ технологічні":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні відстані між об’єктами навколишнього середовища до технологічного обладнання модульної автозаправної станції\n\n" +
+                        "3. Вкажіть категорію модульної автозаправної станції ⛽️\n\n" +
+                        "\uD83D\uDC49 3.1 Категорія І (малої потужності)\n" +
+                        "\uD83D\uDC49 3.2 Категорія ІІ (середньої потужності)");
+                sendMessage.setReplyMarkup(inlineButton.inlineModularGasStationFireProtectionDistancesKeyboard());
+                break;
+            case "категорія І(малої потужності)":
+            case "категорія ІІ(середньої потужності)":
+                databaseRepository.setCategory_buildings(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                        "4. Вкажіть тип об'єкту навколишнього середовища:\n\n" +
+                        "\uD83D\uDC49 4.1 Житлові та громадські будинки\n" +
+                        "\uD83D\uDC49 4.2 Місця з одночасним перебуванням 100 осіб та більше\n" +
+                        "\uD83D\uDC49 4.3 Окремо стоячі торгові місця \n" +
+                        "\uD83D\uDC49 4.4 Індивідуальні гаражі та відкриті автостоянки\n" +
+                        "\uD83D\uDC49 4.5 Очисні та каналізаційні споруди\n" +
+                        "\uD83D\uDC49 4.6 Виробничі, адміністративні, складські будівлі і споруди\n" +
+                        "\uD83D\uDC49 4.7 Виробничі будинки, де обертаються шкідливі речовини \n" +
+                        "\uD83D\uDC49 4.8 Склади твердих горючих речовин \n" +
+                        "\uD83D\uDC49 4.9 Лісові насадження");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireProtectionDistancesTechnologicalModularGasStationKeyboard());
+                break;
+            case "2.7 ВПВ технологічні":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні відстані між об’єктами навколишнього середовища до технологічного обладнання автомобільних газонаповнювальних компресорних станцій або багатопаливних автозаправних станцій\n\n" +
+                        "3. Вкажіть вид газоподібного палива:\n\n" +
+                        "\uD83D\uDC49 3.1 Скраплений вуглеводневий газ\n" +
+                        "\uD83D\uDC49 3.2 Стиснений природний газ");
+                sendMessage.setReplyMarkup(inlineButton.inlineMultiFuelGasStationsFireProtectionDistancesKeyboard());
+                break;
+            case "скраплений вуглеводневий газ":
+            case "стиснений природний газ":
+                databaseRepository.setType_of_fuel(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                        "4. Вкажіть тип об'єкту навколишнього середовища: \n\n" +
+                        "\uD83D\uDC49 4.1 Житлові та громадські будинки\n" +
+                        "\uD83D\uDC49 4.2 Місця з одночасним перебуванням 100 осіб та більше\n" +
+                        "\uD83D\uDC49 4.3 Окремо стоячі торгові місця \n" +
+                        "\uD83D\uDC49 4.4 Індивідуальні гаражі та відкриті автостоянки\n" +
+                        "\uD83D\uDC49 4.5 Очисні та каналізаційні споруди\n" +
+                        "\uD83D\uDC49 4.6 Виробничі, адміністративні, складські будівлі і споруди\n" +
+                        "\uD83D\uDC49 4.7 Виробничі будинки, де обертаються шкідливі речовини \n" +
+                        "\uD83D\uDC49 4.8 Склади твердих горючих речовин \n" +
+                        "\uD83D\uDC49 4.9 Лісові насадження");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireProtectionDistancesTechnologicalModularGasStationKeyboard());
+                break;
+            case "2.8 ВПВ технологічні":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні відстані між будівлями і спорудами закритими розподільчими пристроями трансформаторних пунктів\n\n" +
+                        "3. Вкажіть ступінь вогнестійкості \uD83D\uDD25");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireResistanceFireProtectionDistancesKeyboard());
+                break;
+            case "2.9 ВПВ технологічні":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні відстані між об’єктами навколишнього середовища та технологічним обладнанням газових сховищ (газгольдерів)\n\n" +
+                        "3. Вкажіть вид газгольдеру\n\n" +
+                        "\uD83D\uDC49 3.1 Поршневий\n" +
+                        "\uD83D\uDC49 3.2 Постійного об’єму або із водяним басейном");
+                sendMessage.setReplyMarkup(inlineButton.inlineGasHolderFireProtectionDistancesKeyboard());
+                break;
+            case "поршневий":
+            case "постійного об’єму":
+                databaseRepository.setType_gas_holder(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                        "4. Вкажіть тип об'єкту навколишнього середовища: \n\n" +
+                        "\uD83D\uDC49 4.1 Житлові та громадські будинки\n" +
+                        "\uD83D\uDC49 4.2 Склад кам’яного вугілля\n" +
+                        "\uD83D\uDC49 4.3 Склад торфу ємністю до 10000 тон\n" +
+                        "\uD83D\uDC49 4.4 Склад лісоматеріалів, дров та горючих матеріалів\n" +
+                        "\uD83D\uDC49 4.5 Склад легкозаймистих рідин\n" +
+                        "\uD83D\uDC49 4.6 Склад горючих рідин\n" +
+                        "\uD83D\uDC49 4.7 Виробничі і допоміжні будівлі промислових підприємств\n" +
+                        "\uD83D\uDC49 4.8 Промислові печі з використанням відкритого вогню");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireProtectionDistancesGasHolderKeyboard());
+                break;
+            case "4.1 ВПВ газгольдерів":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: житлові та громадські будинки\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.2 ВПВ газгольдерів":
+                sendMessage.setText("Обрано: склад кам’яного вугілля\n\n" +
+                        "4. Вкажіть ємність складу\uD83C\uDFE2 \n\n" +
+                        "\uD83D\uDC49 4.1 До 10000\n" +
+                        "\uD83D\uDC49 4.2 Від 10000 до 100000" );
+                sendMessage.setReplyMarkup(inlineButton.inlineHardCoalStorageFireProtectionDistancesKeyboard());
+                break;
+            case "до 10000 вугілля":
+            case "до 10000 ліс":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: до 10000\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "від 10000 вугілля":
+            case "від 10000 ліс":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: від 10000 до 100000\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.3 ВПВ газгольдерів":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: склад торфу ємністю до 10000 тон\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.4 ВПВ газгольдерів":
+                sendMessage.setText("Обрано: склад лісоматеріалів, дров та горючих матеріалів\n\n" +
+                        "4. Вкажіть ємність складу \uD83C\uDFE2 \n\n" +
+                        "\uD83D\uDC49 4.1 До 10000\n" +
+                        "\uD83D\uDC49 4.2 Від 10000 до 100000");
+                sendMessage.setReplyMarkup(inlineButton.inlineLumberFireProtectionDistancesKeyboard());
+                break;
+            case "4.5 ВПВ газгольдерів":
+                sendMessage.setText("Обрано: склад легкозаймистих рідин\n\n" +
+                        "4. Вкажіть ємність складу (м.куб):\n\n" +
+                        "\uD83D\uDC49 4.1 До 500\n" +
+                        "\uD83D\uDC49 4.2 Від 500 до 1000\n" +
+                        "\uD83D\uDC49 4.3 Від 1000 до 2000");
+                sendMessage.setReplyMarkup(inlineButton.inlineFlammableLiquidsStorageFireProtectionDistancesKeyboard());
+                break;
+            case "до 500":
+            case "від 500 до 1000":
+            case "від 1000 до 2000":
+            case "до 2500":
+            case "від 2500 до 5000":
+            case "від 5000 до 10000":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.6 ВПВ газгольдерів":
+                sendMessage.setText("Обрано: склад горючих рідин\n\n" +
+                        "4. Вкажіть ємність складу (м.куб):\n\n" +
+                        "\uD83D\uDC49 4.1 до 2500\n" +
+                        "\uD83D\uDC49 4.2 від 2500 до 5000\n" +
+                        "\uD83D\uDC49 4.3 від 5000 до 10000");
+                sendMessage.setReplyMarkup(inlineButton.inlineCombustibleLiquidsStorageFireProtectionDistancesKeyboard());
+                break;
+            case "4.7 ВПВ газгольдерів":
+                sendMessage.setText("Обрано: виробничі і допоміжні будівлі промислових підприємств\n\n" +
+                        "4. Вкажіть ступінь вогнестійкості:\n\n" +
+                        "\uD83D\uDC49 4.1 І/ІІ ступінь\n" +
+                        "\uD83D\uDC49 4.2 ІІ/ІІІ/ІІІа/ІІІб/IV/Iva/V ступінь");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireResistancePistonGasHolderFireProtectionDistancesKeyboard());
+                break;
+            case "І/ІІ ступінь":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: І, ІІ ступінь вогнестійкості\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "ІІ-V ступінь":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: ІІ, ІІІ, ІІІа, ІІІб, IV, Iva, V ступінь вогнестійкості\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.8 ВПВ газгольдерів":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: промислові печі з використанням відкритого вогню \n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "1.3 ВПВ":
+                databaseRepository.setType_fire_distance(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні відстані між будівлями та/або інженерними комунікаціями\n\n" +
+                        "2. Виберіть призначення об'єкту: \n\n" +
+                        "\uD83D\uDC49 2.1 Протипожежні відстані між складами (установками) нафти і нафтопродуктів та інженерними мережами\n" +
+                        "\uD83D\uDC49 2.2 Протипожежні відстані між технологічними трубопроводами складів нафти і нафтопродуктів та будівлями, спорудами і інженерними мережами\n" +
+                        "\uD83D\uDC49 2.3 Протипожежні відстані між підземними технологічними трубопроводами легкозаймистих та горючих рідин та будівлями, спорудами і інженерними мережами\n" +
+                        "\uD83D\uDC49 2.4 Протипожежні відстані від споруд автозаправних станцій до інженерних мереж\n" +
+                        "\uD83D\uDC49 2.5 Протипожежні відстані від будівель і споруд до інженерних мереж");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireProtectionDistancesBetweenCommunicationsKeyboard());
+                break;
+            case "2.1 ВПВ комунікації":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні відстані між складами (установками) нафти і нафтопродуктів та інженерними мережами\n\n" +
+                        "3. Вкажіть категорію складу: ");
+                sendMessage.setReplyMarkup(inlineButton.inlineCategoriesStorageFireProtectionDistancesKeyboard());
+                break;
+            case "5.1 2.1 ВПВ комунікації":
+                databaseRepository.setType_premises("водопровідні",userId);
+                sendMessage.setText("Обрано: водопровідні споруди\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "5.2 2.1 ВПВ комунікації":
+                databaseRepository.setType_premises("очисні",userId);
+                sendMessage.setText("Обрано: очисні каналізаційні споруди та мережі\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "2.2 ВПВ комунікації":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: Протипожежні відстані між технологічними трубопроводами складів нафти і нафтопродуктів та будівлями, спорудами і інженерними мережами\n\n" +
+                        "3. Вкажіть спосіб прокладки технологічних трубопроводів\n\n" +
+                        "\uD83D\uDC49 3.1 Наземне\n" +
+                        "\uD83D\uDC49 3.2 Підземне");
+                sendMessage.setReplyMarkup(inlineButton.inlineLocationPipelineFireProtectionDistancesKeyboard());
+                break;
+            case "3.1 2.2 ВПВ комунікації":
+                databaseRepository.setLocation_pipeline("наземне",userId);
+                sendMessage.setText("Обрано: наземне\n\n" +
+                        "4. Вкажіть тип будівлі: \n\n" +
+                        "\uD83D\uDC49 4.1 Фундаменти будівель та споруд складів нафти і нафтопродуктів \n" +
+                        "\uD83D\uDC49 4.2 Фундаменти адміністративно-побутових будівель з масовим перебуванням людей\n" +
+                        "\uD83D\uDC49 4.3 Стінки резервуарів нафти і нафтопродуктів\n" +
+                        "\uD83D\uDC49 4.4 Фундаменти опор естакад, трубопроводів, мереж зв’язку\n" +
+                        "\uD83D\uDC49 4.5 Фундаменти ліній електроживлення\n" +
+                        "\uD83D\uDC49 4.6 Відкриті трансформаторні підстанції\n" +
+                        "\uD83D\uDC49 4.7 Водопроводи, дренажі\n" +
+                        "\uD83D\uDC49 4.8 Каналізування\n" +
+                        "\uD83D\uDC49 4.9 Кабельні канали ");
+                sendMessage.setReplyMarkup(inlineButton.inlinePipelineFireProtectionDistancesKeyboard());
+                break;
+            case "3.2 2.2 ВПВ комунікації":
+                databaseRepository.setLocation_pipeline("підземне",userId);
+                sendMessage.setText("Обрано: підземне\n\n" +
+                        "4. Вкажіть тип будівлі: \n\n" +
+                        "\uD83D\uDC49 4.1 Фундаменти будівель та споруд складів нафти і нафтопродуктів \n" +
+                        "\uD83D\uDC49 4.2 Фундаменти адміністративно-побутових будівель з масовим перебуванням людей\n" +
+                        "\uD83D\uDC49 4.3 Стінки резервуарів нафти і нафтопродуктів\n" +
+                        "\uD83D\uDC49 4.4 Фундаменти опор естакад, трубопроводів, мереж зв’язку\n" +
+                        "\uD83D\uDC49 4.5 Фундаменти ліній електроживлення\n" +
+                        "\uD83D\uDC49 4.6 Відкриті трансформаторні підстанції\n" +
+                        "\uD83D\uDC49 4.7 Водопроводи, дренажі\n" +
+                        "\uD83D\uDC49 4.8 Каналізування\n" +
+                        "\uD83D\uDC49 4.9 Кабельні канали ");
+                sendMessage.setReplyMarkup(inlineButton.inlinePipelineFireProtectionDistancesKeyboard());
+                break;
+            case "4.1 трубопроводи ВПВ":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: фундаменти будівель та споруд складів нафти і нафтопродуктів\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.2 трубопроводи ВПВ":
+                sendMessage.setText("Обрано: фундаменти адміністративно-побутових будівель з масовим перебуванням людей\n\n" +
+                        "5. Виберіть тиск трубопроводу:" +
+                        "\uD83D\uDC49 5.1 До 2,5 МПа\n" +
+                        "\uD83D\uDC49 5.2 Більше 2,5 МПа");
+                sendMessage.setReplyMarkup(inlineButton.inlinePressurePipelineFireProtectionDistancesKeyboard());
+                break;
+            case "до 2,5 МПа":
+            case "більше 2,5 МПа":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.3 трубопроводи ВПВ":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: стінки резервуарів нафти і нафтопродуктів\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.4 трубопроводи ВПВ":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: фундаменти опор естакад, трубопроводів, мереж зв’язку\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.5 трубопроводи ВПВ":
+                sendMessage.setText("Обрано: фундаменти ліній електроживлення\n\n" +
+                        "5. Виберіть напругу ліній електроживлення: \n\n" +
+                        "\uD83D\uDC49 5.1 До 1 кВ\n" +
+                        "\uD83D\uDC49 5.2 Більше 1 кВ до 35 кВ \n" +
+                        "\uD83D\uDC49 5.3 Більше 35 кВ");
+                sendMessage.setReplyMarkup(inlineButton.inlineVoltageFireProtectionDistancesKeyboard());
+                break;
+            case "до 1 кВ":
+            case "більше 1 кВ до 35 кВ":
+            case "більше 35 кВ":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.6 трубопроводи ВПВ":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: відкриті трансформаторні підстанції\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.7 трубопроводи ВПВ":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: водопроводи, дренажі\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.8 трубопроводи ВПВ":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: каналізування\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.9 трубопроводи ВПВ":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: кабельні канали \n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "2.3 ВПВ комунікації":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні відстані між підземними технологічними трубопроводами легкозаймистих та горючих рідин та будівлями, спорудами і інженерними мережами\n\n" +
+                        "3. Вкажіть вид транспортуємої речовини: \n\n" +
+                        "\uD83D\uDC49 3.1 Легкозаймисті рідини, горючі рідини\n" +
+                        "\uD83D\uDC49 3.2 Масла, мазути");
+                sendMessage.setReplyMarkup(inlineButton.inlinePipelineLiquidsFireProtectionDistancesKeyboard());
+                break;
+            case "легкозаймисті/горючі рідини":
+            case "масла, мазути":
+                databaseRepository.setType_liquid(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                        "4. Вкажіть тип будівлі: \n\n" +
+                        "\uD83D\uDC49 4.1 Будівлі і споруди промислових, сільськогосподарських, складських підприємств, гаражі з кількістю місць до 20 одиниць\n" +
+                        "\uD83D\uDC49 4.2 Нежитлові і допоміжні будівлі, насосні станції \n" +
+                        "\uD83D\uDC49 4.3 Житлові будинки");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypeBuildingPipelineLiquidsFireProtectionDistancesKeyboard());
+                break;
+            case "4.1 2.3 ВПВ комунікації":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: будівлі і споруди промислових, сільськогосподарських, складських підприємств, гаражі з кількістю місць до 20 одиниць\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.2 2.3 ВПВ комунікації":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: нежитлові і допоміжні будівлі, насосні станції\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.3 2.3 ВПВ комунікації":
+                sendMessage.setText("Обрано: житлові будинки\n\n" +
+                        "5. Виберіть діаметр трубопроводу:\n\n" +
+                        "\uD83D\uDC49 5.1 До 300 мм \n" +
+                        "\uD83D\uDC49 5.2 Більше 300 мм");
+                sendMessage.setReplyMarkup(inlineButton.inlineDiameterPipelineFireProtectionDistancesKeyboard());
+                break;
+            case "до 300 мм":
+            case "більше 300 мм":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "2.4 ВПВ комунікації":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні відстані від споруд автозаправних станцій до інженерних мереж\n\n" +
+                        "3. Оберіть тип мереж: \n\n" +
+                        "\uD83D\uDC49 3.1 Лінії електрифікованого міського транспорту\n" +
+                        "\uD83D\uDC49 3.2 Повітряні лінії електропередач\n" +
+                        "\uD83D\uDC49 3.3 Кабельні лінії електропередач\n" +
+                        "\uD83D\uDC49 3.4 Лінії зв’язку \n" +
+                        "\uD83D\uDC49 3.5 Теплові мережі");
+                sendMessage.setReplyMarkup(inlineButton.inlineGasStationEngineeringNetworksFireProtectionDistancesKeyboard());
+                break;
+            case "3.1 2.4 ВПВ комунікації":
+                sendMessage.setText("Обрано: лінії електрифікованого міського транспорту\n\n" +
+                        "4. Вкажіть тип автозаправної станції: \n\n" +
+                        "\uD83D\uDC49 4.1 Автозаправні станції типів А та Б \n" +
+                        "\uD83D\uDC49 4.2 Автозаправні станції типу В");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypesGasStationFireProtectionDistancesKeyboard());
+                break;
+            case "тип АЗС А або Б":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "тип АЗС В":
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                        "5. Вкажіть вид автозаправної станції:\n\n" +
+                        "\uD83D\uDC49 5.1 Мала\n" +
+                        "\uD83D\uDC49 5.2 Середня");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypesGasStationEngineeringNetworksFireProtectionDistancesKeyboard());
+                break;
+            case "мала АЗС":
+            case "середня АЗС":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "3.2 2.4 ВПВ комунікації":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: повітряні лінії електропередач\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "3.3 2.4 ВПВ комунікації":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: кабельні лінії електропередач\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "3.4 2.4 ВПВ комунікації":
+                sendMessage.setText("Обрано: лінії зв’язку\n\n" +
+                        "4. Вкажіть варіант прокладання:\n\n" +
+                        "\uD83D\uDC49 4.1 Кабельні\n" +
+                        "\uD83D\uDC49 4.2 Повітряні");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypesCommunicationLinesFireProtectionDistancesKeyboard());
+                break;
+            case "кабельні":
+            case "повітряні":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "3.5 2.4 ВПВ комунікації":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: теплові мережі\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "2.5 ВПВ комунікації":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні відстані від будівель і споруд до інженерних мереж\n\n" +
+                        "3. Вкажіть тип споруд:\n\n" +
+                        "\uD83D\uDC49 3.1 Газопроводи \n" +
+                        "\uD83D\uDC49 3.2 Кабелі силові \n" +
+                        "\uD83D\uDC49 3.3 Кабельні тунелі ");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypesEngineeringNetworksFireProtectionDistancesKeyboard());
+                break;
+            case "3.1 2.5 ВПВ комунікації":
+                sendMessage.setText("Обрано: газопроводи \n\n" +
+                        "4. Вкажіть тип тиску: \n\n" +
+                        "\uD83D\uDC49 4.1 Низького тиску\n" +
+                        "\uD83D\uDC49 4.2 Середнього тиску \n" +
+                        "\uD83D\uDC49 4.3 Високого тиску від 0,3 до 0,6 МПа\n" +
+                        "\uD83D\uDC49 4.4 Високого тиску від 0,6 до 1,2 МПа");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypesGasPipelineFireProtectionDistancesKeyboard());
+                break;
+            case "4.1 2.5 ВПВ комунікації":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: низького тиску\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.2 2.5 ВПВ комунікації":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: середнього тиску \n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.3 2.5 ВПВ комунікації":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: високого тиску від 0,3 до 0,6 МПа\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "4.4 2.5 ВПВ комунікації":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: високого тиску від 0,6 до 1,2 МПа\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "3.2 2.5 ВПВ комунікації":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: кабелі силові\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
+            case "3.3 2.5 ВПВ комунікації":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: кабельні тунелі\n\n" + resultFireProtectionDistances() + "\n\n" + instructions.getStart());
+                break;
         }
+
         messageSender.sendMessage(sendMessage);
     }
     private String resultExtinguisher() { // виводить результат для вогнегасника
@@ -4305,6 +5026,12 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
     }
     private String resultFireProtectionDistances(){
         FireProtectionDistances fireProtectionDistances = new FireProtectionDistances(userId,databaseRepository);
-        return fireProtectionDistances.getFireProtectionDistancesBetweenBuildings();
+        if (databaseRepository.getType_fire_distance(userId).equals("1.1 ВПВ")){
+            return fireProtectionDistances.getFireProtectionDistancesBetweenBuildings();
+        } else if (databaseRepository.getType_fire_distance(userId).equals("1.2 ВПВ")) {
+            return fireProtectionDistances.getFireProtectionDistancesTechnological();
+        }else {
+            return fireProtectionDistances.getFireProtectionDistancesCommunications();
+        }
     }
 }
