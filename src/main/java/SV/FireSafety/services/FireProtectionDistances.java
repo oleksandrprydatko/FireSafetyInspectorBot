@@ -927,7 +927,7 @@ public class FireProtectionDistances {
                     return distances(1);
                 }
             }
-        } else if (typePremisses().equals("2.3 ВПВ комунікації")) {
+        } else if (typeObject().equals("2.3 ВПВ комунікації")) {
             if (typeLiquid().equals("легкозаймисті/горючі рідини")){
                 if (typePremisses().equals("4.1 2.3 ВПВ комунікації")){
                     return distances(15);
