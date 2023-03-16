@@ -2105,4 +2105,113 @@ public class InlineButton {
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
+
+    // площа протипожежних відсіків, посадочних місць, поверховість
+    public InlineKeyboardMarkup inlineChooseCharacteristicSquareSeatsFloorsKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.1").callbackData("1.1 ПМП").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.2").callbackData("1.2 ПМП").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSquareSeatsFloorsKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 1.1 ПМП").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 1.1 ПМП").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 1.1 ПМП").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.4").callbackData("2.4 1.1 ПМП").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.5").callbackData("2.5 1.1 ПМП").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineSquareSeatsFloorsFloorsFrom1To25Keyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("від 10 до 25 поверхів").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("від 2 до 9 поверхів").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.3").callbackData("1 поверх").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSquareSeatsFloorsFloors1Or2Keyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("2 поверхи").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("1 поверх").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSquareSeatsFloorsFloorsFrom1To5Keyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("від 2 до 5 поверхів").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("1 поверх").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSquareSeatsFloorsFireAlarmKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("відсутні").callbackData("відсутні").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("наявні").callbackData("наявні").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineSquareSeatsFloorsFloorsTypeEntertainmentKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.1").callbackData("театр").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.2").callbackData("клубний заклад").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("3.3").callbackData("кінотеатр").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSquareSeatsFloorsFloorsTypesCinemaKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.1").callbackData("цілорічної дії").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.2").callbackData("літній закритий").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.3").callbackData("літній відкритий").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    public InlineKeyboardMarkup inlineTypesIndustrialSquareSeatsFloorsKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 1.2 ПМП").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 1.2 ПМП").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineTypesObjectsCategoryАSquareSeatsFloorsKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.1").callbackData("наявні об’єкти").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.2").callbackData("відсутні об’єкти").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSquareSeatsFloorsFrom1To6Keyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.1").callbackData("від 3 до 6 поверхів").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.2").callbackData("2 поверхи").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("4.3").callbackData("1 поверх").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSquareSeatsFloorsFrom1To3Keyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.1").callbackData("3 поверхи").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.2").callbackData("2 поверхи").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.3").callbackData("1 поверх").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
 }

@@ -29,7 +29,9 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
             "fire_resistance=NULL,seats=NULL,books_storage=NULL,archives=NULL," +
             "amount_of_transport=NULL,weight=NULL,productivity=NULL," +
             "length=NULL,fire_resistance_to_which=NULL,fire_alarm=false," +
-            "specific_load=false,type_fire_distance=NULL where inspector.users.id_telegram = :telegram_id",nativeQuery = true)
+            "specific_load=false,type_fire_distance=NULL,type_gas_station=NULL," +
+            "size_gas_station=NULL,type_of_fuel=NULL,type_gas_holder=NULL,location_pipeline=NULL," +
+            "type_liquid=NULL,type_fire_compartment_area=NULL,type_cinema=NULL where inspector.users.id_telegram = :telegram_id",nativeQuery = true)
     void clearDB(long telegram_id);
     @Transactional
     @Modifying
@@ -504,4 +506,20 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
 
     @Query(value = "select type_liquid from inspector.users where id_telegram = :userId ", nativeQuery = true)
     String getType_liquid(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set type_fire_compartment_area = :command where id_telegram = :userId", nativeQuery = true)
+    void setType_fire_compartment_area(String command,long userId);
+
+    @Query(value = "select type_fire_compartment_area from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    String getType_fire_compartment_area(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set type_cinema = :command where id_telegram = :userId", nativeQuery = true)
+    void setType_cinema(String command,long userId);
+
+    @Query(value = "select type_cinema from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    String getType_cinema(long userId);
 }
