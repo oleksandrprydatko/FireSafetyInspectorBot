@@ -142,6 +142,15 @@ public class MessageHandler implements Handler<Message> {
                         //очищення бази
                         databaseRepository.clearDB(userId);
                         return;
+                    //площа протипожежних відсіків, посадочні місця, поверховість
+                    case "/fire_compartment_area":
+                        databaseRepository.setComand_of_menu("/fire_compartment_area",userId);
+                        sendMessage.setText("Я підсистема Fire Compartment Area \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити допустиму площу протипожежних відсіків, кількості посадочних місць та поверховості об'єктів \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
+                        messageSender.sendMessage(sendMessage);
+                        //очищення бази
+                        databaseRepository.clearDB(userId);
+                        return;
                     // видає посилання на портал електронних послуг
                     case "/service_portal":
                         //встановлення команди в БД
@@ -382,5 +391,6 @@ public class MessageHandler implements Handler<Message> {
 //        notification_system - Визначення типу системи оповіщення, та управління евакуюванням людей
 //        fire_water_supply - Визначення необхідності влаштування та параметрів протипожежного водопостачання
 //        fire_protection_distances - Визначення протипожежних відстаней
+//        fire_compartment_area - Визначення допустимої площі протипожежних відсіків, кількості посадочних місць та поверховість об'єктів
 //        service_portal - Портал електронних послуг ДСНС України
 //        feedback_info - Інформація. Зворотній зв'язок

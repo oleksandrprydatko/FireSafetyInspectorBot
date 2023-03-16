@@ -63,6 +63,9 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "/fire_protection_distances":
                 fireProtectionDistances(callbackQuery);
                 break;
+            case "/fire_compartment_area":
+                fireCompartmentArea(callbackQuery);
+                break;
         }
     }
     // Визначення типу та необхідної кількості вогнегасників
@@ -4954,6 +4957,397 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
 
         messageSender.sendMessage(sendMessage);
     }
+    private void fireCompartmentArea(CallbackQuery callbackQuery){
+        Message message = callbackQuery.getMessage();
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setParseMode(ParseMode.HTML);
+        sendMessage.setChatId(String.valueOf(message.getChatId()));
+        String chatID = String.valueOf(message.getChatId());
+        userId = Long.valueOf(chatID);
+        switch (callbackQuery.getData()){
+            case "Розпочати":
+                sendMessage.setText("1. Оберіть характеристику, що необхідно визначити:\n\n" +
+                        "\uD83D\uDC49 1.1 Площа протипожежного відсіку, допустима кількість посадочних місць та поверховість об’єктів громадського призначення\n" +
+                        "\uD83D\uDC49 1.2 Площа протипожежного відсіку та поверховість об’єктів промислового призначення ");
+                sendMessage.setReplyMarkup(inlineButton.inlineChooseCharacteristicSquareSeatsFloorsKeyboard());
+                break;
+            case "1.1 ПМП":
+                databaseRepository.setType_fire_compartment_area(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: площа протипожежного відсіку, допустима кількість посадочних місць та поверховість об’єктів громадського призначення\n\n" +
+                        "2. Виберіть призначення об'єкту:\n\n" +
+                        "\uD83D\uDC49 2.1 Площа протипожежного відсіку та поверховість об’єктів  житлового призначення\n" +
+                        "\uD83D\uDC49 2.2 Площа протипожежного відсіку та поверховість об'єктів громадського призначення\n" +
+                        "\uD83D\uDC49 2.3 Допустима кількість посадочних місць та поверховість культурно-видовищних та дозвіллєвих закладів\n" +
+                        "\uD83D\uDC49 2.4 Допустима кількість посадочних місць спортивних закладів\n" +
+                        "\uD83D\uDC49 2.5 Площа протипожежного відсіку та поверховість об’єктів харчування");
+                sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsKeyboard());
+                break;
+            case "2.1 1.1 ПМП":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: площа протипожежного відсіку та поверховість об’єктів  житлового призначення\n\n" +
+                        "3. Вкажіть ступінь вогнестійкості будівлі: \uD83D\uDD25");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireResistanceFireProtectionDistancesKeyboard());
+                break;
+            case "І ступінь вогнестійкості":
+            case "ІІ ступінь вогнестійкості":
+            case "ІІІ ступінь вогнестійкості":
+            case "ІІІа ступінь вогнестійкості":
+            case "ІІІб ступінь вогнестійкості":
+            case "ІV ступінь вогнестійкості":
+            case "ІVа ступінь вогнестійкості":
+            case "V ступінь вогнестійкості":
+                databaseRepository.setFire_resistance(callbackQuery.getData(),userId);
+                if (databaseRepository.getType_of_object(userId).equals("2.1 1.1 ПМП")){
+                    if (callbackQuery.getData().equals("І ступінь вогнестійкості") || callbackQuery.getData().equals("ІІ ступінь вогнестійкості")){
+                        sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                "4. Вкажіть поверховість будівлі \uD83C\uDFE2 \n\n" +
+                                "\uD83D\uDC49 4.1 Від 10 до 25 поверхів \n" +
+                                "\uD83D\uDC49 4.2 Від 2 до 9 поверхів \n" +
+                                "\uD83D\uDC49 4.3 1 поверх");
+                        sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFloorsFrom1To25Keyboard());
+                    } else if (callbackQuery.getData().equals("ІІІб ступінь вогнестійкості") || callbackQuery.getData().equals("ІV ступінь вогнестійкості")) {
+                        sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                "4. Вкажіть поверховість будівлі \uD83C\uDFE2 \n\n" +
+                                "\uD83D\uDC49 4.1 2 поверхи \n" +
+                                "\uD83D\uDC49 4.2 1 поверх ");
+                        sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFloors1Or2Keyboard());
+                    }else {
+                        sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                    }
+                } else if (databaseRepository.getType_of_object(userId).equals("2.2 1.1 ПМП")) {
+                    if (callbackQuery.getData().equals("І ступінь вогнестійкості") || callbackQuery.getData().equals("ІІ ступінь вогнестійкості")){
+                        sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                "4. Вкажіть поверховість будівлі \uD83C\uDFE2 \n\n" +
+                                "\uD83D\uDC49 4.1 Від 10 до 25 поверхів \n" +
+                                "\uD83D\uDC49 4.2 Від 2 до 9 поверхів \n" +
+                                "\uD83D\uDC49 4.3 1 поверх");
+                        sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFloorsFrom1To25Keyboard());
+                    }else if (callbackQuery.getData().equals("ІV ступінь вогнестійкості") || callbackQuery.getData().equals("V ступінь вогнестійкості")) {
+                        sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                "4. Вкажіть поверховість будівлі \uD83C\uDFE2 \n\n" +
+                                "\uD83D\uDC49 4.1 2 поверхи \n" +
+                                "\uD83D\uDC49 4.2 1 поверх ");
+                        sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFloors1Or2Keyboard());
+                    } else if (callbackQuery.getData().equals("ІІІ ступінь вогнестійкості")) {
+                        sendMessage.setText("Обрано " + callbackQuery.getData() + "\n\n" +
+                                "4. Вкажіть поверховість будівлі \uD83C\uDFE2 \n\n" +
+                                "\uD83D\uDC49 4.1 Від 2 до 5 поверхів\n" +
+                                "\uD83D\uDC49 4.2 1 поверх");
+                        sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFloorsFrom1To5Keyboard());
+                    }else {
+                        sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                    }
+                } else if (databaseRepository.getType_of_object(userId).equals("2.3 1.1 ПМП")) {
+                    if (databaseRepository.getType_premises(userId).equals("кінотеатр")){
+                        sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                "5. Вкажіть вид кінотеатру: \uD83C\uDFA5 \n\n" +
+                                "\uD83D\uDC49 5.1 Цілорічної дії \n" +
+                                "\uD83D\uDC49 5.2 Сезонний літній закритий\n" +
+                                "\uD83D\uDC49 5.3 Сезонний літній відкритий");
+                        sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFloorsTypesCinemaKeyboard());
+                    }else {
+                        sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                    }
+                } else if (databaseRepository.getType_of_object(userId).equals("2.4 1.1 ПМП")) {
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                    break;
+                } else if (databaseRepository.getType_of_object(userId).equals("2.5 1.1 ПМП")) {
+                    if (callbackQuery.getData().equals("І ступінь вогнестійкості") || callbackQuery.getData().equals("ІІ ступінь вогнестійкості") || callbackQuery.getData().equals("ІІІ ступінь вогнестійкості")){
+                        sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                "3. Вкажіть поверховість будівлі:\n\n" +
+                                "\uD83D\uDC49 3.1 Від 2 до 5 поверхів\n" +
+                                "\uD83D\uDC49 3.2 1 поверх");
+                        sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFloorsFrom1To5Keyboard());
+                    } else if (callbackQuery.getData().equals("ІV ступінь вогнестійкості") || callbackQuery.getData().equals("V ступінь вогнестійкості")) {
+                        sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                "4. Вкажіть поверховість будівлі \uD83C\uDFE2 \n\n" +
+                                "\uD83D\uDC49 4.1 2 Поверхи \n" +
+                                "\uD83D\uDC49 4.2 1 Поверх ");
+                        sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFloors1Or2Keyboard());
+                    }else {
+                        sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                    }
+                } else if (databaseRepository.getType_of_object(userId).equals("2.1 1.2 ПМП")) {
+                    if (databaseRepository.getCategory_buildings(userId).equals("Категорія А") || databaseRepository.getCategory_buildings(userId).equals("Категорія Б")){
+                        if (callbackQuery.getData().equals("ІІ ступінь вогнестійкості") || callbackQuery.getData().equals("ІІІа ступінь вогнестійкості")){
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                    "5. Вкажіть тип будівлі: \n\n" +
+                                    "\uD83D\uDC49 5.1 Наявні об’єкти нафтопереробної, газової, хімічної та нафтохімічної промисловості\n" +
+                                    "\uD83D\uDC49 5.2 Відсутні об’єкти нафтопереробної, газової, хімічної та нафтохімічної промисловості");
+                            sendMessage.setReplyMarkup(inlineButton.inlineTypesObjectsCategoryАSquareSeatsFloorsKeyboard());
+                        }else {
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                        }
+                    } else if (databaseRepository.getCategory_buildings(userId).equals("Категорія В")) {
+                        if (callbackQuery.getData().equals("ІІІ ступінь вогнестійкості")){
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                    "5. Вкажіть поверховість будівлі: \n\n" +
+                                    "\uD83D\uDC49 5.1 Три поверхи\n" +
+                                    "\uD83D\uDC49 5.2 Два поверхи\n" +
+                                    "\uD83D\uDC49 5.3 Один поверх");
+                            sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFrom1To3Keyboard());
+                        } else if (callbackQuery.getData().equals("ІІІа ступінь вогнестійкості") || callbackQuery.getData().equals("ІV ступінь вогнестійкості") || callbackQuery.getData().equals("ІVа ступінь вогнестійкості")) {
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                    "4. Вкажіть поверховість будівлі \uD83C\uDFE2 \n\n" +
+                                    "\uD83D\uDC49 4.1 2 Поверхи \n" +
+                                    "\uD83D\uDC49 4.2 1 Поверх ");
+                            sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFloors1Or2Keyboard());
+                        }else {
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                        }
+                    } else if (databaseRepository.getCategory_buildings(userId).equals("Категорія Г")) {
+                        if (callbackQuery.getData().equals("ІІІ ступінь вогнестійкості")){
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                    "5. Вкажіть поверховість будівлі: \n\n" +
+                                    "\uD83D\uDC49 5.1 Три поверхи\n" +
+                                    "\uD83D\uDC49 5.2 Два поверхи\n" +
+                                    "\uD83D\uDC49 5.3 Один поверх");
+                            sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFrom1To3Keyboard());
+                        } else if (callbackQuery.getData().equals("ІV ступінь вогнестійкості") || callbackQuery.getData().equals("ІVа ступінь вогнестійкості")) {
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                    "4. Вкажіть поверховість будівлі \uD83C\uDFE2 \n\n" +
+                                    "\uD83D\uDC49 4.1 2 Поверхи \n" +
+                                    "\uD83D\uDC49 4.2 1 Поверх ");
+                            sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFloors1Or2Keyboard());
+                        }else {
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                        }
+                    }else {
+                        if (callbackQuery.getData().equals("ІІІ ступінь вогнестійкості")){
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                    "5. Вкажіть поверховість будівлі: \n\n" +
+                                    "\uD83D\uDC49 5.1 Три поверхи\n" +
+                                    "\uD83D\uDC49 5.2 Два поверхи\n" +
+                                    "\uD83D\uDC49 5.3 Один поверх");
+                            sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFrom1To3Keyboard());
+                        } else if (callbackQuery.getData().equals("ІV ступінь вогнестійкості") || callbackQuery.getData().equals("ІVа ступінь вогнестійкості") || callbackQuery.getData().equals("V ступінь вогнестійкості")) {
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                    "4. Вкажіть поверховість будівлі \uD83C\uDFE2 \n\n" +
+                                    "\uD83D\uDC49 4.1 2 Поверхи \n" +
+                                    "\uD83D\uDC49 4.2 1 Поверх ");
+                            sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFloors1Or2Keyboard());
+                        }else {
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                        }
+                    }
+                }else {
+                    if (databaseRepository.getCategory_buildings(userId).equals("Категорія А")){
+                        sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                    } else if (databaseRepository.getCategory_buildings(userId).equals("Категорія Б")) {
+                        if (callbackQuery.getData().equals("І ступінь вогнестійкості") || callbackQuery.getData().equals("ІІ ступінь вогнестійкості")){
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                    "5. Вкажіть поверховість будівлі: \n\n" +
+                                    "\uD83D\uDC49 5.1 Три поверхи\n" +
+                                    "\uD83D\uDC49 5.2 Два поверхи\n" +
+                                    "\uD83D\uDC49 5.3 Один поверх");
+                            sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFrom1To3Keyboard());
+                        }else {
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                        }
+                    } else if (databaseRepository.getCategory_buildings(userId).equals("Категорія В")) {
+                        if (callbackQuery.getData().equals("І ступінь вогнестійкості") || callbackQuery.getData().equals("ІІ ступінь вогнестійкості")){
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                    "6. Вкажіть поверховість будівлі: \n\n" +
+                                    "\uD83D\uDC49 6.1 Від трьох поверхів до шести поверхів\n" +
+                                    "\uD83D\uDC49 6.2 Два поверхи\n" +
+                                    "\uD83D\uDC49 6.3 Один поверх");
+                            sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFrom1To6Keyboard());
+                        } else if (callbackQuery.getData().equals("ІІІ ступінь вогнестійкості")) {
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                    "5. Вкажіть поверховість будівлі: \n\n" +
+                                    "\uD83D\uDC49 5.1 Три поверхи\n" +
+                                    "\uD83D\uDC49 5.2 Два поверхи\n" +
+                                    "\uD83D\uDC49 5.3 Один поверх");
+                            sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFrom1To3Keyboard());
+                        } else if (callbackQuery.getData().equals("ІV ступінь вогнестійкості")) {
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                    "4. Вкажіть поверховість будівлі \uD83C\uDFE2 \n\n" +
+                                    "\uD83D\uDC49 4.1 2 Поверхи \n" +
+                                    "\uD83D\uDC49 4.2 1 Поверх ");
+                            sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFloors1Or2Keyboard());
+                        }else {
+                            sendMessage.setText("Обрано: " +callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                        }
+                    }else {
+                        if (callbackQuery.getData().equals("ІІІ ступінь вогнестійкості")) {
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                    "5. Вкажіть поверховість будівлі: \n\n" +
+                                    "\uD83D\uDC49 5.1 Три поверхи\n" +
+                                    "\uD83D\uDC49 5.2 Два поверхи\n" +
+                                    "\uD83D\uDC49 5.3 Один поверх");
+                            sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFrom1To3Keyboard());
+                        } else if (callbackQuery.getData().equals("ІІІа ступінь вогнестійкості") || callbackQuery.getData().equals("ІV ступінь вогнестійкості") || callbackQuery.getData().equals("V ступінь вогнестійкості")) {
+                            sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                                    "4. Вкажіть поверховість будівлі \uD83C\uDFE2 \n\n" +
+                                    "\uD83D\uDC49 4.1 2 Поверхи \n" +
+                                    "\uD83D\uDC49 4.2 1 Поверх ");
+                            sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFloors1Or2Keyboard());
+                        }else {
+                            sendMessage.setText("Обрано: " +callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                        }
+                    }
+
+                }
+                break;
+            case "від 10 до 25 поверхів":
+                databaseRepository.setFloors(25,userId);
+                if (databaseRepository.getType_of_object(userId).equals("2.2 1.1 ПМП") && (databaseRepository.getFire_resistance(userId).equals("І ступінь вогнестійкості") || databaseRepository.getFire_resistance(userId).equals("ІI ступінь вогнестійкості"))){
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                            "5. Вкажіть наявність систем автоматичного пожежогасіння \uD83D\uDCA7");
+                    sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFireAlarmKeyboard());
+                }else {
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                }
+                break;
+            case "від 2 до 9 поверхів":
+                databaseRepository.setFloors(9,userId);
+                if (databaseRepository.getType_of_object(userId).equals("2.2 1.1 ПМП") && (databaseRepository.getFire_resistance(userId).equals("І ступінь вогнестійкості") || databaseRepository.getFire_resistance(userId).equals("ІI ступінь вогнестійкості"))){
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                            "5. Вкажіть наявність систем автоматичного пожежогасіння \uD83D\uDCA7");
+                    sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFireAlarmKeyboard());
+                }else {
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                }
+                break;
+            case "1 поверх":
+                databaseRepository.setFloors(1,userId);
+                if ((databaseRepository.getType_of_object(userId).equals("2.2 1.1 ПМП") && (databaseRepository.getFire_resistance(userId).equals("І ступінь вогнестійкості") || databaseRepository.getFire_resistance(userId).equals("ІI ступінь вогнестійкості"))) ||
+                    databaseRepository.getType_of_object(userId).equals("2.5 1.1 ПМП") && (databaseRepository.getFire_resistance(userId).equals("І ступінь вогнестійкості") || databaseRepository.getFire_resistance(userId).equals("ІI ступінь вогнестійкості"))){
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                            "5. Вкажіть наявність систем автоматичного пожежогасіння \uD83D\uDCA7");
+                    sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFireAlarmKeyboard());
+                }else {
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                }
+                break;
+            case "2 поверхи":
+                databaseRepository.setFloors(2,userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                break;
+            case "від 2 до 5 поверхів":
+                databaseRepository.setFloors(5,userId);
+                if (databaseRepository.getType_of_object(userId).equals("2.5 1.1 ПМП") && (databaseRepository.getFire_resistance(userId).equals("І ступінь вогнестійкості") || databaseRepository.getFire_resistance(userId).equals("ІI ступінь вогнестійкості"))){
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                            "5. Вкажіть наявність систем автоматичного пожежогасіння \uD83D\uDCA7");
+                    sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFireAlarmKeyboard());
+                }else {
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                }
+                break;
+            case "від 3 до 6 поверхів":
+                databaseRepository.setFloors(6,userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                break;
+            case "3 поверхи":
+                databaseRepository.setFloors(3,userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                break;
+            case "2.2 1.1 ПМП":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: площа протипожежного відсіку та поверховість об’єктів громадського призначення\n\n" +
+                        "3. Вкажіть ступінь вогнестійкості будівлі \uD83D\uDD25");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireResistanceFireProtectionDistancesKeyboard());
+                break;
+            case "відсутні":
+                databaseRepository.setFire_alarm(false,userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                break;
+            case "наявні":
+                databaseRepository.setFire_alarm(true,userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                break;
+            case "2.3 1.1 ПМП":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: допустима кількість посадочних місць та поверховість культурно-видовищних та дозвіллєвих закладів\n\n" +
+                        "3. Вкажіть вид закладу: \n\n" +
+                        "\uD83D\uDC49 3.1 Театр\n" +
+                        "\uD83D\uDC49 3.2 Клубний заклад\n" +
+                        "\uD83D\uDC49 3.3 Кінотеатр");
+                sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFloorsTypeEntertainmentKeyboard());
+                break;
+            case "театр":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                break;
+            case "клубний заклад":
+            case "кінотеатр":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                        "4. Вкажіть ступінь вогнестійкості \uD83D\uDD25");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireResistanceFireProtectionDistancesKeyboard());
+                break;
+            case "цілорічної дії":
+            case "літній закритий":
+            case "літній відкритий":
+                databaseRepository.setType_cinema(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                break;
+            case "2.4 1.1 ПМП":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: допустима кількість посадочних місць спортивних закладів\n\n" +
+                        "3. Вкажіть ступінь вогнестійкості будівлі \uD83D\uDD25");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireResistanceFireProtectionDistancesKeyboard());
+                break;
+            case "2.5 1.1 ПМП":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: площа протипожежного відсіку та поверховість об’єктів харчування\n\n" +
+                        "3. Вкажіть ступінь вогнестійкості будівлі \uD83D\uDD25");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireResistanceFireProtectionDistancesKeyboard());
+                break;
+            case "1.2 ПМП":
+                databaseRepository.setType_fire_compartment_area(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: площа протипожежного відсіку та поверховість об’єктів промислового призначення\n\n" +
+                        "2. Виберіть призначення об’єкту: \n\n" +
+                        "\uD83D\uDC49 2.1 Площа протипожежного відсіку та поверховість об’єктів виробничого призначення\n" +
+                        "\uD83D\uDC49 2.2 Площа протипожежного відсіку та поверховість об’єктів складського призначення");
+                sendMessage.setReplyMarkup(inlineButton.inlineTypesIndustrialSquareSeatsFloorsKeyboard());
+                break;
+            case "2.1 1.2 ПМП":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: площа протипожежного відсіку та поверховість об’єктів виробничого призначення\n\n" +
+                        "3. Вкажіть категорію будівлі за вибухопожежною небезпекою: \uD83D\uDCA5");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherCategoryPremissesKeyboard());
+                break;
+            case "Категорія А":
+            case "Категорія Б":
+            case "Категорія В":
+            case "Категорія Г":
+            case "Категорія Д":
+                databaseRepository.setCategory_buildings(callbackQuery.getData(),userId);
+                if (databaseRepository.getType_of_object(userId).equals("2.2 1.2 ПМП") && callbackQuery.getData().equals("Категорія Г")){
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                }else {
+                    sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" +
+                            "4. Вкажіть ступінь вогнестійкості\uD83D\uDD25");
+                    sendMessage.setReplyMarkup(inlineButton.inlineFireResistanceFireProtectionDistancesKeyboard());
+                }
+                break;
+            case "наявні об’єкти":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                if (databaseRepository.getFire_resistance(userId).equals("ІІ ступінь вогнестійкості")){
+                    sendMessage.setText("Обрано: наявні об’єкти нафтопереробної, газової, хімічної та нафтохімічної промисловості\n\n" +
+                            "6. Вкажіть поверховість будівлі: \n\n" +
+                            "\uD83D\uDC49 6.1 Від трьох поверхів до шести поверхів\n" +
+                            "\uD83D\uDC49 6.2 Два поверхи\n" +
+                            "\uD83D\uDC49 6.3 Один поверх");
+                    sendMessage.setReplyMarkup(inlineButton.inlineSquareSeatsFloorsFrom1To6Keyboard());
+                }else {
+                    sendMessage.setText("Обрано: наявні об’єкти нафтопереробної, газової, хімічної та нафтохімічної промисловості\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                }
+                break;
+            case "відсутні об’єкти":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: відсутні об’єкти нафтопереробної, газової, хімічної та нафтохімічної промисловості\n\n" + resultFireCompartmentArea() + "\n\n" + instructions.getStart());
+                break;
+            case "2.2 1.2 ПМП":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: площа протипожежного відсіку та поверховість об’єктів складського призначення\n\n" +
+                        "3. Вкажіть категорію будівлі за вибухопожежною небезпекою: \uD83D\uDCA5");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherCategoryPremissesKeyboard());
+                break;
+        }
+        messageSender.sendMessage(sendMessage);
+    }
     private String resultExtinguisher() { // виводить результат для вогнегасника
         String s6 = null;
         String typePremisses = databaseRepository.getType_premises(userId);
@@ -5032,6 +5426,14 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             return fireProtectionDistances.getFireProtectionDistancesTechnological();
         }else {
             return fireProtectionDistances.getFireProtectionDistancesCommunications();
+        }
+    }
+    private String resultFireCompartmentArea(){
+        FireCompartmentArea fireCompartmentArea = new FireCompartmentArea(userId,databaseRepository);
+        if (databaseRepository.getType_fire_compartment_area(userId).equals("1.1 ПМП")){
+            return fireCompartmentArea.getSquareSeatsFloors();
+        }else {
+            return fireCompartmentArea.getSquareFloors();
         }
     }
 }
