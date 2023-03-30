@@ -1090,7 +1090,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "2.3 Вибухові речовини":
             case "2.4 Горючі рідини":
             case "2.3 Тверді горючі речовини":
-            case "2.3 Тверді важкогорючі речовини":
+            case "2.2 Тверді важкогорючі речовини":
             case "2.2 Важкогорючі рідини":
             case "2.2 Негорючі речовини":
                 if (!databaseRepository.getUsed_indoors(userId)){

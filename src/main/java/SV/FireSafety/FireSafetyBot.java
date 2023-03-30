@@ -38,3 +38,4 @@ public class FireSafetyBot extends TelegramLongPollingBot {
     }
 
 }
+
