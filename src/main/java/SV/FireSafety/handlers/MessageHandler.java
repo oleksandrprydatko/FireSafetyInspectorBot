@@ -95,6 +95,16 @@ public class MessageHandler implements Handler<Message> {
                         //очищення бази
                         databaseRepository.clearDB(userId);
                         return;
+                    //класи пожеж
+                    case "/fire_classes":
+                        //встановлення команди в БД
+                        databaseRepository.setComand_of_menu("/fire_classes",userId);
+                        sendMessage.setText("Я підсистема Fire Classes \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу з визначенням класів пожеж \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
+                        messageSender.sendMessage(sendMessage);
+                        //очищення бази
+                        databaseRepository.clearDB(userId);
+                        return;
                     //визначення класу зон
                     case "/zone_classes":
                         //встановлення команди в БД
@@ -386,6 +396,7 @@ public class MessageHandler implements Handler<Message> {
 //        type_number_fire_extinguishers - Визначення типу та необхідної кількості вогнегасників
 //        degree_of_risk_from_activities - Оцінка ступеня ризику від провадження господарської діяльності
 //        determination_of_categories - Визначення категорій приміщень за пожежною небезпекою
+//        fire_classes - Визначення класів пожеж
 //        zone_classes - Визначення класу зони
 //        fire_alarm_installation - Визначення необхідності проектування та монтажу автоматичних систем пожежної сигналізації та пожежогасіння
 //        notification_system - Визначення типу системи оповіщення, та управління евакуюванням людей

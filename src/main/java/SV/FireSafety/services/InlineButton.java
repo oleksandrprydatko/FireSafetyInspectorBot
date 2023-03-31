@@ -548,7 +548,6 @@ public class InlineButton {
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Легкозаймисті рідини З").build()));
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Легкозаймисті рідини З").build()));
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 Легкозаймисті рідини З").build()));
-        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.4").callbackData("2.4 Легкозаймисті рідини З").build()));
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
@@ -2211,6 +2210,19 @@ public class InlineButton {
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.1").callbackData("3 поверхи").build()));
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.2").callbackData("2 поверхи").build()));
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("5.3").callbackData("1 поверх").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    // класи пожеж
+    public InlineKeyboardMarkup inlineFireClassesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.1").callbackData("Клас A").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.2").callbackData("Клас B").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.3").callbackData("Клас C").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.4").callbackData("Клас D").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.5").callbackData("Клас F").build()));
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }

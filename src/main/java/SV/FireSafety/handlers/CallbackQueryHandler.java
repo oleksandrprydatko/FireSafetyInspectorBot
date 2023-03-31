@@ -66,6 +66,10 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "/fire_compartment_area":
                 fireCompartmentArea(callbackQuery);
                 break;
+            case "/fire_classes":
+                fireClasses(callbackQuery);
+                break;
+
         }
     }
     // Визначення типу та необхідної кількості вогнегасників
@@ -1167,7 +1171,6 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 sendMessage.setText(categories.getCategoryВз());
                 break;
             case "2.3 Горючі гази З":
-            case "2.4 Легкозаймисті рідини З":
             case "2.3 Горючі рідини З":
             case "2.2 Тверді горючі речовини З":
             case "2.1 Негорючі речовини З":
@@ -1278,6 +1281,50 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "Д - зниженопожежонебезпечна":
                 sendMessage.setText(categories.getCategoryД());
                 break;
+        }
+        messageSender.sendMessage(sendMessage);
+    }
+    //визначення класів пожеж
+    private void fireClasses(CallbackQuery callbackQuery){
+        //надіслати нове повідомлення в конкретний чат
+        Message message = callbackQuery.getMessage();
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setParseMode(ParseMode.HTML);
+        sendMessage.setChatId(String.valueOf(message.getChatId()));
+        String chatID = String.valueOf(message.getChatId());
+        userId = Long.valueOf(chatID);
+
+        switch (callbackQuery.getData()){
+            case "Розпочати":
+                sendMessage.setText("1. Вкажіть горіння якого виду матеріалів/речовин можливе на об'єкті: \uD83D\uDD25 \n\n" +
+                        "\uD83D\uDC49 1.1 Горіння твердих горючих речовин, переважно органічного походження, горіння яких супроводжується тлінням (деревина, текстиль, папір). \n" +
+                        "\uD83D\uDC49 1.2 Горіння рідких речовин або твердих речовин, які розтоплюються. \n" +
+                        "\uD83D\uDC49 1.3 Горіння газоподібних речовин.\n" +
+                        "\uD83D\uDC49 1.4 Горіння металів та їх сплавів.\n" +
+                        "\uD83D\uDC49 1.5 Горіння речовин, які використовують для приготування їжі (рослинних і тваринних олій та жирів) та які містяться в кухонних приладах.");
+                sendMessage.setReplyMarkup(inlineButton.inlineFireClassesKeyboard());
+                break;
+            case "Клас A":
+                sendMessage.setText("Обрано: горіння твердих горючих речовин, переважно органічного походження, горіння яких супроводжується тлінням (деревина, текстиль, папір)\n\n" +
+                        "Висновок: досліджуваний об'єкт відноситься до класу A \uD83D\uDEA8 \n\n" + instructions.getStart());
+                break;
+            case "Клас B":
+                sendMessage.setText("Обрано: горіння рідких речовин або твердих речовин, які розтоплюються.\n\n" +
+                        "Висновок: досліджуваний об'єкт відноситься до класу B \uD83D\uDEA8 \n\n " + instructions.getStart());
+                break;
+            case "Клас C":
+                sendMessage.setText("Обрано: горіння газоподібних речовин.\n\n" +
+                        "Висновок: досліджуваний об'єкт відноситься до класу C \uD83D\uDEA8 \n\n " + instructions.getStart());
+                break;
+            case "Клас D":
+                sendMessage.setText("Обрано: горіння металів та їх сплавів.\n\n" +
+                        "Висновок: досліджуваний об'єкт відноситься до класу D \uD83D\uDEA8 \n\n " + instructions.getStart());
+                break;
+            case "Клас F":
+                sendMessage.setText("Обрано: горіння речовин, які використовують для приготування їжі (рослинних і тваринних олій та жирів) та які містяться в кухонних приладах.\n\n" +
+                        "Висновок: досліджуваний об'єкт відноситься до класу F \uD83D\uDEA8 \n\n " + instructions.getStart());
+                break;
+
         }
         messageSender.sendMessage(sendMessage);
     }
