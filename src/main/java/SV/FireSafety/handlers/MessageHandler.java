@@ -161,6 +161,15 @@ public class MessageHandler implements Handler<Message> {
                         //очищення бази
                         databaseRepository.clearDB(userId);
                         return;
+                    // системи протипожежного захисту
+                    case "/smoke_protection_systems":
+                        databaseRepository.setComand_of_menu("/smoke_protection_systems",userId);
+                        sendMessage.setText("Я підсистема Smoke Protection Systems\uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити необхідність влаштування систем протидимного захисту \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
+                        messageSender.sendMessage(sendMessage);
+                        //очищення бази
+                        databaseRepository.clearDB(userId);
+                        return;
                     // видає посилання на портал електронних послуг
                     case "/service_portal":
                         //встановлення команди в БД
@@ -403,5 +412,6 @@ public class MessageHandler implements Handler<Message> {
 //        fire_water_supply - Визначення необхідності влаштування та параметрів протипожежного водопостачання
 //        fire_protection_distances - Визначення протипожежних відстаней
 //        fire_compartment_area - Визначення допустимої площі протипожежних відсіків, кількості посадочних місць та поверховість об'єктів
+//        smoke_protection_systems - Визначення необхідності влаштування систем протидимного захисту
 //        service_portal - Портал електронних послуг ДСНС України
 //        feedback_info - Інформація. Зворотній зв'язок

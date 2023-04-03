@@ -31,7 +31,8 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
             "length=NULL,fire_resistance_to_which=NULL,fire_alarm=false," +
             "specific_load=false,type_fire_distance=NULL,type_gas_station=NULL," +
             "size_gas_station=NULL,type_of_fuel=NULL,type_gas_holder=NULL,location_pipeline=NULL," +
-            "type_liquid=NULL,type_fire_compartment_area=NULL,type_cinema=NULL where inspector.users.id_telegram = :telegram_id",nativeQuery = true)
+            "type_liquid=NULL,type_fire_compartment_area=NULL,type_cinema=NULL," +
+            "numbering = 1,type_system_smoke_protection = NULL,type_stairs=NULL,being_on_stairs=false where inspector.users.id_telegram = :telegram_id",nativeQuery = true)
     void clearDB(long telegram_id);
     @Transactional
     @Modifying
@@ -522,4 +523,41 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
 
     @Query(value = "select type_cinema from inspector.users where id_telegram = :userId ", nativeQuery = true)
     String getType_cinema(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set numbering = :command where id_telegram = :userId", nativeQuery = true)
+    void setNumbering(int command,long userId);
+
+    @Query(value = "select numbering from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    Integer getNumbering(long userId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set type_system_smoke_protection = :command where id_telegram = :userId", nativeQuery = true)
+    void setType_system_smoke_protection(String command,long userId);
+
+    @Query(value = "select type_system_smoke_protection from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    String getType_system_smoke_protection(long userId);
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set natural_lighting = :command where id_telegram = :userId", nativeQuery = true)
+    void setNatural_lighting(boolean command,long userId);
+
+    @Query(value = "select natural_lighting from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    Boolean getNatural_lighting(long userId);
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set type_stairs = :command where id_telegram = :userId", nativeQuery = true)
+    void setType_stairs(String command,long userId);
+
+    @Query(value = "select type_stairs from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    String getType_stairs(long userId);
+    @Transactional
+    @Modifying
+    @Query(value = "update inspector.users set being_on_stairs = :command where id_telegram = :userId", nativeQuery = true)
+    void setBeing_on_stairs(boolean command,long userId);
+
+    @Query(value = "select being_on_stairs from inspector.users where id_telegram = :userId ", nativeQuery = true)
+    Boolean getBeing_on_stairs(long userId);
 }

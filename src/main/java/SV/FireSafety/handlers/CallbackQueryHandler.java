@@ -69,6 +69,9 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "/fire_classes":
                 fireClasses(callbackQuery);
                 break;
+            case "/smoke_protection_systems":
+                smokeProtectionSystems(callbackQuery);
+                break;
 
         }
     }
@@ -5395,6 +5398,244 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
         }
         messageSender.sendMessage(sendMessage);
     }
+    private void smokeProtectionSystems(CallbackQuery callbackQuery){
+        Message message = callbackQuery.getMessage();
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setParseMode(ParseMode.HTML);
+        sendMessage.setChatId(String.valueOf(message.getChatId()));
+        String chatID = String.valueOf(message.getChatId());
+        userId = Long.valueOf(chatID);
+
+        int numbering = databaseRepository.getNumbering(userId);
+        String num = numbering + ".";
+        switch (callbackQuery.getData()){
+            case "Розпочати":
+                sendMessage.setText(num +" Оберіть характеристику, що необхідно визначити: \uD83D\uDCA8 \n\n" +
+                        "\uD83D\uDC49" + num +"1 Визначення систем протидимного захисту\n" +
+                        "\uD83D\uDC49" + num +"2 Визначення необхідності влаштування систем видалення диму та гарячих газоподібних продуктів згоряння\n" +
+                        "\uD83D\uDC49" + num +"3 Визначення необхідності влаштування систем захисту за рахунок різниці тисків під час пожежі");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionKeyboard());
+                break;
+            case "визначення системи":
+                sendMessage.setText("Обрано: визначення систем протидимного захисту\n\n" +
+                        num + " Оберіть необхідну систему: \n\n" +
+                        "\uD83D\uDC49" + num +"1 Система видалення диму та гарячих газоподібних продуктів згоряння\n" +
+                        "\uD83D\uDC49" + num +"2 Система захисту за рахунок різниці тисків під час пожежі\n");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionSystemsKeyboard());
+                break;
+            case "система видалення":
+                databaseRepository.setType_system_smoke_protection(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: визначення необхідності влаштування систем видалення диму та гарячих газоподібних продуктів згоряння \n\n" +
+                        num + " Оберіть тип будівлі: \uD83C\uDFDB \n\n" +
+                        "\uD83D\uDC49" + num +"1 Житлові будівлі\n" +
+                        "\uD83D\uDC49" + num +"2 Громадські будівлі\n" +
+                        "\uD83D\uDC49" + num +"3 Адміністративно-побутові будівлі\n" +
+                        "\uD83D\uDC49" + num +"4 Виробничі будівлі\n" +
+                        "\uD83D\uDC49" + num +"5 Приміщення в будівлях різного призначення без наявності природного освітлення\n");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeRemovalSystemsKeyboard(numbering));
+                break;
+            case "житлові будівлі":
+            case "громадські будівлі":
+            case "адміністративні будівлі":
+            case "виробничі будівлі":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + " \n\n" +
+                        num + " Вкажіть умовну висоту будівлі \uD83C\uDFDB \n\n");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionHeightKeyboard());
+                break;
+            case "різного призначення":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: приміщення в будівлях різного призначення без наявності природного освітлення \n\n" +
+                        num + " Оберіть тип приміщення\n\n" +
+                        "\uD83D\uDC49" + num + "1 Розташовані у громадських та адміністративно-побутових будівлях\n" +
+                        "\uD83D\uDC49" + num + "2 Призначені для зберігання або використання горючих матеріалів\n" +
+                        "\uD83D\uDC49" + num + "3 Гардеробні");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionDifferentPurposeKeyboard(numbering));
+                break;
+            case "до 26,5 м":
+                databaseRepository.setHeight_object(1,userId);
+                if (databaseRepository.getType_of_object(userId).equals("громадські будівлі") || databaseRepository.getType_of_object(userId).equals("адміністративні будівлі") || databaseRepository.getType_of_object(userId).equals("виробничі будівлі")) {
+                    sendMessage.setText("Обрано: до 26,5 м \n\n" +
+                            num + " Вкажіть довжину коридору \uD83D\uDEA8");
+                    sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionLengthCorridorKeyboard());
+                }else {
+                    sendMessage.setText("Обрано: до 26,6 м \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                }
+                break;
+            case "26,5 м та більше":
+                databaseRepository.setHeight_object(30,userId);
+                sendMessage.setText("Обрано: 26,5 м та більше\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "до 15 м":
+                databaseRepository.setLength(1,userId);
+                if (databaseRepository.getType_of_object(userId).equals("виробничі будівлі")){
+                    sendMessage.setText("Обрано: до 15 м \n\n" + num +
+                            " Вкажіть наявність постійних робочих місць в приміщеннях категорії виробництва за вибухопожежною та пожежною небезпекою «А», «Б», «В», «Г» або «Д» IV ступеня вогнестійкості \uD83D\uDD25");
+                    sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionFireResistanceKeyboard());
+                }else{
+                    sendMessage.setText("Обрано: до 15 м \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                }
+                break;
+            case "15 м та більше":
+                databaseRepository.setLength(20,userId);
+                if (databaseRepository.getType_of_object(userId).equals("виробничі будівлі")){
+                    sendMessage.setText("Обрано: 15 м та більше \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                }else {
+                    sendMessage.setText("Обрано 15 м та більше \n\n" +
+                            num + " Вкажіть наявність природного освітлення: ☀️ ");
+                    sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionNaturalLightingKeyboard());
+                }
+                break;
+            case "наявне освітлення":
+                databaseRepository.setNatural_lighting(true,userId);
+                sendMessage.setText("Обрано: наявне природнє освітлення \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "відсутнє освітлення":
+                databaseRepository.setNatural_lighting(false,userId);
+                sendMessage.setText("Обрано: відсутнє природнє освітлення \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "наявні категорії":
+                databaseRepository.setCategory_buildings(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: наявні\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "відсутні категорії":
+                databaseRepository.setCategory_buildings(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: відсутні\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "розташовані у будівлях":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: розташовані у громадських та адміністративно-побутових будівлях \n\n" +
+                        num + " Вкажіть кількість осіб що перебувають постійно або тимчасово \uD83E\uDDCD\u200D♂️");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionPeopleKeyboard());
+                break;
+            case "до 50 осіб":
+                databaseRepository.setConstantly_at_facility(1,userId);
+                sendMessage.setText("Обрано: до 50 осіб\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "50 осіб та більше":
+                databaseRepository.setConstantly_at_facility(100,userId);
+                sendMessage.setText("Обрано: 50 осіб та більше\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "горючі матеріали":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: призначені для зберігання або використання горючих матеріалів \n\n" +
+                        num + " Вкажіть площу приміщення (м.кв) \uD83C\uDFDB");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionSquareKeyboard());
+                break;
+            case "до 55 м2":
+                databaseRepository.setSquare(1,userId);
+                sendMessage.setText("Обрано: до 55 м2\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "55 м2 та більше":
+                databaseRepository.setSquare(100,userId);
+                sendMessage.setText("Обрано: 55 м2 та більше \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "гардеробні":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: гардеробні \n\n" +
+                        num + " Вкажіть площу приміщення \uD83C\uDFDB");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionSquareWardrobesKeyboard());
+                break;
+            case "до 200 м2":
+                databaseRepository.setSquare(1,userId);
+                sendMessage.setText("Обрано: до 200 м2 \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "200 м2 та більше":
+                databaseRepository.setSquare(200,userId);
+                sendMessage.setText("Обрано: 200 м2 та більше  \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "система захисту":
+                databaseRepository.setType_system_smoke_protection(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: визначення необхідності влаштування систем захисту за рахунок різниці тисків під час пожежі\n\n" +
+                        num + " Оберіть тип об'єкту \uD83C\uDFEC \n\n" +
+                        "\uD83D\uDC49" + num + "1 Ліфтові шахти\n" +
+                        "\uD83D\uDC49" + num + "2 Незадимлювані сходові клітки\n" +
+                        "\uD83D\uDC49" + num + "3 Тамбур-шлюзи");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionSystemProtectionKeyboard(numbering));
+                break;
+            case "ліфтові шахти":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: ліфтові шахти \n\n" +
+                        num + " Вкажіть умовну висоту будівлі \uD83C\uDFEC");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionHeightSystemProtectionKeyboard());
+                break;
+            case "шахти пожежних ліфтів":
+                sendMessage.setText("Обрано: ліфтові шахти пожежних ліфтів \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "сходові клітки":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: незадимлювані сходові клітки \n\n" +
+                        num + " Вкажіть тип незадимлюваної сходової клітки \uD83D\uDCA8");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionStairsKeyboard());
+                break;
+            case "Н1":
+            case "Н2":
+            case "Н4":
+                databaseRepository.setType_stairs(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "Н3":
+                databaseRepository.setType_stairs(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: Н3 \n\n" +
+                        num + " Зазначте чи допускається перебування на клітині під час пожежі \uD83D\uDD25");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionStairsH3Keyboard());
+                break;
+            case "не допускається":
+                databaseRepository.setBeing_on_stairs(false,userId);
+                sendMessage.setText("Обрано: не допускається\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "допускається":
+                databaseRepository.setBeing_on_stairs(true,userId);
+                sendMessage.setText("Обрано: допускається\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "тамбур-шлюзи":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: тамбур-шлюхи\n\n" +
+                        num + " Оберіть тип об'єкту: \n\n" +
+                        "\uD83D\uDC49" + num + "1 Протипожежні тамбур-шлюзи\n" +
+                        "\uD83D\uDC49" + num + "2 Тамбур-шлюзи незадимлюваних сходових кліток Н3 та Н4\n" +
+                        "\uD83D\uDC49" + num + "3 Тамбур-шлюзи перед ліфтами\n" +
+                        "\uD83D\uDC49" + num + "4 Тамбур-шлюзи перед сходами\n" +
+                        "\uD83D\uDC49" + num + "5 Тамбур-шлюзи атріумів та пасажів\n" +
+                        "\uD83D\uDC49" + num + "6 Тамбур-шлюзи пожежних ліфтів");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionVestibuleLocksKeyboard(numbering));
+                break;
+            case "1 тамбур-шлюзи":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні тамбур-шлюзи" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "2 тамбур-шлюзи":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: тамбур-шлюзи незадимлюваних сходових кліток Н3 та Н4" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "3 тамбур-шлюзи":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: тамбур-шлюзи перед ліфтами \n\n" +
+                        num + " Вкажіть розміщення поверху \uD83C\uDFEC");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionLocationKeyboard());
+                break;
+            case "надземний":
+                databaseRepository.setFloors(1,userId);
+                sendMessage.setText("Обрано: надземний \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "підземний, цокольний":
+                databaseRepository.setFloors(0,userId);
+                sendMessage.setText("Обрано: підземний, цокольний \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "4 тамбур-шлюзи":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: тамбур-шлюзи перед сходами \n\n" +
+                        num + " Вкажіть розміщення поверху \uD83C\uDFEC");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionLocationKeyboard());
+                break;
+            case "5 тамбур-шлюзи":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: тамбур-шлюзи атріумів та пасажів\n\n" +
+                        num + " Оберіть тип об'єкту");
+        }
+        databaseRepository.setNumbering(numbering+1,userId);
+        messageSender.sendMessage(sendMessage);
+    }
     private String resultExtinguisher() { // виводить результат для вогнегасника
         String s6 = null;
         String typePremisses = databaseRepository.getType_premises(userId);
@@ -5481,6 +5722,14 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             return fireCompartmentArea.getSquareSeatsFloors();
         }else {
             return fireCompartmentArea.getSquareFloors();
+        }
+    }
+    private String resultSmokeProtection(){
+        SmokeProtection smokeProtection = new SmokeProtection(userId,databaseRepository);
+        if (databaseRepository.getType_system_smoke_protection(userId).equals("система видалення")){
+            return smokeProtection.getSmokeRemovalSystem();
+        }else {
+            return smokeProtection.getProtectionSystem();
         }
     }
 }
