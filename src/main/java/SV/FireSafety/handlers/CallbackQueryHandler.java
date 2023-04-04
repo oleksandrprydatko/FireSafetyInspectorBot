@@ -5602,11 +5602,11 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 break;
             case "1 тамбур-шлюзи":
                 databaseRepository.setType_premises(callbackQuery.getData(),userId);
-                sendMessage.setText("Обрано: протипожежні тамбур-шлюзи" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                sendMessage.setText("Обрано: протипожежні тамбур-шлюзи \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
                 break;
             case "2 тамбур-шлюзи":
                 databaseRepository.setType_premises(callbackQuery.getData(),userId);
-                sendMessage.setText("Обрано: тамбур-шлюзи незадимлюваних сходових кліток Н3 та Н4" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                sendMessage.setText("Обрано: тамбур-шлюзи незадимлюваних сходових кліток Н3 та Н4 \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
                 break;
             case "3 тамбур-шлюзи":
                 databaseRepository.setType_premises(callbackQuery.getData(),userId);
@@ -5631,7 +5631,20 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "5 тамбур-шлюзи":
                 databaseRepository.setType_premises(callbackQuery.getData(),userId);
                 sendMessage.setText("Обрано: тамбур-шлюзи атріумів та пасажів\n\n" +
-                        num + " Оберіть тип об'єкту");
+                        num + " Оберіть місцерозташування \uD83D\uDCCD \n\n" +
+                        "\uD83D\uDC49" + num + "1 На вході до атріумів та пасажів\n" +
+                        "\uD83D\uDC49" + num + "2 В об’ємі атріуму");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionAstriumKeyboard(numbering));
+                break;
+            case "на вході до атріумів":
+            case "в об’ємі атріуму":
+                databaseRepository.setLocation_pipeline(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "6 тамбур-шлюзи":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: тамбур-шлюзи пожежних ліфтів\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
         }
         databaseRepository.setNumbering(numbering+1,userId);
         messageSender.sendMessage(sendMessage);

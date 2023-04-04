@@ -19,6 +19,10 @@ public class SmokeProtection {
     private String typePremisses() {return databaseRepository.getType_premises(userId);}
     private int constantlyAtFacility() {return databaseRepository.getConstantly_at_facility(userId);}
     private float square() {return databaseRepository.getSquare(userId);}
+    private String typeStairs(){return databaseRepository.getType_stairs(userId);}
+    private Boolean beingOnStairs(){return databaseRepository.getBeing_on_stairs(userId);}
+    private int floors(){return databaseRepository.getFloors(userId);}
+    private String location(){return databaseRepository.getLocation_pipeline(userId);}
     private String notNeeded(){
         return "Висновок: влаштування системи <b>не потребується</b> \uD83D\uDD34";
     }
@@ -93,7 +97,41 @@ public class SmokeProtection {
         return smokeRemovalSystem();
     }
     private String protectionSystem(){
-        return "";
+        if (typeObject().equals("ліфтові шахти")){
+            if (height()<26.5){
+                return notNeeded();
+            }else {
+                return needed();
+            }
+        } else if (typeObject().equals("сходові клітки")) {
+            if (typeStairs().equals("Н1")){
+                return notNeeded();
+            } else if (typeStairs().equals("Н3")) {
+                if (beingOnStairs()){
+                    return needed();
+                }else {
+                    return notNeeded();
+                }
+            }else {
+                return needed();
+            }
+        }else {
+            if (typePremisses().equals("3 тамбур-шлюзи") || typePremisses().equals("4 тамбур-шлюзи")){
+                if (floors()==1){
+                    return notNeeded();
+                }else {
+                    return needed();
+                }
+            } else if (typePremisses().equals("5 тамбур-шлюзи")) {
+                if (location().equals("на вході до атріумів")){
+                    return needed();
+                }else {
+                    return notNeeded();
+                }
+            } else {
+                return needed();
+            }
+        }
     }
     public String getProtectionSystem(){
         return protectionSystem();

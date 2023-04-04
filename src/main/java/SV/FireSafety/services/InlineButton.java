@@ -2377,4 +2377,12 @@ public class InlineButton {
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
+    public InlineKeyboardMarkup inlineSmokeProtectionAstriumKeyboard(int numbering){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".1").callbackData("на вході до атріумів").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".2").callbackData("в об’ємі атріуму").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
 }
