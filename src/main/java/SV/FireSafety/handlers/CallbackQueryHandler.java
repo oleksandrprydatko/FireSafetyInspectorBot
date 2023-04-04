@@ -1308,24 +1308,24 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 sendMessage.setReplyMarkup(inlineButton.inlineFireClassesKeyboard());
                 break;
             case "Клас A":
-                sendMessage.setText("Обрано: горіння твердих горючих речовин, переважно органічного походження, горіння яких супроводжується тлінням (деревина, текстиль, папір)\n\n" +
-                        "Висновок: досліджуваний об'єкт відноситься до класу A \uD83D\uDEA8 \n\n" + instructions.getStart());
+                sendMessage.setText("Обрано: горіння твердих матеріалів, зазвичай органічного походження, під час горіння яких утворюються тліючі вуглини (деревина, текстиль, папір).\n\n" +
+                        "Висновок: ймовірний клас пожежі - A \uD83D\uDEA8 \n\n" + instructions.getStart());
                 break;
             case "Клас B":
-                sendMessage.setText("Обрано: горіння рідких речовин або твердих речовин, які розтоплюються.\n\n" +
-                        "Висновок: досліджуваний об'єкт відноситься до класу B \uD83D\uDEA8 \n\n " + instructions.getStart());
+                sendMessage.setText("Обрано: горіння рідин або твердих речовин, які переходять у рідкий стан.\n\n" +
+                        "Висновок: ймовірний клас пожежі - B \uD83D\uDEA8 \n\n " + instructions.getStart());
                 break;
             case "Клас C":
                 sendMessage.setText("Обрано: горіння газоподібних речовин.\n\n" +
-                        "Висновок: досліджуваний об'єкт відноситься до класу C \uD83D\uDEA8 \n\n " + instructions.getStart());
+                        "Висновок: ймовірний клас пожежі - C \uD83D\uDEA8 \n\n " + instructions.getStart());
                 break;
             case "Клас D":
                 sendMessage.setText("Обрано: горіння металів та їх сплавів.\n\n" +
-                        "Висновок: досліджуваний об'єкт відноситься до класу D \uD83D\uDEA8 \n\n " + instructions.getStart());
+                        "Висновок: ймовірний клас пожежі - D \uD83D\uDEA8 \n\n " + instructions.getStart());
                 break;
             case "Клас F":
-                sendMessage.setText("Обрано: горіння речовин, які використовують для приготування їжі (рослинних і тваринних олій та жирів) та які містяться в кухонних приладах.\n\n" +
-                        "Висновок: досліджуваний об'єкт відноситься до класу F \uD83D\uDEA8 \n\n " + instructions.getStart());
+                sendMessage.setText("Обрано: горіння речовин, які використовують для приготування їжі (рослинні і тваринні олії та жири) та які містяться в кухонних приладах.\n\n" +
+                        "Висновок: ймовірний клас пожежі - F \uD83D\uDEA8 \n\n " + instructions.getStart());
                 break;
 
         }
