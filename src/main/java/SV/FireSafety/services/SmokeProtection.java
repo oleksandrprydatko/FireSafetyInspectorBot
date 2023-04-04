@@ -22,7 +22,7 @@ public class SmokeProtection {
     private String typeStairs(){return databaseRepository.getType_stairs(userId);}
     private Boolean beingOnStairs(){return databaseRepository.getBeing_on_stairs(userId);}
     private int floors(){return databaseRepository.getFloors(userId);}
-    private String location(){return databaseRepository.getLocation_pipeline(userId);}
+    private String location(){return databaseRepository.getB1(userId);}
     private String notNeeded(){
         return "Висновок: влаштування системи <b>не потребується</b> \uD83D\uDD34";
     }

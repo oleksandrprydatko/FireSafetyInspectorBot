@@ -80,7 +80,7 @@ public class MessageHandler implements Handler<Message> {
                     case "/degree_of_risk_from_activities":
                         //встановлення команди в БД
                         databaseRepository.setComand_of_menu("/degree_of_risk_from_activities",userId);
-                        sendMessage.setText("Я підсистема Degree of subject risk Bot \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити ступніть ризику від провадження господарської діяльності \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setText("Я підсистема Degree of Subject Risk Bot \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити ступніть ризику від провадження господарської діяльності \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
                         sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
                         messageSender.sendMessage(sendMessage);
                         //очищення бази
@@ -89,7 +89,7 @@ public class MessageHandler implements Handler<Message> {
                     case "/determination_of_categories":
                         //встановлення команди в БД
                         databaseRepository.setComand_of_menu("/determination_of_categories",userId);
-                        sendMessage.setText("Я підсистема Determination of categories of premisses according to fire hazard \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу з визначенням категорій приміщень,будинків та зовнішніх установок за вибухопожежною та пожежною небезпекою \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setText("Я підсистема Determination of Categories Bot \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу з визначенням категорій приміщень,будинків та зовнішніх установок за вибухопожежною та пожежною небезпекою \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
                         sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
                         messageSender.sendMessage(sendMessage);
                         //очищення бази
@@ -99,7 +99,7 @@ public class MessageHandler implements Handler<Message> {
                     case "/fire_classes":
                         //встановлення команди в БД
                         databaseRepository.setComand_of_menu("/fire_classes",userId);
-                        sendMessage.setText("Я підсистема Fire Classes \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу з визначенням класів пожеж \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setText("Я підсистема Fire Classes Bot \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу з визначенням ймовірного класу пожежі \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
                         sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
                         messageSender.sendMessage(sendMessage);
                         //очищення бази
@@ -109,7 +109,7 @@ public class MessageHandler implements Handler<Message> {
                     case "/zone_classes":
                         //встановлення команди в БД
                         databaseRepository.setComand_of_menu("/zone_classes",userId);
-                        sendMessage.setText("Я підсистема Determination of zone classes \uD83C\uDDFA\uD83C\uDDE6 \nДопоможу визначити клас зони приміщення залежно від параметрів функціонування \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setText("Я підсистема Determination of Zone Classes Bot\uD83C\uDDFA\uD83C\uDDE6 \nДопоможу визначити клас зони приміщення залежно від параметрів функціонування \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
                         sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
                         messageSender.sendMessage(sendMessage);
                         //очищення бази
@@ -119,7 +119,7 @@ public class MessageHandler implements Handler<Message> {
                     case "/fire_alarm_installation":
                         //встановлення команди в БД
                         databaseRepository.setComand_of_menu("/fire_alarm_installation",userId);
-                        sendMessage.setText("Я підсистема Fire alarm installation \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити необхіднІсть проектування та монтажу автоматичних систем пожежної сигналізації та пожежогасіння \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setText("Я підсистема Fire Alarm Installation Bot \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити необхіднІсть проектування та монтажу автоматичних систем пожежної сигналізації та пожежогасіння \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
                         sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
                         messageSender.sendMessage(sendMessage);
                         //очищення бази
@@ -128,7 +128,7 @@ public class MessageHandler implements Handler<Message> {
                     //система оповіщення
                     case "/notification_system":
                         databaseRepository.setComand_of_menu("/notification_system",userId);
-                        sendMessage.setText("Я підсистема Notification System \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити тип системи оповіщення, характеристики системи оповіщення та управління евакуюванням людей при пожежі \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setText("Я підсистема Notification System Bot \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити тип системи оповіщення, характеристики системи оповіщення та управління евакуюванням людей при пожежі \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
                         sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
                         messageSender.sendMessage(sendMessage);
                         //очищення бази
@@ -137,7 +137,7 @@ public class MessageHandler implements Handler<Message> {
                     //протипожежне водопостачання
                     case "/fire_water_supply":
                         databaseRepository.setComand_of_menu("/fire_water_supply",userId);
-                        sendMessage.setText("Я підсистема Fire Water Supply \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити необхідність влаштування та параметри зовнішнього та внутрішнього протипожежного водопостачання \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setText("Я підсистема Fire Water Supply Bot \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити необхідність влаштування та параметри зовнішнього та внутрішнього протипожежного водопостачання \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
                         sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
                         messageSender.sendMessage(sendMessage);
                         //очищення бази
@@ -146,7 +146,7 @@ public class MessageHandler implements Handler<Message> {
                     //протипожежні відстані
                     case "/fire_protection_distances":
                         databaseRepository.setComand_of_menu("/fire_protection_distances",userId);
-                        sendMessage.setText("Я підсистема Fire Protection Distances \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити протипожежні відстані між будівлями, технологічними установками, інженерними комунікаціями \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setText("Я підсистема Fire Protection Distances Bot \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити протипожежні відстані між будівлями, технологічними установками, інженерними комунікаціями \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
                         sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
                         messageSender.sendMessage(sendMessage);
                         //очищення бази
@@ -155,7 +155,7 @@ public class MessageHandler implements Handler<Message> {
                     //площа протипожежних відсіків, посадочні місця, поверховість
                     case "/fire_compartment_area":
                         databaseRepository.setComand_of_menu("/fire_compartment_area",userId);
-                        sendMessage.setText("Я підсистема Fire Compartment Area \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити допустиму площу протипожежних відсіків, кількості посадочних місць та поверховості об'єктів \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setText("Я підсистема Fire Compartment Area Bot \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити допустиму площу протипожежних відсіків, кількості посадочних місць та поверховості об'єктів \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
                         sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
                         messageSender.sendMessage(sendMessage);
                         //очищення бази
@@ -164,7 +164,7 @@ public class MessageHandler implements Handler<Message> {
                     // системи протипожежного захисту
                     case "/smoke_protection_systems":
                         databaseRepository.setComand_of_menu("/smoke_protection_systems",userId);
-                        sendMessage.setText("Я підсистема Smoke Protection Systems\uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити необхідність влаштування систем протидимного захисту \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setText("Я підсистема Smoke Protection Systems Bot \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити необхідність влаштування систем протидимного захисту \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
                         sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
                         messageSender.sendMessage(sendMessage);
                         //очищення бази
@@ -402,16 +402,16 @@ public class MessageHandler implements Handler<Message> {
     }
 }
 //        on_start - На початок
-//        type_number_fire_extinguishers - Визначення типу та необхідної кількості вогнегасників
-//        degree_of_risk_from_activities - Оцінка ступеня ризику від провадження господарської діяльності
-//        determination_of_categories - Визначення категорій приміщень за пожежною небезпекою
-//        fire_classes - Визначення класів пожеж
-//        zone_classes - Визначення класу зони
-//        fire_alarm_installation - Визначення необхідності проектування та монтажу автоматичних систем пожежної сигналізації та пожежогасіння
-//        notification_system - Визначення типу системи оповіщення, та управління евакуюванням людей
-//        fire_water_supply - Визначення необхідності влаштування та параметрів протипожежного водопостачання
-//        fire_protection_distances - Визначення протипожежних відстаней
-//        fire_compartment_area - Визначення допустимої площі протипожежних відсіків, кількості посадочних місць та поверховість об'єктів
-//        smoke_protection_systems - Визначення необхідності влаштування систем протидимного захисту
+//        type_number_fire_extinguishers - Тип та необхідна кількость вогнегасників
+//        degree_of_risk_from_activities - Ступінь ризику від провадження господарської діяльності
+//        determination_of_categories - Категорії приміщень за пожежною небезпекою
+//        fire_classes - Ймовірний клас пожежі
+//        zone_classes - Клас зони
+//        fire_alarm_installation - Проектування та монтаж АСПС та АСПГ
+//        notification_system - Тип системи оповіщення, та управління евакуюванням людей
+//        fire_water_supply - Влаштування та параметри протипожежного водопостачання
+//        fire_protection_distances - Протипожежні відстані
+//        fire_compartment_area - Допустима площа протипожежних відсіків, кількості посадочних місць та поверховість об'єктів
+//        smoke_protection_systems - Влаштування систем протидимного захисту
 //        service_portal - Портал електронних послуг ДСНС України
 //        feedback_info - Інформація. Зворотній зв'язок

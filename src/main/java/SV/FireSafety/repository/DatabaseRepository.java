@@ -26,13 +26,14 @@ public interface DatabaseRepository extends JpaRepository<Database, Long> {
             "dead_people = NULL,losses = NULL, tax_free_income = NULL, injured_people=NULL," +
             "volume_premises=NULL, volume_rooms_a=NULL, volume_rooms_б=NULL, volume_rooms_в=NULL," +
             "volume_rooms_г=NULL,humidity_of_space=NULL,type_of_object=NULL,hotel_rooms=NULL,floors=NULL," +
-            "fire_resistance=NULL,seats=NULL,books_storage=NULL,archives=NULL," +
+            "fire_resistance=NULL,seats=NULL,books_storage=NULL,archives=false," +
             "amount_of_transport=NULL,weight=NULL,productivity=NULL," +
             "length=NULL,fire_resistance_to_which=NULL,fire_alarm=false," +
             "specific_load=false,type_fire_distance=NULL,type_gas_station=NULL," +
             "size_gas_station=NULL,type_of_fuel=NULL,type_gas_holder=NULL,location_pipeline=NULL," +
             "type_liquid=NULL,type_fire_compartment_area=NULL,type_cinema=NULL," +
-            "numbering = 1,type_system_smoke_protection = NULL,type_stairs=NULL,being_on_stairs=false where inspector.users.id_telegram = :telegram_id",nativeQuery = true)
+            "numbering = 1,type_system_smoke_protection = NULL,type_stairs=NULL,being_on_stairs=false," +
+            "natural_lighting = false where inspector.users.id_telegram = :telegram_id",nativeQuery = true)
     void clearDB(long telegram_id);
     @Transactional
     @Modifying

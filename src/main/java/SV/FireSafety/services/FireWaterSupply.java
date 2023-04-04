@@ -24,7 +24,7 @@ public class FireWaterSupply {
     private String result(int fire, int consumption){
         return  "Висновок: розрахункова кількість одночасних пожеж – " + fire + " \uD83D\uDD25, розрахункові витрати води на зовнішнє пожежогасіння в населеному пункті – " + consumption + "л/с \uD83D\uDCA7";
     }
-    private String notStandardized(){return "Висновок: не нормується";}
+    private String notStandardized(){return "Висновок: <b>не нормується</b> \uD83D\uDD34";}
     private String costs(int costs){return "Висновок: витрати на зовнішнє пожежогасіння складають - " + costs + "\uD83D\uDCA7 л/с";}
     private String noLessCosts(){return "Висновок: витрати на зовнішнє пожежогасіння складають – не менше 35 \uD83D\uDCA7 л/с";}
     private String incorrectFloors(boolean value, int floors){
@@ -35,10 +35,10 @@ public class FireWaterSupply {
         return "Ви введи не корректні дані. Максимальний можливий об'єм для будівлі обраної вами категорії за вибухопожежною та пожежною небезпекою - " + volume+ " м.куб";
     }
     private String costsNotExpected(){
-        return "Висновок: витрати на внутрішнє пожежогасіння не передбачаються";
+        return "Висновок: витрати на внутрішнє пожежогасіння <b>не передбачаються</b> \uD83D\uDD34";
     }
     private String costsNotRequired(){
-        return "Висновок: витрати на внутрішнє пожежогасіння не вимагаються";
+        return "Висновок: витрати на внутрішнє пожежогасіння <b>не вимагаються</b> \uD83D\uDD34";
     }
     private String costsInternal(int jet, double costs){
         return "Висновок: кількість струменів – " + jet + " , витрати на внутрішнє пожежогасіння складають – " + costs + " \uD83D\uDCA7 л/с";
