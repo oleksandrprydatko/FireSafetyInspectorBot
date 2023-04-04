@@ -69,6 +69,9 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "/fire_classes":
                 fireClasses(callbackQuery);
                 break;
+            case "/smoke_protection_systems":
+                smokeProtectionSystems(callbackQuery);
+                break;
 
         }
     }
@@ -177,28 +180,28 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "Порошковий":
                 //встановлення в БД типу вогнегасника
                 databaseRepository.setType_extinguisher("порошковий", userId);
-                sendMessage.setText("Обрано: порошковий вогнегасник" + "\n\n" + "5. Надішліть площу приміщення/поверху(м.кв) та натисніть \" Розрахувати \" \uD83D\uDC47 ");
+                sendMessage.setText("Обрано: порошковий вогнегасник" + "\n\n" + "5. Надішліть площу приміщення/поверху(м.кв) та натисніть \"Розрахувати\" \uD83D\uDC47 ");
                 sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherCalculateKeyboard());
                 databaseRepository.setValue("площа", userId);
                 break;
             case "Водопінний":
                 //встановлення в БД типу вогнегасника
                 databaseRepository.setType_extinguisher("водопінний", userId);
-                sendMessage.setText("Обрано: водопінний вогнегасник" + "\n\n" + "5. Надішліть площу приміщення/поверху(м.кв) та натисніть \" Розрахувати \" \uD83D\uDC47 ");
+                sendMessage.setText("Обрано: водопінний вогнегасник" + "\n\n" + "5. Надішліть площу приміщення/поверху(м.кв) та натисніть \"Розрахувати\" \uD83D\uDC47 ");
                 sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherCalculateKeyboard());
                 databaseRepository.setValue("площа", userId);
                 break;
             case "Водяний":
                 //встановлення в БД типу вогнегасника
                 databaseRepository.setType_extinguisher("водяний", userId);
-                sendMessage.setText("Обрано: водяний вогнегасник" + "\n\n" + "5. Надішліть площу приміщення/поверху(м.кв) та натисніть \" Розрахувати \" \uD83D\uDC47");
+                sendMessage.setText("Обрано: водяний вогнегасник" + "\n\n" + "5. Надішліть площу приміщення/поверху(м.кв) та натисніть \"Розрахувати\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherCalculateKeyboard());
                 databaseRepository.setValue("площа", userId);
                 break;
             case "Газовий":
                 //встановлення в БД типу вогнегасника
                 databaseRepository.setType_extinguisher("газовий", userId);
-                sendMessage.setText("Обрано: газовий вогнегасник" + "\n\n" + "5. Надішліть площу приміщення/поверху(м.кв) та натисніть \" Розрахувати \" \uD83D\uDC47 ");
+                sendMessage.setText("Обрано: газовий вогнегасник" + "\n\n" + "5. Надішліть площу приміщення/поверху(м.кв) та натисніть \"Розрахувати\" \uD83D\uDC47 ");
                 sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherCalculateKeyboard());
                 databaseRepository.setValue("площа", userId);
                 break;
@@ -254,7 +257,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 //встановлює в БД приміщення використовується для приготування їжі
                 databaseRepository.setType_premises("Кухні", userId);
                 databaseRepository.setKitchen(1, userId);
-                sendMessage.setText("Обрано: приміщення для приготування їжі" + "\n\n" + "4. Вкажіть кількість окремих робочих місць де в технологічному процесі приготування їжі застосовуються рослинні або тваринні масла і жири.");
+                sendMessage.setText("Обрано: приміщення для приготування їжі" + "\n\n" + "4. Вкажіть кількість окремих робочих місць де в технологічному процесі приготування їжі застосовуються рослинні або тваринні масла і жири та натисніть \" Далі \" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskObjectAreaKitchenKeyboard());
                 databaseRepository.setValue("робочі місця", userId);
                 break;
@@ -264,19 +267,19 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherOfficeEquipmentKeyboard());
                 break;
             case "Водяний для кухні":
-                sendMessage.setText("Обрано: водяний вогнегасник" + "\n\n" + "6. Надішліть площу приміщення/поверху(м.кв) та натисніть \" Розрахувати \" ");
+                sendMessage.setText("Обрано: водяний вогнегасник" + "\n\n" + "6. Надішліть площу приміщення/поверху(м.кв) та натисніть \"Розрахувати\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherCalculateKeyboard());
                 databaseRepository.setValue("площа", userId);
                 break;
             case "Так, передбачені":
                 databaseRepository.setB2("true", userId);
-                sendMessage.setText("Обрано: наявні технічні приміщення (у т.ч. комори, електрощитові тощо)" + "\n\n" + "8. Надішліть загальну площу технічних приміщень (м.кв.) після чого натисніть \"Розрахувати\"");
+                sendMessage.setText("Обрано: наявні технічні приміщення (у т.ч. комори, електрощитові тощо)" + "\n\n" + "8. Надішліть загальну площу технічних приміщень (м.кв.) після чого натисніть \"Розрахувати\" \uD83D\uDC47");
                 sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherCalculateTechnicalPremisesKeyboard());
                 databaseRepository.setType_premises("Технічні приміщення", userId);
                 databaseRepository.setValue("технічні приміщення", userId);
                 break;
             case "Ні, не передбачені":
-                sendMessage.setText("Технічні приміщення відсутні. Додаткового остащення вогнегасниками не потребується");
+                sendMessage.setText("Технічні приміщення відсутні. Додаткового остащення вогнегасниками не потребується \n\n" + instructions.getStart());
                 databaseRepository.setB2("false", userId);
                 break;
             case "Житлові":
@@ -286,13 +289,13 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherTypesLivingKeyboard());
                 break;
             case "Квартири":
-                sendMessage.setText("Обрано: квартири багатоквартирних житлових будинків" + "\n\n" + resultExtinguisher());
+                sendMessage.setText("Обрано: квартири багатоквартирних житлових будинків" + "\n\n" + resultExtinguisher() + "\n\n" + instructions.getStart());
                 break;
             case "Гуртожитки":
-                sendMessage.setText("Обрано: кімната/секція/блок гуртожитку" + "\n\n" + resultExtinguisher());
+                sendMessage.setText("Обрано: кімната/секція/блок гуртожитку" + "\n\n" + resultExtinguisher() + "\n\n" + instructions.getStart());
                 break;
             case "Будинки індивідуальної забудови":
-                sendMessage.setText("Обрано: житлові будинки індивідуальної забудови" + "\n\n" + resultExtinguisher());
+                sendMessage.setText("Обрано: житлові будинки індивідуальної забудови" + "\n\n" + resultExtinguisher() + "\n\n" + instructions.getStart());
                 break;
             case "Гаражі/автомайстерні":
                 //встановлення в БД типу приміщення
@@ -304,7 +307,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "Розрахувати":
                 if (databaseRepository.getValue(userId).equals("паркування")) {
                     if (databaseRepository.getParking(userId) != null) {
-                        sendMessage.setText(resultExtinguisher());
+                        sendMessage.setText(resultExtinguisher() + "\n\n" + instructions.getStart());
                     } else {
                         sendMessage.setText("Ви не ввели рекомендовані системою параметри. \n\n" +
                                 "2. Надішліть кількість місць стоянки автомобілів у боксі (гаражі, стоянці) після чого натисніть \"Розрахувати\" \uD83C\uDD7F️");
@@ -315,13 +318,13 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherTechnicalFacilitiesKeyboard());
                 } else {
                     sendMessage.setText("Ви не ввели рекомендовані системою параметри. \n\n" +
-                            "Надішліть площу приміщення/поверху(м.кв) та натисніть \" Розрахувати \" \uD83D\uDC47");
+                            "Надішліть площу приміщення/поверху(м.кв) та натисніть \"Розрахувати\" \uD83D\uDC47");
                     sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherCalculateKeyboard());
                 }
                 break;
             case "Розрахувати(техн.прим)":
                 if (databaseRepository.getSquare_technical_premises(userId) != null) {
-                    sendMessage.setText(resultExtinguisher());
+                    sendMessage.setText(resultExtinguisher() + "\n\n" + instructions.getStart());
                 } else {
                     sendMessage.setText("Ви не ввели рекомендовані системою параметри \n\n" +
                             "Надішліть загальну площу технічних приміщень (м.кв.) після чого натисніть \"Розрахувати\" \uD83D\uDC47");
@@ -334,7 +337,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                     sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherForKitchenKeyboard());
                 }else{
                     sendMessage.setText("Ви не ввели рекомендовані системою параметри \n\n" +
-                            "Вкажіть кількість окремих робочих місць де в технологічному процесі приготування їжі застосовуються рослинні або тваринні масла і жири.");
+                            "Вкажіть кількість окремих робочих місць де в технологічному процесі приготування їжі застосовуються рослинні або тваринні масла і жири та натисніть \"Далі\" \uD83D\uDC47");
                     sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskObjectAreaKitchenKeyboard());
                 }
                 break;
@@ -422,7 +425,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 //встановлює в БД типу об'єкту ризику
                 databaseRepository.setType_object_of_risk("обєкт метрополітену",userId);
                 databaseRepository.setValue("площа",userId);
-                sendMessage.setText("Обрано: Об’єкт метрополітену" + "\n\n" + "Надішліть загальну площу об'єкта (м.кв.) та натисніть \"Далі\"\n");
+                sendMessage.setText("Обрано: Об’єкт метрополітену" + "\n\n" + "Надішліть загальну площу об'єкта (м.кв.) та натисніть \"Далі\" \uD83D\uDC47 \n");
                 sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskObjectAreaKeyboard());
                 break;
             case "2.4":
@@ -456,42 +459,42 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 //встановлення в БД категорії приміщення
                 databaseRepository.setCategory_premises("Категорія А",userId);
                 databaseRepository.setValue("площа",userId);
-                sendMessage.setText("Обрано: приміщення категорії А" + "\n\n" + "Надішліть загальну площу об'єкта (м.кв.) та натисніть \"Далі\" \n ");
+                sendMessage.setText("Обрано: приміщення категорії А" + "\n\n" + "Надішліть загальну площу об'єкта (м.кв.) та натисніть \"Далі\" \uD83D\uDC47 \n ");
                 sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskObjectAreaKeyboard());
                 break;
             case "Категорія приміщення Б":
                 //встановлення в БД категорії приміщення
                 databaseRepository.setCategory_premises("Категорія Б",userId);
                 databaseRepository.setValue("площа",userId);
-                sendMessage.setText("Обрано: приміщення категорії Б" + "\n\n" + "Надішліть загальну площу об'єкта (м.кв.) та натисніть \"Далі\" \n");
+                sendMessage.setText("Обрано: приміщення категорії Б" + "\n\n" + "Надішліть загальну площу об'єкта (м.кв.) та натисніть \"Далі\" \uD83D\uDC47 \n");
                 sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskObjectAreaKeyboard());
                 break;
             case "Категорія приміщення В":
                 //встановлення в БД категорії приміщення
                 databaseRepository.setCategory_premises("Категорія В",userId);
                 databaseRepository.setValue("площа",userId);
-                sendMessage.setText("Обрано: приміщення категорії В" + "\n\n" + "Надішліть загальну площу об'єкта (м.кв.) та натисніть \"Далі\" \n");
+                sendMessage.setText("Обрано: приміщення категорії В" + "\n\n" + "Надішліть загальну площу об'єкта (м.кв.) та натисніть \"Далі\" \uD83D\uDC47 \n");
                 sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskObjectAreaKeyboard());
                 break;
             case "Категорія приміщення Г":
                 //встановлення в БД категорії приміщення
                 databaseRepository.setCategory_premises("Категорія Г",userId);
                 databaseRepository.setValue("площа",userId);
-                sendMessage.setText("Обрано: приміщення категорії Г" + "\n\n" + "Надішліть загальну площу об'єкта (м.кв.) та натисніть \"Далі\" \n");
+                sendMessage.setText("Обрано: приміщення категорії Г" + "\n\n" + "Надішліть загальну площу об'єкта (м.кв.) та натисніть \"Далі\" \uD83D\uDC47 \n");
                 sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskObjectAreaKeyboard());
                 break;
             case "Категорія приміщення Д":
                 //встановлення в БД категорії приміщення
                 databaseRepository.setCategory_premises("Категорія Д",userId);
                 databaseRepository.setValue("площа",userId);
-                sendMessage.setText("Обрано: приміщення категорії Д" + "\n\n" + "Надішліть загальну площу об'єкта (м.кв.) та натисніть \"Далі\" \n");
+                sendMessage.setText("Обрано: приміщення категорії Д" + "\n\n" + "Надішліть загальну площу об'єкта (м.кв.) та натисніть \"Далі\" \uD83D\uDC47 \n");
                 sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskObjectAreaKeyboard());
                 break;
             case "2.6":
                 //встановлення в БД тип об'єкту ризику
                 databaseRepository.setType_object_of_risk("інші обєкти",userId);
                 databaseRepository.setValue("площа",userId);
-                sendMessage.setText("Обрано: Інші об’єкти" + "\n\n" + "Надішліть загальну площу об'єкта (м.кв.) та натисніть \"Далі\"\n");
+                sendMessage.setText("Обрано: Інші об’єкти" + "\n\n" + "Надішліть загальну площу об'єкта (м.кв.) та натисніть \"Далі\"\uD83D\uDC47 \n");
                 sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskObjectAreaKeyboard());
                 break;
             case "Далі":
@@ -657,7 +660,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                                 || (databaseRepository.getLevel_emergency(userId).equals("НС регіонального рівня") &&  databaseRepository.getDead_people(userId) != null && databaseRepository.getFixed_violations(userId)!=null)
                                 || (databaseRepository.getLevel_emergency(userId).equals("НС місцевого рівня") && databaseRepository.getDead_people(userId) != null && databaseRepository.getLosses(userId)!=null && databaseRepository.getTax_free_income(userId) != null && databaseRepository.getFixed_violations(userId)!=null)
                                 || ((databaseRepository.getLevel_emergency(userId).equals("НС обєктового рівня")||databaseRepository.getLevel_emergency(userId).equals("не класифікована НС")) && databaseRepository.getDead_people(userId)!=null && databaseRepository.getLosses(userId)!=null && databaseRepository.getTax_free_income(userId)!=null && databaseRepository.getInjured_people(userId) !=null && databaseRepository.getFixed_violations(userId) != null)){
-                            sendMessage.setText(resultDegreeRisk());
+                            sendMessage.setText(resultDegreeRisk() + "\n\n" + instructions.getStart());
                         }
                     }
                 }else if (databaseRepository.getCharacteristics_object(userId).equals("проєктується")){
@@ -735,10 +738,10 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                             || (databaseRepository.getLevel_emergency(userId).equals("НС регіонального рівня") &&  databaseRepository.getDead_people(userId) != null && databaseRepository.getFixed_violations(userId)!=null)
                             || (databaseRepository.getLevel_emergency(userId).equals("НС місцевого рівня") && databaseRepository.getDead_people(userId) != null && databaseRepository.getLosses(userId)!=null && databaseRepository.getTax_free_income(userId) != null && databaseRepository.getFixed_violations(userId)!=null)
                             || ((databaseRepository.getLevel_emergency(userId).equals("НС обєктового рівня")||databaseRepository.getLevel_emergency(userId).equals("не класифікована НС")) && databaseRepository.getDead_people(userId)!=null && databaseRepository.getLosses(userId)!=null && databaseRepository.getTax_free_income(userId)!=null && databaseRepository.getInjured_people(userId) !=null && databaseRepository.getFixed_violations(userId) != null)){
-                        sendMessage.setText("3. Оберіть тип об'єкта для встановлення показників ступеня ризику за класом наслідків (відповідальності) під час будівництва (з запропонованого переліку):\n" +
-                                "3.1. Об’єкт із значними наслідками (СС3)\n" +
-                                "3.2. Об’єкт із середніми наслідками (СС2)\n" +
-                                "3.3. Об’єкт із незначними наслідками (СС1)");
+                        sendMessage.setText("3. Оберіть тип об'єкта для встановлення показників ступеня ризику за класом наслідків (відповідальності) під час будівництва (з запропонованого переліку):\n\n" +
+                                "\uD83D\uDC49 3.1. Об’єкт із значними наслідками (СС3)\n" +
+                                "\uD83D\uDC49 3.2. Об’єкт із середніми наслідками (СС2)\n" +
+                                "\uD83D\uDC49 3.3. Об’єкт із незначними наслідками (СС1)");
                         sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskConstructionConsequencesKeyboard());
                     }
                 }
@@ -939,17 +942,17 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "⚡️ 3.1":
                 //додавання в БД тип об'єкту із наслідками
                 databaseRepository.setType_result_degree_risk("об’єкт із значними наслідками",userId);
-                sendMessage.setText("Обрано: Об’єкт із значними наслідками (СС3)" + "\n\n"+resultDegreeRisk());
+                sendMessage.setText("Обрано: Об’єкт із значними наслідками (СС3)" + "\n\n"+resultDegreeRisk() + "\n\n" + instructions.getStart());
                 break;
             case "⚡️ 3.2":
                 //додавання в БД тип об'єкту із наслідками
                 databaseRepository.setType_result_degree_risk("об’єкт із середніми наслідками",userId);
-                sendMessage.setText("Обрано: Об’єкт із середніми наслідками (СС2)" + "\n\n" + resultDegreeRisk());
+                sendMessage.setText("Обрано: Об’єкт із середніми наслідками (СС2)" + "\n\n" + resultDegreeRisk() + "\n\n" + instructions.getStart());
                 break;
             case "⚡️ 3.3":
                 //додавання в БД тип об'єкту із наслідками
                 databaseRepository.setType_result_degree_risk("об’єкт із незначними наслідками",userId);
-                sendMessage.setText("Обрано: Об’єкт із незначними наслідками (СС1)" + "\n\n" + resultDegreeRisk());
+                sendMessage.setText("Обрано: Об’єкт із незначними наслідками (СС1)" + "\n\n" + resultDegreeRisk() + "\n\n" + instructions.getStart());
                 break;
 
         }
@@ -1045,7 +1048,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "2.1 Легкозаймисті рідини":
             case "2.1 Вибухові речовини":
                 if (!databaseRepository.getUsed_indoors(userId)){
-                    sendMessage.setText(categories.getCategoryA());
+                    sendMessage.setText(categories.getCategoryA() + "\n\n" + instructions.getStart());
                 }else{
                     sendMessage.setText(categories.getCategoryA() + "\n\n" + "Чи є необхідність визначити категорію будівлі?");
                     sendMessage.setReplyMarkup(inlineButton.inlineDeterminationNecessityCategoriesKeyboard());
@@ -1056,7 +1059,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "2.1 Горючі пили":
             case "2.1 Горючі волокна":
                 if (!databaseRepository.getUsed_indoors(userId)){
-                    sendMessage.setText(categories.getCategoryБ());
+                    sendMessage.setText(categories.getCategoryБ() + "\n\n" + instructions.getStart());
                 }else{
                     sendMessage.setText(categories.getCategoryБ() + "\n\n" + "Чи є необхідність визначити категорію будівлі?");
                     sendMessage.setReplyMarkup(inlineButton.inlineDeterminationNecessityCategoriesKeyboard());
@@ -1072,7 +1075,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "2.1 Тверді важкогорючі речовини":
             case "2.1 Важкогорючі рідини":
                 if (!databaseRepository.getUsed_indoors(userId)){
-                    sendMessage.setText(categories.getCategoryВ());
+                    sendMessage.setText(categories.getCategoryВ() + "\n\n" + instructions.getStart());
                 }else{
                     sendMessage.setText(categories.getCategoryВ() + "\n\n" + "Чи є необхідність визначити категорію будівлі?");
                     sendMessage.setReplyMarkup(inlineButton.inlineDeterminationNecessityCategoriesKeyboard());
@@ -1084,7 +1087,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "2.2 Тверді горючі речовини":
             case "2.1 Негорючі речовини":
                 if (!databaseRepository.getUsed_indoors(userId)){
-                    sendMessage.setText(categories.getCategoryГ());
+                    sendMessage.setText(categories.getCategoryГ() + "\n\n" + instructions.getStart());
                 }else{
                     sendMessage.setText(categories.getCategoryГ() + "\n\n" + "Чи є необхідність визначити категорію будівлі?");
                     sendMessage.setReplyMarkup(inlineButton.inlineDeterminationNecessityCategoriesKeyboard());
@@ -1098,7 +1101,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "2.2 Важкогорючі рідини":
             case "2.2 Негорючі речовини":
                 if (!databaseRepository.getUsed_indoors(userId)){
-                    sendMessage.setText(categories.getCategoryД());
+                    sendMessage.setText(categories.getCategoryД() + "\n\n" + instructions.getStart());
                 }else{
                     sendMessage.setText(categories.getCategoryД() + "\n\n" + "Чи є необхідність визначити категорію будівлі?");
                     sendMessage.setReplyMarkup(inlineButton.inlineDeterminationNecessityCategoriesKeyboard());
@@ -1151,13 +1154,13 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "2.1 Горючі гази З":
             case "2.1 Легкозаймисті рідини З":
             case "2.1 Вибухові речовини З":
-                sendMessage.setText(categories.getCategoryАз());
+                sendMessage.setText(categories.getCategoryАз() + "\n\n" + instructions.getStart());
                 break;
             case "2.2 Легкозаймисті рідини З":
             case "2.1 Горючі рідини З":
             case "2.1 Горючі пили З":
             case "2.1 Горючі волокна З":
-                sendMessage.setText(categories.getCategoryБз());
+                sendMessage.setText(categories.getCategoryБз() + "\n\n" + instructions.getStart());
                 break;
             case "2.2 Горючі гази З":
             case "2.3 Легкозаймисті рідини З":
@@ -1168,18 +1171,18 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             case "2.1 Тверді горючі речовини З":
             case "2.1 Тверді важкогорючі речовини З":
             case "2.1 Важкогорючі рідини З":
-                sendMessage.setText(categories.getCategoryВз());
+                sendMessage.setText(categories.getCategoryВз() + "\n\n" + instructions.getStart());
                 break;
             case "2.3 Горючі гази З":
             case "2.3 Горючі рідини З":
             case "2.2 Тверді горючі речовини З":
             case "2.1 Негорючі речовини З":
-                sendMessage.setText(categories.getCategoryГз());
+                sendMessage.setText(categories.getCategoryГз() + "\n\n" + instructions.getStart());
                 break;
             case "2.2 Тверді важкогорючі речовини З":
             case "2.2 Важкогорючі рідини З":
             case "2.2 Негорючі речовини З":
-                sendMessage.setText(categories.getCategoryДз());
+                sendMessage.setText(categories.getCategoryДз() + "\n\n" + instructions.getStart());
                 break;
             case "Категорія будівлі":
                 databaseRepository.setValue("обєм будівлі",userId);
@@ -1203,7 +1206,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                                 sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
                             } else {
                                 if (categoryBuilding.getBuildingCategoryA()) {
-                                    sendMessage.setText(categories.getCategoryAб());
+                                    sendMessage.setText(categories.getCategoryAб()+ "\n\n" + instructions.getStart());
                                 } else {
                                     databaseRepository.setValue("обєм приміщень Б",userId);
                                     sendMessage.setText("Надішліть об'єм приміщень категорії Б та натисніть \" Далі \" \uD83D\uDC47");
@@ -1217,7 +1220,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                                 sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
                             }else {
                                 if (categoryBuilding.getBuildingCategoryБ()){
-                                    sendMessage.setText(categories.getCategoryБб());
+                                    sendMessage.setText(categories.getCategoryБб() + "\n\n" + instructions.getStart());
                                 }else {
                                     databaseRepository.setValue("обєм приміщень В",userId);
                                     sendMessage.setText("Надішліть об'єм приміщень категорії B та натисніть \" Далі \" \uD83D\uDC47");
@@ -1231,7 +1234,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                                 sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
                             }else {
                                 if (categoryBuilding.getBuildingCategoryВ()){
-                                    sendMessage.setText(categories.getCategoryВб());
+                                    sendMessage.setText(categories.getCategoryВб() + "\n\n" + instructions.getStart());
                                 }else {
                                     databaseRepository.setValue("обєм приміщень Г",userId);
                                     sendMessage.setText("Надішліть об'єм приміщень категорії Г та натисніть \" Далі \" \uD83D\uDC47");
@@ -1245,9 +1248,9 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                                 sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
                             }else {
                                 if (categoryBuilding.getBuildingCategoryГ()){
-                                    sendMessage.setText(categories.getCategoryГб());
+                                    sendMessage.setText(categories.getCategoryГб() + "\n\n" + instructions.getStart());
                                 }else {
-                                    sendMessage.setText(categories.getCategoryДб());
+                                    sendMessage.setText(categories.getCategoryДб() + "\n\n" + instructions.getStart());
                                 }
                             }
                         }
@@ -1297,32 +1300,32 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
         switch (callbackQuery.getData()){
             case "Розпочати":
                 sendMessage.setText("1. Вкажіть горіння якого виду матеріалів/речовин можливе на об'єкті: \uD83D\uDD25 \n\n" +
-                        "\uD83D\uDC49 1.1 Горіння твердих горючих речовин, переважно органічного походження, горіння яких супроводжується тлінням (деревина, текстиль, папір). \n" +
-                        "\uD83D\uDC49 1.2 Горіння рідких речовин або твердих речовин, які розтоплюються. \n" +
+                        "\uD83D\uDC49 1.1 Горіння твердих матеріалів, зазвичай органічного походження, під час горіння яких утворюються тліючі вуглини (деревина, текстиль, папір). \n" +
+                        "\uD83D\uDC49 1.2 Горіння рідин або твердих речовин, які переходять у рідкий стан. \n" +
                         "\uD83D\uDC49 1.3 Горіння газоподібних речовин.\n" +
                         "\uD83D\uDC49 1.4 Горіння металів та їх сплавів.\n" +
-                        "\uD83D\uDC49 1.5 Горіння речовин, які використовують для приготування їжі (рослинних і тваринних олій та жирів) та які містяться в кухонних приладах.");
+                        "\uD83D\uDC49 1.5 Горіння речовин, які використовують для приготування їжі (рослинні і тваринні олії та жири) та які містяться в кухонних приладах.");
                 sendMessage.setReplyMarkup(inlineButton.inlineFireClassesKeyboard());
                 break;
             case "Клас A":
-                sendMessage.setText("Обрано: горіння твердих горючих речовин, переважно органічного походження, горіння яких супроводжується тлінням (деревина, текстиль, папір)\n\n" +
-                        "Висновок: досліджуваний об'єкт відноситься до класу A \uD83D\uDEA8 \n\n" + instructions.getStart());
+                sendMessage.setText("Обрано: горіння твердих матеріалів, зазвичай органічного походження, під час горіння яких утворюються тліючі вуглини (деревина, текстиль, папір).\n\n" +
+                        "Висновок: ймовірний клас пожежі - A \uD83D\uDEA8 \n\n" + instructions.getStart());
                 break;
             case "Клас B":
-                sendMessage.setText("Обрано: горіння рідких речовин або твердих речовин, які розтоплюються.\n\n" +
-                        "Висновок: досліджуваний об'єкт відноситься до класу B \uD83D\uDEA8 \n\n " + instructions.getStart());
+                sendMessage.setText("Обрано: горіння рідин або твердих речовин, які переходять у рідкий стан.\n\n" +
+                        "Висновок: ймовірний клас пожежі - B \uD83D\uDEA8 \n\n " + instructions.getStart());
                 break;
             case "Клас C":
                 sendMessage.setText("Обрано: горіння газоподібних речовин.\n\n" +
-                        "Висновок: досліджуваний об'єкт відноситься до класу C \uD83D\uDEA8 \n\n " + instructions.getStart());
+                        "Висновок: ймовірний клас пожежі - C \uD83D\uDEA8 \n\n " + instructions.getStart());
                 break;
             case "Клас D":
                 sendMessage.setText("Обрано: горіння металів та їх сплавів.\n\n" +
-                        "Висновок: досліджуваний об'єкт відноситься до класу D \uD83D\uDEA8 \n\n " + instructions.getStart());
+                        "Висновок: ймовірний клас пожежі - D \uD83D\uDEA8 \n\n " + instructions.getStart());
                 break;
             case "Клас F":
-                sendMessage.setText("Обрано: горіння речовин, які використовують для приготування їжі (рослинних і тваринних олій та жирів) та які містяться в кухонних приладах.\n\n" +
-                        "Висновок: досліджуваний об'єкт відноситься до класу F \uD83D\uDEA8 \n\n " + instructions.getStart());
+                sendMessage.setText("Обрано: горіння речовин, які використовують для приготування їжі (рослинні і тваринні олії та жири) та які містяться в кухонних приладах.\n\n" +
+                        "Висновок: ймовірний клас пожежі - F \uD83D\uDEA8 \n\n " + instructions.getStart());
                 break;
 
         }
@@ -1364,10 +1367,10 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentTwoKeyboard());
                 break;
             case "2.1.1_Zone_classes":
-                sendMessage.setText(zc.zoneClass0());
+                sendMessage.setText(zc.zoneClass0() + "\n\n" + instructions.getStart());
                 break;
             case "2.1.2_Zone_classes":
-                sendMessage.setText(zc.zoneClass20());
+                sendMessage.setText(zc.zoneClass20() + "\n\n" + instructions.getStart());
                 break;
             case "2.2_Zone_classes":
                 sendMessage.setText("Обрано: Вибухонебезпечне середовище може утворитись під час нормальної експлуатації\n\n" +
@@ -1377,10 +1380,10 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentThreeKeyboard());
                 break;
             case "2.2.1_Zone_classes":
-                sendMessage.setText(zc.zoneClass1());
+                sendMessage.setText(zc.zoneClass1() + "\n\n" + instructions.getStart());
                 break;
             case "2.2.2_Zone_classes":
-                sendMessage.setText(zc.zoneClass21());
+                sendMessage.setText(zc.zoneClass21() + "\n\n" + instructions.getStart());
                 break;
             case "2.3_Zone_classes":
                 sendMessage.setText("Обрано: Вибухонебезпечне середовище відсутнє або при утворенні триває не довго, та може виникати у випадку аварії\n\n" +
@@ -1390,10 +1393,10 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 sendMessage.setReplyMarkup(inlineButton.inlineExplosiveEnvironmentFourKeyboard());
                 break;
             case "2.3.1_Zone_classes":
-                sendMessage.setText(zc.zoneClass2());
+                sendMessage.setText(zc.zoneClass2() + "\n\n" + instructions.getStart());
                 break;
             case "2.3.2_Zone_classes":
-                sendMessage.setText(zc.zoneClass22());
+                sendMessage.setText(zc.zoneClass22() + "\n\n" + instructions.getStart());
                 break;
             case "1.2_Zone_classes":
                 sendMessage.setText("Обрано: Використовуються пожежонебезпечні речовини\n\n" +
@@ -1419,15 +1422,15 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 break;
             case "3.1.1.1_Zone_classes":
             case "3.2.1_Zone_classes":
-                sendMessage.setText(zc.zoneClassP_I());
+                sendMessage.setText(zc.zoneClassP_I() + "\n\n" + instructions.getStart());
                 break;
             case "3.1.1.2_Zone_classes":
             case "3.2.2_Zone_classes":
-                sendMessage.setText(zc.zoneClassP_II());
+                sendMessage.setText(zc.zoneClassP_II() + "\n\n" + instructions.getStart());
                 break;
             case "3.1.1.3_Zone_classes":
             case "3.2.3_Zone_classes":
-                sendMessage.setText(zc.zoneClassP_IIa());
+                sendMessage.setText(zc.zoneClassP_IIa() + "\n\n" + instructions.getStart());
                 break;
             case "3.1.2_Zone_classes":
                 sendMessage.setText("Обрано: Пожежонебезпечне середовище поза приміщеннями\n\n" + zc.zoneClassP_III());
@@ -1491,46 +1494,46 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 break;
             case "5.1_Zone_classes":
                 if (databaseRepository.getHumidity_of_space(userId).equals("сухе")){
-                    sendMessage.setText("Обрано: гаряче приміщення\n\n" + zc.zoneClassSukhi() + "\n\n" + zc.zoneClassGariachi());
+                    sendMessage.setText("Обрано: гаряче приміщення\n\n" + zc.zoneClassSukhi() + "\n\n" + zc.zoneClassGariachi() + "\n\n" + instructions.getStart());
                 }else if (databaseRepository.getHumidity_of_space(userId).equals("вологе")){
-                    sendMessage.setText("Обрано: гаряче приміщення\n\n" + zc.zoneClassVologi() + "\n\n" + zc.zoneClassGariachi());
+                    sendMessage.setText("Обрано: гаряче приміщення\n\n" + zc.zoneClassVologi() + "\n\n" + zc.zoneClassGariachi() + "\n\n" + instructions.getStart());
                 }else if(databaseRepository.getHumidity_of_space(userId).equals("сире")){
-                    sendMessage.setText("Обрано: гаряче приміщення\n\n" + zc.zoneClassSyri() + "\n\n" + zc.zoneClassGariachi());
+                    sendMessage.setText("Обрано: гаряче приміщення\n\n" + zc.zoneClassSyri() + "\n\n" + zc.zoneClassGariachi() + "\n\n" + instructions.getStart());
                 }else if(databaseRepository.getHumidity_of_space(userId).equals("особливо сире")){
-                    sendMessage.setText("Обрано: гаряче приміщення\n\n" + zc.zoneClassOsoblyvoSyri() + "\n\n" + zc.zoneClassGariachi() );
+                    sendMessage.setText("Обрано: гаряче приміщення\n\n" + zc.zoneClassOsoblyvoSyri() + "\n\n" + zc.zoneClassGariachi() + "\n\n" + instructions.getStart());
                 }
                 break;
             case "5.2_Zone_classes":
                 if (databaseRepository.getHumidity_of_space(userId).equals("сухе")){
-                    sendMessage.setText("Обрано: запилене приміщення\n\n" + zc.zoneClassSukhi() + "\n\n" + zc.zoneClassZapyleni());
+                    sendMessage.setText("Обрано: запилене приміщення\n\n" + zc.zoneClassSukhi() + "\n\n" + zc.zoneClassZapyleni() + "\n\n" + instructions.getStart());
                 }else if (databaseRepository.getHumidity_of_space(userId).equals("вологе")){
-                    sendMessage.setText("Обрано: запилене приміщення\n\n" + zc.zoneClassVologi() + "\n\n" + zc.zoneClassZapyleni());
+                    sendMessage.setText("Обрано: запилене приміщення\n\n" + zc.zoneClassVologi() + "\n\n" + zc.zoneClassZapyleni() + "\n\n" + instructions.getStart());
                 }else if(databaseRepository.getHumidity_of_space(userId).equals("сире")){
-                    sendMessage.setText("Обрано: запилене приміщення\n\n" + zc.zoneClassSyri() + "\n\n" +  zc.zoneClassZapyleni());
+                    sendMessage.setText("Обрано: запилене приміщення\n\n" + zc.zoneClassSyri() + "\n\n" +  zc.zoneClassZapyleni() + "\n\n" + instructions.getStart());
                 }else if(databaseRepository.getHumidity_of_space(userId).equals("особливо сире")){
-                    sendMessage.setText("Обрано: запилене приміщення\n\n" + zc.zoneClassOsoblyvoSyri() + "\n\n" + zc.zoneClassZapyleni());
+                    sendMessage.setText("Обрано: запилене приміщення\n\n" + zc.zoneClassOsoblyvoSyri() + "\n\n" + zc.zoneClassZapyleni() + "\n\n" + instructions.getStart());
                 }
                 break;
             case "5.3_Zone_classes":
                 if (databaseRepository.getHumidity_of_space(userId).equals("сухе")){
-                    sendMessage.setText("Обрано: Приміщення з агресивними парами, рідинами, газами\n\n" + zc.zoneClassSukhi() + "\n\n" + zc.zoneClassKhimichni());
+                    sendMessage.setText("Обрано: Приміщення з агресивними парами, рідинами, газами\n\n" + zc.zoneClassSukhi() + "\n\n" + zc.zoneClassKhimichni() + "\n\n" + instructions.getStart());
                 }else if (databaseRepository.getHumidity_of_space(userId).equals("вологе")){
-                    sendMessage.setText("Обрано: Приміщення з агресивними парами, рідинами, газами\n\n" + zc.zoneClassVologi() + "\n\n" + zc.zoneClassKhimichni());
+                    sendMessage.setText("Обрано: Приміщення з агресивними парами, рідинами, газами\n\n" + zc.zoneClassVologi() + "\n\n" + zc.zoneClassKhimichni() + "\n\n" + instructions.getStart());
                 }else if(databaseRepository.getHumidity_of_space(userId).equals("сире")){
-                    sendMessage.setText("Обрано: Приміщення з агресивними парами, рідинами, газами\n\n" + zc.zoneClassSyri() + "\n\n" + zc.zoneClassKhimichni());
+                    sendMessage.setText("Обрано: Приміщення з агресивними парами, рідинами, газами\n\n" + zc.zoneClassSyri() + "\n\n" + zc.zoneClassKhimichni() + "\n\n" + instructions.getStart());
                 }else if(databaseRepository.getHumidity_of_space(userId).equals("особливо сире")){
-                    sendMessage.setText("Обрано: Приміщення з агресивними парами, рідинами, газами\n\n" + zc.zoneClassOsoblyvoSyri() + "\n\n" + zc.zoneClassKhimichni());
+                    sendMessage.setText("Обрано: Приміщення з агресивними парами, рідинами, газами\n\n" + zc.zoneClassOsoblyvoSyri() + "\n\n" + zc.zoneClassKhimichni() + "\n\n" + instructions.getStart());
                 }
                 break;
             case "5.4_Zone_classes":
                 if (databaseRepository.getHumidity_of_space(userId).equals("сухе")){
-                    sendMessage.setText("Відсутні особливості технологічного процесу\n\n" + zc.zoneClassSukhi());
+                    sendMessage.setText("Відсутні особливості технологічного процесу\n\n" + zc.zoneClassSukhi() + "\n\n" + instructions.getStart());
                 }else if (databaseRepository.getHumidity_of_space(userId).equals("вологе")){
-                    sendMessage.setText("Відсутні особливості технологічного процесу\n\n" + zc.zoneClassVologi());
+                    sendMessage.setText("Відсутні особливості технологічного процесу\n\n" + zc.zoneClassVologi() + "\n\n" + instructions.getStart());
                 }else if(databaseRepository.getHumidity_of_space(userId).equals("сире")){
-                    sendMessage.setText("Відсутні особливості технологічного процесу\n\n" + zc.zoneClassSyri());
+                    sendMessage.setText("Відсутні особливості технологічного процесу\n\n" + zc.zoneClassSyri() + "\n\n" + instructions.getStart());
                 }else if(databaseRepository.getHumidity_of_space(userId).equals("особливо сире")){
-                    sendMessage.setText("Відсутні особливості технологічного процесу\n\n" + zc.zoneClassOsoblyvoSyri());
+                    sendMessage.setText("Відсутні особливості технологічного процесу\n\n" + zc.zoneClassOsoblyvoSyri() + "\n\n" + instructions.getStart());
                 }
                 break;
         }
@@ -5395,6 +5398,257 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
         }
         messageSender.sendMessage(sendMessage);
     }
+    private void smokeProtectionSystems(CallbackQuery callbackQuery){
+        Message message = callbackQuery.getMessage();
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setParseMode(ParseMode.HTML);
+        sendMessage.setChatId(String.valueOf(message.getChatId()));
+        String chatID = String.valueOf(message.getChatId());
+        userId = Long.valueOf(chatID);
+
+        int numbering = databaseRepository.getNumbering(userId);
+        String num = numbering + ".";
+        switch (callbackQuery.getData()){
+            case "Розпочати":
+                sendMessage.setText(num +" Оберіть характеристику, що необхідно визначити: \uD83D\uDCA8 \n\n" +
+                        "\uD83D\uDC49" + num +"1 Визначення систем протидимного захисту\n" +
+                        "\uD83D\uDC49" + num +"2 Визначення необхідності влаштування систем видалення диму та гарячих газоподібних продуктів згоряння\n" +
+                        "\uD83D\uDC49" + num +"3 Визначення необхідності влаштування систем захисту за рахунок різниці тисків під час пожежі");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionKeyboard());
+                break;
+            case "визначення системи":
+                sendMessage.setText("Обрано: визначення систем протидимного захисту\n\n" +
+                        num + " Оберіть необхідну систему: \n\n" +
+                        "\uD83D\uDC49" + num +"1 Система видалення диму та гарячих газоподібних продуктів згоряння\n" +
+                        "\uD83D\uDC49" + num +"2 Система захисту за рахунок різниці тисків під час пожежі\n");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionSystemsKeyboard());
+                break;
+            case "система видалення":
+                databaseRepository.setType_system_smoke_protection(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: визначення необхідності влаштування систем видалення диму та гарячих газоподібних продуктів згоряння \n\n" +
+                        num + " Оберіть тип будівлі: \uD83C\uDFDB \n\n" +
+                        "\uD83D\uDC49" + num +"1 Житлові будівлі\n" +
+                        "\uD83D\uDC49" + num +"2 Громадські будівлі\n" +
+                        "\uD83D\uDC49" + num +"3 Адміністративно-побутові будівлі\n" +
+                        "\uD83D\uDC49" + num +"4 Виробничі будівлі\n" +
+                        "\uD83D\uDC49" + num +"5 Приміщення в будівлях різного призначення без наявності природного освітлення\n");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeRemovalSystemsKeyboard(numbering));
+                break;
+            case "житлові будівлі":
+            case "громадські будівлі":
+            case "адміністративні будівлі":
+            case "виробничі будівлі":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + " \n\n" +
+                        num + " Вкажіть умовну висоту будівлі \uD83C\uDFDB \n\n");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionHeightKeyboard());
+                break;
+            case "різного призначення":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: приміщення в будівлях різного призначення без наявності природного освітлення \n\n" +
+                        num + " Оберіть тип приміщення\n\n" +
+                        "\uD83D\uDC49" + num + "1 Розташовані у громадських та адміністративно-побутових будівлях\n" +
+                        "\uD83D\uDC49" + num + "2 Призначені для зберігання або використання горючих матеріалів\n" +
+                        "\uD83D\uDC49" + num + "3 Гардеробні");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionDifferentPurposeKeyboard(numbering));
+                break;
+            case "до 26,5 м":
+                databaseRepository.setHeight_object(1,userId);
+                if (databaseRepository.getType_of_object(userId).equals("громадські будівлі") || databaseRepository.getType_of_object(userId).equals("адміністративні будівлі") || databaseRepository.getType_of_object(userId).equals("виробничі будівлі")) {
+                    sendMessage.setText("Обрано: до 26,5 м \n\n" +
+                            num + " Вкажіть довжину коридору \uD83D\uDEA8");
+                    sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionLengthCorridorKeyboard());
+                }else {
+                    sendMessage.setText("Обрано: до 26,6 м \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                }
+                break;
+            case "26,5 м та більше":
+                databaseRepository.setHeight_object(30,userId);
+                sendMessage.setText("Обрано: 26,5 м та більше\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "до 15 м":
+                databaseRepository.setLength(1,userId);
+                if (databaseRepository.getType_of_object(userId).equals("виробничі будівлі")){
+                    sendMessage.setText("Обрано: до 15 м \n\n" + num +
+                            " Вкажіть наявність постійних робочих місць в приміщеннях категорії виробництва за вибухопожежною та пожежною небезпекою «А», «Б», «В», «Г» або «Д» IV ступеня вогнестійкості \uD83D\uDD25");
+                    sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionFireResistanceKeyboard());
+                }else{
+                    sendMessage.setText("Обрано: до 15 м \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                }
+                break;
+            case "15 м та більше":
+                databaseRepository.setLength(20,userId);
+                if (databaseRepository.getType_of_object(userId).equals("виробничі будівлі")){
+                    sendMessage.setText("Обрано: 15 м та більше \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                }else {
+                    sendMessage.setText("Обрано 15 м та більше \n\n" +
+                            num + " Вкажіть наявність природного освітлення: ☀️ ");
+                    sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionNaturalLightingKeyboard());
+                }
+                break;
+            case "наявне освітлення":
+                databaseRepository.setNatural_lighting(true,userId);
+                sendMessage.setText("Обрано: наявне природнє освітлення \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "відсутнє освітлення":
+                databaseRepository.setNatural_lighting(false,userId);
+                sendMessage.setText("Обрано: відсутнє природнє освітлення \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "наявні категорії":
+                databaseRepository.setCategory_buildings(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: наявні\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "відсутні категорії":
+                databaseRepository.setCategory_buildings(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: відсутні\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "розташовані у будівлях":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: розташовані у громадських та адміністративно-побутових будівлях \n\n" +
+                        num + " Вкажіть кількість осіб що перебувають постійно або тимчасово \uD83E\uDDCD\u200D♂️");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionPeopleKeyboard());
+                break;
+            case "до 50 осіб":
+                databaseRepository.setConstantly_at_facility(1,userId);
+                sendMessage.setText("Обрано: до 50 осіб\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "50 осіб та більше":
+                databaseRepository.setConstantly_at_facility(100,userId);
+                sendMessage.setText("Обрано: 50 осіб та більше\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "горючі матеріали":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: призначені для зберігання або використання горючих матеріалів \n\n" +
+                        num + " Вкажіть площу приміщення (м.кв) \uD83C\uDFDB");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionSquareKeyboard());
+                break;
+            case "до 55 м2":
+                databaseRepository.setSquare(1,userId);
+                sendMessage.setText("Обрано: до 55 м2\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "55 м2 та більше":
+                databaseRepository.setSquare(100,userId);
+                sendMessage.setText("Обрано: 55 м2 та більше \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "гардеробні":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: гардеробні \n\n" +
+                        num + " Вкажіть площу приміщення \uD83C\uDFDB");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionSquareWardrobesKeyboard());
+                break;
+            case "до 200 м2":
+                databaseRepository.setSquare(1,userId);
+                sendMessage.setText("Обрано: до 200 м2 \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "200 м2 та більше":
+                databaseRepository.setSquare(200,userId);
+                sendMessage.setText("Обрано: 200 м2 та більше  \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "система захисту":
+                databaseRepository.setType_system_smoke_protection(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: визначення необхідності влаштування систем захисту за рахунок різниці тисків під час пожежі\n\n" +
+                        num + " Оберіть тип об'єкту \uD83C\uDFEC \n\n" +
+                        "\uD83D\uDC49" + num + "1 Ліфтові шахти\n" +
+                        "\uD83D\uDC49" + num + "2 Незадимлювані сходові клітки\n" +
+                        "\uD83D\uDC49" + num + "3 Тамбур-шлюзи");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionSystemProtectionKeyboard(numbering));
+                break;
+            case "ліфтові шахти":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: ліфтові шахти \n\n" +
+                        num + " Вкажіть умовну висоту будівлі \uD83C\uDFEC");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionHeightSystemProtectionKeyboard());
+                break;
+            case "шахти пожежних ліфтів":
+                sendMessage.setText("Обрано: ліфтові шахти пожежних ліфтів \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "сходові клітки":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: незадимлювані сходові клітки \n\n" +
+                        num + " Вкажіть тип незадимлюваної сходової клітки \uD83D\uDCA8");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionStairsKeyboard());
+                break;
+            case "Н1":
+            case "Н2":
+            case "Н4":
+                databaseRepository.setType_stairs(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "Н3":
+                databaseRepository.setType_stairs(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: Н3 \n\n" +
+                        num + " Зазначте чи допускається перебування на клітині під час пожежі \uD83D\uDD25");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionStairsH3Keyboard());
+                break;
+            case "не допускається":
+                databaseRepository.setBeing_on_stairs(false,userId);
+                sendMessage.setText("Обрано: не допускається\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "допускається":
+                databaseRepository.setBeing_on_stairs(true,userId);
+                sendMessage.setText("Обрано: допускається\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "тамбур-шлюзи":
+                databaseRepository.setType_of_object(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: тамбур-шлюхи\n\n" +
+                        num + " Оберіть тип об'єкту: \n\n" +
+                        "\uD83D\uDC49" + num + "1 Протипожежні тамбур-шлюзи\n" +
+                        "\uD83D\uDC49" + num + "2 Тамбур-шлюзи незадимлюваних сходових кліток Н3 та Н4\n" +
+                        "\uD83D\uDC49" + num + "3 Тамбур-шлюзи перед ліфтами\n" +
+                        "\uD83D\uDC49" + num + "4 Тамбур-шлюзи перед сходами\n" +
+                        "\uD83D\uDC49" + num + "5 Тамбур-шлюзи атріумів та пасажів\n" +
+                        "\uD83D\uDC49" + num + "6 Тамбур-шлюзи пожежних ліфтів");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionVestibuleLocksKeyboard(numbering));
+                break;
+            case "1 тамбур-шлюзи":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: протипожежні тамбур-шлюзи \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "2 тамбур-шлюзи":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: тамбур-шлюзи незадимлюваних сходових кліток Н3 та Н4 \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "3 тамбур-шлюзи":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: тамбур-шлюзи перед ліфтами \n\n" +
+                        num + " Вкажіть розміщення поверху \uD83C\uDFEC");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionLocationKeyboard());
+                break;
+            case "надземний":
+                databaseRepository.setFloors(1,userId);
+                sendMessage.setText("Обрано: надземний \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "підземний, цокольний":
+                databaseRepository.setFloors(0,userId);
+                sendMessage.setText("Обрано: підземний, цокольний \n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "4 тамбур-шлюзи":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: тамбур-шлюзи перед сходами \n\n" +
+                        num + " Вкажіть розміщення поверху \uD83C\uDFEC");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionLocationKeyboard());
+                break;
+            case "5 тамбур-шлюзи":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: тамбур-шлюзи атріумів та пасажів\n\n" +
+                        num + " Оберіть місцерозташування \uD83D\uDCCD \n\n" +
+                        "\uD83D\uDC49" + num + "1 На вході до атріумів та пасажів\n" +
+                        "\uD83D\uDC49" + num + "2 В об’ємі атріуму");
+                sendMessage.setReplyMarkup(inlineButton.inlineSmokeProtectionAstriumKeyboard(numbering));
+                break;
+            case "на вході до атріумів":
+            case "в об’ємі атріуму":
+                databaseRepository.setB1(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: " + callbackQuery.getData() + "\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+            case "6 тамбур-шлюзи":
+                databaseRepository.setType_premises(callbackQuery.getData(),userId);
+                sendMessage.setText("Обрано: тамбур-шлюзи пожежних ліфтів\n\n" + resultSmokeProtection() + "\n\n" + instructions.getStart());
+                break;
+        }
+        databaseRepository.setNumbering(numbering+1,userId);
+        messageSender.sendMessage(sendMessage);
+    }
     private String resultExtinguisher() { // виводить результат для вогнегасника
         String s6 = null;
         String typePremisses = databaseRepository.getType_premises(userId);
@@ -5481,6 +5735,14 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
             return fireCompartmentArea.getSquareSeatsFloors();
         }else {
             return fireCompartmentArea.getSquareFloors();
+        }
+    }
+    private String resultSmokeProtection(){
+        SmokeProtection smokeProtection = new SmokeProtection(userId,databaseRepository);
+        if (databaseRepository.getType_system_smoke_protection(userId).equals("система видалення")){
+            return smokeProtection.getSmokeRemovalSystem();
+        }else {
+            return smokeProtection.getProtectionSystem();
         }
     }
 }

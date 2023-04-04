@@ -2226,4 +2226,163 @@ public class InlineButton {
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
+
+    //протидимний захист
+    public InlineKeyboardMarkup inlineSmokeProtectionKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.1").callbackData("визначення системи").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.2").callbackData("система видалення").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("1.3").callbackData("система захисту").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionSystemsKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.1").callbackData("система видалення").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.2").callbackData("система захисту").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeRemovalSystemsKeyboard(int numbering){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering+".1").callbackData("житлові будівлі").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering+".2").callbackData("громадські будівлі").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering+".3").callbackData("адміністративні будівлі").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering+".4").callbackData("виробничі будівлі").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering+".5").callbackData("різного призначення").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionHeightKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("до 26,5 м").callbackData("до 26,5 м").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("26,5 м та більше").callbackData("26,5 м та більше").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionLengthCorridorKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("до 15 м").callbackData("до 15 м").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("15 м та більше").callbackData("15 м та більше").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionNaturalLightingKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("наявне").callbackData("наявне освітлення").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("відсутнє").callbackData("відсутнє освітлення").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionFireResistanceKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("наявні").callbackData("наявні категорії").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("відсутні").callbackData("відсутні категорії").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionDifferentPurposeKeyboard(int numbering){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".1").callbackData("розташовані у будівлях").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".2").callbackData("горючі матеріали").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".3").callbackData("гардеробні").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionPeopleKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("до 50 осіб").callbackData("до 50 осіб").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("50 осіб та більше").callbackData("50 осіб та більше").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionSquareKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("до 55 м2").callbackData("до 55 м2").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("55 м2 та більше").callbackData("55 м2 та більше").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionSquareWardrobesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("до 200 м2").callbackData("до 200 м2").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("200 м2 та більше").callbackData("200 м2 та більше").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionSystemProtectionKeyboard(int numbering){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".1").callbackData("ліфтові шахти").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".2").callbackData("сходові клітки").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".3").callbackData("тамбур-шлюзи").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionHeightSystemProtectionKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("до 26,5 м").callbackData("до 26,5 м").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("26,5 м та більше").callbackData("26,5 м та більше").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("ліфтові шахти пожежних ліфтів").callbackData("шахти пожежних ліфтів").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionStairsKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Н1").callbackData("Н1").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Н2").callbackData("Н2").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Н3").callbackData("Н3").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Н4").callbackData("Н4").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionStairsH3Keyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("не допускається").callbackData("не допускається").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("допускається").callbackData("допускається").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionVestibuleLocksKeyboard(int numbering){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".1").callbackData("1 тамбур-шлюзи").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".2").callbackData("2 тамбур-шлюзи").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".3").callbackData("3 тамбур-шлюзи").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".4").callbackData("4 тамбур-шлюзи").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".5").callbackData("5 тамбур-шлюзи").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".6").callbackData("6 тамбур-шлюзи").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionLocationKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("надземний").callbackData("надземний").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("підземний, цокольний").callbackData("підземний, цокольний").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineSmokeProtectionAstriumKeyboard(int numbering){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".1").callbackData("на вході до атріумів").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text(numbering +".2").callbackData("в об’ємі атріуму").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
 }
