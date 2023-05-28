@@ -50,68 +50,12 @@ public class DegreeRiskObject{
         if (typeObjectOfRisk().equals("об'єкт підвищеної небезпеки")) {
             R1 = 31;
         }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення") && typeStateOwnedObject().equals("об’єкт оборони")) {
-            R1 = 33;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення")
-                && typeStateOwnedObject().equals("об’єкт енергетичного комплексу")) {
+        if (typeObjectOfRisk().equals("об'єкт стратегічного значення") && typeStateOwnedObject().equals("I та II категорій критичності")) {
             R1 = 35;
         }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення") && typeStateOwnedObject().equals("об’єкт транспорту")) {
-            R1 = 21;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення") && typeStateOwnedObject().equals("об’єкт держрезерву")) {
-            R1 = 30;
-        }
         if (typeObjectOfRisk().equals("об'єкт стратегічного значення")
-                && typeStateOwnedObject().equals("об’єкт аграрного комплексу")) {
-            R1 = 25;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення") && typeStateOwnedObject().equals("об’єкт зв'язку")) {
-            R1 = 20;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення") && typeStateOwnedObject().equals("об’єкт авіації")) {
-            R1 = 30;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення")
-                && typeStateOwnedObject().equals("об’єкт машинобувної промисловості")) {
-            R1 = 20;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення") && typeStateOwnedObject().equals("об’єкт металургії")) {
-            R1 = 22;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення") && typeStateOwnedObject().equals("об’єкт хімпрому")) {
-            R1 = 31;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення") && typeStateOwnedObject().equals("об’єкт науки")) {
-            R1 = 10;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення") && typeStateOwnedObject().equals("об’єкт метрології")) {
-            R1 = 12;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення") && typeStateOwnedObject().equals("об’єкт гідрометеорології")) {
-            R1 = 14;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення") && typeStateOwnedObject().equals("об’єкт будматеріалів")) {
-            R1 = 21;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення")
-                && typeStateOwnedObject().equals("об’єкт фінансово-бюджетний")) {
+                && typeStateOwnedObject().equals("III та IV категорій критичності")) {
             R1 = 15;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення") && typeStateOwnedObject().equals("об’єкт харчовий")) {
-            R1 = 18;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення")
-                && typeStateOwnedObject().equals("об’єкт легкої промисловості")){
-            R1 = 20;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення") && typeStateOwnedObject().equals("об’єкт поліграфії")) {
-            R1 = 16;
-        }
-        if (typeObjectOfRisk().equals("об'єкт стратегічного значення")
-                && typeStateOwnedObject().equals("об’єкт геологорозвідувальний")) {
-            R1 = 16;
         }
         if (typeObjectOfRisk().equals("об’єкт метрополітену")) {
             R1 = 28;
@@ -147,6 +91,9 @@ public class DegreeRiskObject{
         if (typeObjectOfRisk().equals("промисловий або складський об’єкт")
                 && (categoryPremisses().equals("Категорія Г") || categoryPremisses().equals("Категорія Д"))) {
             R1 = 0;
+        }
+        if (typeObjectOfRisk().equals("підземні, цокольні та/або підвальні поверхи")){
+            R1 = 10;
         }
         if ((square()) <= 300) {
             R2 = 1;
@@ -194,13 +141,13 @@ public class DegreeRiskObject{
             R5 = 20;
         }
         if (levelEmergency().equals("НС регіонального рівня") && (deadPeople()) < 3) {
-            R5 = 15;
+            R5 = 10;
         }
         if (levelEmergency().equals("НС місцевого рівня")) {
             if ((deadPeople()) >= 3) {
                 R51 = 20;
             } else if ((deadPeople()) >= 1 && (deadPeople()) < 3) {
-                R51 = 15;
+                R51 = 10;
             } else if ((deadPeople()) == 0) {
                 R51 = 10;
             }
@@ -215,7 +162,7 @@ public class DegreeRiskObject{
             if ((deadPeople()) >= 3) {
                 R51 = 20;
             } else if ((deadPeople()) >= 1 && (deadPeople()) < 3) {
-                R51 = 15;
+                R51 = 10;
             } else if ((deadPeople()) == 0) {
                 R51 = 5;
             }
@@ -239,7 +186,7 @@ public class DegreeRiskObject{
             if ((deadPeople()) >= 3) {
                 R51 = 20;
             } else if ((deadPeople()) >= 1 && (deadPeople()) < 3) {
-                R51 = 15;
+                R51 = 10;
             } else if ((deadPeople()) == 0) {
                 R51 = 0;
             }
@@ -360,13 +307,13 @@ public class DegreeRiskObject{
             R5 = 20;
         }
         if (levelEmergency().equals("НС регіонального рівня") && (deadPeople()) < 3) {
-            R5 = 15;
+            R5 = 10;
         }
         if (levelEmergency().equals("НС місцевого рівня")) {
             if ((deadPeople()) >= 3) {
                 R51 = 20;
             } else if ((deadPeople()) >= 1 && (deadPeople()) < 3) {
-                R51 = 15;
+                R51 = 10;
             } else if ((deadPeople()) == 0) {
                 R51 = 10;
             }
@@ -381,7 +328,7 @@ public class DegreeRiskObject{
             if ((deadPeople()) >= 3) {
                 R51 = 20;
             } else if ((deadPeople()) >= 1 && (deadPeople()) < 3) {
-                R51 = 15;
+                R51 = 10;
             } else if ((deadPeople()) == 0) {
                 R51 = 5;
             }
@@ -405,7 +352,7 @@ public class DegreeRiskObject{
             if ((deadPeople()) >= 3) {
                 R51 = 20;
             } else if ((deadPeople()) >= 1 && (deadPeople()) < 3) {
-                R51 = 15;
+                R51 = 10;
             } else if ((deadPeople()) == 0) {
                 R51 = 0;
             }

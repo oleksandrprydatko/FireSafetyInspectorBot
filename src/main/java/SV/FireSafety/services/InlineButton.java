@@ -230,6 +230,7 @@ public class InlineButton {
                 InlineKeyboardButton.builder().text("2.4").callbackData("2.4").build()));
         keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.5").callbackData("2.5").build(),
                 InlineKeyboardButton.builder().text("2.6").callbackData("2.6").build()));
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("2.7").callbackData("2.7").build()));
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
@@ -267,24 +268,7 @@ public class InlineButton {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("🏢 3.1").callbackData("🏢 3.1").build(),
-                InlineKeyboardButton.builder().text("🏢 3.2").callbackData("🏢 3.2").build(),
-                InlineKeyboardButton.builder().text("🏢 3.3").callbackData("🏢 3.3").build()));
-        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("🏢 3.4").callbackData("🏢 3.4").build(),
-                InlineKeyboardButton.builder().text("🏢 3.5").callbackData("🏢 3.5").build(),
-                InlineKeyboardButton.builder().text("🏢 3.6").callbackData("🏢 3.6").build()));
-        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("🏢 3.7").callbackData("🏢 3.7").build(),
-                InlineKeyboardButton.builder().text("🏢 3.8").callbackData("🏢 3.8").build(),
-                InlineKeyboardButton.builder().text("🏢 3.9").callbackData("🏢 3.9").build()));
-        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("🏢 3.10").callbackData("🏢 3.10").build(),
-                InlineKeyboardButton.builder().text("🏢 3.11").callbackData("🏢 3.11").build(),
-                InlineKeyboardButton.builder().text("🏢 3.12").callbackData("🏢 3.12").build()));
-        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("🏢 3.13").callbackData("🏢 3.13").build(),
-                InlineKeyboardButton.builder().text("🏢 3.14").callbackData("🏢 3.14").build(),
-                InlineKeyboardButton.builder().text("🏢 3.15").callbackData("🏢 3.15").build()));
-        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("🏢 3.16").callbackData("🏢 3.16").build(),
-                InlineKeyboardButton.builder().text("🏢 3.17").callbackData("🏢 3.17").build(),
-                InlineKeyboardButton.builder().text("🏢 3.18").callbackData("🏢 3.18").build()));
-        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("🏢 3.19").callbackData("🏢 3.19").build()));
+                InlineKeyboardButton.builder().text("🏢 3.2").callbackData("🏢 3.2").build()));
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
