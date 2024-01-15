@@ -10,6 +10,10 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @Service
 public class MessageSenderImpl implements MessageSender {
     private FireSafetyBot fireSafetyBot;
+    @Autowired
+    public void setFireSafetyBot(FireSafetyBot fireSafetyBot){
+        this.fireSafetyBot = fireSafetyBot;
+    }
     @Override
     public void sendMessage(SendMessage sendMessage) {
         try{
@@ -28,8 +32,4 @@ public class MessageSenderImpl implements MessageSender {
         }
     }
 
-    @Autowired
-    public void setFireSafetyBot(FireSafetyBot fireSafetyBot){
-        this.fireSafetyBot = fireSafetyBot;
-    }
 }

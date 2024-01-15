@@ -170,6 +170,24 @@ public class MessageHandler implements Handler<Message> {
                         //очищення бази
                         databaseRepository.clearDB(userId);
                         return;
+                    // посилання на сертифікаційний центр
+                    case "/certification_center":
+                        //встановлення команди в БД
+                        databaseRepository.setComand_of_menu("/certification_center",userId);
+                        sendMessage.setText("\uD83C\uDDFA\uD83C\uDDE6 Офіційний чат-бот випробувальної лабораторії Державного центру сертифікації ДСНС України: https://t.me/tl_statecenter_bot");
+                        messageSender.sendMessage(sendMessage);
+                        //очищення бази
+                        databaseRepository.clearDB(userId);
+                        return;
+                    // посилання на нормативно-правові акти
+                    case "/regulatory_documents":
+                        //встановлення команди в БД
+                        databaseRepository.setComand_of_menu("/certification_center",userId);
+                        sendMessage.setText("\uD83C\uDDFA\uD83C\uDDE6 Перелік нормативно-правових документів, що регламентують діяльність підрозділів ДСНС України: https://dsns.gov.ua/uk/zakonodavstvo/departament-derzhavnogo-naglyadu-ta-kontrolyu-docs");
+                        messageSender.sendMessage(sendMessage);
+                        //очищення бази
+                        databaseRepository.clearDB(userId);
+                        return;
                     // видає посилання на портал електронних послуг
                     case "/service_portal":
                         //встановлення команди в БД
